@@ -1,0 +1,39 @@
+{
+    "dashboard": "Tableau de bord",
+    "overview": "Prezentare generală",
+    "activity": "Activity",
+    "tokens": "Tokens",
+    "collabs": "Collabs",
+    "spaces": "Spații",
+
+
+    "application": "Aplicații",
+    "raffles": "Tombole",
+    "monitor": "Monitor",
+    "lending": "Lending",
+    "trade": "Trading",
+    "rarity-search": "Căutare de raritate",
+    "mint-calendar": "Calendar mentă",
+    "auctions": "Licitații",
+    "lottery": "Loterie",
+
+    
+    "cosmicastro": "Astronauții cosmici",
+    "cosmicastro-caption": "Secțiunea Numai Titularul",
+    "sniper": "Sniper Tool",
+    "staking": "Miza",
+    "art-upgrade": "Art Upgrade",
+    "cryo": "Camera criogenică",
+    "rescue": "Misiuni de salvare",
+
+
+    "maintenance": "întreținere",
+    "error-404": "Eroare 404",
+    "coming-soon": "In curand",
+    "under-construction": "În construcție",
+
+
+    "social-twitter": "Twitter",
+    "social-discord": "Discord",
+    "feature-request": "Foaie de parcurs"
+}

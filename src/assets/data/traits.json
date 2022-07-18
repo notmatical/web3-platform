@@ -1,0 +1,728 @@
+[
+    [
+        {
+            "amount": 139,
+            "trait_type": "Background",
+            "value": "Blue Cloud"
+        },
+        {
+            "amount": 120,
+            "trait_type": "Background",
+            "value": "Roseanna"
+        },
+        {
+            "amount": 38,
+            "trait_type": "Background",
+            "value": "Volcanic World"
+        },
+        {
+            "amount": 123,
+            "trait_type": "Background",
+            "value": "Pale Wood"
+        },
+        {
+            "amount": 75,
+            "trait_type": "Background",
+            "value": "Wormhole"
+        },
+        {
+            "amount": 81,
+            "trait_type": "Background",
+            "value": "Lush"
+        },
+        {
+            "amount": 31,
+            "trait_type": "Background",
+            "value": "Dark World"
+        },
+        {
+            "amount": 122,
+            "trait_type": "Background",
+            "value": "Venice"
+        },
+        {
+            "amount": 130,
+            "trait_type": "Background",
+            "value": "Copper"
+        },
+        {
+            "amount": 131,
+            "trait_type": "Background",
+            "value": "80s Purple"
+        },
+        {
+            "amount": 56,
+            "trait_type": "Background",
+            "value": "Deep Space"
+        },
+        {
+            "amount": 99,
+            "trait_type": "Background",
+            "value": "Love Tonight"
+        },
+        {
+            "amount": 107,
+            "trait_type": "Background",
+            "value": "Ash"
+        },
+        {
+            "amount": 72,
+            "trait_type": "Background",
+            "value": "Chestnut"
+        },
+        {
+            "amount": 92,
+            "trait_type": "Background",
+            "value": "Hersheys"
+        },
+        {
+            "amount": 83,
+            "trait_type": "Background",
+            "value": "Black Rose"
+        },
+        {
+            "amount": 89,
+            "trait_type": "Background",
+            "value": "Ice World"
+        },
+        {
+            "amount": 13,
+            "trait_type": "Background",
+            "value": "Planet"
+        },
+        {
+            "amount": 49,
+            "trait_type": "Background",
+            "value": "Vast World"
+        },
+        {
+            "amount": 55,
+            "trait_type": "Background",
+            "value": "Lava World"
+        },
+        {
+            "amount": 25,
+            "trait_type": "Background",
+            "value": "Yellow Galaxy"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Background",
+            "value": "Glitch Space"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Background",
+            "value": "Light Purple"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Background",
+            "value": "Water"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Background",
+            "value": "Galaxy"
+        }
+    ],
+    [
+        {
+            "amount": 1338,
+            "trait_type": "Role",
+            "value": "Adventurer"
+        },
+        {
+            "amount": 231,
+            "trait_type": "Role",
+            "value": "Scientist"
+        },
+        {
+            "amount": 98,
+            "trait_type": "Role",
+            "value": "Doctor"
+        },
+        {
+            "amount": 38,
+            "trait_type": "Role",
+            "value": "Mission Specialist"
+        },
+        {
+            "amount": 29,
+            "trait_type": "Role",
+            "value": "Commander"
+        }
+    ],
+    [
+        {
+            "amount": 56,
+            "trait_type": "Wings",
+            "value": "Flame Wings"
+        },
+        {
+            "amount": 1419,
+            "trait_type": "Wings",
+            "value": "None"
+        },
+        {
+            "amount": 141,
+            "trait_type": "Wings",
+            "value": "Default Wings"
+        },
+        {
+            "amount": 57,
+            "trait_type": "Wings",
+            "value": "Blue Flame Wings"
+        },
+        {
+            "amount": 61,
+            "trait_type": "Wings",
+            "value": "Green Flame Wings"
+        }
+    ],
+    [
+        {
+            "amount": 101,
+            "trait_type": "Suit",
+            "value": "Leopard"
+        },
+        {
+            "amount": 74,
+            "trait_type": "Suit",
+            "value": "Chrome"
+        },
+        {
+            "amount": 88,
+            "trait_type": "Suit",
+            "value": "Glitch"
+        },
+        {
+            "amount": 149,
+            "trait_type": "Suit",
+            "value": "Blue"
+        },
+        {
+            "amount": 109,
+            "trait_type": "Suit",
+            "value": "Lunar"
+        },
+        {
+            "amount": 151,
+            "trait_type": "Suit",
+            "value": "Green"
+        },
+        {
+            "amount": 83,
+            "trait_type": "Suit",
+            "value": "Rainbow Glitch"
+        },
+        {
+            "amount": 74,
+            "trait_type": "Suit",
+            "value": "Zebra"
+        },
+        {
+            "amount": 38,
+            "trait_type": "Suit",
+            "value": "Galaxy"
+        },
+        {
+            "amount": 84,
+            "trait_type": "Suit",
+            "value": "Rainbow"
+        },
+        {
+            "amount": 130,
+            "trait_type": "Suit",
+            "value": "Acid"
+        },
+        {
+            "amount": 49,
+            "trait_type": "Suit",
+            "value": "Tuxedo"
+        },
+        {
+            "amount": 140,
+            "trait_type": "Suit",
+            "value": "Jelly"
+        },
+        {
+            "amount": 35,
+            "trait_type": "Suit",
+            "value": "Ruby"
+        },
+        {
+            "amount": 76,
+            "trait_type": "Suit",
+            "value": "Radiation"
+        },
+        {
+            "amount": 75,
+            "trait_type": "Suit",
+            "value": "Red Leopard"
+        },
+        {
+            "amount": 112,
+            "trait_type": "Suit",
+            "value": "Slime"
+        },
+        {
+            "amount": 66,
+            "trait_type": "Suit",
+            "value": "Gold"
+        },
+        {
+            "amount": 17,
+            "trait_type": "Suit",
+            "value": "Gold Goo"
+        },
+        {
+            "amount": 37,
+            "trait_type": "Suit",
+            "value": "Diamond"
+        },
+        {
+            "amount": 25,
+            "trait_type": "Suit",
+            "value": "Captain America"
+        },
+        {
+            "amount": 17,
+            "trait_type": "Suit",
+            "value": "Iron Man"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Suit",
+            "value": "Robust"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Suit",
+            "value": "Half"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Suit",
+            "value": "White"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Suit",
+            "value": "Grim Reaper"
+        }
+    ],
+    [
+        {
+            "amount": 133,
+            "trait_type": "Glass",
+            "value": "Black"
+        },
+        {
+            "amount": 96,
+            "trait_type": "Glass",
+            "value": "Blue Mixer"
+        },
+        {
+            "amount": 154,
+            "trait_type": "Glass",
+            "value": "Pink"
+        },
+        {
+            "amount": 69,
+            "trait_type": "Glass",
+            "value": "Joker Bright"
+        },
+        {
+            "amount": 55,
+            "trait_type": "Glass",
+            "value": "Joker Dark"
+        },
+        {
+            "amount": 115,
+            "trait_type": "Glass",
+            "value": "Orange Mixer"
+        },
+        {
+            "amount": 93,
+            "trait_type": "Glass",
+            "value": "Reflection"
+        },
+        {
+            "amount": 116,
+            "trait_type": "Glass",
+            "value": "Rainbow"
+        },
+        {
+            "amount": 48,
+            "trait_type": "Glass",
+            "value": "Skeleton"
+        },
+        {
+            "amount": 53,
+            "trait_type": "Glass",
+            "value": "Green Glowing Eyes"
+        },
+        {
+            "amount": 102,
+            "trait_type": "Glass",
+            "value": "Sunset"
+        },
+        {
+            "amount": 109,
+            "trait_type": "Glass",
+            "value": "Frosted"
+        },
+        {
+            "amount": 98,
+            "trait_type": "Glass",
+            "value": "Purple Eyes"
+        },
+        {
+            "amount": 139,
+            "trait_type": "Glass",
+            "value": "Red"
+        },
+        {
+            "amount": 65,
+            "trait_type": "Glass",
+            "value": "Blue Glowing Eyes"
+        },
+        {
+            "amount": 64,
+            "trait_type": "Glass",
+            "value": "Red Eyes"
+        },
+        {
+            "amount": 44,
+            "trait_type": "Glass",
+            "value": "Monkey"
+        },
+        {
+            "amount": 77,
+            "trait_type": "Glass",
+            "value": "Blue Eyes"
+        },
+        {
+            "amount": 52,
+            "trait_type": "Glass",
+            "value": "Pink Glowing Eyes"
+        },
+        {
+            "amount": 49,
+            "trait_type": "Glass",
+            "value": "Glowing Eyes"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Glass",
+            "value": "Robust"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Glass",
+            "value": "Girl"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Glass",
+            "value": "White"
+        }
+    ],
+    [
+        {
+            "amount": 1320,
+            "trait_type": "Broken Glass",
+            "value": "None"
+        },
+        {
+            "amount": 414,
+            "trait_type": "Broken Glass",
+            "value": "Broken"
+        }
+    ],
+    [
+        {
+            "amount": 657,
+            "trait_type": "Suit Accessory",
+            "value": "None"
+        },
+        {
+            "amount": 48,
+            "trait_type": "Suit Accessory",
+            "value": "Dimension Shift"
+        },
+        {
+            "amount": 56,
+            "trait_type": "Suit Accessory",
+            "value": "Ledger"
+        },
+        {
+            "amount": 57,
+            "trait_type": "Suit Accessory",
+            "value": "Electricity"
+        },
+        {
+            "amount": 38,
+            "trait_type": "Suit Accessory",
+            "value": "Laser"
+        },
+        {
+            "amount": 40,
+            "trait_type": "Suit Accessory",
+            "value": "Green Laser"
+        },
+        {
+            "amount": 34,
+            "trait_type": "Suit Accessory",
+            "value": "Spider Legs"
+        },
+        {
+            "amount": 70,
+            "trait_type": "Suit Accessory",
+            "value": "Solana Bucket"
+        },
+        {
+            "amount": 75,
+            "trait_type": "Suit Accessory",
+            "value": "Angel Halo"
+        },
+        {
+            "amount": 29,
+            "trait_type": "Suit Accessory",
+            "value": "Purple Laser"
+        },
+        {
+            "amount": 57,
+            "trait_type": "Suit Accessory",
+            "value": "Purple Electricity"
+        },
+        {
+            "amount": 35,
+            "trait_type": "Suit Accessory",
+            "value": "Blue Fire"
+        },
+        {
+            "amount": 36,
+            "trait_type": "Suit Accessory",
+            "value": "Shadow Energy"
+        },
+        {
+            "amount": 41,
+            "trait_type": "Suit Accessory",
+            "value": "Solana Hoodie"
+        },
+        {
+            "amount": 25,
+            "trait_type": "Suit Accessory",
+            "value": "Dark Hoodie"
+        },
+        {
+            "amount": 15,
+            "trait_type": "Suit Accessory",
+            "value": "Minx Labs Hoodie"
+        },
+        {
+            "amount": 48,
+            "trait_type": "Suit Accessory",
+            "value": "Pink Electricity"
+        },
+        {
+            "amount": 74,
+            "trait_type": "Suit Accessory",
+            "value": "Golden Chain"
+        },
+        {
+            "amount": 33,
+            "trait_type": "Suit Accessory",
+            "value": "Crown"
+        },
+        {
+            "amount": 28,
+            "trait_type": "Suit Accessory",
+            "value": "Bitcoin Chain"
+        },
+        {
+            "amount": 57,
+            "trait_type": "Suit Accessory",
+            "value": "Lime Electricity"
+        },
+        {
+            "amount": 44,
+            "trait_type": "Suit Accessory",
+            "value": "Double Swords"
+        },
+        {
+            "amount": 49,
+            "trait_type": "Suit Accessory",
+            "value": "Fire Effect"
+        },
+        {
+            "amount": 28,
+            "trait_type": "Suit Accessory",
+            "value": "Red Spider Legs"
+        },
+        {
+            "amount": 43,
+            "trait_type": "Suit Accessory",
+            "value": "Orbit"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Suit Accessory",
+            "value": "Robust"
+        },
+        {
+            "amount": 13,
+            "trait_type": "Suit Accessory",
+            "value": "Lightning Effect"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Suit Accessory",
+            "value": "Full Suite"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Suit Accessory",
+            "value": "Dress"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Suit Accessory",
+            "value": "Cowboy Hat"
+        }
+    ],
+    [
+        {
+            "amount": 107,
+            "trait_type": "Hand Accessory",
+            "value": "Shadow Orb"
+        },
+        {
+            "amount": 297,
+            "trait_type": "Hand Accessory",
+            "value": "Closed Hand"
+        },
+        {
+            "amount": 100,
+            "trait_type": "Hand Accessory",
+            "value": "Rose"
+        },
+        {
+            "amount": 103,
+            "trait_type": "Hand Accessory",
+            "value": "Space Doggo"
+        },
+        {
+            "amount": 89,
+            "trait_type": "Hand Accessory",
+            "value": "Flame Orb"
+        },
+        {
+            "amount": 99,
+            "trait_type": "Hand Accessory",
+            "value": "Lightning Orb"
+        },
+        {
+            "amount": 71,
+            "trait_type": "Hand Accessory",
+            "value": "American Flag"
+        },
+        {
+            "amount": 39,
+            "trait_type": "Hand Accessory",
+            "value": "Baby Yoda"
+        },
+        {
+            "amount": 43,
+            "trait_type": "Hand Accessory",
+            "value": "Monkey"
+        },
+        {
+            "amount": 49,
+            "trait_type": "Hand Accessory",
+            "value": "Excalibur"
+        },
+        {
+            "amount": 45,
+            "trait_type": "Hand Accessory",
+            "value": "Scythe"
+        },
+        {
+            "amount": 35,
+            "trait_type": "Hand Accessory",
+            "value": "Umbrella"
+        },
+        {
+            "amount": 32,
+            "trait_type": "Hand Accessory",
+            "value": "Space Monkey"
+        },
+        {
+            "amount": 130,
+            "trait_type": "Hand Accessory",
+            "value": "Planet"
+        },
+        {
+            "amount": 94,
+            "trait_type": "Hand Accessory",
+            "value": "Water Orb"
+        },
+        {
+            "amount": 80,
+            "trait_type": "Hand Accessory",
+            "value": "Jellyfish"
+        },
+        {
+            "amount": 81,
+            "trait_type": "Hand Accessory",
+            "value": "Blue Katana"
+        },
+        {
+            "amount": 34,
+            "trait_type": "Hand Accessory",
+            "value": "Fire Axe"
+        },
+        {
+            "amount": 39,
+            "trait_type": "Hand Accessory",
+            "value": "Baby Alien"
+        },
+        {
+            "amount": 34,
+            "trait_type": "Hand Accessory",
+            "value": "Buzzlight Year"
+        },
+        {
+            "amount": 42,
+            "trait_type": "Hand Accessory",
+            "value": "Pyramid"
+        },
+        {
+            "amount": 32,
+            "trait_type": "Hand Accessory",
+            "value": "Blue Axe"
+        },
+        {
+            "amount": 56,
+            "trait_type": "Hand Accessory",
+            "value": "Bong"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Hand Accessory",
+            "value": "Glitch Planet"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Hand Accessory",
+            "value": "Fish"
+        },
+        {
+            "amount": 1,
+            "trait_type": "Hand Accessory",
+            "value": "Revolver"
+        }
+    ]
+]

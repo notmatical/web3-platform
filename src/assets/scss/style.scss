@@ -1,0 +1,606 @@
+// color variants
+@import 'themes-vars.module.scss';
+
+// third-party
+@import '~react-perfect-scrollbar/dist/css/styles.css';
+@import '~react-toastify/dist/ReactToastify.css';
+@import '~slick-carousel/slick/slick.css';
+@import '~slick-carousel/slick/slick-theme.css';
+
+// ==============================|| REACT TOASTIFY ||============================== //
+:root {
+    --toastify-color-light: #fff;
+    --toastify-color-dark: #121212;
+    --toastify-color-info: #3498db;
+    --toastify-color-success: #07bc0c;
+    --toastify-color-warning: #ec9c3d;
+    --toastify-color-error: #e74c3c;
+    --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+    --toastify-icon-color-info: var(--toastify-color-info);
+    --toastify-icon-color-success: var(--toastify-color-success);
+    --toastify-icon-color-warning: var(--toastify-color-warning);
+    --toastify-icon-color-error: var(--toastify-color-error);
+    --toastify-toast-width: 320px;
+    --toastify-toast-background: #fff;
+    --toastify-toast-min-height: 64px;
+    --toastify-toast-max-height: 800px;
+    --toastify-font-family: 'Inter', sans-serif;
+    --toastify-z-index: 9999;
+    --toastify-text-color-light: #757575;
+    --toastify-text-color-dark: #fff;
+    --toastify-text-color-info: #fff;
+    --toastify-text-color-success: #fff;
+    --toastify-text-color-warning: #fff;
+    --toastify-text-color-error: #fff;
+    --toastify-spinner-color: #616161;
+    --toastify-spinner-color-empty-area: #e0e0e0;
+    --toastify-color-progress-light: linear-gradient(
+      to right,
+      #4cd964,
+      #5ac8fa,
+      #007aff,
+      #34aadc,
+      #5856d6,
+      #ff2d55
+    );
+    --toastify-color-progress-dark: #bb86fc;
+    --toastify-color-progress-info: var(--toastify-color-info);
+    --toastify-color-progress-success: var(--toastify-color-success);
+    --toastify-color-progress-warning: var(--toastify-color-warning);
+    --toastify-color-progress-error: var(--toastify-color-error);
+}
+
+.Toastify__toast {
+    position: relative;
+    min-height: var(--toastify-toast-min-height);
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    padding: 8px;
+    border-radius: 4px;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 15px 0 rgba(0, 0, 0, 0.05);
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    max-height: var(--toastify-toast-max-height);
+    overflow: hidden;
+    font-family: var(--toastify-font-family);
+    cursor: pointer;
+    direction: ltr;
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--default {
+    background: var(--toastify-color-light);
+    color: var(--toastify-text-color-light);
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--info {
+    color: var(--toastify-text-color-info);
+    background: var(--toastify-color-info);
+}
+  
+.Toastify__toast-theme--colored.Toastify__toast--success {
+    color: var(--toastify-text-color-success);
+    background: var(--toastify-color-success);
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--warning {
+    color: var(--toastify-text-color-warning);
+    background: var(--toastify-color-warning);
+}
+
+.Toastify__toast-theme--colored.Toastify__toast--error {
+    color: var(--toastify-text-color-error);
+    background: var(--toastify-color-error);
+}
+
+// ==============================|| LIGHT BOX ||============================== //
+.slick-arrow:before {
+    color: $grey500;
+}
+
+// ==============================|| LIGHT BOX ||============================== //
+.fullscreen .react-images__blanket {
+    z-index: 1200;
+}
+
+// ==============================|| APEXCHART ||============================== //
+
+.apexcharts-legend-series .apexcharts-legend-marker {
+    margin-right: 8px;
+}
+
+// ==============================|| SCROLLBAR ||============================== //
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: $secondaryDark;
+}
+
+// ==============================|| PERFECT SCROLLBAR ||============================== //
+
+.scrollbar-container {
+    .ps__rail-y {
+        &:hover > .ps__thumb-y,
+        &:focus > .ps__thumb-y,
+        &.ps--clicking .ps__thumb-y {
+            background-color: $grey500;
+            width: 5px;
+        }
+    }
+    .ps__thumb-y {
+        background-color: $grey500;
+        border-radius: 6px;
+        width: 5px;
+        right: 0;
+    }
+}
+
+.scrollbar-container.ps,
+.scrollbar-container > .ps {
+    &.ps--active-y > .ps__rail-y {
+        width: 5px;
+        background-color: transparent !important;
+        z-index: 999;
+        &:hover,
+        &.ps--clicking {
+            width: 5px;
+            background-color: transparent;
+        }
+    }
+    &.ps--scrolling-y > .ps__rail-y,
+    &.ps--scrolling-x > .ps__rail-x {
+        opacity: 0.4;
+        background-color: transparent;
+    }
+}
+
+// ==============================|| GLITCH KEYFRAMES ||============================== //
+.layers:after,.layers:before {
+    content: attr(data-text);
+    position: absolute;
+    width: 110%;
+    z-index: -1;
+}
+
+.layers:before {
+    top: 10px;
+    left: 15px;
+    color: #e0287d;
+}
+
+.layers:after {
+    top: 5px;
+    left: -10px;
+    color: #1bc7fb;
+}
+
+.glitch p {
+    -webkit-animation: paths 5s step-end infinite;
+    animation: paths 5s step-end infinite;
+}
+
+.glitch:before {
+    -webkit-animation: paths 5s step-end infinite,opacity 5s step-end infinite,font 8s step-end infinite,movement 10s step-end infinite;
+    animation: paths 5s step-end infinite,opacity 5s step-end infinite,font 8s step-end infinite,movement 10s step-end infinite;
+}
+
+.glitch:after {
+    -webkit-animation: paths 5s step-end infinite,opacity 5s step-end infinite,font 7s step-end infinite,movement 8s step-end infinite;
+    animation: paths 5s step-end infinite,opacity 5s step-end infinite,font 7s step-end infinite,movement 8s step-end infinite;
+}
+
+// ==============================|| ANIMATION KEYFRAMES ||============================== //
+
+.paths {
+    -webkit-animation: paths 5s step-end infinite;
+    animation: paths 5s step-end infinite;
+}
+
+@-webkit-keyframes paths {
+    0%
+    {
+        -webkit-clip-path: polygon(0 43%,83% 43%,83% 22%,23% 22%,23% 24%,91% 24%,91% 26%,18% 26%,18% 83%,29% 83%,29% 17%,41% 17%,41% 39%,18% 39%,18% 82%,54% 82%,54% 88%,19% 88%,19% 4%,39% 4%,39% 14%,76% 14%,76% 52%,23% 52%,23% 35%,19% 35%,19% 8%,36% 8%,36% 31%,73% 31%,73% 16%,1% 16%,1% 56%,50% 56%,50% 8%);
+        clip-path: polygon(0 43%,83% 43%,83% 22%,23% 22%,23% 24%,91% 24%,91% 26%,18% 26%,18% 83%,29% 83%,29% 17%,41% 17%,41% 39%,18% 39%,18% 82%,54% 82%,54% 88%,19% 88%,19% 4%,39% 4%,39% 14%,76% 14%,76% 52%,23% 52%,23% 35%,19% 35%,19% 8%,36% 8%,36% 31%,73% 31%,73% 16%,1% 16%,1% 56%,50% 56%,50% 8%);
+    }
+
+    5%
+    {
+        -webkit-clip-path: polygon(0 29%,44% 29%,44% 83%,94% 83%,94% 56%,11% 56%,11% 64%,94% 64%,94% 70%,88% 70%,88% 32%,18% 32%,18% 96%,10% 96%,10% 62%,9% 62%,9% 84%,68% 84%,68% 50%,52% 50%,52% 55%,35% 55%,35% 87%,25% 87%,25% 39%,15% 39%,15% 88%,52% 88%);
+        clip-path: polygon(0 29%,44% 29%,44% 83%,94% 83%,94% 56%,11% 56%,11% 64%,94% 64%,94% 70%,88% 70%,88% 32%,18% 32%,18% 96%,10% 96%,10% 62%,9% 62%,9% 84%,68% 84%,68% 50%,52% 50%,52% 55%,35% 55%,35% 87%,25% 87%,25% 39%,15% 39%,15% 88%,52% 88%);
+    }
+
+    30%
+    {
+        -webkit-clip-path: polygon(0 53%,93% 53%,93% 62%,68% 62%,68% 37%,97% 37%,97% 89%,13% 89%,13% 45%,51% 45%,51% 88%,17% 88%,17% 54%,81% 54%,81% 75%,79% 75%,79% 76%,38% 76%,38% 28%,61% 28%,61% 12%,55% 12%,55% 62%,68% 62%,68% 51%,0 51%,0 92%,63% 92%,63% 4%,65% 4%);
+        clip-path: polygon(0 53%,93% 53%,93% 62%,68% 62%,68% 37%,97% 37%,97% 89%,13% 89%,13% 45%,51% 45%,51% 88%,17% 88%,17% 54%,81% 54%,81% 75%,79% 75%,79% 76%,38% 76%,38% 28%,61% 28%,61% 12%,55% 12%,55% 62%,68% 62%,68% 51%,0 51%,0 92%,63% 92%,63% 4%,65% 4%);
+    }
+
+    45%
+    {
+        -webkit-clip-path: polygon(0 33%,2% 33%,2% 69%,58% 69%,58% 94%,55% 94%,55% 25%,33% 25%,33% 85%,16% 85%,16% 19%,5% 19%,5% 20%,79% 20%,79% 96%,93% 96%,93% 50%,5% 50%,5% 74%,55% 74%,55% 57%,96% 57%,96% 59%,87% 59%,87% 65%,82% 65%,82% 39%,63% 39%,63% 92%,4% 92%,4% 36%,24% 36%,24% 70%,1% 70%,1% 43%,15% 43%,15% 28%,23% 28%,23% 71%,90% 71%,90% 86%,97% 86%,97% 1%,60% 1%,60% 67%,71% 67%,71% 91%,17% 91%,17% 14%,39% 14%,39% 30%,58% 30%,58% 11%,52% 11%,52% 83%,68% 83%);
+        clip-path: polygon(0 33%,2% 33%,2% 69%,58% 69%,58% 94%,55% 94%,55% 25%,33% 25%,33% 85%,16% 85%,16% 19%,5% 19%,5% 20%,79% 20%,79% 96%,93% 96%,93% 50%,5% 50%,5% 74%,55% 74%,55% 57%,96% 57%,96% 59%,87% 59%,87% 65%,82% 65%,82% 39%,63% 39%,63% 92%,4% 92%,4% 36%,24% 36%,24% 70%,1% 70%,1% 43%,15% 43%,15% 28%,23% 28%,23% 71%,90% 71%,90% 86%,97% 86%,97% 1%,60% 1%,60% 67%,71% 67%,71% 91%,17% 91%,17% 14%,39% 14%,39% 30%,58% 30%,58% 11%,52% 11%,52% 83%,68% 83%);
+    }
+
+    76%
+    {
+        -webkit-clip-path: polygon(0 26%,15% 26%,15% 73%,72% 73%,72% 70%,77% 70%,77% 75%,8% 75%,8% 42%,4% 42%,4% 61%,17% 61%,17% 12%,26% 12%,26% 63%,73% 63%,73% 43%,90% 43%,90% 67%,50% 67%,50% 41%,42% 41%,42% 46%,50% 46%,50% 84%,96% 84%,96% 78%,49% 78%,49% 25%,63% 25%,63% 14%);
+        clip-path: polygon(0 26%,15% 26%,15% 73%,72% 73%,72% 70%,77% 70%,77% 75%,8% 75%,8% 42%,4% 42%,4% 61%,17% 61%,17% 12%,26% 12%,26% 63%,73% 63%,73% 43%,90% 43%,90% 67%,50% 67%,50% 41%,42% 41%,42% 46%,50% 46%,50% 84%,96% 84%,96% 78%,49% 78%,49% 25%,63% 25%,63% 14%);
+    }
+
+    90%
+    {
+        -webkit-clip-path: polygon(0 41%,13% 41%,13% 6%,87% 6%,87% 93%,10% 93%,10% 13%,89% 13%,89% 6%,3% 6%,3% 8%,16% 8%,16% 79%,0 79%,0 99%,92% 99%,92% 90%,5% 90%,5% 60%,0 60%,0 48%,89% 48%,89% 13%,80% 13%,80% 43%,95% 43%,95% 19%,80% 19%,80% 85%,38% 85%,38% 62%);
+        clip-path: polygon(0 41%,13% 41%,13% 6%,87% 6%,87% 93%,10% 93%,10% 13%,89% 13%,89% 6%,3% 6%,3% 8%,16% 8%,16% 79%,0 79%,0 99%,92% 99%,92% 90%,5% 90%,5% 60%,0 60%,0 48%,89% 48%,89% 13%,80% 13%,80% 43%,95% 43%,95% 19%,80% 19%,80% 85%,38% 85%,38% 62%);
+    }
+
+    1%,7%,33%,47%,78%,93%
+    {
+        -webkit-clip-path: none;
+        clip-path: none;
+    }
+}
+
+@keyframes paths {
+    0%
+    {
+        -webkit-clip-path: polygon(0 43%,83% 43%,83% 22%,23% 22%,23% 24%,91% 24%,91% 26%,18% 26%,18% 83%,29% 83%,29% 17%,41% 17%,41% 39%,18% 39%,18% 82%,54% 82%,54% 88%,19% 88%,19% 4%,39% 4%,39% 14%,76% 14%,76% 52%,23% 52%,23% 35%,19% 35%,19% 8%,36% 8%,36% 31%,73% 31%,73% 16%,1% 16%,1% 56%,50% 56%,50% 8%);
+        clip-path: polygon(0 43%,83% 43%,83% 22%,23% 22%,23% 24%,91% 24%,91% 26%,18% 26%,18% 83%,29% 83%,29% 17%,41% 17%,41% 39%,18% 39%,18% 82%,54% 82%,54% 88%,19% 88%,19% 4%,39% 4%,39% 14%,76% 14%,76% 52%,23% 52%,23% 35%,19% 35%,19% 8%,36% 8%,36% 31%,73% 31%,73% 16%,1% 16%,1% 56%,50% 56%,50% 8%);
+    }
+
+    5%
+    {
+        -webkit-clip-path: polygon(0 29%,44% 29%,44% 83%,94% 83%,94% 56%,11% 56%,11% 64%,94% 64%,94% 70%,88% 70%,88% 32%,18% 32%,18% 96%,10% 96%,10% 62%,9% 62%,9% 84%,68% 84%,68% 50%,52% 50%,52% 55%,35% 55%,35% 87%,25% 87%,25% 39%,15% 39%,15% 88%,52% 88%);
+        clip-path: polygon(0 29%,44% 29%,44% 83%,94% 83%,94% 56%,11% 56%,11% 64%,94% 64%,94% 70%,88% 70%,88% 32%,18% 32%,18% 96%,10% 96%,10% 62%,9% 62%,9% 84%,68% 84%,68% 50%,52% 50%,52% 55%,35% 55%,35% 87%,25% 87%,25% 39%,15% 39%,15% 88%,52% 88%);
+    }
+
+    30%
+    {
+        -webkit-clip-path: polygon(0 53%,93% 53%,93% 62%,68% 62%,68% 37%,97% 37%,97% 89%,13% 89%,13% 45%,51% 45%,51% 88%,17% 88%,17% 54%,81% 54%,81% 75%,79% 75%,79% 76%,38% 76%,38% 28%,61% 28%,61% 12%,55% 12%,55% 62%,68% 62%,68% 51%,0 51%,0 92%,63% 92%,63% 4%,65% 4%);
+        clip-path: polygon(0 53%,93% 53%,93% 62%,68% 62%,68% 37%,97% 37%,97% 89%,13% 89%,13% 45%,51% 45%,51% 88%,17% 88%,17% 54%,81% 54%,81% 75%,79% 75%,79% 76%,38% 76%,38% 28%,61% 28%,61% 12%,55% 12%,55% 62%,68% 62%,68% 51%,0 51%,0 92%,63% 92%,63% 4%,65% 4%);
+    }
+
+    45%
+    {
+        -webkit-clip-path: polygon(0 33%,2% 33%,2% 69%,58% 69%,58% 94%,55% 94%,55% 25%,33% 25%,33% 85%,16% 85%,16% 19%,5% 19%,5% 20%,79% 20%,79% 96%,93% 96%,93% 50%,5% 50%,5% 74%,55% 74%,55% 57%,96% 57%,96% 59%,87% 59%,87% 65%,82% 65%,82% 39%,63% 39%,63% 92%,4% 92%,4% 36%,24% 36%,24% 70%,1% 70%,1% 43%,15% 43%,15% 28%,23% 28%,23% 71%,90% 71%,90% 86%,97% 86%,97% 1%,60% 1%,60% 67%,71% 67%,71% 91%,17% 91%,17% 14%,39% 14%,39% 30%,58% 30%,58% 11%,52% 11%,52% 83%,68% 83%);
+        clip-path: polygon(0 33%,2% 33%,2% 69%,58% 69%,58% 94%,55% 94%,55% 25%,33% 25%,33% 85%,16% 85%,16% 19%,5% 19%,5% 20%,79% 20%,79% 96%,93% 96%,93% 50%,5% 50%,5% 74%,55% 74%,55% 57%,96% 57%,96% 59%,87% 59%,87% 65%,82% 65%,82% 39%,63% 39%,63% 92%,4% 92%,4% 36%,24% 36%,24% 70%,1% 70%,1% 43%,15% 43%,15% 28%,23% 28%,23% 71%,90% 71%,90% 86%,97% 86%,97% 1%,60% 1%,60% 67%,71% 67%,71% 91%,17% 91%,17% 14%,39% 14%,39% 30%,58% 30%,58% 11%,52% 11%,52% 83%,68% 83%);
+    }
+
+    76%
+    {
+        -webkit-clip-path: polygon(0 26%,15% 26%,15% 73%,72% 73%,72% 70%,77% 70%,77% 75%,8% 75%,8% 42%,4% 42%,4% 61%,17% 61%,17% 12%,26% 12%,26% 63%,73% 63%,73% 43%,90% 43%,90% 67%,50% 67%,50% 41%,42% 41%,42% 46%,50% 46%,50% 84%,96% 84%,96% 78%,49% 78%,49% 25%,63% 25%,63% 14%);
+        clip-path: polygon(0 26%,15% 26%,15% 73%,72% 73%,72% 70%,77% 70%,77% 75%,8% 75%,8% 42%,4% 42%,4% 61%,17% 61%,17% 12%,26% 12%,26% 63%,73% 63%,73% 43%,90% 43%,90% 67%,50% 67%,50% 41%,42% 41%,42% 46%,50% 46%,50% 84%,96% 84%,96% 78%,49% 78%,49% 25%,63% 25%,63% 14%);
+    }
+
+    90%
+    {
+        -webkit-clip-path: polygon(0 41%,13% 41%,13% 6%,87% 6%,87% 93%,10% 93%,10% 13%,89% 13%,89% 6%,3% 6%,3% 8%,16% 8%,16% 79%,0 79%,0 99%,92% 99%,92% 90%,5% 90%,5% 60%,0 60%,0 48%,89% 48%,89% 13%,80% 13%,80% 43%,95% 43%,95% 19%,80% 19%,80% 85%,38% 85%,38% 62%);
+        clip-path: polygon(0 41%,13% 41%,13% 6%,87% 6%,87% 93%,10% 93%,10% 13%,89% 13%,89% 6%,3% 6%,3% 8%,16% 8%,16% 79%,0 79%,0 99%,92% 99%,92% 90%,5% 90%,5% 60%,0 60%,0 48%,89% 48%,89% 13%,80% 13%,80% 43%,95% 43%,95% 19%,80% 19%,80% 85%,38% 85%,38% 62%);
+    }
+
+    1%,7%,33%,47%,78%,93%
+    {
+        -webkit-clip-path: none;
+        clip-path: none;
+    }
+}
+
+.movement {
+    position: relative;
+    -webkit-animation: movement 8s step-end infinite;
+    animation: movement 8s step-end infinite;
+}
+
+@-webkit-keyframes movement {
+    0%
+    {
+        top: 0;
+        left: -20px;
+    }
+
+    15%
+    {
+        top: 10px;
+        left: 10px;
+    }
+
+    60%
+    {
+        top: 5px;
+        left: -10px;
+    }
+
+    75%
+    {
+        top: -5px;
+        left: 20px;
+    }
+
+    to
+    {
+        top: 10px;
+        left: 5px;
+    }
+}
+
+@keyframes movement {
+    0%
+    {
+        top: 0;
+        left: -20px;
+    }
+
+    15%
+    {
+        top: 10px;
+        left: 10px;
+    }
+
+    60%
+    {
+        top: 5px;
+        left: -10px;
+    }
+
+    75%
+    {
+        top: -5px;
+        left: 20px;
+    }
+
+    to
+    {
+        top: 10px;
+        left: 5px;
+    }
+}
+
+.opacity {
+    -webkit-animation: opacity 5s step-end infinite;
+    animation: opacity 5s step-end infinite;
+}
+
+@-webkit-keyframes opacity {
+    0%
+    {
+        opacity: .1;
+    }
+
+    5%
+    {
+        opacity: .7;
+    }
+
+    30%
+    {
+        opacity: .4;
+    }
+
+    45%
+    {
+        opacity: .6;
+    }
+
+    76%
+    {
+        opacity: .4;
+    }
+
+    90%
+    {
+        opacity: .8;
+    }
+
+    1%,7%,33%,47%,78%,93%
+    {
+        opacity: 0;
+    }
+}
+
+@keyframes opacity {
+    0%
+    {
+        opacity: .1;
+    }
+
+    5%
+    {
+        opacity: .7;
+    }
+
+    30%
+    {
+        opacity: .4;
+    }
+
+    45%
+    {
+        opacity: .6;
+    }
+
+    76%
+    {
+        opacity: .4;
+    }
+
+    90%
+    {
+        opacity: .8;
+    }
+
+    1%,7%,33%,47%,78%,93%
+    {
+        opacity: 0;
+    }
+}
+
+.font {
+    -webkit-animation: font 7s step-end infinite;
+    animation: font 7s step-end infinite;
+}
+
+@-webkit-keyframes font {
+    0%
+    {
+        font-weight: 100;
+        color: #e0287d;
+        -webkit-filter: blur(3px);
+        filter: blur(3px);
+    }
+
+    20%
+    {
+        font-weight: 500;
+        color: #fff;
+        -webkit-filter: blur(0);
+        filter: blur(0);
+    }
+
+    50%
+    {
+        font-weight: 300;
+        color: #1bc7fb;
+        -webkit-filter: blur(2px);
+        filter: blur(2px);
+    }
+
+    60%
+    {
+        font-weight: 700;
+        color: #fff;
+        -webkit-filter: blur(0);
+        filter: blur(0);
+    }
+
+    90%
+    {
+        font-weight: 500;
+        color: #e0287d;
+        -webkit-filter: blur(6px);
+        filter: blur(6px);
+    }
+}
+
+@keyframes font {
+    0%
+    {
+        font-weight: 100;
+        color: #e0287d;
+        -webkit-filter: blur(3px);
+        filter: blur(3px);
+    }
+
+    20%
+    {
+        font-weight: 500;
+        color: #fff;
+        -webkit-filter: blur(0);
+        filter: blur(0);
+    }
+
+    50%
+    {
+        font-weight: 300;
+        color: #1bc7fb;
+        -webkit-filter: blur(2px);
+        filter: blur(2px);
+    }
+
+    60%
+    {
+        font-weight: 700;
+        color: #fff;
+        -webkit-filter: blur(0);
+        filter: blur(0);
+    }
+
+    90%
+    {
+        font-weight: 500;
+        color: #e0287d;
+        -webkit-filter: blur(6px);
+        filter: blur(6px);
+    }
+}
+
+@keyframes wings {
+    50% {
+        transform: translateY(-40px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    53%,
+    to {
+        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: translateZ(0);
+    }
+    40%,
+    43% {
+        animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        transform: translate3d(0, -5px, 0);
+    }
+    70% {
+        animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+        transform: translate3d(0, -7px, 0);
+    }
+    80% {
+        transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: translateZ(0);
+    }
+    90% {
+        transform: translate3d(0, -2px, 0);
+    }
+}
+
+@keyframes slideY {
+    0%,
+    50%,
+    100% {
+        transform: translateY(0px);
+    }
+    25% {
+        transform: translateY(-10px);
+    }
+    75% {
+        transform: translateY(10px);
+    }
+}
+
+@keyframes slideX {
+    0%,
+    50%,
+    100% {
+        transform: translateX(0px);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}

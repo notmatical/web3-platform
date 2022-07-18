@@ -1,0 +1,45 @@
+{
+    "name": "@minxlabs/server",
+    "version": "1.0.0",
+    "description": "",
+    "main": "./index.js",
+    "scripts": {
+        "check-staged": "lint-staged",
+        "start": "node -r esm index.js",
+        "dev": "nodemon -r esm -r dotenv/config index.js dotenv_config_path=../../.env"
+    },
+    "keywords": [],
+    "license": "ISC",
+    "dependencies": {
+        "@discordjs/rest": "^0.4.1",
+        "apollo-datasource-rest": "^3.5.3",
+        "apollo-server-express": "^2.6.3",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.0",
+        "chalk": "^2.4.2",
+        "connect-mongo": "^3.0.0",
+        "discord-api-types": "^0.31.2",
+        "discord.js": "^13.6.0",
+        "esm": "^3.2.25",
+        "express": "^4.17.1",
+        "express-session": "^1.16.2",
+        "graphql": "^14.4.2",
+        "graphql-tag": "^2.10.1",
+        "graphql-type-json": "^0.3.2",
+        "helmet": "^3.18.0",
+        "joi": "^14.3.1",
+        "joi-objectid": "^2.0.0",
+        "lodash": "^4.17.11",
+        "moment": "^2.24.0",
+        "mongoose": "^5.6.0",
+        "morgan": "^1.9.1",
+        "nodemailer": "^6.2.1",
+        "passport": "^0.5.2",
+        "passport-discord": "^0.1.4"
+    },
+    "devDependencies": {
+        "dotenv": "^8.6.0",
+        "nodemon": "^1.19.1",
+        "prettier": "^1.18.2"
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "dashboard": "仪表板",
+    "overview": "概述",
+    "activity": "Activity",
+    "tokens": "Tokens",
+    "collabs": "Collabs",
+    "spaces": "空间",
+
+    "application": "应用",
+    "raffles": "莱佛士",
+    "monitor": "Monitor",
+    "lending": "Lending",
+    "trade": "Trading",
+    "rarity-search": "稀有度搜索",
+    "mint-calendar": "薄荷日历",
+    "auctions": "拍卖",
+    "lottery": "彩票",
+
+    
+    "cosmicastro": "宇宙宇航员",
+    "cosmicastro-caption": "仅持有人部分",
+    "sniper": "Sniper Tool",
+    "staking": "质押",
+    "art-upgrade": "Art Upgrade",
+    "cryo": "低温室",
+    "rescue": "救援任务",
+
+
+    "maintenance": "维护",
+    "error-404": "错误 404",
+    "coming-soon": "快来了",
+    "under-construction": "正在施工",
+
+
+    "social-twitter": "Twitter",
+    "social-discord": "Discord",
+    "feature-request": "路线图"
+}

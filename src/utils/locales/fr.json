@@ -1,0 +1,39 @@
+{
+    "dashboard": "Tableau de bord",
+    "overview": "Aperçu",
+    "activity": "Activity",
+    "tokens": "Tokens",
+    "collabs": "Collabs",
+    "spaces": "Les espaces",
+
+
+    "application": "Applications",
+    "raffles": "Tombolas",
+    "monitor": "Monitor",
+    "lending": "Lending",
+    "trade": "Trading",
+    "rarity-search": "Recherche de rareté",
+    "mint-calendar": "Calendrier de la menthe",
+    "auctions": "Les enchères",
+    "lottery": "Loterie",
+
+
+    "cosmicastro": "Astronautes cosmiques",
+    "cosmicastro-caption": "Section Titulaire uniquement",
+    "sniper": "Sniper Tool",
+    "staking": "Jalonnement",
+    "art-upgrade": "Art Upgrade",
+    "cryo": "Chambre cryogénique",
+    "rescue": "Missions de sauvetage",
+
+
+    "maintenance": "Maintenance",
+    "error-404": "Erreur 404",
+    "coming-soon": "À venir",
+    "under-construction": "En cours de construction",
+
+    
+    "social-twitter": "Twitter",
+    "social-discord": "Discord",
+    "feature-request": "Feuille de route"
+}

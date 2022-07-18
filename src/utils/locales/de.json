@@ -1,0 +1,39 @@
+{
+    "dashboard": "Dashboard",
+    "overview": "Überblick",
+    "activity": "Activity",
+    "tokens": "Tokens",
+    "collabs": "Kooperationen",
+    "spaces": "Räume",
+
+
+    "application": "Anwendungen",
+    "raffles": "Verlosungen",
+    "monitor": "Monitor",
+    "lending": "Lending",
+    "trade": "Trading",
+    "rarity-search": "Seltenheits Suche",
+    "mint-calendar": "Mint Kalender",
+    "auctions": "Versteigerungen",
+    "lottery": "Lotterie",
+
+    
+    "cosmicastro": "Cosmic Astronauts",
+    "cosmicastro-caption": "Besitzer Sektion",
+    "sniper": "Sniper Werkzeug",
+    "staking": "Staking",
+    "art-upgrade": "Art Upgrade",
+    "cryo": "Kryogen Kammer",
+    "rescue": "Rettungs Mission",
+
+
+    "maintenance": "Wartung",
+    "error-404": "Error 404",
+    "coming-soon": "In kürze Verfügbar",
+    "under-construction": "In der Entwicklung",
+
+
+    "social-twitter": "Twitter",
+    "social-discord": "Discord",
+    "feature-request": "Zukunftsplan"
+}

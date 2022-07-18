@@ -1,0 +1,308 @@
+
+.rarities {
+    padding: 12px;
+  }
+  
+  .rarities h2{
+    margin-top: 0;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 18px;
+    color: white;
+  }
+  
+  .rarity-exploer {
+    display: flex;
+  }
+  
+  .rarity-exploer .viverorc .viveinfo {
+    display: flex;
+    padding: 0px;
+    height: 44px;
+    width: 100%;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    top: 0px;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 152%;
+  }
+  
+  .rarity-exploer .viverorc {
+    background-size: 100% 100% !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    width: 520px;
+    height: 520px;
+    background: #09080d;
+    border-radius: 15px 15px 20px 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .rarity-exploer .viverorc .viveinfo div:first-child {
+    border-right: 2px solid #2F3244;
+    border-bottom-left-radius: 15px;
+    color: white;
+  }
+  .rarity-exploer .viverorc .viveinfo div:last-child {
+    border-bottom-right-radius: 15px;
+    color: white;
+  }
+  
+  .rarity-exploer .viverorc .viveinfo div {
+    text-align: center;
+    padding: 10px 25px;
+    background: radial-gradient(122.42% 162.5% at 53.45% 56.82%, rgba(255, 255, 255, 0.108) 0%, rgba(0, 0, 0, 0) 100%) border-box, linear-gradient(0deg, #09080d, #09080d) border-box;
+  }
+  
+  .rarity-exploer .viverorc .bg-bl {
+    background: #09080d;
+    height: 48px;
+    border-radius: 0px 0px 15px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .rarity-exploer .viverorc a {
+    transition: 0.5s;
+    margin: 10px;
+  }
+  
+  .rarity-exploer-check {
+    /* width: 500px; */
+    flex-grow: 1;
+    margin-left: 20px;
+  }
+  .rarity-exploer-check h2 {
+    margin-top: 0;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 18px;
+    color: white;
+  }
+  
+  .rarity-exploer .rarity-list {
+    border-radius: 10px;
+    max-height: 482px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-direction: column;
+    padding-right: 10px;
+  }
+  
+  .rarity-item:first-child {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    /* padding-top: 20px; */
+  }
+
+  .rarity-item:last-child {
+    padding-bottom: 20px;
+  }
+  
+  .rarity-top {
+    text-transform: uppercase;
+    color: #565E7E;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 152%;
+  }
+  
+  .rarity-item {
+    padding-top: 10px;
+    height: 64px;
+    padding-bottom: 10px;
+    background: #09080d;
+    display: block;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .rarity-list {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .helper-common span {
+    border: 1px solid #9A9A9A;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(118, 118, 118, 0.3) 0%, #9A9A9A 100%);
+  }
+  
+  .helper-common .num {
+    border: 1px solid #9A9A9A;
+    display: inline-block;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(240, 140, 125, 0.072) 0%, rgba(244, 164, 127, 0.24) 100%);
+  }
+  
+  
+  .helper-uncommon span {
+    border: 1px solid #88F070;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(118, 118, 118, 0.3) 0%, #88F070 100%);
+  }
+  
+  .helper-uncommon .num {
+    border: 1px solid #88F070;
+    display: inline-block;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(240, 140, 125, 0.072) 0%, rgba(244, 164, 127, 0.24) 100%);
+  }
+  
+  .helper-rare span {
+    border: 1px solid #50B9FF;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(118, 118, 118, 0.3) 0%, #50B9FF 100%);
+  }
+  
+  .helper-rare .num {
+    border: 1px solid #50B9FF;
+    display: inline-block;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(240, 140, 125, 0.072) 0%, rgba(244, 164, 127, 0.24) 100%);
+  }
+  
+  
+  .helper-epic span {
+    border: 1px solid #854AFF;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(118, 118, 118, 0.3) 0%, #854AFF 100%);
+  }
+  
+  .helper-epic .num {
+    border: 1px solid #854AFF;
+    display: inline-block;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(240, 140, 125, 0.072) 0%, rgba(244, 164, 127, 0.24) 100%);
+  }
+  
+  .helper-legendary span {
+    border: 1px solid #8C8C8C;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(118, 118, 118, 0.3) 0%, #8C8C8C 100%);
+  }
+  
+  .helper-legendary .num {
+    border: 1px solid #8C8C8C;
+    display: inline-block;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(240, 140, 125, 0.072) 0%, rgba(244, 164, 127, 0.24) 100%);
+  }
+  
+  .helper-mythic span {
+    border: 1px solid #FF0050;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(118, 118, 118, 0.3) 0%, #FF0050 100%);
+  }
+  
+  .helper-mythic .num {
+    border: 1px solid #FF0050;
+    display: inline-block;
+    background: radial-gradient(139.9% 168.2% at 51.92% 56.25%, rgba(240, 140, 125, 0.072) 0%, rgba(244, 164, 127, 0.24) 100%);
+  }
+  
+  .rarity-top .num {
+    border-radius: 0px 5px 5px 0px;
+    transition: 0.5s;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 152%;
+    text-align: center;
+    color: #F6F6F6;
+    text-transform: capitalize;
+    padding: 5px;
+    width: 70px;
+  }
+   .rarity-top span{
+    display: inline-block;
+    transition: 0.5s;
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 152%;
+    text-align: center;
+    letter-spacing: 0.01em;
+    color: #F6F6F6;
+    text-transform: capitalize;
+    padding: 5px;
+    border-radius: 5px 0px 0px 5px;
+    letter-spacing: 0.01em;
+  }
+  
+  .rarity-bottom {
+    margin-top: 8px;
+  }
+  .progress-bar.progress-rarity {
+    height: 6px;
+    border: 1px solid #3A3E52;
+  }
+  .progress-bar {
+    height: 16px;
+    position: relative;
+    background: #282D3B;
+    box-shadow: inset 0px 0px 12px #282d3b;
+    border: 2px solid #3A3E52;
+    border-radius: 70px;
+  }
+  .progress-bar.progress-common span {
+    background: #9A9A9A;
+    filter: drop-shadow(0px 0px 10px #9A9A9A);
+  }
+  
+  .progress-bar.progress-uncommon span {
+    background: #88F070;
+    filter: drop-shadow(0px 0px 10px #88F070);
+  }
+  
+  .progress-bar.progress-rare span {
+    background: #50B9FF;
+    filter: drop-shadow(0px 0px 10px #50B9FF);
+  }
+  
+  .progress-bar.progress-epic span {
+    background: #854AFF;
+    filter: drop-shadow(0px 0px 10px #854AFF);
+  }
+  
+  .progress-bar.progress-legendary span {
+    background: #88F070;
+    filter: drop-shadow(0px 0px 10px #88F070);
+  }
+  
+  .progress-bar.progress-mythic span {
+    background: #FF0050;
+    filter: drop-shadow(0px 0px 10px #FF0050);
+  }
+  
+  .progress-bar span {
+    display: block;
+    height: 100%;
+    border-radius: 70px;
+    background-color: #9A9A9A;
+    position: relative;
+    overflow: hidden;
+  }
+  .progress-bar span {
+    max-width: 100%;
+    transition: 0.5s;
+  }
+  
+  .rarity-top span.helper {
+    background: rgba(85, 89, 109, 0.24);
+    border: 1px solid #55596D;
+    border-radius: 5px;
+    text-align: center;
+    width: 85px;
+  }
+  
+  .progress-bar .progress-light span{
+    background: #F3F3F3;
+    filter: drop-shadow(0px 0px 10px #F3F3F3);
+  }
