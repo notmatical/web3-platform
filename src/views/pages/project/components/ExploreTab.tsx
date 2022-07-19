@@ -81,15 +81,21 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
     const solPrice = useSolPrice();
     const hsClient = new HyperspaceClient(HS_API_KEY);
 
-    const [value, setValue] = useState<string>('');
+    const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
     const [filterValue, setFilterValue] = useState('lowest_listing_block_timestamp');
     const [autoRefresh, setAutoRefresh] = useState(false);
 
-    const [marketSnapshot, setMarketSnapshot] = useState<any>([]);
-    const fetchMarketSnapshot = async () => {
+    const [value, setValue] = useState<string>('');
+    const searchForToken = async (argument: string) => {
+        setValue(argument);
+        setIsRefreshing(true);
         hsClient
             .getMarketplaceSnapshot({
                 condition: {
+                    name: {
+                        value: argument,
+                        operation: 'FUZZY'
+                    },
                     projects: [
                         {
                             project_id: projectSlug!
@@ -106,13 +112,55 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                 }
             })
             .then((res) => {
+                setIsRefreshing(false);
+                setMarketSnapshot(res.getMarketPlaceSnapshots);
+            });
+    };
+
+    const [marketSnapshot, setMarketSnapshot] = useState<any>([]);
+    const fetchMarketSnapshot = async () => {
+        hsClient
+            .getMarketplaceSnapshot({
+                condition: {
+                    projects: [
+                        {
+                            project_id: projectSlug!
+                        }
+                    ]
+                },
+                orderBy: {
+                    field_name: filterValue,
+                    sort_order: filterValue === 'rank_est' ? 'ASC' : 'DESC'
+                },
+                paginationInfo: {
+                    page_number: 1,
+                    page_size: 30
+                }
+            })
+            .then((res) => {
                 setMarketSnapshot(res.getMarketPlaceSnapshots);
             });
     };
 
     useEffect(() => {
+        let interval: NodeJS.Timeout | undefined;
+
         fetchMarketSnapshot();
-    }, []);
+
+        if (autoRefresh) {
+            console.log('enable auto refresh');
+            interval = setInterval(() => {
+                fetchMarketSnapshot();
+            }, 12500);
+        }
+
+        return () => {
+            if (interval) {
+                console.log('disable auto refresh');
+                clearInterval(interval);
+            }
+        };
+    }, [autoRefresh, filterValue]);
 
     console.log(marketSnapshot);
 
@@ -127,7 +175,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                         <OutlineInputStyle
                             id="input-search-collection"
                             value={value}
-                            onChange={(e) => setValue(e.target.value)}
+                            onChange={(e) => searchForToken(e.target.value)}
                             placeholder="Filter by name or token id"
                             startAdornment={
                                 <InputAdornment position="start">
@@ -169,7 +217,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
             </Grid>
 
             <Grid item xs={12}>
-                {marketSnapshot.market_place_snapshots && marketSnapshot.market_place_snapshots.length > 0 ? (
+                {marketSnapshot.market_place_snapshots && !isRefreshing && marketSnapshot.market_place_snapshots.length > 0 ? (
                     <Grid container spacing={2}>
                         {marketSnapshot.market_place_snapshots.map((nft: any, index: number) => (
                             <Grid key={index} item xs={6} sm={4} md={3} lg={3}>
