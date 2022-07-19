@@ -133,7 +133,6 @@ export const tryParseKey = (key: string): PublicKey | null => {
 
 export const abbreviateValue = (value: number) => {
     let newValue: any = value;
-    console.log(value);
     if (value >= 1000) {
         const suffixes = ['', 'K', 'M', 'B', 'T'];
         const suffixNum = Math.floor(('' + value).length / 3);

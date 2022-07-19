@@ -32,7 +32,7 @@ import { formatPercent, formatUSD, abbreviateValue } from 'utils/utils';
 import MainCard from 'components/MainCard';
 
 // third-party
-import { HyperspaceClient } from 'hyperspace-client-js';
+import { HyperspaceClient, StringInputOperationEnum } from 'hyperspace-client-js';
 
 // assets
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -57,12 +57,12 @@ const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(({ theme 
 
 // data
 const filter = [
+    // {
+    //     value: 'lowest_listing_price',
+    //     label: 'Price: Low to High'
+    // },
     {
-        value: 'lowest_listing_price_low',
-        label: 'Price: Low to High'
-    },
-    {
-        value: 'lowest_listing_price_high',
+        value: 'lowest_listing_price',
         label: 'Price: High to Low'
     },
     {
@@ -212,6 +212,8 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                                             sx={{
                                                 height: 220,
                                                 maxHeight: '220px !important',
+                                                transform: 'scale3d(1, 1, 1) translateY(0px)',
+                                                transition: 'all .65s ease !important',
                                                 '&:hover': {
                                                     transform: 'scale3d(1.16, 1.16, 1) translateY(-15px)',
                                                     transition: 'all .65s ease !important'
