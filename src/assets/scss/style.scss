@@ -110,6 +110,12 @@
     margin-right: 8px;
 }
 
+// ==============================|| SELECTION HOVER ||============================== //
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
 // ==============================|| SCROLLBAR ||============================== //
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
