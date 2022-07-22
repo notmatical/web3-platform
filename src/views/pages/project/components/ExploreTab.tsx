@@ -39,6 +39,21 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import { IconRefresh, IconSearch, IconDiamond } from '@tabler/icons';
 import { CloseCircleOutlined, StarFilled } from '@ant-design/icons';
 import PlaceholderImage from 'assets/images/placeholder.png';
+import MagicEden from 'assets/images/icons/me-logo.svg';
+import Yawww from 'assets/images/icons/yawww.jpg';
+import CoralCube from 'assets/images/icons/coralcube.svg';
+import OpenSea from 'assets/images/icons/opensea.svg';
+import Solanart from 'assets/images/icons/solanart.svg';
+
+// DATA
+enum MarketplacePrograms {
+    ME = 'M2mx93ekt1fmXSVkTrUL9xVFHkmME8HTUi5Cyc5aF7K',
+    CORAL = 'hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk',
+    YAWWW = '5SKmrbAxnHV2sgqyDXkGrLrokZYtWWVEEk5Soed7VLVN',
+    OPENSEA = 'hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk',
+    HYPER = 'HYPERfwdTjyJ2SCaKHmpF2MtrXqWxrsotYDsTrshHWq8',
+    SOLANART = 'hausS13jsjafwWwGqZTUQRmWyvyxn9EQpqMwV1PBBmk'
+}
 
 // styles
 const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(({ theme }) => ({
@@ -130,7 +145,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                 },
                 orderBy: {
                     field_name: filterValue,
-                    sort_order: filterValue === 'rank_est' ? 'ASC' : 'DESC'
+                    sort_order: filterValue === 'rank_est' ? 'ASC' : 'ASC'
                 },
                 paginationInfo: {
                     page_number: 1,
@@ -259,6 +274,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                                             title={nft.name}
                                             sx={{
                                                 height: 220,
+                                                zIndex: 2,
                                                 maxHeight: '220px !important',
                                                 transform: 'scale3d(1, 1, 1) translateY(0px)',
                                                 transition: 'all .65s ease !important',
@@ -270,6 +286,97 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                                         />
                                     </Fade>
                                     <CardContent sx={{ p: 1.5, pb: '12px !important' }}>
+                                        {nft.lowest_listing_mpa !== null && (
+                                            <Box
+                                                sx={{
+                                                    mt: '-25px',
+                                                    width: 'max-content',
+                                                    borderWidth: '4px',
+                                                    borderStyle: 'solid',
+                                                    borderColor: '#09080d',
+                                                    borderRadius: '35px',
+                                                    backgroundColor: '#09080d',
+                                                    zIndex: 9999
+                                                }}
+                                            >
+                                                {nft.lowest_listing_mpa !== null &&
+                                                    nft.lowest_listing_mpa.marketplace_program_id === MarketplacePrograms.ME && (
+                                                        <Tooltip title="Magic Eden V2" placement="top" arrow>
+                                                            <Avatar
+                                                                alt="Marketplace Image"
+                                                                src={MagicEden}
+                                                                sx={{
+                                                                    width: 24,
+                                                                    height: 24,
+                                                                    background: '#09080d'
+                                                                }}
+                                                            />
+                                                        </Tooltip>
+                                                    )}
+                                                {nft.lowest_listing_mpa !== null &&
+                                                    nft.lowest_listing_mpa.marketplace_program_id === MarketplacePrograms.YAWWW && (
+                                                        <Tooltip title="YAWWW" placement="top" arrow>
+                                                            <Avatar
+                                                                alt="Marketplace Image"
+                                                                src={Yawww}
+                                                                sx={{
+                                                                    width: 24,
+                                                                    height: 24,
+                                                                    background: '#09080d'
+                                                                }}
+                                                            />
+                                                        </Tooltip>
+                                                    )}
+                                                {nft.lowest_listing_mpa !== null &&
+                                                    nft.lowest_listing_mpa.marketplace_program_id === MarketplacePrograms.OPENSEA &&
+                                                    nft.lowest_listing_mpa.marketplace_instance_id ===
+                                                        '3o9d13qUvEuuauhFrVom1vuCzgNsJifeaBYDPquaT73Y' && (
+                                                        <Tooltip title="Opensea" placement="top" arrow>
+                                                            <Avatar
+                                                                alt="Marketplace Image"
+                                                                src={OpenSea}
+                                                                sx={{
+                                                                    width: 24,
+                                                                    height: 24,
+                                                                    background: '#09080d'
+                                                                }}
+                                                            />
+                                                        </Tooltip>
+                                                    )}
+                                                {nft.lowest_listing_mpa !== null &&
+                                                    nft.lowest_listing_mpa.marketplace_program_id === MarketplacePrograms.CORAL &&
+                                                    nft.lowest_listing_mpa.marketplace_instance_id ===
+                                                        '29xtkHHFLUHXiLoxTzbC7U8kekTwN3mVQSkfXnB1sQ6e' && (
+                                                        <Tooltip title="CoralCube" placement="top" arrow>
+                                                            <Avatar
+                                                                alt="Marketplace Image"
+                                                                src={CoralCube}
+                                                                sx={{
+                                                                    width: 24,
+                                                                    height: 24,
+                                                                    background: '#09080d'
+                                                                }}
+                                                            />
+                                                        </Tooltip>
+                                                    )}
+                                                {nft.lowest_listing_mpa !== null &&
+                                                    nft.lowest_listing_mpa.marketplace_program_id === MarketplacePrograms.CORAL &&
+                                                    nft.lowest_listing_mpa.marketplace_instance_id ===
+                                                        'GWErq8nJf5JQtohg5k7RTkiZmoCxvGBJqbMSfkrxYFFy' && (
+                                                        <Tooltip title="Solanart AH" placement="top" arrow>
+                                                            <Avatar
+                                                                alt="Marketplace Image"
+                                                                src={Solanart}
+                                                                sx={{
+                                                                    width: 24,
+                                                                    height: 24,
+                                                                    background: '#09080d'
+                                                                }}
+                                                            />
+                                                        </Tooltip>
+                                                    )}
+                                            </Box>
+                                        )}
                                         <Box display="flex" flexDirection="column">
                                             <Box display="flex" flexDirection="row" alignItems="center">
                                                 <Typography variant="subtitle1" color="secondary">
