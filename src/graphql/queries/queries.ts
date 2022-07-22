@@ -187,7 +187,11 @@ export const GET_PROPOSALS_FOR_SPACE = gql`
     query GetProposalsForSpace($id: ID!) {
         proposalsIn(id: $id) {
             id
-            author
+            author {
+                vanity
+                wallet
+                avatarURI
+            }
             title
             body
             discussion
@@ -206,7 +210,11 @@ export const GET_PROPOSAL = gql`
     query GetProposal($id: ID!) {
         proposal(id: $id) {
             id
-            author
+            author {
+                vanity
+                wallet
+                avatarURI
+            }
             title
             body
             discussion

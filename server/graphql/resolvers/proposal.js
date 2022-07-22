@@ -1,5 +1,5 @@
 import { UserInputError, ApolloError } from 'apollo-server-express';
-import { Proposal, Space } from '../../models/models';
+import { Proposal, Space, User } from '../../models/models';
 
 export default {
     Query: {
@@ -23,6 +23,11 @@ export default {
         proposal: async (root, { id }) => {
             const proposal = await Proposal.findById(id);
             return proposal;
+        }
+    },
+    Proposal: {
+        author: (args) => {
+            return User.findById(args.author);
         }
     },
     Mutation: {

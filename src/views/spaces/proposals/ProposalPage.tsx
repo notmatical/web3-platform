@@ -12,8 +12,9 @@ import { useWallet } from '@solana/wallet-adapter-react';
 
 // project imports
 import { useToasts } from 'hooks/useToasts';
-import { abbreviateValue, shortenAddress } from 'utils/utils';
+import { abbreviateValue } from 'utils/utils';
 import SkeletonProductPlaceholder from 'components/cards/Skeleton/ProductPlaceholder';
+import UserLink from 'components/UserLink';
 import MainCard from 'components/cards/MainCard';
 
 // graphql
@@ -213,7 +214,7 @@ const ProposalPage = () => {
     // Manage Functions
     const deleteProposal = async () => {
         if (publicKey) {
-            if (publicKey.toBase58() === data.proposal.author) {
+            if (publicKey.toBase58() === data.proposal.author.wallet) {
                 DeleteProposal({
                     variables: { id: data.proposal.id }
                 }).then(
@@ -319,22 +320,7 @@ const ProposalPage = () => {
                                             sx={{ ml: 1, display: 'block', textDecoration: 'none' }}
                                         >
                                             {space.space.name} by
-                                            <strong>
-                                                <Link
-                                                    to="/under-construction"
-                                                    // to={`/account/${data.proposal.author}/portfolio`}
-                                                    style={{
-                                                        textDecoration: 'none',
-                                                        marginLeft: 5,
-                                                        color:
-                                                            theme.palette.mode === 'dark'
-                                                                ? theme.palette.primary.light
-                                                                : theme.palette.secondary.dark
-                                                    }}
-                                                >
-                                                    {shortenAddress(data.proposal.author, 7)}
-                                                </Link>
-                                            </strong>
+                                            <UserLink user={data.proposal.author} />
                                         </Typography>
                                     </Box>
 

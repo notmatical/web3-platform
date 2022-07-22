@@ -3,7 +3,7 @@ import { gql } from 'apollo-server-express';
 export default gql`
     type Proposal {
         id: ID!
-        author: String!
+        author: User!
         title: String!
         body: String
         discussion: String

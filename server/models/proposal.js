@@ -5,7 +5,10 @@ const { ObjectId } = Schema.Types;
 
 const proposalSchema = new Schema(
     {
-        author: String,
+        author: {
+            type: ObjectId,
+            ref: 'User'
+        },
         title: {
             type: String,
             unique: true

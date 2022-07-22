@@ -8,6 +8,7 @@ import { CheckCircle } from '@mui/icons-material';
 // project imports
 import SkeletonProductPlaceholder from 'components/cards/Skeleton/ProductPlaceholder';
 import MainCard from 'components/cards/MainCard';
+import UserLink from 'components/UserLink';
 import { shortenAddress, abbreviateValue } from 'utils/utils';
 
 // third party
@@ -69,22 +70,7 @@ const ProposalCard = ({ space, proposal, image, loading }: ProposalCardProps) =>
                                         sx={{ ml: 1, display: 'block', textDecoration: 'none' }}
                                     >
                                         {space.name} by
-                                        <strong>
-                                            <Link
-                                                to="/under-construction"
-                                                // to={`/account/${proposal.author}/portfolio`}
-                                                style={{
-                                                    textDecoration: 'none',
-                                                    marginLeft: 5,
-                                                    color:
-                                                        theme.palette.mode === 'dark'
-                                                            ? theme.palette.secondary.main
-                                                            : theme.palette.secondary.main
-                                                }}
-                                            >
-                                                {shortenAddress(proposal.author, 7)}
-                                            </Link>
-                                        </strong>
+                                        <UserLink user={proposal.author} />
                                     </Typography>
                                 </Stack>
                                 <Stack direction="row" justifyContent="flex-end" spacing={1}>
