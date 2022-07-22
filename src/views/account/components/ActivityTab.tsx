@@ -275,24 +275,27 @@ const Activity = ({ user }: { user: any }) => {
                                                     <Typography variant="h5" fontWeight="700" sx={{ ml: 1 }}>
                                                         {activity.name === null ? shortenAddress(activity.token_address) : activity.name}
                                                     </Typography>
-                                                    <Box display="flex" flexDirection="row">
-                                                        <Typography variant="body1" color="info.dark" sx={{ ml: 1 }}>
+                                                    <Box display="flex" flexDirection="row" alignItems="center">
+                                                        <Typography variant="subtitle1" color="info.dark" sx={{ ml: 1 }}>
                                                             {activity.project_name === null
                                                                 ? 'Unverified Collection'
                                                                 : activity.project_name}
-                                                            {activity.is_project_verified === null ? (
-                                                                <Tooltip title="Not Verified" placement="top" arrow>
-                                                                    <WarningIcon
-                                                                        fontSize="inherit"
-                                                                        style={{ color: theme.palette.warning.dark, marginLeft: 2 }}
-                                                                    />
-                                                                </Tooltip>
-                                                            ) : (
-                                                                <Tooltip title="Verified" placement="top" arrow>
-                                                                    <VerifiedIcon fontSize="inherit" style={{ marginLeft: 2 }} />
-                                                                </Tooltip>
-                                                            )}
                                                         </Typography>
+                                                        {activity.is_project_verified === null ? (
+                                                            <Tooltip title="Not Verified" placement="top" arrow>
+                                                                <WarningIcon
+                                                                    fontSize="inherit"
+                                                                    style={{ color: theme.palette.warning.dark, marginLeft: 2 }}
+                                                                />
+                                                            </Tooltip>
+                                                        ) : (
+                                                            <Tooltip title="Verified" placement="top" arrow>
+                                                                <VerifiedIcon
+                                                                    fontSize="inherit"
+                                                                    style={{ color: theme.palette.info.dark, marginLeft: 2 }}
+                                                                />
+                                                            </Tooltip>
+                                                        )}
                                                     </Box>
                                                 </Stack>
                                             </Box>
