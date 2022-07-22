@@ -5,6 +5,9 @@ import Upgrade from './upgrade';
 import User from './user';
 import Social from './social';
 
+// gamification
+import Quest from './quest';
+
 // spaces
 import Space from './space';
 import Proposal from './proposal';
@@ -13,4 +16,4 @@ import Proposal from './proposal';
 import Project from './project';
 import Collab from './collab';
 
-export { User, Social, Project, Collab, Space, Proposal, API, Upgrade };
+export { User, Social, Quest, Project, Collab, Space, Proposal, API, Upgrade };

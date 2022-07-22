@@ -45,6 +45,26 @@ export const GET_LEADERBOARD = gql`
     }
 `;
 
+// Gamification
+export const GET_QUESTS = gql`
+    query quests {
+        quests {
+            name
+            description
+            expiresAt
+            cooldownDays
+            rewardedXp
+            rewardedPoints
+            requiredLevel
+            isClaimable
+            isCompletable
+            isCompletableAt
+            isExpired
+            isOneOff
+        }
+    }
+`;
+
 // API
 export const GET_COLLECTION_STATS = gql`
     query GetCollectionStats($symbol: String!) {
