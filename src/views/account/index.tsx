@@ -463,7 +463,7 @@ function UserAccount() {
                                     flexDirection="row"
                                     alignItems="center"
                                     sx={{
-                                        background: theme.palette.mode === 'dark' ? '#09080d' : theme.palette.primary.main,
+                                        background: theme.palette.mode === 'dark' ? '#0b0f19' : theme.palette.primary.main,
                                         borderRadius: '35px',
                                         mb: 2
                                     }}
@@ -486,7 +486,7 @@ function UserAccount() {
                                     flexDirection="row"
                                     alignItems="center"
                                     sx={{
-                                        background: theme.palette.mode === 'dark' ? '#09080d' : theme.palette.primary.main,
+                                        background: theme.palette.mode === 'dark' ? '#0b0f19' : theme.palette.primary.main,
                                         borderRadius: '35px',
                                         mb: 2
                                     }}
