@@ -100,7 +100,7 @@ const Portfolio = ({ user, tokenList, isLoading }: PortfolioProps) => {
                                                 borderRadius: '9999px',
                                                 padding: 1.5,
                                                 border: '1px solid rgba(213, 217, 233, 0.2)',
-                                                backgroundColor: '#09080d'
+                                                backgroundColor: '#0b0f19'
                                             }}
                                         >
                                             <Avatar
@@ -140,7 +140,7 @@ const Portfolio = ({ user, tokenList, isLoading }: PortfolioProps) => {
                                                 borderRadius: '9999px',
                                                 padding: 1.5,
                                                 border: '1px solid rgba(213, 217, 233, 0.2)',
-                                                backgroundColor: '#09080d'
+                                                backgroundColor: '#0b0f19'
                                             }}
                                         >
                                             <Avatar
@@ -187,7 +187,7 @@ const Portfolio = ({ user, tokenList, isLoading }: PortfolioProps) => {
                                                 borderRadius: '9999px',
                                                 padding: 1.5,
                                                 border: '1px solid rgba(213, 217, 233, 0.2)',
-                                                backgroundColor: '#09080d'
+                                                backgroundColor: '#0b0f19'
                                             }}
                                         >
                                             <Avatar
@@ -226,7 +226,7 @@ const Portfolio = ({ user, tokenList, isLoading }: PortfolioProps) => {
                                                 borderRadius: '9999px',
                                                 padding: 1.5,
                                                 border: '1px solid rgba(213, 217, 233, 0.2)',
-                                                backgroundColor: '#09080d'
+                                                backgroundColor: '#0b0f19'
                                             }}
                                         >
                                             <Avatar
