@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Grid, Box, Fade, Stack, Tooltip, Tab, Tabs, Divider, Avatar, IconButton, Typography } from '@mui/material';
+import { Grid, Box, Fade, Stack, Tooltip, Tab, Tabs, Divider, Avatar, IconButton, Typography, CardMedia } from '@mui/material';
 
 // project imports
 import { useSolPrice } from 'contexts/CoinGecko';
@@ -12,6 +12,7 @@ import { formatUSD } from 'utils/utils';
 import ExploreTab from './components/ExploreTab';
 import OwnersTab from './components/OwnersTab';
 import ActivityTab from './components/ActivityTab';
+import AnalyticsTab from './components/AnalyticsTab';
 
 // assets
 import { IconBook, IconUsers, IconActivity, IconChartBar, IconDots } from '@tabler/icons';
@@ -92,98 +93,99 @@ const CollectionView = () => {
 
     console.log(project);
 
+    // https://storage.googleapis.com/zapper-fi-assets/nft/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/1500x500.jpeg
     return (
         <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-            <Grid item xs={12} sx={{ mb: -2.25 }}>
-                <Box
-                    display="flex"
-                    flexDirection="row"
-                    alignItems="center"
+            <Grid item xs={12}>
+                <CardMedia
+                    image="https://storage.googleapis.com/zapper-fi-assets/nft/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/1500x500.jpeg"
                     sx={{
-                        mb: '8px',
-                        '&:hover': {
-                            color: theme.palette.primary.main,
-                            transition: 'all .1s ease-in-out'
-                        }
+                        overflow: 'hidden',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center center',
+                        height: 200,
+                        ml: '-20px',
+                        mr: '-20px',
+                        mt: '-20px'
                     }}
                 >
-                    <IconButton size="small" color="primary" onClick={() => navigate(-1)}>
-                        <NavigateBeforeRoundedIcon />
-                    </IconButton>
-                    <Typography variant="h4" color="primary" sx={{ ml: 1 }}>
-                        Go Back
-                    </Typography>
-                </Box>
+                    <Box
+                        sx={{
+                            zIndex: 0,
+                            width: '100%',
+                            height: '200px',
+                            background: 'linear-gradient(360deg, #0b0f19 20%, rgba(20, 26, 30, 0) 100%)'
+                        }}
+                    />
+                </CardMedia>
 
-                <Divider />
+                <Box display="flex" flexDirection="row" alignItems="flex-end" sx={{ mt: '-10%' }}>
+                    <Fade in timeout={500} unmountOnExit>
+                        <Avatar
+                            src={project.projectData.project.img_url === null ? PlaceholderImage : project.projectData.project.img_url}
+                            sx={{
+                                height: '120px',
+                                width: '120px',
+                                backgroundColor: 'transparent',
+                                mr: 2
+                            }}
+                            color="inherit"
+                        />
+                    </Fade>
+
+                    {/* project info */}
+                    <Box display="flex" flexDirection="row" alignItems="center" flexGrow={1}>
+                        <Box display="flex" sx={{ borderRadius: 2, p: 2, gap: 4, background: '#0b0f19' }}>
+                            <Stack>
+                                <Typography variant="h4" color="primary">
+                                    # Holders
+                                </Typography>
+                                <Typography variant="h3" color="inherit">
+                                    {project.projectData.num_of_token_holders}
+                                </Typography>
+                            </Stack>
+                            <Stack>
+                                <Typography variant="h4" color="primary">
+                                    Listed
+                                </Typography>
+                                <Typography variant="h3" color="inherit">
+                                    {project.projectData.num_of_token_listed} / {project.projectData.project.supply}
+                                </Typography>
+                            </Stack>
+                            <Stack>
+                                <Typography variant="h4" color="primary">
+                                    Floor Price
+                                </Typography>
+                                <Tooltip title={formatUSD.format(project.projectData.floor_price * solPrice)} placement="bottom" arrow>
+                                    <Typography variant="h3" color="inherit">
+                                        {project.projectData.floor_price} ◎
+                                    </Typography>
+                                </Tooltip>
+                            </Stack>
+                            <Stack>
+                                <Typography variant="h4" color="primary">
+                                    24 Volume
+                                </Typography>
+                                <Tooltip title={formatUSD.format(project.projectData.volume_1day)} placement="bottom" arrow>
+                                    <Typography variant="h3" color="inherit">
+                                        {(project.projectData.volume_1day / solPrice).toFixed(3)} ◎
+                                    </Typography>
+                                </Tooltip>
+                            </Stack>
+                        </Box>
+
+                        {/* external links */}
+                        <Box display="flex" flexDirection="row" justifyContent="flex-end" sx={{ flexGrow: 1 }}>
+                            <IconButton sx={{ width: '33px', height: '33px', border: `1px solid ${theme.palette.primary.dark}` }}>
+                                <IconDots color={theme.palette.primary.dark} />
+                            </IconButton>
+                        </Box>
+                    </Box>
+                </Box>
             </Grid>
 
             <Grid item xs={12}>
                 <Box display="flex" flexDirection="column" sx={{ gap: 2 }}>
-                    <Box display="flex" flexDirection="row" alignItems="center">
-                        <Fade in timeout={500} unmountOnExit>
-                            <Avatar
-                                src={project.projectData.project.img_url === null ? PlaceholderImage : project.projectData.project.img_url}
-                                sx={{
-                                    height: '120px',
-                                    width: '120px',
-                                    backgroundColor: 'transparent',
-                                    mr: 2
-                                }}
-                                color="inherit"
-                            />
-                        </Fade>
-
-                        {/* project info */}
-                        <Box display="flex" flexDirection="row" alignItems="center" flexGrow={1}>
-                            <Box display="flex" sx={{ gap: 4, mb: 1 }}>
-                                <Stack>
-                                    <Typography variant="h4" color="primary">
-                                        # Holders
-                                    </Typography>
-                                    <Typography variant="h3" color="inherit">
-                                        {project.projectData.num_of_token_holders}
-                                    </Typography>
-                                </Stack>
-                                <Stack>
-                                    <Typography variant="h4" color="primary">
-                                        Listed
-                                    </Typography>
-                                    <Typography variant="h3" color="inherit">
-                                        {project.projectData.num_of_token_listed} / {project.projectData.project.supply}
-                                    </Typography>
-                                </Stack>
-                                <Stack>
-                                    <Typography variant="h4" color="primary">
-                                        Floor Price
-                                    </Typography>
-                                    <Tooltip title={formatUSD.format(project.projectData.floor_price * solPrice)} placement="bottom" arrow>
-                                        <Typography variant="h3" color="inherit">
-                                            {project.projectData.floor_price} ◎
-                                        </Typography>
-                                    </Tooltip>
-                                </Stack>
-                                <Stack>
-                                    <Typography variant="h4" color="primary">
-                                        24 Volume
-                                    </Typography>
-                                    <Tooltip title={formatUSD.format(project.projectData.volume_1day)} placement="bottom" arrow>
-                                        <Typography variant="h3" color="inherit">
-                                            {(project.projectData.volume_1day / solPrice).toFixed(3)} ◎
-                                        </Typography>
-                                    </Tooltip>
-                                </Stack>
-                            </Box>
-
-                            {/* external links */}
-                            <Box display="flex" flexDirection="row" justifyContent="flex-end" sx={{ flexGrow: 1 }}>
-                                <IconButton sx={{ border: `1px solid ${theme.palette.primary.dark}` }}>
-                                    <IconDots color={theme.palette.primary.dark} />
-                                </IconButton>
-                            </Box>
-                        </Box>
-                    </Box>
-
                     {/* project name / description */}
                     <Box display="flex" flexDirection="column" sx={{ px: 2, width: { md: '100%', lg: '66.6%' } }}>
                         <Typography variant="h2" color="inherit">
@@ -254,6 +256,9 @@ const CollectionView = () => {
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     <ActivityTab project={project} projectSlug={projectSlug} />
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                    <AnalyticsTab project={project} projectSlug={projectSlug} />
                 </TabPanel>
             </Grid>
         </Grid>

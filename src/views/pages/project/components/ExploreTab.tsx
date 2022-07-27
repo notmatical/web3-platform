@@ -60,13 +60,13 @@ const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(({ theme 
     width: 434,
     paddingLeft: 16,
     paddingRight: 16,
-    background: theme.palette.mode === 'dark' ? '#24182f' : 'transparent',
+    background: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'transparent',
     '& input': {
         background: 'transparent !important',
         paddingLeft: '4px !important'
     },
     [theme.breakpoints.down('md')]: {
-        background: theme.palette.mode === 'dark' ? '#24182f' : 'transparent'
+        background: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'transparent'
     }
 }));
 
@@ -293,9 +293,9 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                                                     width: 'max-content',
                                                     borderWidth: '4px',
                                                     borderStyle: 'solid',
-                                                    borderColor: '#09080d',
+                                                    borderColor: '#0b0f19',
                                                     borderRadius: '35px',
-                                                    backgroundColor: '#09080d',
+                                                    backgroundColor: '#0b0f19',
                                                     zIndex: 9999
                                                 }}
                                             >
@@ -308,7 +308,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                                                                 sx={{
                                                                     width: 24,
                                                                     height: 24,
-                                                                    background: '#09080d'
+                                                                    background: '#0b0f19'
                                                                 }}
                                                             />
                                                         </Tooltip>
@@ -322,7 +322,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                                                                 sx={{
                                                                     width: 24,
                                                                     height: 24,
-                                                                    background: '#09080d'
+                                                                    background: '#0b0f19'
                                                                 }}
                                                             />
                                                         </Tooltip>
@@ -338,7 +338,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                                                                 sx={{
                                                                     width: 24,
                                                                     height: 24,
-                                                                    background: '#09080d'
+                                                                    background: '#0b0f19'
                                                                 }}
                                                             />
                                                         </Tooltip>
@@ -354,7 +354,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                                                                 sx={{
                                                                     width: 24,
                                                                     height: 24,
-                                                                    background: '#09080d'
+                                                                    background: '#0b0f19'
                                                                 }}
                                                             />
                                                         </Tooltip>
@@ -370,7 +370,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                                                                 sx={{
                                                                     width: 24,
                                                                     height: 24,
-                                                                    background: '#09080d'
+                                                                    background: '#0b0f19'
                                                                 }}
                                                             />
                                                         </Tooltip>

@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
-import { shouldForwardProp } from '@mui/system';
 import {
     Grid,
     Box,
@@ -23,7 +22,7 @@ import {
 // project imports
 import { HS_API_KEY } from 'config';
 import { useSolPrice } from 'contexts/CoinGecko';
-import { formatPercent, formatNumber, abbreviateValue, ordinal_suffix_of } from 'utils/utils';
+import { formatPercent, formatNumber, abbreviateValue, ordinal_suffix_of, shortenAddress, formatDate } from 'utils/utils';
 import MainCard from 'components/MainCard';
 
 // third-party
@@ -32,7 +31,7 @@ import { HyperspaceClient, MarketplaceActionEnums } from 'hyperspace-client-js';
 // assets
 import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
 import VerifiedIcon from '@mui/icons-material/Verified';
-import { IconRefresh, IconSearch, IconDiamond } from '@tabler/icons';
+import { IconRefresh, IconDots, IconDiamond } from '@tabler/icons';
 import { CloseCircleOutlined, StarFilled } from '@ant-design/icons';
 import PlaceholderImage from 'assets/images/placeholder.png';
 
@@ -82,6 +81,7 @@ const NftView = () => {
                 }
             })
             .then((res) => {
+                console.log(res);
                 setTokenHistory(res.getMarketPlaceActionsByToken);
             });
     };
@@ -94,122 +94,187 @@ const NftView = () => {
 
     console.log(marketSnapshot);
     console.log(tokenState);
-    console.log(tokenHistory);
 
     return (
         <Grid container spacing={2}>
-            <Grid item xs={12} sx={{ mb: -2.25 }}>
-                <Box
-                    display="flex"
-                    flexDirection="row"
-                    alignItems="center"
+            <Grid item xs={12}>
+                <CardMedia
+                    image={tokenState.length === 0 ? PlaceholderImage : tokenState.market_place_states[0].meta_data_img}
                     sx={{
-                        mb: '8px',
-                        '&:hover': {
-                            color: theme.palette.primary.main,
-                            transition: 'all .1s ease-in-out'
-                        }
+                        overflow: 'hidden',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        // filter: 'blur(16px)',
+                        opacity: '0.5',
+                        height: 300,
+                        ml: '-20px',
+                        mr: '-20px',
+                        mt: '-20px'
                     }}
                 >
-                    <IconButton size="small" color="primary" onClick={() => navigate(-1)}>
-                        <NavigateBeforeRoundedIcon />
-                    </IconButton>
-                    <Typography variant="h4" color="primary" sx={{ ml: 1 }}>
-                        {marketSnapshot.market_place_snapshots && marketSnapshot.market_place_snapshots[0].project_name}
-                    </Typography>
-                </Box>
+                    <Box
+                        sx={{
+                            zIndex: -1,
+                            width: '100%',
+                            height: '100%',
+                            background: 'linear-gradient(360deg, #0b0f19 10%, rgba(20, 26, 30, 0) 100%)'
+                        }}
+                    />
+                </CardMedia>
 
-                <Divider sx={{ mb: 2 }} />
-            </Grid>
-
-            <Grid item xs={12}>
                 {tokenState.market_place_states && tokenState.market_place_states.length > 0 ? (
                     <>
-                        <Box display="flex" flexDirection="row" sx={{ gap: 2 }}>
-                            {/* Avatar */}
-                            <Fade in timeout={500} unmountOnExit>
-                                <Avatar
-                                    src={
-                                        tokenState.market_place_states[0].meta_data_img === null
-                                            ? PlaceholderImage
-                                            : tokenState.market_place_states[0].meta_data_img
-                                    }
+                        <Box display="flex" flexDirection="row" sx={{ gap: 2, mt: '-25%' }}>
+                            <Box display="flex" flexDirection="column" sx={{ gap: 2 }}>
+                                {/* Avatar */}
+                                <Fade in timeout={500} unmountOnExit>
+                                    <Avatar
+                                        src={
+                                            tokenState.market_place_states[0].meta_data_img === null
+                                                ? PlaceholderImage
+                                                : tokenState.market_place_states[0].meta_data_img
+                                        }
+                                        sx={{
+                                            ...theme.typography.commonAvatar,
+                                            height: '320px',
+                                            width: '320px',
+                                            backgroundColor: 'transparent'
+                                        }}
+                                        color="inherit"
+                                    />
+                                </Fade>
+                                <Box
+                                    display="block"
                                     sx={{
-                                        ...theme.typography.commonAvatar,
-                                        height: '320px',
-                                        width: '320px',
-                                        backgroundColor: 'transparent'
+                                        background: '#111827',
+                                        p: 1,
+                                        borderRadius: 2
                                     }}
-                                    color="inherit"
-                                />
-                            </Fade>
+                                >
+                                    <Box display="flex" flexDirection="column" sx={{ gap: 1 }}>
+                                        <Box display="flex" flexDirection="row" justifyContent="space-between">
+                                            <Typography variant="subtitle1" color="primary">
+                                                Token ID
+                                            </Typography>
+                                            <Typography variant="subtitle1" color="inherit">
+                                                1
+                                            </Typography>
+                                        </Box>
+                                        <Divider />
+                                        <Box display="flex" flexDirection="row" justifyContent="space-between">
+                                            <Typography variant="subtitle1" color="primary">
+                                                Address
+                                            </Typography>
+                                            <Typography variant="subtitle1" color="inherit">
+                                                {tokenState && shortenAddress(tokenState.token_address, 6)}
+                                            </Typography>
+                                        </Box>
+                                        <Divider />
+                                        <Box display="flex" flexDirection="row" justifyContent="space-between">
+                                            <Typography variant="subtitle1" color="primary">
+                                                Description
+                                            </Typography>
+                                            <Typography variant="subtitle1" color="inherit">
+                                                1
+                                            </Typography>
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Box>
 
-                            <Box display="flex" flexDirection="column" sx={{ py: 2, gap: 1 }}>
-                                {/* Project Icon */}
-                                <Stack flexDirection="row">
-                                    <Fade in timeout={500} unmountOnExit>
+                            <Box display="flex" flexDirection="column" sx={{ gap: 3, flexGrow: 1, zIndex: 1 }}>
+                                <Box display="flex" flexDirection="column" sx={{ gap: 1 }}>
+                                    <Box display="flex" flexDirection="row" justifyContent="space-between">
+                                        {/* collection family / token name */}
+                                        <Stack>
+                                            <Stack flexDirection="row" alignItems="center">
+                                                <Fade in timeout={500} unmountOnExit>
+                                                    <Avatar
+                                                        src={
+                                                            marketSnapshot.length === 0
+                                                                ? PlaceholderImage
+                                                                : marketSnapshot.market_place_snapshots[0].project_image
+                                                        }
+                                                        sx={{
+                                                            borderRadius: '9999px',
+                                                            height: '20px',
+                                                            width: '20px',
+                                                            backgroundColor: 'transparent'
+                                                        }}
+                                                        color="inherit"
+                                                    />
+                                                </Fade>
+                                                <Typography variant="subtitle1" color="inherit" sx={{ ml: 1, textDecoration: 'underline' }}>
+                                                    {marketSnapshot.market_place_snapshots &&
+                                                        marketSnapshot.market_place_snapshots[0].project_name}
+                                                </Typography>
+                                            </Stack>
+
+                                            <Typography variant="h3" color="inherit">
+                                                {marketSnapshot.market_place_snapshots && marketSnapshot.market_place_snapshots[0].name}
+                                            </Typography>
+                                        </Stack>
+
+                                        <Box
+                                            display="flex"
+                                            alignItems="center"
+                                            sx={{
+                                                gap: 1,
+                                                background: '#111827',
+                                                p: 0.5,
+                                                borderRadius: 2
+                                            }}
+                                        >
+                                            <IconButton sx={{ width: '33px', height: '33px' }}>
+                                                <IconRefresh color={theme.palette.primary.dark} />
+                                            </IconButton>
+                                            <IconButton sx={{ width: '33px', height: '33px' }}>
+                                                <IconRefresh color={theme.palette.primary.dark} />
+                                            </IconButton>
+                                            <IconButton sx={{ width: '33px', height: '33px' }}>
+                                                <IconRefresh color={theme.palette.primary.dark} />
+                                            </IconButton>
+                                        </Box>
+                                    </Box>
+
+                                    {/* Current Owner */}
+                                    <Stack flexDirection="row">
+                                        <Typography variant="h5" color="primary">
+                                            Owned By
+                                        </Typography>
                                         <Avatar
-                                            src={
-                                                marketSnapshot.length === 0
-                                                    ? PlaceholderImage
-                                                    : marketSnapshot.market_place_snapshots[0].project_image
-                                            }
+                                            src="https://arweave.net/u2z_FPvnPsCzgC6wbGc_IADr8KPO627-p6Ar3KAB7QE/7003.png"
                                             sx={{
                                                 borderRadius: '9999px',
                                                 height: '20px',
                                                 width: '20px',
-                                                backgroundColor: 'transparent'
+                                                backgroundColor: 'transparent',
+                                                ml: 0.5,
+                                                '&:hover': {
+                                                    cursor: 'pointer'
+                                                }
                                             }}
                                             color="inherit"
                                         />
-                                    </Fade>
-                                    <Typography variant="h4" color="inherit" sx={{ ml: 1, textDecoration: 'underline' }}>
-                                        {marketSnapshot.market_place_snapshots && marketSnapshot.market_place_snapshots[0].project_name}
-                                    </Typography>
-                                </Stack>
-
-                                {/* Token Name */}
-                                <Typography variant="h3" color="inherit">
-                                    {marketSnapshot.market_place_snapshots && marketSnapshot.market_place_snapshots[0].name}
-                                </Typography>
-
-                                {/* Current Owner */}
-                                <Stack flexDirection="row">
-                                    <Typography variant="h5" color="primary">
-                                        Owned By
-                                    </Typography>
-                                    <Avatar
-                                        src="https://arweave.net/u2z_FPvnPsCzgC6wbGc_IADr8KPO627-p6Ar3KAB7QE/7003.png"
-                                        sx={{
-                                            borderRadius: '9999px',
-                                            height: '20px',
-                                            width: '20px',
-                                            backgroundColor: 'transparent',
-                                            ml: 0.5,
-                                            '&:hover': {
-                                                cursor: 'pointer'
-                                            }
-                                        }}
-                                        color="inherit"
-                                    />
-                                    <Typography
-                                        variant="h5"
-                                        color="secondary"
-                                        onClick={() => navigate(`/account/45rzLU1gPiEsaDtmkjvawgKDYYpSTHdVXKJjZ74dBDFg/portfolio`)}
-                                        sx={{
-                                            ml: 0.5,
-                                            textDecoration: 'underline',
-                                            '&:hover': {
-                                                cursor: 'pointer'
-                                            }
-                                        }}
-                                    >
-                                        matical.sol
-                                    </Typography>
-                                </Stack>
+                                        <Typography
+                                            variant="h5"
+                                            color="secondary"
+                                            onClick={() => navigate(`/account/45rzLU1gPiEsaDtmkjvawgKDYYpSTHdVXKJjZ74dBDFg/portfolio`)}
+                                            sx={{
+                                                ml: 0.5,
+                                                textDecoration: 'underline',
+                                                '&:hover': {
+                                                    cursor: 'pointer'
+                                                }
+                                            }}
+                                        >
+                                            matical.sol
+                                        </Typography>
+                                    </Stack>
+                                </Box>
 
                                 {/* Est Value, Last Sold, */}
-                                <Box display="flex" flexDirection="row" sx={{ mt: 2, gap: 4 }}>
+                                <Box display="flex" flexDirection="row" sx={{ gap: 4 }}>
                                     <Stack>
                                         <Typography variant="h5" color="primary" fontWeight="600">
                                             Est. Value
@@ -265,12 +330,190 @@ const NftView = () => {
                                         </Stack>
                                     </Stack>
                                 </Box>
-                            </Box>
-                        </Box>
 
-                        {/* attributes */}
-                        <Box display="flex" flexDirection="row" sx={{ mt: 2, gap: 2 }}>
-                            <h1>hi</h1>
+                                {/* properties / owner history */}
+                                <Box display="flex" flexDirection="column" sx={{ pt: 2, gap: 2 }}>
+                                    <Typography variant="h5" color="primary" fontWeight="600">
+                                        Properties
+                                    </Typography>
+                                    {marketSnapshot.market_place_snapshots && marketSnapshot.market_place_snapshots.length > 0 ? (
+                                        <Box display="flex" sx={{ gap: 2, gridTemplateColumns: 'repeat(3, minmax(0, 1fr)' }}>
+                                            <Box display="flex" sx={{ p: 1, flexGrow: 1, borderRadius: 2, background: '#111827' }}>
+                                                <Box display="flex" flexDirection="column" sx={{ flexGrow: 1 }}>
+                                                    <Box display="flex" flexDirection="row" justifyContent="space-between">
+                                                        <Typography variant="h5" color="primary" fontWeight="600">
+                                                            Test Trait
+                                                        </Typography>
+                                                        <Typography variant="h5" color="primary" fontWeight="600">
+                                                            74.58 ◎
+                                                        </Typography>
+                                                    </Box>
+                                                    <Typography variant="h5" color="primary" fontWeight="600">
+                                                        Relic Book Page
+                                                    </Typography>
+                                                </Box>
+                                            </Box>
+                                            <Box display="flex" sx={{ p: 1, flexGrow: 1, borderRadius: 2, background: '#111827' }}>
+                                                <Box display="flex" flexDirection="column" sx={{ flexGrow: 1 }}>
+                                                    <Box display="flex" flexDirection="row" justifyContent="space-between">
+                                                        <Typography variant="h5" color="primary" fontWeight="600">
+                                                            Test Trait
+                                                        </Typography>
+                                                        <Typography variant="h5" color="primary" fontWeight="600">
+                                                            74.58 ◎
+                                                        </Typography>
+                                                    </Box>
+                                                    <Typography variant="h5" color="primary" fontWeight="600">
+                                                        Relic Book Page
+                                                    </Typography>
+                                                </Box>
+                                            </Box>
+                                            <Box display="flex" sx={{ p: 1, flexGrow: 1, borderRadius: 2, background: '#111827' }}>
+                                                <Box display="flex" flexDirection="column" sx={{ flexGrow: 1 }}>
+                                                    <Box display="flex" flexDirection="row" justifyContent="space-between">
+                                                        <Typography variant="h5" color="primary" fontWeight="600">
+                                                            Test Trait
+                                                        </Typography>
+                                                        <Typography variant="h5" color="primary" fontWeight="600">
+                                                            74.58 ◎
+                                                        </Typography>
+                                                    </Box>
+                                                    <Typography variant="h5" color="primary" fontWeight="600">
+                                                        Relic Book Page
+                                                    </Typography>
+                                                </Box>
+                                            </Box>
+                                        </Box>
+                                    ) : (
+                                        <Box display="flex" justifyContent="center" alignItems="center">
+                                            <CircularProgress color="secondary" />
+                                        </Box>
+                                    )}
+                                </Box>
+
+                                <Box display="flex" flexDirection="column" sx={{ gap: 1 }}>
+                                    <Typography variant="h5" color="primary" fontWeight="600">
+                                        Owner History
+                                    </Typography>
+
+                                    <Box display="flex" flexDirection="column" sx={{ gap: 2 }}>
+                                        <Box
+                                            display="flex"
+                                            alignItems="center"
+                                            sx={{
+                                                p: 1,
+                                                gap: 1,
+                                                flexGrow: 1,
+                                                borderRadius: 2,
+                                                background: '#111827'
+                                            }}
+                                        >
+                                            <Box display="flex" flexDirection="row" justifyContent="space-between" sx={{ flexGrow: 1 }}>
+                                                <Stack flexDirection="row" sx={{ gap: 1 }}>
+                                                    <Avatar
+                                                        src="https://arweave.net/u2z_FPvnPsCzgC6wbGc_IADr8KPO627-p6Ar3KAB7QE/7003.png"
+                                                        sx={{
+                                                            borderRadius: '9999px',
+                                                            height: '36px',
+                                                            width: '36px',
+                                                            backgroundColor: 'transparent',
+                                                            '&:hover': {
+                                                                cursor: 'pointer'
+                                                            }
+                                                        }}
+                                                        color="inherit"
+                                                    />
+                                                    <Stack>
+                                                        <Typography
+                                                            variant="h5"
+                                                            sx={{
+                                                                textDecoration: 'underline',
+                                                                '&:hover': {
+                                                                    cursor: 'pointer'
+                                                                }
+                                                            }}
+                                                        >
+                                                            matical.sol
+                                                        </Typography>
+                                                        <Typography variant="h5" color="inherit">
+                                                            Owned for 3 days
+                                                        </Typography>
+                                                    </Stack>
+                                                </Stack>
+                                                <Stack alignItems="flex-end">
+                                                    <Typography variant="h5" color="inherit">
+                                                        July 24, 2022
+                                                    </Typography>
+                                                    <Typography variant="h5" color="inherit">
+                                                        Transfer
+                                                    </Typography>
+                                                </Stack>
+                                            </Box>
+                                        </Box>
+                                        {tokenHistory.length > 0 &&
+                                            tokenHistory[0].market_place_actions.map((history: any, index: number) => (
+                                                <Box
+                                                    display="flex"
+                                                    alignItems="center"
+                                                    sx={{
+                                                        p: 1,
+                                                        gap: 1,
+                                                        flexGrow: 1,
+                                                        borderRadius: 2,
+                                                        background: '#111827'
+                                                    }}
+                                                >
+                                                    <Box
+                                                        display="flex"
+                                                        flexDirection="row"
+                                                        justifyContent="space-between"
+                                                        sx={{ flexGrow: 1 }}
+                                                    >
+                                                        <Stack flexDirection="row" sx={{ gap: 1 }}>
+                                                            <Avatar
+                                                                src="https://arweave.net/u2z_FPvnPsCzgC6wbGc_IADr8KPO627-p6Ar3KAB7QE/7003.png"
+                                                                sx={{
+                                                                    borderRadius: '9999px',
+                                                                    height: '36px',
+                                                                    width: '36px',
+                                                                    backgroundColor: 'transparent',
+                                                                    '&:hover': {
+                                                                        cursor: 'pointer'
+                                                                    }
+                                                                }}
+                                                                color="inherit"
+                                                            />
+                                                            <Stack>
+                                                                <Typography
+                                                                    variant="h5"
+                                                                    sx={{
+                                                                        textDecoration: 'underline',
+                                                                        '&:hover': {
+                                                                            cursor: 'pointer'
+                                                                        }
+                                                                    }}
+                                                                >
+                                                                    matical.sol
+                                                                </Typography>
+                                                                <Typography variant="h5" color="inherit">
+                                                                    Owned for 3 days
+                                                                </Typography>
+                                                            </Stack>
+                                                        </Stack>
+                                                        <Stack alignItems="flex-end">
+                                                            <Typography variant="h5" color="inherit">
+                                                                {formatDate.format(new Date(history.block_timestamp * 1000))}
+                                                            </Typography>
+                                                            <Typography variant="h5" color="inherit">
+                                                                Transfer
+                                                            </Typography>
+                                                        </Stack>
+                                                    </Box>
+                                                </Box>
+                                            ))}
+                                    </Box>
+                                </Box>
+                            </Box>
                         </Box>
                     </>
                 ) : (
