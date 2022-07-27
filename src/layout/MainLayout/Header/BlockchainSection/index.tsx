@@ -5,67 +5,47 @@ import { useTheme } from '@mui/material/styles';
 import {
     Avatar,
     Box,
-    ClickAwayListener,
     Grid,
-    List,
-    ListItemButton,
-    ListItemText,
-    Paper,
-    Popper,
+    Divider,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+    CircularProgress,
+    Stack,
+    Button,
     Typography,
     useMediaQuery
 } from '@mui/material';
 
 // project imports
-import Transitions from 'components/@extended/Transitions';
+import useConfig from 'hooks/useConfig';
 
 // assets
-import TranslateTwoToneIcon from '@mui/icons-material/TranslateTwoTone';
-import useConfig from 'hooks/useConfig';
+import { IconX } from '@tabler/icons';
+import SwitchIcon from 'assets/images/icons/switch-icon.svg';
+import SolanaChain from 'assets/images/blockchains/solana-icon.png';
+import EtherChain from 'assets/images/blockchains/ethereum-icon.png';
+import PolyChain from 'assets/images/blockchains/polygon-icon.png';
+import AvaxChain from 'assets/images/blockchains/avalanche-icon.png';
+import CeloChain from 'assets/images/blockchains/celo-icon.png';
+import CronosChain from 'assets/images/blockchains/cronos-icon.png';
+import BinanceChain from 'assets/images/blockchains/binance-smart-chain-icon.png';
+import EvmosChain from 'assets/images/blockchains/evmos-icon.png';
 
 // ==============================|| LOCALIZATION ||============================== //
 
-const LocalizationSection = () => {
+const BlockchainSection = () => {
     const { borderRadius, locale, onChangeLocale } = useConfig();
 
     const theme = useTheme();
     const matchesXs = useMediaQuery(theme.breakpoints.down('md'));
 
+    // Modal
     const [open, setOpen] = useState(false);
-    const anchorRef = useRef<any>(null);
-    const [language, setLanguage] = useState<string>(locale);
-
-    const handleListItemClick = (
-        event: React.MouseEvent<HTMLAnchorElement> | React.MouseEvent<HTMLDivElement, MouseEvent> | undefined,
-        lng: string
-    ) => {
-        setLanguage(lng);
-        onChangeLocale(lng);
-        setOpen(false);
-    };
-
-    const handleToggle = () => {
-        setOpen((prevOpen) => !prevOpen);
-    };
-
-    const handleClose = (event: MouseEvent | TouchEvent) => {
-        if (anchorRef.current && anchorRef.current.contains(event.target)) {
-            return;
-        }
-        setOpen(false);
-    };
-
-    const prevOpen = useRef(open);
-    useEffect(() => {
-        if (prevOpen.current === true && open === false) {
-            anchorRef.current.focus();
-        }
-        prevOpen.current = open;
-    }, [open]);
-
-    useEffect(() => {
-        setLanguage(locale);
-    }, [locale]);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     return (
         <>
@@ -87,129 +67,225 @@ const LocalizationSection = () => {
                         background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.primary.light,
                         color: theme.palette.primary.dark,
                         transition: 'all .2s ease-in-out',
+                        overflow: 'none !important',
                         '&[aria-controls="menu-list-grow"],&:hover': {
                             borderColor: theme.palette.primary.main,
                             background: theme.palette.primary.main,
                             color: theme.palette.primary.light
                         }
                     }}
-                    ref={anchorRef}
                     aria-controls={open ? 'menu-list-grow' : undefined}
                     aria-haspopup="true"
-                    onClick={handleToggle}
+                    onClick={handleOpen}
                     color="inherit"
                 >
-                    <Typography variant="h5" sx={{ textTransform: 'uppercase' }} color="inherit">
-                        {language}
-                    </Typography>
+                    <Avatar
+                        src={SolanaChain}
+                        sx={{
+                            borderRadius: '9999px',
+                            height: '25px',
+                            width: '25px',
+                            backgroundColor: 'transparent'
+                        }}
+                        color="inherit"
+                    />
+                    <Box
+                        display="flex"
+                        sx={{
+                            position: 'absolute',
+                            top: '-6px',
+                            right: '-6px',
+                            padding: '2px',
+                            borderRadius: '4px',
+                            backgroundColor: theme.palette.dark.main
+                        }}
+                    >
+                        <img src={SwitchIcon} alt="Clip/Copy" style={{ color: theme.palette.primary.main, fontSize: '7px' }} />
+                    </Box>
                 </Avatar>
             </Box>
 
-            <Popper
-                placement={matchesXs ? 'bottom-start' : 'bottom'}
-                open={open}
-                anchorEl={anchorRef.current}
-                role={undefined}
-                transition
-                disablePortal
-                popperOptions={{
-                    modifiers: [
-                        {
-                            name: 'offset',
-                            options: {
-                                offset: [matchesXs ? 0 : 0, 20]
-                            }
-                        }
-                    ]
-                }}
-            >
-                {({ TransitionProps }) => (
-                    <ClickAwayListener onClickAway={handleClose}>
-                        <Transitions position={matchesXs ? 'top-left' : 'top'} in={open} {...TransitionProps}>
-                            <Paper elevation={16}>
-                                {open && (
-                                    <List
-                                        component="nav"
-                                        sx={{
-                                            width: '100%',
-                                            minWidth: 200,
-                                            maxWidth: 280,
-                                            bgcolor: theme.palette.background.paper,
-                                            borderRadius: `${borderRadius}px`,
-                                            [theme.breakpoints.down('md')]: {
-                                                maxWidth: 250
-                                            }
-                                        }}
-                                    >
-                                        <ListItemButton selected={language === 'en'} onClick={(event) => handleListItemClick(event, 'en')}>
-                                            <ListItemText
-                                                primary={
-                                                    <Grid container>
-                                                        <Typography color="textPrimary">English</Typography>
-                                                        <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
-                                                            (UK)
-                                                        </Typography>
-                                                    </Grid>
-                                                }
-                                            />
-                                        </ListItemButton>
-                                        <ListItemButton selected={language === 'de'} onClick={(event) => handleListItemClick(event, 'de')}>
-                                            <ListItemText
-                                                primary={
-                                                    <Grid container>
-                                                        <Typography color="textPrimary">Deutsch</Typography>
-                                                        <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
-                                                            (German)
-                                                        </Typography>
-                                                    </Grid>
-                                                }
-                                            />
-                                        </ListItemButton>
-                                        <ListItemButton selected={language === 'fr'} onClick={(event) => handleListItemClick(event, 'fr')}>
-                                            <ListItemText
-                                                primary={
-                                                    <Grid container>
-                                                        <Typography color="textPrimary">Français</Typography>
-                                                        <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
-                                                            (French)
-                                                        </Typography>
-                                                    </Grid>
-                                                }
-                                            />
-                                        </ListItemButton>
-                                        <ListItemButton selected={language === 'ro'} onClick={(event) => handleListItemClick(event, 'ro')}>
-                                            <ListItemText
-                                                primary={
-                                                    <Grid container>
-                                                        <Typography color="textPrimary">Română</Typography>
-                                                        <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
-                                                            (Romanian)
-                                                        </Typography>
-                                                    </Grid>
-                                                }
-                                            />
-                                        </ListItemButton>
-                                        <ListItemButton selected={language === 'zh'} onClick={(event) => handleListItemClick(event, 'zh')}>
-                                            <ListItemText
-                                                primary={
-                                                    <Grid container>
-                                                        <Typography color="textPrimary">中国人</Typography>
-                                                        <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
-                                                            (Chinese)
-                                                        </Typography>
-                                                    </Grid>
-                                                }
-                                            />
-                                        </ListItemButton>
-                                    </List>
-                                )}
-                            </Paper>
-                        </Transitions>
-                    </ClickAwayListener>
-                )}
-            </Popper>
+            {/* Dialog renders its body even if not open */}
+            <Dialog maxWidth="sm" fullWidth onClose={handleClose} open={open} scroll="paper" sx={{ '& .MuiDialog-paper': { p: 0 } }}>
+                {open && <ChooseBlockchainModal onCancel={handleClose} />}
+            </Dialog>
         </>
     );
 };
 
-export default LocalizationSection;
+const ChooseBlockchainModal = ({ onCancel }: { onCancel: () => void }) => {
+    const theme = useTheme();
+
+    return (
+        <>
+            <DialogTitle sx={{ m: 0, p: 2 }}>
+                Select Network
+                <IconButton
+                    aria-label="cloe"
+                    onClick={onCancel}
+                    sx={{
+                        position: 'absolute',
+                        right: 12,
+                        top: 12,
+                        color: theme.palette.grey[500]
+                    }}
+                >
+                    <IconX />
+                </IconButton>
+            </DialogTitle>
+            <DialogContent sx={{ p: 3 }}>
+                <Box display="flex" flexDirection="column" sx={{ gap: 1 }}>
+                    <Box display="flex" flexDirection="row" justifyContent="flex-start" sx={{ gap: 1 }}>
+                        <Button variant="text" color="primary" fullWidth>
+                            <Avatar
+                                src={SolanaChain}
+                                sx={{
+                                    boxShadow: '0 0 0 2px #2c3a43',
+                                    borderRadius: '9999px',
+                                    height: '25px',
+                                    width: '25px',
+                                    backgroundColor: 'transparent',
+                                    mr: '12px'
+                                }}
+                                color="inherit"
+                            />
+                            <Typography variant="subtitle1" fontSize="16px" fontWeight="500" color="white">
+                                Solana
+                            </Typography>
+                        </Button>
+                        <Button variant="text" color="primary" fullWidth>
+                            <Avatar
+                                src={EtherChain}
+                                sx={{
+                                    boxShadow: '0 0 0 2px #2c3a43',
+                                    borderRadius: '9999px',
+                                    height: '25px',
+                                    width: '25px',
+                                    backgroundColor: 'transparent',
+                                    mr: '12px'
+                                }}
+                                color="inherit"
+                            />
+                            <Typography variant="subtitle1" fontSize="16px" fontWeight="500" color="white">
+                                Ethereum
+                            </Typography>
+                        </Button>
+                    </Box>
+                    {/* row 2 */}
+                    <Box display="flex" flexDirection="row" justifyContent="flex-start" sx={{ gap: 1 }}>
+                        <Button variant="text" color="primary" fullWidth>
+                            <Avatar
+                                src={PolyChain}
+                                sx={{
+                                    boxShadow: '0 0 0 2px #2c3a43',
+                                    borderRadius: '9999px',
+                                    height: '25px',
+                                    width: '25px',
+                                    backgroundColor: 'transparent',
+                                    mr: '12px'
+                                }}
+                                color="inherit"
+                            />
+                            <Typography variant="subtitle1" fontSize="16px" fontWeight="500" color="white">
+                                Polygon
+                            </Typography>
+                        </Button>
+                        <Button variant="text" color="primary" fullWidth>
+                            <Avatar
+                                src={AvaxChain}
+                                sx={{
+                                    boxShadow: '0 0 0 2px #2c3a43',
+                                    borderRadius: '9999px',
+                                    height: '25px',
+                                    width: '25px',
+                                    backgroundColor: 'transparent',
+                                    mr: '12px'
+                                }}
+                                color="inherit"
+                            />
+                            <Typography variant="subtitle1" fontSize="16px" fontWeight="500" color="white">
+                                Avalanche
+                            </Typography>
+                        </Button>
+                    </Box>
+                    {/* row 3 */}
+                    <Box display="flex" flexDirection="row" justifyContent="flex-start" sx={{ gap: 1 }}>
+                        <Button variant="text" color="primary" fullWidth>
+                            <Avatar
+                                src={CeloChain}
+                                sx={{
+                                    boxShadow: '0 0 0 2px #2c3a43',
+                                    borderRadius: '9999px',
+                                    height: '25px',
+                                    width: '25px',
+                                    backgroundColor: 'transparent',
+                                    mr: '12px'
+                                }}
+                                color="inherit"
+                            />
+                            <Typography variant="subtitle1" fontSize="16px" fontWeight="500" color="white">
+                                Celo
+                            </Typography>
+                        </Button>
+                        <Button variant="text" color="primary" fullWidth>
+                            <Avatar
+                                src={CronosChain}
+                                sx={{
+                                    boxShadow: '0 0 0 2px #2c3a43',
+                                    borderRadius: '9999px',
+                                    height: '25px',
+                                    width: '25px',
+                                    backgroundColor: 'transparent',
+                                    mr: '12px'
+                                }}
+                                color="inherit"
+                            />
+                            <Typography variant="subtitle1" fontSize="16px" fontWeight="500" color="white">
+                                Cronos
+                            </Typography>
+                        </Button>
+                    </Box>
+                    {/* row 4 */}
+                    <Box display="flex" flexDirection="row" justifyContent="flex-start" sx={{ gap: 1 }}>
+                        <Button variant="text" color="primary" fullWidth>
+                            <Avatar
+                                src={BinanceChain}
+                                sx={{
+                                    boxShadow: '0 0 0 2px #2c3a43',
+                                    borderRadius: '9999px',
+                                    height: '25px',
+                                    width: '25px',
+                                    backgroundColor: 'transparent',
+                                    mr: '12px'
+                                }}
+                                color="inherit"
+                            />
+                            <Typography variant="subtitle1" fontSize="16px" fontWeight="500" color="white">
+                                BSC
+                            </Typography>
+                        </Button>
+                        <Button variant="text" color="primary" fullWidth>
+                            <Avatar
+                                src={EvmosChain}
+                                sx={{
+                                    boxShadow: '0 0 0 2px #2c3a43',
+                                    borderRadius: '9999px',
+                                    height: '25px',
+                                    width: '25px',
+                                    backgroundColor: 'transparent',
+                                    mr: '12px'
+                                }}
+                                color="inherit"
+                            />
+                            <Typography variant="subtitle1" fontSize="16px" fontWeight="500" color="white">
+                                Evmos
+                            </Typography>
+                        </Button>
+                    </Box>
+                </Box>
+            </DialogContent>
+        </>
+    );
+};
+
+export default BlockchainSection;

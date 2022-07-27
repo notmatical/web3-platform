@@ -9,7 +9,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import Logo from 'components/Logo';
 import SearchSection from './SearchSection';
 import MobileSection from './MobileSection';
-// import BlockchainSection from './BlockchainSection';
+import BlockchainSection from './BlockchainSection';
 import LocalizationSection from './LocalizationSection';
 import NotificationSection from './NotificationSection';
 import Customization from './Customization';
@@ -51,7 +51,7 @@ const Header = () => {
                         ...theme.typography.mediumAvatar,
                         overflow: 'hidden',
                         transition: 'all .2s ease-in-out',
-                        background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.secondary.light,
+                        background: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : theme.palette.secondary.light,
                         color: theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.secondary.dark,
                         '&:hover': {
                             background: theme.palette.mode === 'dark' ? theme.palette.secondary.main : theme.palette.secondary.dark,
@@ -78,12 +78,14 @@ const Header = () => {
                 <LocalizationSection />
             </Box>
 
+            <BlockchainSection />
+
             {/* notification & profile */}
             {connected && <NotificationSection />}
 
             <Customization />
 
-            <Chip
+            {/* <Chip
                 label="BETA"
                 size="small"
                 sx={{
@@ -92,7 +94,7 @@ const Header = () => {
                     backgroundColor: '#d329ff',
                     backgroundImage: 'linear-gradient(147deg, #d329ff 0%, #69147f 97%)'
                 }}
-            />
+            /> */}
 
             {/* <ProfileSection /> */}
 
