@@ -50,8 +50,7 @@ const ProfileList = () => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef<any>(null);
 
-    const { data, loading, error, refetch } = useQuery(queries.GET_USER, { variables: { wallet: publicKey }, fetchPolicy: 'network-only' });
-    console.log(data, loading, error);
+    const { data, loading, error } = useQuery(queries.GET_USER, { variables: { wallet: publicKey }, fetchPolicy: 'network-only' });
 
     const base58 = useMemo(() => publicKey?.toBase58(), [publicKey]);
     const content = useMemo(() => {
@@ -111,11 +110,11 @@ const ProfileList = () => {
                 sx={{
                     textOverflow: 'ellipsis',
                     borderRadius: 2,
-                    backgroundColor: theme.palette.mode === 'dark' ? '#24182f' : theme.palette.primary.light
+                    backgroundColor: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : theme.palette.primary.light
                 }}
             >
                 <Box display="flex" flexDirection="row" alignItems="center" sx={{ p: 1, flexGrow: 1 }}>
-                    {loading && !data ? (
+                    {loading || !data ? (
                         <Skeleton variant="circular" animation="wave" width={44} height={44} sx={{ mr: 1 }} />
                     ) : (
                         <Avatar
@@ -137,7 +136,7 @@ const ProfileList = () => {
                             alignItems="center"
                             sx={{ textOverflow: 'ellipsis' }}
                         >
-                            {loading && !data ? (
+                            {loading || !data ? (
                                 <>
                                     <Skeleton variant="text" animation="wave" height={18} width={75} />
                                     <IconChevronDown size="1rem" />
@@ -151,7 +150,7 @@ const ProfileList = () => {
                                 </>
                             )}
                         </Box>
-                        {loading && !data ? (
+                        {loading || !data ? (
                             <LinearProgress color="secondary" sx={{ mt: 0.5, mb: 0.5 }} />
                         ) : (
                             <LinearProgress
@@ -162,7 +161,7 @@ const ProfileList = () => {
                             />
                         )}
                         <Box display="flex" flexDirection="row" justifyContent="space-between">
-                            {loading && !data ? (
+                            {loading || !data ? (
                                 <>
                                     <Skeleton variant="text" animation="wave" height={18} width={25} />
                                     <Skeleton variant="text" animation="wave" height={18} width={60} />
@@ -234,40 +233,52 @@ const ProfileList = () => {
                                         <Box sx={{ m: 1 }}>
                                             <Stack>
                                                 <Stack direction="row" spacing={0.5} alignItems="center" justifyContent="flex-start">
-                                                    <Avatar
-                                                        src={data.user.avatarURI ? data.user.avatarURI : DefaultUser}
-                                                        sx={{
-                                                            ...theme.typography.mediumAvatar,
-                                                            margin: '8px 8px 8px 8px !important',
-                                                            cursor: 'pointer'
-                                                        }}
-                                                        aria-controls={open ? 'menu-list-grow' : undefined}
-                                                        aria-haspopup="true"
-                                                        color="inherit"
-                                                    />
-                                                    <Stack direction="column" alignItems="flex-start" justifyContent="flex-start">
-                                                        <Typography variant="h4">
-                                                            {data.user.vanity ? data.user.vanity : content}
-                                                        </Typography>
-                                                        <Link
-                                                            to={{
-                                                                pathname: `/account/${publicKey}/portfolio`
+                                                    {loading || !data ? (
+                                                        <Skeleton variant="circular" animation="wave" width={44} height={44} />
+                                                    ) : (
+                                                        <Avatar
+                                                            src={data.user.avatarURI ? data.user.avatarURI : DefaultUser}
+                                                            sx={{
+                                                                ...theme.typography.mediumAvatar,
+                                                                margin: '8px 8px 8px 8px !important',
+                                                                cursor: 'pointer'
                                                             }}
-                                                            style={{ textDecoration: 'none' }}
-                                                        >
-                                                            <Typography
-                                                                variant="caption"
-                                                                color="secondary"
-                                                                sx={{
-                                                                    '&:hover': {
-                                                                        transition: 'all .1s ease-in-out',
-                                                                        color: theme.palette.secondary.dark
-                                                                    }
-                                                                }}
-                                                            >
-                                                                View Profile
-                                                            </Typography>
-                                                        </Link>
+                                                            aria-controls={open ? 'menu-list-grow' : undefined}
+                                                            aria-haspopup="true"
+                                                            color="inherit"
+                                                        />
+                                                    )}
+                                                    <Stack direction="column" alignItems="flex-start" justifyContent="flex-start">
+                                                        {loading || !data ? (
+                                                            <>
+                                                                <Skeleton variant="text" animation="wave" height={18} width={75} />
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <Typography variant="h4">
+                                                                    {data.user.vanity ? data.user.vanity : content}
+                                                                </Typography>
+                                                                <Link
+                                                                    to={{
+                                                                        pathname: `/account/${publicKey}/portfolio`
+                                                                    }}
+                                                                    style={{ textDecoration: 'none' }}
+                                                                >
+                                                                    <Typography
+                                                                        variant="caption"
+                                                                        color="secondary"
+                                                                        sx={{
+                                                                            '&:hover': {
+                                                                                transition: 'all .1s ease-in-out',
+                                                                                color: theme.palette.secondary.dark
+                                                                            }
+                                                                        }}
+                                                                    >
+                                                                        View Profile
+                                                                    </Typography>
+                                                                </Link>
+                                                            </>
+                                                        )}
                                                     </Stack>
                                                 </Stack>
                                             </Stack>
@@ -305,7 +316,6 @@ const ProfileList = () => {
                                                 <Stack direction="column" alignItems="flex-start" justifyContent="flex-start">
                                                     <Typography variant="body1" fontWeight="400" sx={{ ml: 1 }}>
                                                         Main Wallet
-                                                        {/* <img src={Clipboard} alt="Clip/Copy" style={{ marginLeft: 5 }} /> */}
                                                     </Typography>
                                                     {wallet && (
                                                         <Typography variant="body1" fontWeight="800" sx={{ ml: 1 }}>
@@ -317,39 +327,41 @@ const ProfileList = () => {
 
                                             <Divider sx={{ mt: 1, mb: 1 }} />
 
-                                            <Stack
-                                                direction="row"
-                                                spacing={0.5}
-                                                alignItems="center"
-                                                justifyContent="flex-start"
-                                                sx={{
-                                                    p: 0.5,
-                                                    mb: 1,
-                                                    borderRadius: '4px',
-                                                    '&:hover': {
-                                                        cursor: 'pointer',
-                                                        transition: 'all .1s ease-in-out',
-                                                        background: theme.palette.primary.dark
-                                                    }
-                                                }}
-                                            >
-                                                <Avatar
+                                            {data && data.user.isStaff && (
+                                                <Stack
+                                                    direction="row"
+                                                    spacing={0.5}
+                                                    alignItems="center"
+                                                    justifyContent="flex-start"
                                                     sx={{
-                                                        ...theme.typography.mediumAvatar,
-                                                        cursor: 'pointer'
+                                                        p: 0.5,
+                                                        mb: 1,
+                                                        borderRadius: '4px',
+                                                        '&:hover': {
+                                                            cursor: 'pointer',
+                                                            transition: 'all .1s ease-in-out',
+                                                            background: theme.palette.primary.dark
+                                                        }
                                                     }}
-                                                    aria-controls={open ? 'menu-list-grow' : undefined}
-                                                    aria-haspopup="true"
-                                                    color="inherit"
                                                 >
-                                                    <IconCrown stroke={1.5} size="1.3rem" />
-                                                </Avatar>
-                                                <Stack direction="column" alignItems="flex-start" justifyContent="flex-start">
-                                                    <Typography variant="body1" fontWeight="800" sx={{ ml: 1 }}>
-                                                        Admin Panel
-                                                    </Typography>
+                                                    <Avatar
+                                                        sx={{
+                                                            ...theme.typography.mediumAvatar,
+                                                            cursor: 'pointer'
+                                                        }}
+                                                        aria-controls={open ? 'menu-list-grow' : undefined}
+                                                        aria-haspopup="true"
+                                                        color="inherit"
+                                                    >
+                                                        <IconCrown stroke={1.5} size="1.3rem" />
+                                                    </Avatar>
+                                                    <Stack direction="column" alignItems="flex-start" justifyContent="flex-start">
+                                                        <Typography variant="body1" fontWeight="800" sx={{ ml: 1 }}>
+                                                            Admin Panel
+                                                        </Typography>
+                                                    </Stack>
                                                 </Stack>
-                                            </Stack>
+                                            )}
 
                                             <Stack
                                                 direction="row"
@@ -453,82 +465,6 @@ const ProfileList = () => {
                                                     </Typography>
                                                 </Stack>
                                             </Stack>
-
-                                            {/* <List
-                                                component="nav"
-                                                sx={{
-                                                    width: '100%',
-                                                    maxWidth: 350,
-                                                    minWidth: 300,
-                                                    backgroundColor: theme.palette.background.paper,
-                                                    borderRadius: '10px',
-                                                    [theme.breakpoints.down('md')]: {
-                                                        minWidth: '100%'
-                                                    },
-                                                    '& .MuiListItemButton-root': {
-                                                        mt: 0.5
-                                                    }
-                                                }}
-                                            >
-                                                <ListItemButton sx={{ borderRadius: `${borderRadius}px` }} selected={selectedIndex === 0}>
-                                                    <ListItemIcon>
-                                                        <IconNotes stroke={1.5} size="1.3rem" />
-                                                    </ListItemIcon>
-                                                    <ListItemText primary={<Typography variant="body2">Account Profile</Typography>} />
-                                                </ListItemButton>
-                                                {user.isDiscordLinked ? (
-                                                    <ListItemButton
-                                                        sx={{ borderRadius: `${borderRadius}px` }}
-                                                        selected={selectedIndex === 1}
-                                                        onClick={(event: React.MouseEvent<HTMLDivElement>) =>
-                                                            handleListItemClick(event, 1, '/discord/link')
-                                                        }
-                                                    >
-                                                        <ListItemIcon>
-                                                            <IconBrandDiscord stroke={1.5} size="1.3rem" />
-                                                        </ListItemIcon>
-                                                        <ListItemText primary={<Typography variant="body2">Discord Linked</Typography>} />
-                                                    </ListItemButton>
-                                                ) : (
-                                                    <ListItemButton
-                                                        sx={{ borderRadius: `${borderRadius}px` }}
-                                                        selected={selectedIndex === 1}
-                                                        onClick={(event: React.MouseEvent<HTMLDivElement>) =>
-                                                            handleListItemClick(event, 1, '/discord/link')
-                                                        }
-                                                    >
-                                                        <ListItemIcon>
-                                                            <IconBrandDiscord stroke={1.5} size="1.3rem" />
-                                                        </ListItemIcon>
-                                                        <ListItemText primary={<Typography variant="body2">Link Discord</Typography>} />
-                                                    </ListItemButton>
-                                                )}
-
-                                                <Divider />
-
-                                                <ListItemButton
-                                                    sx={{ borderRadius: `${borderRadius}px` }}
-                                                    selected={selectedIndex === 2}
-                                                    onClick={(event: React.MouseEvent<HTMLDivElement>) =>
-                                                        handleListItemClick(event, 2, '/user/account-profile/profile1')
-                                                    }
-                                                >
-                                                    <ListItemIcon>
-                                                        <IconWorld stroke={1.5} size="1.3rem" />
-                                                    </ListItemIcon>
-                                                    <ListItemText primary={<Typography variant="body2">Change Provider</Typography>} />
-                                                </ListItemButton>
-                                                <ListItemButton
-                                                    sx={{ borderRadius: `${borderRadius}px` }}
-                                                    selected={selectedIndex === 3}
-                                                    onClick={handleLogout}
-                                                >
-                                                    <ListItemIcon>
-                                                        <IconPower stroke={1.5} size="1.3rem" />
-                                                    </ListItemIcon>
-                                                    <ListItemText primary={<Typography variant="body2">Sign Out</Typography>} />
-                                                </ListItemButton>
-                                            </List> */}
                                         </Box>
                                     </MainCard>
                                 )}

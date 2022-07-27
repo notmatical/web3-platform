@@ -30,7 +30,7 @@ const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(({ theme 
     marginLeft: 16,
     paddingLeft: 16,
     paddingRight: 16,
-    background: theme.palette.mode === 'dark' ? '#24182f' : 'transparent',
+    background: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.04)' : 'transparent',
     '& input': {
         background: 'transparent !important',
         paddingLeft: '4px !important'
