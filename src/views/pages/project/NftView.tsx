@@ -27,7 +27,7 @@ import { formatPercent, formatNumber, abbreviateValue, ordinal_suffix_of } from 
 import MainCard from 'components/MainCard';
 
 // third-party
-import { HyperspaceClient } from 'hyperspace-client-js';
+import { HyperspaceClient, MarketplaceActionEnums } from 'hyperspace-client-js';
 
 // assets
 import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
@@ -78,7 +78,7 @@ const NftView = () => {
             .getTokenHistory({
                 condition: {
                     tokenAddresses: [tokenAddress!],
-                    actionTypes: ['TRANSACTION']
+                    actionType: 'TRANSACTION' as MarketplaceActionEnums
                 }
             })
             .then((res) => {

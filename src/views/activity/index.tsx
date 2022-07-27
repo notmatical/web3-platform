@@ -33,12 +33,12 @@ import TopSaleCard from './components/TopSaleCard';
 import TrendingProfileCard from './components/TrendingProfileCard';
 
 // third-party
-import { HyperspaceClient, MarketPlaceActionEnum } from 'hyperspace-client-js';
+import { HyperspaceClient, MarketplaceActionEnums, SortOrderEnum } from 'hyperspace-client-js';
 
 // assets
 import { IconChevronDown, IconInfoCircle } from '@tabler/icons';
 import { CloseCircleOutlined, InfoCircleFilled } from '@ant-design/icons';
-import LargeUser from 'assets/images/nft-test/animate.gif';
+import LargeUser from 'assets/images/placeholder.png';
 import DefaultUser from 'assets/images/users/user-image.jpg';
 
 const Activity = () => {
@@ -55,7 +55,7 @@ const Activity = () => {
             .getProjects({
                 orderBy: {
                     field_name: 'volume_7day',
-                    sort_order: 'DESC'
+                    sort_order: 'DESC' as SortOrderEnum
                 },
                 paginationInfo: {
                     page_size: 5
@@ -65,24 +65,6 @@ const Activity = () => {
                 console.log(res);
                 setProjects(res.getProjectStats);
             });
-
-        hsClient
-            .getTokenHistory({
-                condition: {
-                    tokenAddresses: ['CTtnUysRiWfqXsRG2Zwa2DxmPrPYdan78UDMpZQh9gz9'],
-                    actionTypes: ['LISTING', 'BID']
-                }
-            })
-            .then((res) => console.log(res));
-
-        hsClient
-            .getWalletStats({
-                condition: {
-                    searchAddress: 'FNbVw5r57YPfno86ibG9FTuN69BhYQaQraMKX8NRQAA6',
-                    timePeriod: 'ALL'
-                }
-            })
-            .then((res) => console.log(res));
     };
 
     useEffect(() => {

@@ -32,7 +32,7 @@ import { formatPercent, formatUSD, abbreviateValue } from 'utils/utils';
 import MainCard from 'components/MainCard';
 
 // third-party
-import { HyperspaceClient, StringInputOperationEnum } from 'hyperspace-client-js';
+import { HyperspaceClient, SortOrderEnum, StringInputOperationEnum } from 'hyperspace-client-js';
 
 // assets
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -109,7 +109,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                 condition: {
                     name: {
                         value: argument,
-                        operation: 'FUZZY'
+                        operation: 'FUZZY' as StringInputOperationEnum
                     },
                     projects: [
                         {
@@ -119,7 +119,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                 },
                 orderBy: {
                     field_name: filterValue,
-                    sort_order: 'DESC'
+                    sort_order: 'DESC' as SortOrderEnum
                 },
                 paginationInfo: {
                     page_number: 1,
@@ -145,7 +145,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                 },
                 orderBy: {
                     field_name: filterValue,
-                    sort_order: filterValue === 'rank_est' ? 'ASC' : 'ASC'
+                    sort_order: (filterValue === 'rank_est' ? 'ASC' : 'DESC') as SortOrderEnum
                 },
                 paginationInfo: {
                     page_number: 1,

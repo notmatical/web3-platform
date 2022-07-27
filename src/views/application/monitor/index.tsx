@@ -35,7 +35,7 @@ import { formatPriceNumber, formatNumber, formatPercent, formatPrice } from 'uti
 import MainCard from 'components/MainCard';
 
 // third-party
-import { HyperspaceClient } from 'hyperspace-client-js';
+import { HyperspaceClient, SortOrderEnum } from 'hyperspace-client-js';
 
 // assets
 import { IconChevronDown, IconChevronUp } from '@tabler/icons';
@@ -75,7 +75,7 @@ const Monitor = () => {
             .getProjects({
                 orderBy: {
                     field_name: 'volume_1day',
-                    sort_order: 'DESC'
+                    sort_order: 'DESC' as SortOrderEnum
                 },
                 paginationInfo: {
                     page_number: 1,

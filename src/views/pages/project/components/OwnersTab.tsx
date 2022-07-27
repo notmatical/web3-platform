@@ -32,7 +32,7 @@ import { relativeTimeFromDates, abbreviateValue, shortenAddress } from 'utils/ut
 import MainCard from 'components/MainCard';
 
 // third-party
-import { HyperspaceClient } from 'hyperspace-client-js';
+import { HyperspaceClient, MarketplaceActionEnums } from 'hyperspace-client-js';
 
 // assets
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -70,8 +70,7 @@ const ActivityTab = ({ project, projectSlug }: { project: any; projectSlug: any 
             .getProjectHistory({
                 condition: {
                     projects: [{ project_id: projectSlug! }],
-                    actionTypes: ['TRANSACTION', 'BID', 'CANCELBID', 'LISTING', 'DELISTING', 'UPDATELISTING'],
-                    nonMpaActionTypes: ['MINT']
+                    actionTypes: ['TRANSACTION', 'BID', 'CANCELBID', 'LISTING', 'DELISTING', 'UPDATELISTING'] as MarketplaceActionEnums[]
                 },
                 paginationInfo: {
                     progressive_load: true

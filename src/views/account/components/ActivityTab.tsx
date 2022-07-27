@@ -31,7 +31,7 @@ import { useSolPrice } from 'contexts/CoinGecko';
 import { relativeTimeFromDates, formatUSD, shortenAddress } from 'utils/utils';
 
 // third-party
-import { HyperspaceClient } from 'hyperspace-client-js';
+import { HyperspaceClient, MarketplaceActionEnums } from 'hyperspace-client-js';
 
 // assets
 import VerifiedIcon from '@mui/icons-material/Verified';
@@ -67,7 +67,7 @@ const Activity = ({ user }: { user: any }) => {
                 condition: {
                     userAddress: user.wallet,
                     // actionTypes: ['TRANSACTION', 'BID', 'CANCELBID', 'LISTING', 'DELISTING', 'UPDATELISTING'],
-                    actionTypes: ['BID', 'CANCELBID']
+                    actionTypes: ['BID', 'CANCELBID'] as MarketplaceActionEnums[]
                     // nonMpaActionTypes: ['MINT']
                 },
                 paginationInfo: {
