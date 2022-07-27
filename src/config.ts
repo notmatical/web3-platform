@@ -44,7 +44,7 @@ export const appConfig: ConfigOptions = {
 };
 
 export const config: ThemeConfigProps = {
-    defaultPath: '/overview',
+    defaultPath: '/home',
     fontFamily: `'Roboto', sans-serif`,
     borderRadius: 8,
     mode: 'dark', // light, dark

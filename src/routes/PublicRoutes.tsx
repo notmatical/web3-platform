@@ -81,7 +81,7 @@ const PublicRoutes = {
 
         // General
         {
-            path: '/overview',
+            path: '/home',
             element: <DashboardDefault />
         },
 

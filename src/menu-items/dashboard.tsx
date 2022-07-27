@@ -2,13 +2,13 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { IconLayout2, IconActivity, IconCoin, IconAtom, IconAffiliate, IconBox } from '@tabler/icons';
+import { IconHome, IconActivity, IconCoin, IconAtom, IconAffiliate, IconBox } from '@tabler/icons';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import { OverrideIcon } from 'types';
 
 // constant
 const icons = {
-    IconLayout2,
+    IconHome,
     IconActivity,
     IconCoin,
     IconAtom,
@@ -34,15 +34,15 @@ interface DashboardMenuProps {
 
 const dashboard = {
     id: 'dashboard',
-    title: <FormattedMessage id="dashboard" />,
+    title: ' ',
     type: 'group',
     children: [
         {
-            id: 'overview',
-            title: <FormattedMessage id="overview" />,
+            id: 'home',
+            title: <FormattedMessage id="home" />,
             type: 'item',
-            url: '/overview',
-            icon: icons.IconLayout2,
+            url: '/',
+            icon: icons.IconHome,
             breadcrumbs: false
         },
         {
