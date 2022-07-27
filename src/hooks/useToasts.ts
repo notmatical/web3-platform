@@ -1,10 +1,10 @@
 import { toast } from 'react-toastify';
 
 export const useToasts = () => {
-    const showInfoToast = (message: string, close: boolean = false) => toast.info(message);
-    const showErrorToast = (message: string, close: boolean = false) => toast.error(message);
-    const showSuccessToast = (message: string, close: boolean = false) => toast.success(message);
-    const showWarningToast = (message: string, close: boolean = false) => toast.warning(message);
+    const showInfoToast = (message: string) => toast.info(message);
+    const showErrorToast = (message: string) => toast.error(message);
+    const showSuccessToast = (message: string) => toast.success(message);
+    const showWarningToast = (message: string) => toast.warning(message);
 
     return {
         showInfoToast,
