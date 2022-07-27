@@ -38,8 +38,8 @@ import { getParsedNftAccountsByOwner } from '@nfteyez/sol-rayz';
 import axios from 'axios';
 
 // graphql
-import { useQuery, useMutation } from '@apollo/client';
-import { queries, mutations } from '../../../graphql/graphql';
+import { useQuery } from '@apollo/client';
+import { queries } from '../../../graphql/graphql';
 
 function Staking() {
     const theme = useTheme();

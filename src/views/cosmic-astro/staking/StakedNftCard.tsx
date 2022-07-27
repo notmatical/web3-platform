@@ -78,7 +78,7 @@ const StakeNftCard = ({ mint, name, image, role, lockTime, stakedTime, startLoad
                 content={false}
                 boxShadow
                 sx={{
-                    background: '#09080d',
+                    background: '#0b0f19',
                     '&:hover': {
                         transform: 'scale3d(1.03, 1.03, 1)',
                         transition: '.15s'
