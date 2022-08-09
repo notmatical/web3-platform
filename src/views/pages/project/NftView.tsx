@@ -31,9 +31,10 @@ import { HyperspaceClient, MarketplaceActionEnums } from 'hyperspace-client-js';
 // assets
 import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
 import VerifiedIcon from '@mui/icons-material/Verified';
-import { IconRefresh, IconDots, IconDiamond } from '@tabler/icons';
+import { IconRefresh, IconExternalLink, IconDiamond } from '@tabler/icons';
 import { CloseCircleOutlined, StarFilled } from '@ant-design/icons';
 import PlaceholderImage from 'assets/images/placeholder.png';
+import MagicEden from 'assets/images/icons/me-logo.svg';
 
 const NftView = () => {
     const theme = useTheme();
@@ -92,13 +93,14 @@ const NftView = () => {
         fetchTokenHistory();
     }, []);
 
+    console.log(tokenHistory);
     console.log(marketSnapshot);
     console.log(tokenState);
 
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                <CardMedia
+                {/* <CardMedia
                     image={tokenState.length === 0 ? PlaceholderImage : tokenState.market_place_states[0].meta_data_img}
                     sx={{
                         overflow: 'hidden',
@@ -120,11 +122,12 @@ const NftView = () => {
                             background: 'linear-gradient(360deg, #0b0f19 10%, rgba(20, 26, 30, 0) 100%)'
                         }}
                     />
-                </CardMedia>
+                </CardMedia> */}
 
                 {tokenState.market_place_states && tokenState.market_place_states.length > 0 ? (
                     <>
-                        <Box display="flex" flexDirection="row" sx={{ gap: 2, mt: '-25%' }}>
+                        <Box display="flex" flexDirection="row" sx={{ gap: 2 }}>
+                            {/* sx={{ gap: 2, mt: '-25%' }} */}
                             <Box display="flex" flexDirection="column" sx={{ gap: 2 }}>
                                 {/* Avatar */}
                                 <Fade in timeout={500} unmountOnExit>
@@ -225,14 +228,40 @@ const NftView = () => {
                                                 borderRadius: 2
                                             }}
                                         >
-                                            <IconButton sx={{ width: '33px', height: '33px' }}>
-                                                <IconRefresh color={theme.palette.primary.dark} />
+                                            <IconButton
+                                                sx={{
+                                                    background: '#202a30',
+                                                    width: '33px',
+                                                    height: '33px'
+                                                }}
+                                            >
+                                                <IconRefresh color="#FFF" />
                                             </IconButton>
-                                            <IconButton sx={{ width: '33px', height: '33px' }}>
-                                                <IconRefresh color={theme.palette.primary.dark} />
+                                            <IconButton
+                                                sx={{
+                                                    background: '#202a30',
+                                                    width: '33px',
+                                                    height: '33px'
+                                                }}
+                                            >
+                                                <Avatar
+                                                    alt="Marketplace Image"
+                                                    src={MagicEden}
+                                                    sx={{
+                                                        width: 33,
+                                                        height: 33,
+                                                        background: '#0b0f19'
+                                                    }}
+                                                />
                                             </IconButton>
-                                            <IconButton sx={{ width: '33px', height: '33px' }}>
-                                                <IconRefresh color={theme.palette.primary.dark} />
+                                            <IconButton
+                                                sx={{
+                                                    background: '#202a30',
+                                                    width: '33px',
+                                                    height: '33px'
+                                                }}
+                                            >
+                                                <IconExternalLink color="#FFF" />
                                             </IconButton>
                                         </Box>
                                     </Box>
@@ -280,21 +309,9 @@ const NftView = () => {
                                             Est. Value
                                         </Typography>
                                         <Stack flexDirection="row">
-                                            <Tooltip
-                                                title={`$${abbreviateValue(
-                                                    marketSnapshot.market_place_snapshots[0].rarity_est
-                                                        ? marketSnapshot.market_place_snapshots[0].rarity_est
-                                                        : 0.01 * solPrice
-                                                ).toFixed(1)}`}
-                                                placement="bottom"
-                                                arrow
-                                            >
+                                            <Tooltip title={`$${abbreviateValue(0.01 * solPrice).toFixed(1)}`} placement="bottom" arrow>
                                                 <Typography variant="h4" color="inherit">
-                                                    {/* 500 ◎ */}
-                                                    {marketSnapshot.market_place_snapshots[0].rarity_est
-                                                        ? marketSnapshot.market_place_snapshots[0].rarity_est.toFixed(2)
-                                                        : `< 0.01`}{' '}
-                                                    ◎
+                                                    120 ◎ {/* < 0.01 ◎ */}
                                                 </Typography>
                                             </Tooltip>
                                             <Tooltip title="% change from last sale" placement="bottom" arrow>
@@ -336,60 +353,63 @@ const NftView = () => {
                                     <Typography variant="h5" color="primary" fontWeight="600">
                                         Properties
                                     </Typography>
-                                    {marketSnapshot.market_place_snapshots && marketSnapshot.market_place_snapshots.length > 0 ? (
-                                        <Box display="flex" sx={{ gap: 2, gridTemplateColumns: 'repeat(3, minmax(0, 1fr)' }}>
-                                            <Box display="flex" sx={{ p: 1, flexGrow: 1, borderRadius: 2, background: '#111827' }}>
-                                                <Box display="flex" flexDirection="column" sx={{ flexGrow: 1 }}>
-                                                    <Box display="flex" flexDirection="row" justifyContent="space-between">
+                                    <Box display="flex" sx={{ gap: 2, gridTemplateColumns: 'repeat(3, minmax(0, 1fr)' }}>
+                                        {marketSnapshot.market_place_snapshots &&
+                                            marketSnapshot.market_place_snapshots.length > 0 &&
+                                            marketSnapshot.market_place_snapshots.map((nft: any, index: number) => (
+                                                <Box display="flex" sx={{ p: 1, flexGrow: 1, borderRadius: 2, background: '#111827' }}>
+                                                    <Box display="flex" flexDirection="column" sx={{ flexGrow: 1 }}>
+                                                        <Box display="flex" flexDirection="row" justifyContent="space-between">
+                                                            <Typography variant="h5" color="primary" fontWeight="600">
+                                                                {nft.project_id}
+                                                            </Typography>
+                                                            <Typography variant="h5" color="primary" fontWeight="600">
+                                                                74.58 ◎
+                                                            </Typography>
+                                                        </Box>
                                                         <Typography variant="h5" color="primary" fontWeight="600">
-                                                            Test Trait
-                                                        </Typography>
-                                                        <Typography variant="h5" color="primary" fontWeight="600">
-                                                            74.58 ◎
-                                                        </Typography>
-                                                    </Box>
-                                                    <Typography variant="h5" color="primary" fontWeight="600">
-                                                        Relic Book Page
-                                                    </Typography>
-                                                </Box>
-                                            </Box>
-                                            <Box display="flex" sx={{ p: 1, flexGrow: 1, borderRadius: 2, background: '#111827' }}>
-                                                <Box display="flex" flexDirection="column" sx={{ flexGrow: 1 }}>
-                                                    <Box display="flex" flexDirection="row" justifyContent="space-between">
-                                                        <Typography variant="h5" color="primary" fontWeight="600">
-                                                            Test Trait
-                                                        </Typography>
-                                                        <Typography variant="h5" color="primary" fontWeight="600">
-                                                            74.58 ◎
+                                                            Relic Book Page
                                                         </Typography>
                                                     </Box>
-                                                    <Typography variant="h5" color="primary" fontWeight="600">
-                                                        Relic Book Page
-                                                    </Typography>
                                                 </Box>
-                                            </Box>
-                                            <Box display="flex" sx={{ p: 1, flexGrow: 1, borderRadius: 2, background: '#111827' }}>
-                                                <Box display="flex" flexDirection="column" sx={{ flexGrow: 1 }}>
-                                                    <Box display="flex" flexDirection="row" justifyContent="space-between">
-                                                        <Typography variant="h5" color="primary" fontWeight="600">
-                                                            Test Trait
-                                                        </Typography>
-                                                        <Typography variant="h5" color="primary" fontWeight="600">
-                                                            74.58 ◎
-                                                        </Typography>
-                                                    </Box>
-                                                    <Typography variant="h5" color="primary" fontWeight="600">
-                                                        Relic Book Page
-                                                    </Typography>
-                                                </Box>
-                                            </Box>
-                                        </Box>
-                                    ) : (
-                                        <Box display="flex" justifyContent="center" alignItems="center">
-                                            <CircularProgress color="secondary" />
-                                        </Box>
-                                    )}
+                                            ))}
+                                    </Box>
                                 </Box>
+
+                                {/* <Box display="flex" sx={{ p: 1, flexGrow: 1, borderRadius: 2, background: '#111827' }}>
+                                    <Box display="flex" flexDirection="column" sx={{ flexGrow: 1 }}>
+                                        <Box display="flex" flexDirection="row" justifyContent="space-between">
+                                            <Typography variant="h5" color="primary" fontWeight="600">
+                                                Test Trait
+                                            </Typography>
+                                            <Typography variant="h5" color="primary" fontWeight="600">
+                                                74.58 ◎
+                                            </Typography>
+                                        </Box>
+                                        <Typography variant="h5" color="primary" fontWeight="600">
+                                            Relic Book Page
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                                <Box display="flex" sx={{ p: 1, flexGrow: 1, borderRadius: 2, background: '#111827' }}>
+                                    <Box display="flex" flexDirection="column" sx={{ flexGrow: 1 }}>
+                                        <Box display="flex" flexDirection="row" justifyContent="space-between">
+                                            <Typography variant="h5" color="primary" fontWeight="600">
+                                                Test Trait
+                                            </Typography>
+                                            <Typography variant="h5" color="primary" fontWeight="600">
+                                                74.58 ◎
+                                            </Typography>
+                                        </Box>
+                                        <Typography variant="h5" color="primary" fontWeight="600">
+                                            Relic Book Page
+                                        </Typography>
+                                    </Box>
+                                </Box> */}
+
+                                {/* // <Box display="flex" justifyContent="center" alignItems="center">
+                                //     <CircularProgress color="secondary" />
+                                // </Box> */}
 
                                 <Box display="flex" flexDirection="column" sx={{ gap: 1 }}>
                                     <Typography variant="h5" color="primary" fontWeight="600">
@@ -471,7 +491,7 @@ const NftView = () => {
                                                     >
                                                         <Stack flexDirection="row" sx={{ gap: 1 }}>
                                                             <Avatar
-                                                                src="https://arweave.net/u2z_FPvnPsCzgC6wbGc_IADr8KPO627-p6Ar3KAB7QE/7003.png"
+                                                                src={PlaceholderImage}
                                                                 sx={{
                                                                     borderRadius: '9999px',
                                                                     height: '36px',
@@ -493,7 +513,7 @@ const NftView = () => {
                                                                         }
                                                                     }}
                                                                 >
-                                                                    matical.sol
+                                                                    {shortenAddress(history.buyer_address, 4)}
                                                                 </Typography>
                                                                 <Typography variant="h5" color="inherit">
                                                                     Owned for 3 days
@@ -504,8 +524,8 @@ const NftView = () => {
                                                             <Typography variant="h5" color="inherit">
                                                                 {formatDate.format(new Date(history.block_timestamp * 1000))}
                                                             </Typography>
-                                                            <Typography variant="h5" color="inherit">
-                                                                Transfer
+                                                            <Typography variant="h5" fontWeight="600" color="inherit">
+                                                                Bought for {history.price} SOL
                                                             </Typography>
                                                         </Stack>
                                                     </Box>
