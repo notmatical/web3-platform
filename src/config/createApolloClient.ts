@@ -12,8 +12,8 @@ const client = new ApolloClient({
         }
     }),
     credentials: 'include',
-    uri: 'http://localhost:8080/graphql'
-    // link: createHttpLink({ uri: '/graphql' })
+    // uri: 'http://localhost:8080/graphql'
+    link: createHttpLink({ uri: '/graphql' })
 });
 
 export default client;
