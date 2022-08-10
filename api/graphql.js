@@ -72,7 +72,7 @@ const apolloServer = new ApolloServer({
 export default apolloServer.start().then(() => {
     const handler = cors(apolloServer.createHandler({ path: '/api/graphql' }));
 
-    mongoose.connect(MONGO_DB_URI, {
+    mongoose.connect('mongodb+srv://yakudao:YBQ9FDBqyulWlLNe@yaku-hub.5pxjlbl.mongodb.net', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
