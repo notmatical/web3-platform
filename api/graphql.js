@@ -34,7 +34,7 @@ export const config = {
 const cors = Cors({
     allowCredentials: true,
     allowMethods: ['GET', 'POST', 'OPTIONS'],
-    origin: ['76.76.21.21', 'https://hub.yaku.ai/', '76.76.21.241']
+    origin: '*'
 });
 
 app.use(cors);
