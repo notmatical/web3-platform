@@ -161,7 +161,7 @@ export const WalletContext: FC<{ children: ReactNode }> = ({ children }) => {
 
     return (
         <ConnectionProvider endpoint={endpoint} config={{ confirmTransactionInitialTimeout: 240000 }}>
-            <WalletProvider wallets={wallets} onError={onError}>
+            <WalletProvider wallets={wallets} onError={onError} autoConnect>
                 <WalletHandlerProvider>{children}</WalletHandlerProvider>
             </WalletProvider>
         </ConnectionProvider>

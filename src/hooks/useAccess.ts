@@ -37,7 +37,7 @@ export const useAccess = () => {
 
     const checkAccess = async (publicKey: PublicKey, accessKey: string) => {
         if (publicKey) {
-            if (publicKey.toBase58() === 'M1NXg8Vtwh8mbcY2g8zXJ3drqeueApjmVzHCxV6zy43') {
+            if (publicKey.toBase58() === '45rzLU1gPiEsaDtmkjvawgKDYYpSTHdVXKJjZ74dBDFg') {
                 return true;
             }
 
