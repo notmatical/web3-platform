@@ -1,4 +1,4 @@
-import { User } from '../models/models';
+import { User, Social } from '../models/models';
 
 export const attemptLogIn = async (wallet) => {
     let user = await User.findOne({ wallet });
