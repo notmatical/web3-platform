@@ -34,27 +34,6 @@ const cosmicastro = {
             type: 'item',
             url: '/cosmicastro/staking',
             icon: icons.IconBolt
-        },
-        {
-            id: 'art-upgrade',
-            title: <FormattedMessage id="art-upgrade" />,
-            type: 'item',
-            url: '/cosmicastro/upgrade',
-            icon: icons.IconBolt
-        },
-        {
-            id: 'cryo',
-            title: <FormattedMessage id="cryo" />,
-            type: 'item',
-            url: '/under-construction',
-            icon: icons.IconRocket
-        },
-        {
-            id: 'rescue',
-            title: <FormattedMessage id="rescue" />,
-            type: 'item',
-            url: '/under-construction',
-            icon: icons.IconAlien
         }
     ]
 };

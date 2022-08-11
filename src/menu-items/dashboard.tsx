@@ -41,41 +41,16 @@ const dashboard = {
             id: 'home',
             title: <FormattedMessage id="home" />,
             type: 'item',
-            url: '/',
+            url: '/home',
             icon: icons.IconHome,
             breadcrumbs: false
         },
         {
-            id: 'activity',
-            title: <FormattedMessage id="activity" />,
+            id: 'feed',
+            title: <FormattedMessage id="feed" />,
             type: 'item',
-            url: '/activity',
+            url: '/feed',
             icon: icons.IconActivity,
-            breadcrumbs: false
-        },
-        {
-            id: 'tokens',
-            title: <FormattedMessage id="tokens" />,
-            type: 'item',
-            url: '/tokens',
-            icon: icons.IconCoin,
-            breadcrumbs: false,
-            new: true
-        },
-        {
-            id: 'collabs',
-            title: <FormattedMessage id="collabs" />,
-            type: 'item',
-            url: '/collabs',
-            icon: icons.IconAtom,
-            breadcrumbs: false
-        },
-        {
-            id: 'spaces',
-            title: <FormattedMessage id="spaces" />,
-            type: 'item',
-            url: '/spaces',
-            icon: icons.IconAffiliate,
             breadcrumbs: false
         }
     ]

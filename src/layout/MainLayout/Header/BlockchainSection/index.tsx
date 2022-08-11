@@ -29,6 +29,7 @@ import SolanaChain from 'assets/images/blockchains/solana-icon.png';
 import EtherChain from 'assets/images/blockchains/ethereum-icon.png';
 import PolyChain from 'assets/images/blockchains/polygon-icon.png';
 import AvaxChain from 'assets/images/blockchains/avalanche-icon.png';
+import NearChain from 'assets/images/blockchains/near-icon.jpg';
 import CeloChain from 'assets/images/blockchains/celo-icon.png';
 import CronosChain from 'assets/images/blockchains/cronos-icon.png';
 import BinanceChain from 'assets/images/blockchains/binance-smart-chain-icon.png';
@@ -175,6 +176,23 @@ const ChooseBlockchainModal = ({ onCancel }: { onCancel: () => void }) => {
                     <Box display="flex" flexDirection="row" justifyContent="flex-start" sx={{ gap: 1 }}>
                         <Button variant="text" color="primary" fullWidth>
                             <Avatar
+                                src={NearChain}
+                                sx={{
+                                    boxShadow: '0 0 0 2px #2c3a43',
+                                    borderRadius: '9999px',
+                                    height: '25px',
+                                    width: '25px',
+                                    backgroundColor: 'transparent',
+                                    mr: '12px'
+                                }}
+                                color="inherit"
+                            />
+                            <Typography variant="subtitle1" fontSize="16px" fontWeight="500" color="white">
+                                NEAR
+                            </Typography>
+                        </Button>
+                        <Button variant="text" color="primary" fullWidth>
+                            <Avatar
                                 src={PolyChain}
                                 sx={{
                                     boxShadow: '0 0 0 2px #2c3a43',
@@ -188,23 +206,6 @@ const ChooseBlockchainModal = ({ onCancel }: { onCancel: () => void }) => {
                             />
                             <Typography variant="subtitle1" fontSize="16px" fontWeight="500" color="white">
                                 Polygon
-                            </Typography>
-                        </Button>
-                        <Button variant="text" color="primary" fullWidth>
-                            <Avatar
-                                src={AvaxChain}
-                                sx={{
-                                    boxShadow: '0 0 0 2px #2c3a43',
-                                    borderRadius: '9999px',
-                                    height: '25px',
-                                    width: '25px',
-                                    backgroundColor: 'transparent',
-                                    mr: '12px'
-                                }}
-                                color="inherit"
-                            />
-                            <Typography variant="subtitle1" fontSize="16px" fontWeight="500" color="white">
-                                Avalanche
                             </Typography>
                         </Button>
                     </Box>

@@ -1,0 +1,17 @@
+.rest-enter {
+  opacity: 0.1;
+}
+.rest-enter-active {
+  opacity: 1;
+  transition: opacity 100ms ease-in;
+}
+
+@keyframe rest {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

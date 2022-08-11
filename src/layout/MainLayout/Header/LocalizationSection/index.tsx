@@ -16,14 +16,24 @@ import {
     useMediaQuery
 } from '@mui/material';
 
+// third-party
+import { map } from 'lodash';
+
 // project imports
 import Transitions from 'components/@extended/Transitions';
+import useConfig from 'hooks/useConfig';
+import { LOCALES } from 'config';
 
 // assets
 import TranslateTwoToneIcon from '@mui/icons-material/TranslateTwoTone';
-import useConfig from 'hooks/useConfig';
 
 // ==============================|| LOCALIZATION ||============================== //
+
+const languagesMap: Record<string, string> = {
+    zh: '简',
+    'zh-tw': '繁',
+    ja: '日'
+};
 
 const LocalizationSection = () => {
     const { borderRadius, locale, onChangeLocale } = useConfig();
@@ -100,7 +110,7 @@ const LocalizationSection = () => {
                     color="inherit"
                 >
                     <Typography variant="h5" sx={{ textTransform: 'uppercase' }} color="inherit">
-                        {language}
+                        {languagesMap[language] || language}
                     </Typography>
                 </Avatar>
             </Box>
@@ -141,66 +151,23 @@ const LocalizationSection = () => {
                                             }
                                         }}
                                     >
-                                        <ListItemButton selected={language === 'en'} onClick={(event) => handleListItemClick(event, 'en')}>
-                                            <ListItemText
-                                                primary={
-                                                    <Grid container>
-                                                        <Typography color="textPrimary">English</Typography>
-                                                        <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
-                                                            (UK)
-                                                        </Typography>
-                                                    </Grid>
-                                                }
-                                            />
-                                        </ListItemButton>
-                                        <ListItemButton selected={language === 'de'} onClick={(event) => handleListItemClick(event, 'de')}>
-                                            <ListItemText
-                                                primary={
-                                                    <Grid container>
-                                                        <Typography color="textPrimary">Deutsch</Typography>
-                                                        <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
-                                                            (German)
-                                                        </Typography>
-                                                    </Grid>
-                                                }
-                                            />
-                                        </ListItemButton>
-                                        <ListItemButton selected={language === 'fr'} onClick={(event) => handleListItemClick(event, 'fr')}>
-                                            <ListItemText
-                                                primary={
-                                                    <Grid container>
-                                                        <Typography color="textPrimary">Français</Typography>
-                                                        <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
-                                                            (French)
-                                                        </Typography>
-                                                    </Grid>
-                                                }
-                                            />
-                                        </ListItemButton>
-                                        <ListItemButton selected={language === 'ro'} onClick={(event) => handleListItemClick(event, 'ro')}>
-                                            <ListItemText
-                                                primary={
-                                                    <Grid container>
-                                                        <Typography color="textPrimary">Română</Typography>
-                                                        <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
-                                                            (Romanian)
-                                                        </Typography>
-                                                    </Grid>
-                                                }
-                                            />
-                                        </ListItemButton>
-                                        <ListItemButton selected={language === 'zh'} onClick={(event) => handleListItemClick(event, 'zh')}>
-                                            <ListItemText
-                                                primary={
-                                                    <Grid container>
-                                                        <Typography color="textPrimary">中国人</Typography>
-                                                        <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
-                                                            (Chinese)
-                                                        </Typography>
-                                                    </Grid>
-                                                }
-                                            />
-                                        </ListItemButton>
+                                        {map(LOCALES, ({ value, label, desc }) => (
+                                            <ListItemButton
+                                                selected={language === value}
+                                                onClick={(event) => handleListItemClick(event, value)}
+                                            >
+                                                <ListItemText
+                                                    primary={
+                                                        <Grid container>
+                                                            <Typography color="textPrimary">{label}</Typography>
+                                                            <Typography variant="caption" color="textSecondary" sx={{ ml: '8px' }}>
+                                                                ({desc})
+                                                            </Typography>
+                                                        </Grid>
+                                                    }
+                                                />
+                                            </ListItemButton>
+                                        ))}
                                     </List>
                                 )}
                             </Paper>

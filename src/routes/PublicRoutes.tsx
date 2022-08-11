@@ -67,7 +67,7 @@ const PublicRoutes = {
 
         // Activity / NFT
         {
-            path: '/activity',
+            path: '/feed',
             element: <Activity />
         },
         {

@@ -1,24 +1,24 @@
-import { Box, CardContent, CardMedia, Grid, Button, Typography, Divider, Tooltip } from '@mui/material';
+import { Box, CardContent, CardMedia, Grid, Button, Typography, Divider } from '@mui/material';
+import { Image } from 'mui-image';
 import moment from 'moment';
+import HashLoader from 'react-spinners/HashLoader';
 
 // web3
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 
 // project imports
-import SkeletonProductPlaceholder from 'components/cards/Skeleton/ProductPlaceholder';
 import MainCard from 'components/MainCard';
 import Chip from 'components/@extended/Chip';
 import { StakedNftCardProps } from 'types/staking';
 import { roleRewards } from 'utils/utils';
-import { claimReward, withdrawNft, calculateReward } from 'actions/stake';
+import { claimReward, withdrawNft } from 'actions/stake';
 import { useToasts } from 'hooks/useToasts';
 
 // third-party
-import { useConfirm } from 'material-ui-confirm';
+import { FormattedMessage } from 'react-intl';
 
 const StakeNftCard = ({ mint, name, image, role, lockTime, stakedTime, startLoading, stopLoading, updatePage }: StakedNftCardProps) => {
-    const confirm = useConfirm();
     const reward = roleRewards.find((rRole) => rRole.roles.includes(role));
     const rewardString = `${reward?.dailyReward} $COSMIC / DAY`;
 
@@ -27,48 +27,38 @@ const StakeNftCard = ({ mint, name, image, role, lockTime, stakedTime, startLoad
 
     const onUnstake = async () => {
         try {
-            await withdrawNft(
-                wallet,
-                new PublicKey(mint),
-                () => startLoading(),
-                () => stopLoading(),
-                () => updatePage()
-            );
+            startLoading();
+            await withdrawNft(wallet, new PublicKey(mint));
+            showInfoToast('You have successfully unstaked your NFT.');
         } catch (error) {
-            console.log(error);
+            console.error(error);
+        } finally {
+            updatePage();
+            stopLoading();
         }
     };
 
     // Claiming
     const tryClaimRewards = async () => {
-        await claimReward(
-            wallet,
-            new PublicKey(mint),
-            () => startLoading(),
-            () => stopLoading(),
-            () => updatePage()
-        );
+        try {
+            startLoading();
+            await claimReward(wallet, new PublicKey(mint));
+            showInfoToast('You have successfully claimed your NFTs reward.');
+        } catch (error) {
+            console.error(error);
+        } finally {
+            updatePage();
+            stopLoading();
+        }
     };
 
     const onClaim = async () => {
         if (wallet.publicKey === null) return;
 
-        if (lockTime > Math.floor(Date.now() / 1000)) {
-            confirm({ description: 'You are attempting to claim within 15 days. You will receive a 25% loss of accumulated rewards.' })
-                .then(() => {
-                    try {
-                        tryClaimRewards();
-                    } catch (error) {
-                        console.log(error);
-                    }
-                })
-                .catch(() => showErrorToast('You have cancelled the claim process.'));
-        } else {
-            try {
-                tryClaimRewards();
-            } catch (error) {
-                console.log(error);
-            }
+        try {
+            tryClaimRewards();
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -78,14 +68,16 @@ const StakeNftCard = ({ mint, name, image, role, lockTime, stakedTime, startLoad
                 content={false}
                 boxShadow
                 sx={{
-                    background: '#0b0f19',
+                    background: '#09080d',
                     '&:hover': {
                         transform: 'scale3d(1.03, 1.03, 1)',
                         transition: '.15s'
                     }
                 }}
             >
-                <CardMedia sx={{ height: 220 }} image={image} title={name} />
+                <CardMedia sx={{ minHeight: 200, display: 'flex', alignItems: 'center' }}>
+                    <Image src={image} alt={name} showLoading={<HashLoader size={32} color="#c300ff" />} />
+                </CardMedia>
                 <CardContent sx={{ p: 2, pb: '16px !important' }}>
                     {/* name */}
                     <Box display="flex" alignItems="center">
@@ -128,12 +120,12 @@ const StakeNftCard = ({ mint, name, image, role, lockTime, stakedTime, startLoad
                         <Grid container spacing={1}>
                             <Grid item xs={6}>
                                 <Button onClick={() => onClaim()} variant="contained" fullWidth>
-                                    Claim
+                                    <FormattedMessage id="claim" />
                                 </Button>
                             </Grid>
                             <Grid item xs={6}>
                                 <Button onClick={() => onUnstake()} variant="outlined" color="error" fullWidth>
-                                    Unstake
+                                    <FormattedMessage id="unstake" />
                                 </Button>
                             </Grid>
                         </Grid>

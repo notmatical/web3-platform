@@ -10,8 +10,8 @@ export default {
         }
     },
     User: {
-        socialStats: (args) => {
-            return Social.findOne({ wallet: args.wallet });
+        socialStats: async (args) => {
+            return await Social.findOne({ wallet: args.wallet });
         },
         followed: () => {
             return User.find({});

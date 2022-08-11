@@ -9,15 +9,20 @@ export type NFT = {
     staked: boolean;
 };
 
-export interface RewardCardProps extends KeyedObject {
-    ticketPriceCosmic: number;
-    ticketPriceSol: number;
-    endTimestamp: number;
-    ticketsCount: number;
-    nftMint: string;
-    raffleKey: string;
-    maxEntrants: number;
-}
+export type YAKU_NFT = {
+    name?: string;
+    image?: string;
+    mintAddress?: any;
+    reward?: number;
+    index?: number;
+    proof?: any;
+    traits?: any;
+    mint_address: string;
+    stakeDays: number;
+    lastClaim: number;
+    interval: number;
+    amount: number;
+};
 
 export interface StakingNftCardProps extends KeyedObject {
     mint: string;
@@ -36,6 +41,31 @@ export interface StakedNftCardProps extends KeyedObject {
     role: string;
     lockTime: number;
     stakedTime: number;
+    startLoading: Function;
+    stopLoading: Function;
+    updatePage: Function;
+}
+
+export interface YakuStakingNftCardProps extends KeyedObject {
+    mint: string;
+    reward: string;
+    name: string;
+    image: string;
+    traits?: any;
+    startLoading: Function;
+    stopLoading: Function;
+    updatePage: Function;
+}
+
+export interface YakuStakedNftCardProps extends KeyedObject {
+    mint: string;
+    reward: string;
+    name: string;
+    image: string;
+    traits?: any;
+    lastClaim: number;
+    interval: number;
+    amount: number;
     startLoading: Function;
     stopLoading: Function;
     updatePage: Function;

@@ -7,351 +7,441 @@ import {
     Box,
     Grid,
     Stack,
-    List,
-    ListItemIcon,
-    ListItemText,
     TextField,
-    MenuItem,
-    Avatar,
     Button,
     Typography,
-    Checkbox
+    Checkbox,
+    Container,
+    CardMedia,
+    CardContent,
+    Radio,
+    FormControlLabel,
+    RadioGroup,
+    FormControl,
+    Select,
+    MenuItem,
+    SelectChangeEvent
 } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import Image from 'mui-image';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 
 // web3
-import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 import { useWallet } from '@solana/wallet-adapter-react';
 
 // project imports
-import { getStateByKey, getRaffleState } from 'actions/raffle';
 import { useMeta } from 'contexts/meta/meta';
-import { useToasts } from 'hooks/useToasts';
-import { getNftMetaData } from 'actions/shared';
-import { DECIMALS } from 'config';
 import MainCard from 'components/MainCard';
+import { useToasts } from 'hooks/useToasts';
 
 // third-party
-import axios from 'axios';
-import moment from 'moment';
 
 // assets
-import { CheckCircleOutlined } from '@ant-design/icons';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-
-const tokens = [
-    {
-        value: 'cosmic',
-        label: 'COSMIC'
-    },
-    {
-        value: 'dust',
-        label: 'DUST'
-    },
-    {
-        value: 'test',
-        label: 'TEST'
-    }
-];
+import { getNFTDetail } from './fetchData';
+import Loading from 'components/Loading';
+import { FormattedMessage } from 'react-intl';
+import { NFTDetail } from 'types/raffles';
+import { DEFAULT_PAY_TYPE, RAFFLE_REWARD_TYPES, TICKETS_MAX, TOKEN_PAY_TYPE, WHITELIST_MAX } from 'config/config';
+import { adminValidation } from 'actions/shared';
+import { NumberInput } from 'components/NumberInput';
+import { PublicKey } from '@solana/web3.js';
+import { createRaffle } from 'actions/raffle';
+import { TermsAndConditions } from './TermsAndConditions';
 
 const RaffleCreate = () => {
     const theme = useTheme();
     const wallet = useWallet();
     const navigate = useNavigate();
-    const { raffleKey } = useParams();
+    const { mint: mintAddr = '' } = useParams();
     const { showErrorToast } = useToasts();
     const { startLoading, stopLoading } = useMeta();
 
     const [checked, setChecked] = useState(false);
     const [isCreating, setIsCreating] = useState(false);
-    const [valueBasic, setValueBasic] = useState<Date | null>(new Date());
 
     const [mint, setMint] = useState('');
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
     const [family, setFamily] = useState('Not Specified');
-    const [myTickets, setMyTickets] = useState<any>([]);
+    const [rewardPrice, setRewardPrice] = useState(0);
+    const [paymentMethod, setPaymentMethod] = useState('sol');
+    const [rewardType, setRewardType] = useState('nft');
     const [isAdmin, setIsAdmin] = useState(false);
+
+    const [winnerCount, setWinnerCount] = useState(1);
+    const [price, setPrice] = useState(0);
+    const [maxTickets, setMaxTickets] = useState(TICKETS_MAX);
+    const [endTime, setEndTime] = useState<Date | null>(new Date());
     const [isCreator, setIsCreator] = useState(false);
 
-    const [price, setPrice] = useState(0);
-    const [payType, setPayType] = useState('SOL');
-    const [endsAt, setEndsAt] = useState(0);
-    const [count, setCount] = useState(0);
-    const [maxEntrants, setMaxEntrants] = useState(0);
+    // creation
 
-    const [tickets, setTickets] = useState(1);
+    const handleCreate = async () => {
+        if (mint === undefined) return;
+        if (checkValidate()) {
+            let solPrice;
+            let splPrice;
+            if (paymentMethod === 'sol') {
+                solPrice = price;
+                splPrice = 0;
+            } else if (paymentMethod === 'spl') {
+                solPrice = 0;
+                splPrice = price;
+            }
+            if (solPrice === undefined) return;
+            if (splPrice === undefined) return;
+            if (maxTickets === undefined) return;
 
-    const [isRevealed, setIsRevealed] = useState(false);
-    const [isWinner, setIsWinner] = useState(false);
-    const [isClaimed, setIsClaimed] = useState(false);
-    const [isTicketsView, setIsTicketsView] = useState(false);
-    const [loading, setLoading] = useState(false);
+            const white = RAFFLE_REWARD_TYPES[rewardType];
+            const winnerCnt = rewardType === 'nft' ? 1 : winnerCount;
 
-    const getRaffleData = async () => {
-        if (raffleKey === undefined) return;
+            try {
+                startLoading();
+                if (endTime !== null) {
+                    setIsCreating(true);
+                    await createRaffle(
+                        wallet,
+                        new PublicKey(mint),
+                        solPrice,
+                        splPrice,
+                        endTime.getTime() / 1000,
+                        rewardPrice,
+                        winnerCnt,
+                        white,
+                        maxTickets
+                    );
+                    setIsCreating(false);
+                    navigate('/raffles', { replace: true });
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                stopLoading();
+            }
+        }
+    };
 
+    const checkValidate = () => {
+        if (price === 0) {
+            showErrorToast('Please enter correct price');
+            return false;
+        }
+        const now = new Date();
+        if (endTime === null || now >= endTime) {
+            showErrorToast('Please enter correct end date');
+            return false;
+        }
+        if (rewardType === 'whitelist' && (winnerCount === undefined || winnerCount === 0)) {
+            showErrorToast('Please enter the correct number of winners.');
+            return false;
+        }
+        if (maxTickets === undefined || maxTickets === 0) {
+            showErrorToast('Please enter the correct number of max tickets.');
+            return false;
+        }
+        return true;
+    };
+
+    const handlePayment = (event: SelectChangeEvent<string>) => {
+        const {
+            target: { value }
+        } = event;
+        setPaymentMethod(value);
+    };
+
+    const handleRewardType = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRewardType((event.target as HTMLInputElement).value);
+    };
+    const updatePage = async () => {
+        setMint(mintAddr);
         try {
-            const raffle = await getStateByKey(new PublicKey(raffleKey));
-            if (raffle !== null) {
-                getNftDetail(raffle.nftMint.toBase58());
-                setMint(raffle.nftMint.toBase58());
+            startLoading();
+            const item: NFTDetail = await getNFTDetail({ wallet, mint: mintAddr });
+            if (item) {
+                setImage(item.image);
+                setName(item.name);
+                setFamily(item.family);
+                setDescription(item.description);
+                if (item.raffleData) {
+                    const { maxTickets: max, end, price: rafflePrice, payType: rafflePayType, winnerCnt } = item.raffleData;
+                    setMaxTickets(max);
+                    setEndTime(new Date(end));
+                    setPrice(rafflePrice);
+                    setPaymentMethod(rafflePayType === TOKEN_PAY_TYPE ? 'spl' : 'sol');
+                    setWinnerCount(winnerCnt);
+                }
             }
         } catch (error) {
-            console.log(error);
+            console.error(error);
+        } finally {
+            stopLoading();
         }
     };
 
-    const getNftDetail = async (nftMint: string) => {
-        if (raffleKey === undefined) return;
-
-        startLoading();
-
-        const uri = await getNftMetaData(new PublicKey(nftMint));
-        await axios
-            .get(uri)
-            .then((res) => {
-                setImage(res.data.image);
-                setName(res.data.name);
-                setFamily(res.data.collection.name);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-
-        const raffleData = await getRaffleState(new PublicKey(nftMint));
-        if (raffleData === null) return;
-
-        // Assigning Variables
-        const currentTickets = raffleData.count.toNumber();
-        setCount(currentTickets);
-        const maxTickets = raffleData.maxEntrants.toNumber();
-        setMaxEntrants(maxTickets);
-        const end = raffleData.endTimestamp.toNumber() * 1000;
-        setEndsAt(end);
-
-        if (raffleData.ticketPricePrey.toNumber() === 0) {
-            setPrice(raffleData.ticketPriceSol.toNumber() / LAMPORTS_PER_SOL);
-            setPayType('SOL');
-        } else if (raffleData.ticketPriceSol.toNumber() === 0) {
-            setPrice(raffleData.ticketPricePrey.toNumber() / DECIMALS);
-            setPayType('COSMIC');
-        }
-
-        const mine: any = [];
-        for (let i = 0; i < tickets; i += 1) {
-            if (raffleData.entrants[i].toBase58() === wallet.publicKey?.toBase58()) {
-                mine.push({ index: i + 1 });
+    useEffect(() => {
+        if (wallet.publicKey !== null) {
+            const admin = adminValidation(wallet.publicKey);
+            setIsAdmin(admin);
+            if (admin) {
+                updatePage();
+            } else {
+                navigate('/raffles', { replace: true });
             }
+        } else {
+            setIsAdmin(false);
+            navigate('/raffles', { replace: true });
         }
-        setMyTickets(mine);
-
-        if (raffleData.winner[0].toBase58() === '11111111111111111111111111111111') {
-            setIsRevealed(false);
-        } else setIsRevealed(true);
-
-        stopLoading();
-    };
-
-    // creation
-    const handleCreate = () => {
-        if (!checked) {
-            showErrorToast('You must accept the terms and conditions.');
-            return;
-        }
-
-        setIsCreating(true);
-
-        console.log('pass', checked);
-    };
+    }, [wallet.connect]);
 
     return (
-        <Grid container>
-            <Grid item xs={12}>
-                <Typography fontWeight="700" color="secondary.dark" sx={{ fontSize: '3rem', pr: 3, pl: 3 }}>
-                    CREATE NEW RAFFLE
-                </Typography>
-            </Grid>
-
-            <Grid item sx={{ mr: 3, ml: 3 }}>
-                <Avatar
-                    alt="User 1"
-                    src={image}
-                    sx={{
-                        borderRadius: '16px',
-                        mb: 3,
-                        width: 400,
-                        height: 400
-                    }}
-                />
-                {!wallet.connected && (
-                    <Button variant="outlined" color="secondary" sx={{ borderRadius: 3 }} fullWidth>
-                        Connect Wallet
-                    </Button>
-                )}
-                <Box display="flex" justifyContent="space-between">
-                    <Grid container columnSpacing={2}>
-                        <Grid item xs={5}>
-                            <TextField
-                                type="number"
-                                InputProps={{ inputProps: { min: 0, max: maxEntrants - count } }}
-                                fullWidth
-                                rows={1}
-                                onChange={(e: any) => setTickets(e.target.value)}
-                                placeholder="Quanity"
-                            />
-                        </Grid>
-
-                        <Grid item xs={7}>
-                            <Stack alignItems="center">
-                                <Button variant="contained" color="secondary" sx={{ borderRadius: 3 }} fullWidth>
-                                    Purchase Ticket
-                                </Button>
-
-                                <Typography fontWeight="700" color="inherit" sx={{ fontSize: '1.25rem', pt: '4px' }}>
-                                    {price} {payType} / Ticket
+        <Box
+            sx={{
+                minHeight: 'calc(100vh - 80px)',
+                p: 4,
+                backgroundColor: 'background.default',
+                color: 'text.primary'
+            }}
+        >
+            <Container maxWidth="xl">
+                <Grid container spacing={3}>
+                    <Grid item xs={12}>
+                        <Typography fontWeight="700" color="secondary" sx={{ fontSize: '1.5rem' }}>
+                            <FormattedMessage id="create-new-raffle" />
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={4} xl={3}>
+                        <MainCard
+                            content={false}
+                            boxShadow
+                            sx={{
+                                background: theme.palette.mode === 'dark' ? '#09080d' : theme.palette.primary.light
+                            }}
+                        >
+                            <CardMedia>
+                                <Image src={image} showLoading={<Loading />} alt="" />
+                            </CardMedia>
+                            <CardContent sx={{ p: 1 }}>
+                                <Box sx={{ display: 'flex', py: 1 }}>
+                                    <Typography component="p">{name}</Typography>
+                                </Box>
+                                <Box sx={{ display: 'flex', py: 1 }}>
+                                    <Typography component="p">{family}</Typography>
+                                </Box>
+                                <Box sx={{ display: 'flex', py: 1 }}>
+                                    <Typography component="p">{description}</Typography>
+                                </Box>
+                            </CardContent>
+                        </MainCard>
+                    </Grid>
+                    <Grid item xs={12} md={6} lg={8} xl={9} sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+                        <Typography>
+                            <FormattedMessage id="choose-payment-method" />
+                        </Typography>
+                        <Grid container spacing={2}>
+                            <Grid
+                                item
+                                xs={12}
+                                md={6}
+                                sx={{
+                                    my: 2
+                                }}
+                            >
+                                <Typography>
+                                    <FormattedMessage id="price" />
                                 </Typography>
-                            </Stack>
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        alignItems: 'center'
+                                    }}
+                                >
+                                    <FormattedMessage id="price-placeholder">
+                                        {(msg) => (
+                                            <NumberInput
+                                                className="number-control"
+                                                name="price"
+                                                value={price}
+                                                min={0.01}
+                                                step={0.01}
+                                                precision={2}
+                                                onChange={(value?: number) => {
+                                                    if (!value) return;
+                                                    if (value >= 0.01) {
+                                                        setPrice(value);
+                                                    }
+                                                }}
+                                                placeholder={`${msg}`}
+                                            />
+                                        )}
+                                    </FormattedMessage>
+
+                                    <FormControl>
+                                        <Select value={paymentMethod} defaultValue="spl" onChange={handlePayment}>
+                                            <MenuItem value="spl">{TOKEN_PAY_TYPE}</MenuItem>
+                                            <MenuItem value="sol">{DEFAULT_PAY_TYPE}</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                            </Grid>
+                            <Grid
+                                item
+                                xs={12}
+                                md={6}
+                                sx={{
+                                    my: 2
+                                }}
+                            >
+                                <Typography>
+                                    <FormattedMessage id="choose-reward-type" />
+                                </Typography>
+                                <Box
+                                    sx={{
+                                        display: 'flex'
+                                    }}
+                                >
+                                    <FormControl>
+                                        <RadioGroup row onChange={handleRewardType} defaultValue="nft">
+                                            <FormControlLabel value="nft" control={<Radio />} label="NFT" />
+                                            <FormControlLabel value="whitelist" control={<Radio />} label="Whitelist" />
+                                            <FormControlLabel value="spl" control={<Radio />} label={TOKEN_PAY_TYPE} />
+                                        </RadioGroup>
+                                    </FormControl>
+                                </Box>
+                            </Grid>
+                            {rewardType !== 'nft' && (
+                                <Grid item xs={12} md={6}>
+                                    <Typography>
+                                        <FormattedMessage id="winner-count" /> {WHITELIST_MAX})
+                                    </Typography>
+                                    <FormattedMessage id="winner-count-placeholder">
+                                        {(msg) => (
+                                            <NumberInput
+                                                className="number-control"
+                                                name="winner-count"
+                                                value={winnerCount}
+                                                min={1}
+                                                max={WHITELIST_MAX}
+                                                step={1}
+                                                precision={0}
+                                                onChange={(value?: number) => {
+                                                    if (!value) return;
+                                                    if (value >= 1 && value <= WHITELIST_MAX) {
+                                                        setWinnerCount(value);
+                                                    }
+                                                }}
+                                                placeholder={`${msg}`}
+                                            />
+                                        )}
+                                    </FormattedMessage>
+                                </Grid>
+                            )}
+
+                            {rewardType === 'spl' && (
+                                <Grid item xs={12} md={6}>
+                                    <Typography>
+                                        <FormattedMessage id="reward-price" /> ({TOKEN_PAY_TYPE})
+                                    </Typography>
+                                    <FormattedMessage id="reward-price-placeholder">
+                                        {(msg) => (
+                                            <NumberInput
+                                                className="number-control"
+                                                name="reward-price"
+                                                value={rewardPrice}
+                                                min={0.01}
+                                                step={0.01}
+                                                precision={2}
+                                                onChange={(value?: number) => {
+                                                    if (!value) return;
+                                                    if (value >= 0.01) {
+                                                        setRewardPrice(value);
+                                                    }
+                                                }}
+                                                placeholder={`${msg}`}
+                                            />
+                                        )}
+                                    </FormattedMessage>
+                                </Grid>
+                            )}
+
+                            <Grid item xs={12} md={6}>
+                                <Typography>
+                                    <FormattedMessage id="end-time" />
+                                </Typography>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DateTimePicker
+                                        renderInput={(props) => <TextField fullWidth {...props} helperText="" />}
+                                        value={endTime}
+                                        onChange={(value: Date | null) => {
+                                            setEndTime(value);
+                                        }}
+                                    />
+                                </LocalizationProvider>
+                            </Grid>
+
+                            <Grid item xs={12} md={6}>
+                                <Typography>
+                                    <FormattedMessage id="max-tickets" /> {TICKETS_MAX})
+                                </Typography>
+                                <FormattedMessage id="max-tickets-placeholder">
+                                    {(msg) => (
+                                        <NumberInput
+                                            className="number-control"
+                                            name="max-tickets"
+                                            value={maxTickets}
+                                            min={1}
+                                            max={TICKETS_MAX}
+                                            step={1}
+                                            precision={0}
+                                            onChange={(value?: number) => {
+                                                if (!value) return;
+                                                if (value >= 1 && value <= TICKETS_MAX) {
+                                                    setMaxTickets(value);
+                                                }
+                                            }}
+                                            placeholder={`${msg}`}
+                                        />
+                                    )}
+                                </FormattedMessage>
+                            </Grid>
+
+                            <Grid item xs={12}>
+                                <MainCard border={false} boxShadow sx={{ borderRadius: 3 }}>
+                                    <Stack flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
+                                        <Box display="flex" alignItems="center">
+                                            <Checkbox
+                                                color="secondary"
+                                                name="checked"
+                                                checked={checked}
+                                                onChange={(e) => setChecked(e.target.checked)}
+                                                sx={{ color: theme.palette.secondary.main }}
+                                            />
+                                            <Typography fontWeight="700" color="inherit" sx={{ fontSize: '.875rem' }}>
+                                                I have read and accept the terms and conditions.
+                                            </Typography>
+                                        </Box>
+                                    </Stack>
+
+                                    {/* terms and conditions */}
+                                    <TermsAndConditions />
+                                </MainCard>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Button
+                                    color="secondary"
+                                    variant="contained"
+                                    sx={{ width: '100%', mt: 2, p: 2, textTransform: 'uppercase' }}
+                                    onClick={() => handleCreate()}
+                                >
+                                    <FormattedMessage id="create-new-raffle" />
+                                </Button>
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Box>
-            </Grid>
-
-            <Grid item xs={8}>
-                <MainCard border={false} boxShadow sx={{ borderRadius: 3 }}>
-                    {/* collection information */}
-                    <Box display="flex" justifyContent="space-between">
-                        <Stack>
-                            <Typography fontWeight="700" color="inherit" sx={{ fontSize: '2.25rem', pb: '4px' }}>
-                                {name}
-                            </Typography>
-                        </Stack>
-                    </Box>
-                    {/* tabs */}
-                    <Stack flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2, gap: 3 }}>
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DateTimePicker
-                                renderInput={(props) => <TextField fullWidth {...props} helperText="" />}
-                                label="Raffle End Date"
-                                value={valueBasic}
-                                onChange={(newValue: Date | null) => {
-                                    setValueBasic(newValue);
-                                }}
-                            />
-                        </LocalizationProvider>
-                        <TextField
-                            type="number"
-                            label="Ticket Supply"
-                            InputProps={{ inputProps: { min: 0, max: maxEntrants - count } }}
-                            rows={1}
-                            fullWidth
-                            onChange={(e: any) => setTickets(e.target.value)}
-                        />
-                        <Box display="flex" flexDirection="row">
-                            <TextField
-                                type="number"
-                                label="Ticket Price"
-                                InputProps={{ inputProps: { min: 0, max: maxEntrants - count } }}
-                                fullWidth
-                                rows={1}
-                                onChange={(e: any) => setTickets(e.target.value)}
-                            >
-                                {tokens.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                            <TextField
-                                id="standard-select-type"
-                                select
-                                fullWidth
-                                rows={1}
-                                onChange={(e: any) => setTickets(e.target.value)}
-                            >
-                                {tokens.map((option) => (
-                                    <MenuItem key={option.value} value={option.value}>
-                                        {option.label}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
-                        </Box>
-                    </Stack>
-
-                    {/* <Box display="flex" alignItems="center" sx={{ pt: 1, pb: 1 }}> */}
-                    <Stack flexDirection="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
-                        <Box display="flex" alignItems="center">
-                            <Checkbox
-                                color="secondary"
-                                name="checked"
-                                checked={checked}
-                                onChange={(e) => setChecked(e.target.checked)}
-                                sx={{ color: theme.palette.secondary.main }}
-                            />
-                            <Typography fontWeight="700" color="inherit" sx={{ fontSize: '.875rem' }}>
-                                I have read and accept the terms and conditions.
-                            </Typography>
-                        </Box>
-                        <Box>
-                            <LoadingButton
-                                onClick={handleCreate}
-                                variant="contained"
-                                size="large"
-                                color="secondary"
-                                sx={{ borderRadius: 3 }}
-                                loading={isCreating}
-                                fullWidth
-                            >
-                                Create Raffle
-                            </LoadingButton>
-                        </Box>
-                    </Stack>
-
-                    {/* terms and conditions */}
-                    <MainCard
-                        sx={{
-                            mt: 2,
-                            borderRadius: 4,
-                            border: `2px solid ${theme.palette.secondary.dark} !important`,
-                            backgroundColor: 'rgba(215, 0, 39, 0.05)'
-                        }}
-                    >
-                        <Typography fontWeight="700" variant="h4" color="secondary.dark">
-                            Terms & Conditions
-                        </Typography>
-                        <List component="div" disablePadding>
-                            <Box display="flex" flexDirection="row" alignItems="center">
-                                <ListItemIcon sx={{ minWidth: '15px' }}>
-                                    <FiberManualRecordIcon sx={{ fontSize: '0.5rem' }} />
-                                </ListItemIcon>
-                                <ListItemText primary="Nested List" />
-                            </Box>
-                            <Box display="flex" flexDirection="row" alignItems="center">
-                                <ListItemIcon sx={{ minWidth: '15px' }}>
-                                    <FiberManualRecordIcon sx={{ fontSize: '0.5rem' }} />
-                                </ListItemIcon>
-                                <ListItemText primary="Nested List" />
-                            </Box>
-                            <Box display="flex" flexDirection="row" alignItems="center">
-                                <ListItemIcon sx={{ minWidth: '15px' }}>
-                                    <FiberManualRecordIcon sx={{ fontSize: '0.5rem' }} />
-                                </ListItemIcon>
-                                <ListItemText primary="Nested List" />
-                            </Box>
-                            <Box display="flex" flexDirection="row" alignItems="center">
-                                <ListItemIcon sx={{ minWidth: '15px' }}>
-                                    <FiberManualRecordIcon sx={{ fontSize: '0.5rem' }} />
-                                </ListItemIcon>
-                                <ListItemText primary="Nested List" />
-                            </Box>
-                        </List>
-                    </MainCard>
-                </MainCard>
-            </Grid>
-        </Grid>
+                </Grid>
+            </Container>
+        </Box>
     );
 };
 

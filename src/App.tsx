@@ -4,12 +4,11 @@ import Routes from 'routes';
 // project imports
 import Locales from 'components/Locales';
 import NavigationScroll from 'layout/NavigationScroll';
-import Snackbar from 'components/@extended/Snackbar';
 import ThemeCustomization from 'themes';
 
 // third-party
-import { ConfirmProvider } from 'material-ui-confirm';
 import { ToastContainer } from 'react-toastify';
+import { RecoilRoot } from 'recoil';
 
 // providers
 import { MetaProvider } from 'contexts/meta/meta';
@@ -27,36 +26,27 @@ const App = () => (
             <CoinGeckoProvider>
                 <HyperspaceProvider>
                     <ThemeCustomization>
-                        <ConfirmProvider
-                            defaultOptions={{
-                                confirmationText: 'Confirm',
-                                cancellationButtonProps: { variant: 'outlined' },
-                                confirmationButtonProps: { variant: 'contained', color: 'secondary' }
-                            }}
-                        >
-                            <Locales>
-                                <NavigationScroll>
-                                    <MetaProvider>
-                                        <LoaderProvider>
-                                            <>
-                                                <Routes />
-                                                <Snackbar />
-                                                <ToastContainer
-                                                    position="bottom-right"
-                                                    autoClose={5000}
-                                                    hideProgressBar={false}
-                                                    newestOnTop={false}
-                                                    draggable={false}
-                                                    pauseOnHover={false}
-                                                    theme="colored"
-                                                    limit={5}
-                                                />
-                                            </>
-                                        </LoaderProvider>
-                                    </MetaProvider>
-                                </NavigationScroll>
-                            </Locales>
-                        </ConfirmProvider>
+                        <Locales>
+                            <NavigationScroll>
+                                <MetaProvider>
+                                    <LoaderProvider>
+                                        <RecoilRoot>
+                                            <Routes />
+                                            <ToastContainer
+                                                position="bottom-right"
+                                                autoClose={5000}
+                                                hideProgressBar={false}
+                                                newestOnTop={false}
+                                                draggable={false}
+                                                pauseOnHover={false}
+                                                theme="colored"
+                                                limit={5}
+                                            />
+                                        </RecoilRoot>
+                                    </LoaderProvider>
+                                </MetaProvider>
+                            </NavigationScroll>
+                        </Locales>
                     </ThemeCustomization>
                 </HyperspaceProvider>
             </CoinGeckoProvider>

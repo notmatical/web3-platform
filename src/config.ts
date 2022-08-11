@@ -14,16 +14,15 @@ export const HS_API_KEY =
 export const GLOBAL_AUTHORITY_SEED = 'global-authority';
 export const METAPLEX = new web3.PublicKey('metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s');
 export const COSMIC_TOKEN_MINT = new PublicKey('326vsKSXsf1EsPU1eKstzHwHmHyxsbavY4nTJGEm3ugV');
+export const YAKU_TOKEN_MINT = new PublicKey('NGK3iHqqQkyRZUj4uhJDQqEyKKcZ7mdawWpqwMffM3s');
 
 export const USER_POOL_SIZE = 3664;
 export const EPOCH = 86400;
-export const STAKING_PROGRAM = '8g3PG15GWGFsBLtfaVXZ8ntpUTNvwDMsrW2dRFr7pR4V';
+export const STAKING_PROGRAM = '8g3PG15GWGFsBLtfaVXZ8ntpUTNvwDMsrW2dRFr7pR4V'; // cosmos staking use
 
-export const RAFFLE_SIZE = 66618;
-// 66544
-export const RAFFLE_PROGRAM = '7NQTWWABH9JYqWcFtukSEvuGNHX32sppwV4BBCgsQWJ9';
-export const DECIMALS = 1000000000;
-export const PREY_DECIMALS = 1000000000;
+export const RAFFLE_SIZE = 182544;
+export const RAFFLE_PROGRAM = '2QzwyjJ9owcEm6HWCaEmCVLqBZeKjRniZ3NMT3LV6qvb';
+export const YAKU_DECIMALS = 1000000000;
 
 export const RAFFLE_ADMINS = [
     {
@@ -42,6 +41,44 @@ export const appConfig: ConfigOptions = {
         defaultPayout: 0.5
     }
 };
+
+export const LOCALES = [
+    {
+        value: 'en',
+        label: 'English',
+        desc: 'UK'
+    },
+    {
+        value: 'de',
+        label: 'Deutsch',
+        desc: 'German'
+    },
+    {
+        value: 'fr',
+        label: 'Français',
+        desc: 'French'
+    },
+    {
+        value: 'ro',
+        label: 'Română',
+        desc: 'Romanian'
+    },
+    {
+        value: 'zh',
+        label: '简体中文',
+        desc: 'Simplified Chinese'
+    },
+    {
+        value: 'zh-tw',
+        label: '繁體中文',
+        desc: 'Traditional Chinese'
+    },
+    {
+        value: 'ja',
+        label: '日本語',
+        desc: 'Japanese'
+    }
+];
 
 export const config: ThemeConfigProps = {
     defaultPath: '/home',

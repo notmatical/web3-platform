@@ -3,21 +3,15 @@ import React, { useState, useEffect } from 'react';
 // third-party
 import { IntlProvider, MessageFormatElement } from 'react-intl';
 import useConfig from 'hooks/useConfig';
+import { find } from 'lodash';
+import { LOCALES } from 'config';
 
 // load locales files
 const loadLocaleData = (locale: string) => {
-    switch (locale) {
-        case 'fr':
-            return import('utils/locales/fr.json');
-        case 'de':
-            return import('utils/locales/de.json');
-        case 'ro':
-            return import('utils/locales/ro.json');
-        case 'zh':
-            return import('utils/locales/zh.json');
-        default:
-            return import('utils/locales/en.json');
+    if (!find(LOCALES, ({ value }) => value === locale)) {
+        return import('utils/locales/en.json');
     }
+    return import(`utils/locales/${locale}.json`);
 };
 
 // ==============================|| LOCALIZATION ||============================== //

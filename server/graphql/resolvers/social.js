@@ -6,7 +6,7 @@ export default {
     Query: {
         socials: (root, args, context, info) => Social.find({}),
         social: async (root, args, context, info) => {
-            return Social.findOne({ wallet: args.wallet });
+            return await Social.findOne({ wallet: args.wallet });
         },
         leaderboard: async (root, args, context, info) => {
             return Social.find().sort({ followersCount: 'desc' }).limit(args.first);

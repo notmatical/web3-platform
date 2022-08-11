@@ -13,7 +13,7 @@ const StakeEmpty = () => (
                         <Grid container spacing={gridSpacing}>
                             <Grid item xs={12}>
                                 <Typography variant="h1" color="inherit" component="div">
-                                    You do not own any Cosmic Astronauts
+                                    You do not own any unstaked Yaku collections.
                                 </Typography>
                             </Grid>
                         </Grid>

@@ -1,21 +1,18 @@
 import React, { FunctionComponent, ReactElement } from 'react';
 
 // material-ui
-import "@mui/styles";
+import '@mui/styles';
 import { Theme } from '@mui/material/styles';
-import { SvgIconTypeMap, SnackbarOrigin, ChipProps, TableCellProps } from '@mui/material';
-
+import { SvgIconTypeMap, ChipProps, TableCellProps } from '@mui/material';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 
 // project imports
 import { TablerIcon } from '@tabler/icons';
 import { CalendarStateProps } from './calendar';
 import { RarityStateProps } from './rarity';
-import { ProjectStateProps } from './collections';
 import { ProposalStateProps } from './proposals';
 import { SpaceStateProps } from './spaces';
 
-import { SnackbarProps } from './snackbar';
 import { StringPublicKey } from 'utils/ids';
 import { Connection } from '@solana/web3.js';
 
@@ -40,9 +37,9 @@ export interface TabsProps {
 
 export interface GenericCardProps {
     title?: string;
-    primary?: string | number | undefined;
-    secondary?: string;
-    content?: string;
+    primary?: string | number | ReactElement;
+    secondary?: string | number | ReactElement;
+    content?: string | number | ReactElement;
     image?: string;
     dateTime?: string;
     iconPrimary?: OverrideIcon;
@@ -96,6 +93,7 @@ export type NavItemType = {
     breadcrumbs?: boolean;
     disabled?: boolean;
     hidden?: boolean;
+    soon?: boolean;
     hot?: boolean;
     new?: boolean;
     chip?: ChipProps;
@@ -108,10 +106,8 @@ export interface ColorPaletteProps {
 }
 
 export interface DefaultRootStateProps {
-    snackbar: SnackbarProps;
     calendar: CalendarStateProps;
     rarity: RarityStateProps;
-    collections: ProjectStateProps;
     proposals: ProposalStateProps;
     spaces: SpaceStateProps;
 }
@@ -159,7 +155,7 @@ export type WalletResult = {
     nfts: NftTokenAccount[];
     error: unknown | undefined;
     isLoading: boolean;
-}
+};
 
 export type WalletNftProps = {
     publicAddress: StringPublicKey;
@@ -168,7 +164,7 @@ export type WalletNftProps = {
     stringifyPubKeys?: boolean;
     sort?: boolean;
     limit?: number;
-}
+};
 
 /** ---- Common Functions types ---- */
 

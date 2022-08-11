@@ -2,7 +2,6 @@ import { useEffect, useState, ReactElement } from 'react';
 
 // redux
 import { useDispatch, useSelector } from 'store';
-import { getSpaces, addSpace } from 'store/slices/spaces';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';

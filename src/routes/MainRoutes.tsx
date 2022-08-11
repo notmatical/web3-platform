@@ -47,7 +47,7 @@ const MainRoutes = {
 
         // Monitor
         {
-            path: '/monitor',
+            path: '/nft',
             element: <Monitor />
         },
         {

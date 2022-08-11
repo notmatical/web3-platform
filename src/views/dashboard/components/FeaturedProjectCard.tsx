@@ -10,7 +10,6 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { Keypair, SystemProgram, Transaction } from '@solana/web3.js';
 
 // project imports
-import { openSnackbar } from 'store/slices/snackbar';
 import { explorerLinkFor } from 'utils/transactions';
 import { useDispatch } from 'store';
 import Chip from 'components/@extended/Chip';
@@ -92,18 +91,6 @@ const FeaturedProjectCard = ({ isLoading }: FeaturedProjectCardProps) => {
         await connection.confirmTransaction(signature, 'processed');
 
         console.log(explorerLinkFor(signature, connection));
-
-        dispatch(
-            openSnackbar({
-                open: true,
-                message: `Transaction Success`,
-                variant: 'alert',
-                alert: {
-                    color: 'info'
-                },
-                close: false
-            })
-        );
     }, [publicKey, dispatch, sendTransaction, connection]);
 
     return (
