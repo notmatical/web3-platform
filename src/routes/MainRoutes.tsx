@@ -16,8 +16,13 @@ const Monitor = Loadable(lazy(() => import('views/application/monitor/index')));
 
 // raffles
 const Raffles = Loadable(lazy(() => import('views/application/raffles/index')));
+const CreateRaffle = Loadable(lazy(() => import('views/application/raffles/CreateRaffle')));
 const RaffleCreate = Loadable(lazy(() => import('views/application/raffles/RaffleCreate')));
 const RafflePage = Loadable(lazy(() => import('views/application/raffles/RafflePage')));
+
+// staff management
+const Admin = Loadable(lazy(() => import('views/staff-management/admin/Admin')));
+const Employee = Loadable(lazy(() => import('views/staff-management/employee/Employee')));
 
 const MainRoutes = {
     path: '/',
@@ -45,6 +50,16 @@ const MainRoutes = {
             element: <Trading />
         },
 
+        // Staff Management
+        {
+            path: '/staff-management/admin',
+            element: <Admin />
+        },
+        {
+            path: '/staff-management/employee',
+            element: <Employee />
+        },
+
         // Monitor
         {
             path: '/nft',
@@ -62,6 +77,10 @@ const MainRoutes = {
         },
         {
             path: '/raffles/create',
+            element: <CreateRaffle />
+        },
+        {
+            path: '/raffles/new/:mint',
             element: <RaffleCreate />
         },
         {
