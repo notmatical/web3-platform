@@ -66,8 +66,8 @@ const Activity = ({ user }: { user: any }) => {
             .getUserHistory({
                 condition: {
                     userAddress: user.wallet,
-                    // actionTypes: ['TRANSACTION', 'BID', 'CANCELBID', 'LISTING', 'DELISTING', 'UPDATELISTING'],
-                    actionTypes: ['BID', 'CANCELBID'] as MarketplaceActionEnums[]
+                    actionTypes: ['TRANSACTION', 'BID', 'CANCELBID', 'LISTING', 'DELISTING', 'UPDATELISTING'] as MarketplaceActionEnums[]
+                    // actionTypes: ['BID', 'CANCELBID'] as MarketplaceActionEnums[]
                     // nonMpaActionTypes: ['MINT']
                 },
                 paginationInfo: {
