@@ -137,6 +137,19 @@ const NavItem = ({ item, level }: NavItemProps) => {
                     label="SOON"
                 />
             )}
+            {item.soon && (
+                <Chip
+                    sx={{
+                        fontWeight: 500,
+                        borderRadius: '4px !important',
+                        background: '#f38aff'
+                    }}
+                    color="secondary"
+                    variant="filled"
+                    size="small"
+                    label="SOON"
+                />
+            )}
             {item.hot && (
                 <Chip
                     sx={{
