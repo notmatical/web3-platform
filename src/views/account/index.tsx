@@ -561,7 +561,7 @@ function UserAccount() {
                                             color: theme.palette.mode === 'dark' ? theme.palette.text.secondary : 'secondary.main'
                                         }}
                                     >
-                                        {abbreviateValue(data.user.socialStats.followersCount)}
+                                        {data.user.socialStats ? abbreviateValue(data.user.socialStats.followersCount) : 0}
                                     </Typography>
                                     <Typography variant="body2" color="primary">
                                         Followers
@@ -595,7 +595,7 @@ function UserAccount() {
                                             color: theme.palette.mode === 'dark' ? theme.palette.text.secondary : 'secondary.main'
                                         }}
                                     >
-                                        {abbreviateValue(data.user.socialStats.followedCount)}
+                                        {data.user.socialStats ? abbreviateValue(data.user.socialStats.followedCount) : 0}
                                     </Typography>
                                     <Typography variant="body2" color="primary">
                                         Following
@@ -630,7 +630,7 @@ function UserAccount() {
                                             color: theme.palette.mode === 'dark' ? theme.palette.text.secondary : 'secondary.main'
                                         }}
                                     >
-                                        {ordinal_suffix_of(data.user.socialStats.followersRank)}
+                                        {data.user.socialStats ? ordinal_suffix_of(data.user.socialStats.followersRank) : 'Unranked'}
                                     </Typography>
                                     <Typography variant="body2" color="primary">
                                         Leaderboard
