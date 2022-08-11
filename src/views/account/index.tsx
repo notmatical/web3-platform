@@ -257,6 +257,7 @@ function UserAccount() {
                     <Grid item xs={12} md={4} sx={{ pt: '0 !important' }}>
                         <MainCard
                             sx={{
+                                overflow: 'visible !important',
                                 mt: '-10%'
                             }}
                             contentSX={{
