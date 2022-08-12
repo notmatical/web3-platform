@@ -4,9 +4,15 @@ import * as Auth from '../../helpers/auth';
 export default {
     Query: {
         // TODO: projection, pagination, sanitization
-        users: (root, args, context, info) => User.find({}),
-        user: async (root, args, context, info) => {
-            return User.findOne({ wallet: args.wallet });
+        users: () => User.find({}),
+        multiUsers: async (root, { wallets }) => {
+            console.log(wallets);
+            const res = await User.find({ wallet: { $in: wallets } });
+            console.log(res);
+            return res;
+        },
+        user: async (root, { wallet }) => {
+            return User.findOne({ wallet });
         }
     },
     User: {

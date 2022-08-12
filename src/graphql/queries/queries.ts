@@ -24,6 +24,19 @@ export const GET_USER = gql`
     }
 `;
 
+export const GET_MULTIPLE_USERS = gql`
+    query MultipleUsers($wallets: [String!]) {
+        multiUsers(wallets: $wallets) {
+            id
+            vanity
+            avatarURI
+            vanity
+            level
+            xp
+        }
+    }
+`;
+
 // Social/Ranking
 export const GET_LEADERBOARD = gql`
     query ranking($first: Int) {
