@@ -1,6 +1,5 @@
 import { PublicKey } from '@solana/web3.js';
-import { getParsedNftAccountsByOwner } from '@nfteyez/sol-rayz';
-import { useWallet, useConnection } from '@solana/wallet-adapter-react';
+import { first, toUpper, get } from 'lodash';
 
 /* eslint-disable */
 
@@ -138,12 +137,14 @@ export const abbreviateValue = (value: number) => {
         const suffixNum = Math.floor(('' + value).length / 3);
         let shortValue: any = '';
         for (let precision = 2; precision >= 1; precision--) {
-            shortValue = parseFloat((suffixNum != 0 ? (value / Math.pow(1000, suffixNum)) : value).toPrecision(precision));
-            let dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g,'');
-            if (dotLessShortValue.length <= 2) { break; }
+            shortValue = parseFloat((suffixNum != 0 ? value / Math.pow(1000, suffixNum) : value).toPrecision(precision));
+            let dotLessShortValue = (shortValue + '').replace(/[^a-zA-Z 0-9]+/g, '');
+            if (dotLessShortValue.length <= 2) {
+                break;
+            }
         }
-        if (shortValue % 1 != 0)  shortValue = shortValue.toFixed(1);
-        newValue = shortValue+suffixes[suffixNum];
+        if (shortValue % 1 != 0) shortValue = shortValue.toFixed(1);
+        newValue = shortValue + suffixes[suffixNum];
     }
     return newValue;
 };
@@ -216,3 +217,30 @@ export function isValidSolanaAddress(address: string) {
         return false;
     }
 }
+
+export const stringToColor = (string: string) => {
+    let hash = 0;
+    let i;
+
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+        hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = '#';
+
+    for (i = 0; i < 3; i += 1) {
+        const value = (hash >> (i * 8)) & 0xff;
+        color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+};
+
+export const stringAvatar = (name: string) => ({
+    sx: {
+        bgcolor: stringToColor(name)
+    },
+    children: toUpper(`${first(name.split(' ')[0])}${first(get(name.split(' '), 1, ' '))}`)
+});

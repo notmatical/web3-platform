@@ -3,7 +3,7 @@
 import { Avatar, Box, Button, IconButton, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { showSearchAtom } from 'views/cosmic-astro/sniping/recoil/atom/HaloLabsAtom';
+import { showSearchAtom } from 'views/cosmic-astro/sniping/recoil/atom/InfinityAtom';
 import { Image } from 'mui-image';
 import { AddOutlined } from '@mui/icons-material';
 

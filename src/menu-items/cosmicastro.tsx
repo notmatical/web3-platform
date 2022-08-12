@@ -25,7 +25,7 @@ const cosmicastro = {
             id: 'sniper',
             title: <FormattedMessage id="sniper" />,
             type: 'item',
-            url: '/under-construction',
+            url: '/cosmicastro/sniper',
             icon: icons.IconCrosshair
         },
         {

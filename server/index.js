@@ -11,8 +11,6 @@ require('dotenv').config();
 
 import loggerConfig from './config/loggerConfig';
 
-import cors from 'cors';
-
 // Axios
 import axios from 'axios';
 
@@ -78,20 +76,95 @@ const server = new ApolloServer({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// API Routes
-app.use('/api/v1', routes);
-
-// Express Proxy Route
-app.get('/drops', (req, res, next) => {
-    axios
-        .get('https://api.howrare.is/v0.1/drops')
-        .then(resp => {
-            const data = resp.data.result.data;
-            res.json({ data });
-        })
-        .catch(err => {
-            res.json({ err });
+app.get('/getMETransactionInstructionsForSnipe', async (req, res) => {
+    if (
+        !req.query ||
+        req.query.buyer == '' ||
+        req.query.seller == '' ||
+        req.query.auctionHouse == '' ||
+        req.query.tokenMint == '' ||
+        req.query.tokenAddress == '' ||
+        req.query.price == '' ||
+        req.query.expiry == '' ||
+        req.query.pdaAddress == '' ||
+        req.query.sellerReferral == ''
+    ) {
+        return res.status(400).send({
+            message: ''
         });
+    } else {
+        // gets the transaction instructions from ME
+        const transaction = await axios
+            .get('https://api-mainnet.magiceden.dev/v2/instructions/buy_now', {
+                params: {
+                    buyer: req.query.buyer,
+                    seller: req.query.seller,
+                    auctionHouseAddress: req.query.auctionHouse.length > 0 ?
+                        req.query.auctionHouse :
+                        'E8cU1WiRWjanGxmn96ewBgk9vPTcL6AEZ1t6F6fkgUWe',
+                    tokenMint: req.query.tokenMint,
+                    tokenATA: req.query.tokenAddress,
+                    price: req.query.price,
+                    buyerReferral: process.env.SOLANA_FEE_ACCOUNT,
+                    sellerReferral: req.query.sellerReferral == '' ? '' : req.query.sellerReferral,
+                    buyerExpiry: '0',
+                    sellerExpiry: req.query.expiry,
+                },
+                headers: {
+                    Authorization: process.env.ME_AUTHORIZATION_TOKEN,
+                },
+            })
+            .then((response2) => {
+                res.send(response2.data);
+                buyInstructionCount += 1;
+                if (String(req.query.buyer) in buyWalletMintPair) {
+                    buyWalletMintPair[String(req.query.buyer)].push(
+                        String(req.query.tokenMint)
+                    );
+                } else {
+                    buyWalletMintPair[String(req.query.buyer)] = [
+                        String(req.query.tokenMint),
+                    ];
+                }
+
+                return response2.data;
+            })
+            .catch((error) => {
+                if (error.response) {
+                    // The request was made and the server responded with a status code
+                    // that falls out of the range of 2xx
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                    return res.status(502).send({
+                        message: 'Failed to get instruction from Magic Eden. Error from Magic Eden: ' +
+                            error.response.status,
+                        data: error.response.data,
+                        config: error.config,
+                    });
+                } else if (error.request) {
+                    // The request was made but no response was received
+                    console.log(error.request);
+                    return res.status(502).send({
+                        message: 'Got no response regarding buy instruction from Magic Eden. Error from Magic Eden: ' +
+                            error.response.status,
+                        data: error.response.data,
+                        request: error.request,
+                        config: error.config,
+                    });
+                } else {
+                    // Something happened in setting up the request that triggered an Error
+                    console.log('Error', error.message);
+                    return res.status(502).send({
+                        message: 'Something wrong with the setup regarding buy instruction from Magic Eden. Error from Magic Eden: ' +
+                            error.response.status,
+                        error: error.message,
+                        config: error.config,
+                    });
+                }
+            });
+        return transaction;
+    }
 });
 
 // logging with morgan

@@ -3,7 +3,7 @@
 import { Box } from '@mui/material';
 import { useDetectClickOutside } from 'react-detect-click-outside';
 import { useRecoilValue } from 'recoil';
-import { searchResultAtom } from 'views/cosmic-astro/sniping/recoil/atom/HaloLabsAtom';
+import { searchResultAtom } from 'views/cosmic-astro/sniping/recoil/atom/InfinityAtom';
 import '../rainbow.css';
 import EachSearchResult from './EachSearchResult';
 

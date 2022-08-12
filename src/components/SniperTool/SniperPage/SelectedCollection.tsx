@@ -1,6 +1,6 @@
 /* eslint-disable  */
 
-import { localCollectionDataAtom, localCollectionDataPriceAtom } from 'views/cosmic-astro/sniping/recoil/atom/HaloLabsAtom';
+import { localCollectionDataAtom, localCollectionDataPriceAtom } from 'views/cosmic-astro/sniping/recoil/atom/InfinityAtom';
 import { useRecoilState } from 'recoil';
 import solanaLogo from 'assets/images/icons/solana.png';
 import '../rainbow.css';

@@ -3,7 +3,7 @@ import EachListing from './EachListing';
 import useWebSocket from 'react-use-websocket';
 import { Transition } from '@headlessui/react';
 import '../SniperPage/transitionStyles.css';
-import { allListingAtom } from 'views/cosmic-astro/sniping/recoil/atom/HaloLabsAtom';
+import { allListingAtom } from 'views/cosmic-astro/sniping/recoil/atom/InfinityAtom';
 
 const Listings = ({ buyNow }: any) => {
     const [allListing, setAllListing] = useRecoilState<any[]>(allListingAtom);

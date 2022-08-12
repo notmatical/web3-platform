@@ -1,8 +1,4 @@
 /* eslint-disable no-await-in-loop */
-import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { Transaction } from '@solana/web3.js';
-import axios from 'axios';
-import { useRecoilState } from 'recoil';
 
 // material-ui
 import { Grid } from '@mui/material';
@@ -10,10 +6,16 @@ import { Grid } from '@mui/material';
 // project imports
 import { useToasts } from 'hooks/useToasts';
 import { gridSpacing } from 'store/constant';
-import { snipedIdentifierAtom } from './recoil/atom/HaloLabsAtom';
-import Sniper from 'components/HaloBullsTool/SniperPage/Sniper';
+import { snipedIdentifierAtom } from './recoil/atom/InfinityAtom';
+import Sniper from 'components/SniperTool/SniperPage/Sniper';
 import { SNIPER_API_URL } from 'config/config';
+
+// third-party
+import axios from 'axios';
 import { cloneDeep } from 'lodash';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { Transaction } from '@solana/web3.js';
+import { useRecoilState } from 'recoil';
 
 const SniperHome = () => {
     const wallet = useWallet();
@@ -89,11 +91,11 @@ const SniperHome = () => {
                                 continue;
                             }
                             if (typeof getTransResp === 'object' && getTransResp?.meta?.err === null) {
-                                // showInfoToast(
-                                //     <a href={`https://solscan.io/tx/${res}`} target="_blank" rel="noreferrer" className="m-auto">
-                                //         Sniped, Congrats!
-                                //     </a>
-                                // );
+                                showInfoToast(
+                                    <a href={`https://solscan.io/tx/${res}`} target="_blank" rel="noreferrer" className="m-auto">
+                                        Sniped, Congrats!
+                                    </a>
+                                );
                                 signature = res;
                                 // eslint-disable-next-line no-continue
                                 continue;

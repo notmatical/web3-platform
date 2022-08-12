@@ -14,7 +14,7 @@ import {
     localCollectionDataPriceAtom,
     rarityDataAtom,
     fpAtom
-} from 'views/cosmic-astro/sniping/recoil/atom/HaloLabsAtom';
+} from 'views/cosmic-astro/sniping/recoil/atom/InfinityAtom';
 import { useEffect, useState } from 'react';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import solanaLogo from 'assets/images/icons/solana.png';
@@ -39,9 +39,10 @@ import {
     Button,
     IconButton,
     LinearProgress,
-    Avatar
+    Avatar,
+    Tooltip
 } from '@mui/material';
-import { IconSearch } from '@tabler/icons';
+import { IconSearch, IconSquareX } from '@tabler/icons';
 import { shouldForwardProp } from '@mui/system';
 import { DeleteOutline, RefreshOutlined } from '@mui/icons-material';
 import { SNIPER_API_URL, SNIPER_API_ENDPOINT } from 'config/config';
@@ -299,7 +300,7 @@ const Sniper = ({ buyNow }: any) => {
         if (!(collectionData.symbol in rarityData)) {
             let rankingResp: any = { status: 'Unsuccessful', data: [] };
             try {
-                const { data } = await axios.get(`${SNIPER_API_URL}/getRankingsByCollection/${collectionData.symbol}`);
+                const { data } = await axios.get(`${SNIPER_API_ENDPOINT}/getRankingsByCollection/${collectionData.symbol}`);
                 rankingResp = data;
             } catch (error) {
                 console.error(error);
@@ -892,17 +893,19 @@ const Sniper = ({ buyNow }: any) => {
                                 justifyContent: 'flex-end'
                             }}
                         >
-                            <IconButton
-                                sx={{
-                                    padding: '5px 3px',
-                                    borderRadius: '5px',
-                                    color: theme.palette.mode === 'dark' ? theme.palette.primary.light : theme.palette.primary.main
-                                }}
-                                color="error"
-                                onClick={() => clearListings()}
-                            >
-                                <DeleteOutline />
-                            </IconButton>
+                            <Tooltip title="Clear Listings" arrow>
+                                <IconButton
+                                    sx={{
+                                        padding: '5px 3px',
+                                        borderRadius: '5px',
+                                        color: theme.palette.mode === 'dark' ? theme.palette.primary.light : theme.palette.primary.main
+                                    }}
+                                    color="error"
+                                    onClick={() => clearListings()}
+                                >
+                                    <IconSquareX />
+                                </IconButton>
+                            </Tooltip>
                         </Grid>
                     </Grid>
                     {/** FILTER AND LIVE DIV END */}

@@ -1,7 +1,7 @@
 /* eslint-disable  */
 
 import { useRecoilValue } from 'recoil';
-import { filteredListingAtom } from 'views/cosmic-astro/sniping/recoil/atom/HaloLabsAtom';
+import { filteredListingAtom } from 'views/cosmic-astro/sniping/recoil/atom/InfinityAtom';
 import FilteredEachListings from './FilteredEachListings';
 import { Transition } from '@headlessui/react';
 import './transitionStyles.css';

@@ -4,7 +4,7 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import MEMarketLogo from 'assets/images/icons/MEMarketLogo.png';
 import solanaLogo from 'assets/images/icons/solana.png';
-import { rarityColorCodeAtom, fpAtom } from 'views/cosmic-astro/sniping/recoil/atom/HaloLabsAtom';
+import { rarityColorCodeAtom, fpAtom } from 'views/cosmic-astro/sniping/recoil/atom/InfinityAtom';
 import { Avatar, Box, Button, Chip, Grid, IconButton, ListItem, Typography, useTheme } from '@mui/material';
 import { FormattedMessage } from 'react-intl';
 
