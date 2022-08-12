@@ -12,7 +12,7 @@ const Lending = Loadable(lazy(() => import('views/application/lending/index')));
 const Trading = Loadable(lazy(() => import('views/application/trade/index')));
 
 // monitor
-const Monitor = Loadable(lazy(() => import('views/application/monitor/index')));
+const Monitor = Loadable(lazy(() => import('views/explore/nfts/index')));
 
 // raffles
 const Raffles = Loadable(lazy(() => import('views/application/raffles/index')));
@@ -60,7 +60,7 @@ const MainRoutes = {
             element: <Employee />
         },
 
-        // Monitor
+        // Explore
         {
             path: '/nft',
             element: <Monitor />
