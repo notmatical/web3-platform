@@ -76,6 +76,23 @@ export default {
         },
         changeUsername: async (root, args, context, info) => {
             return 'test';
+        },
+        addExperience: async (root, { wallet, xp }) => {
+            console.log(wallet, xp);
+            const user = await User.findOne({ wallet });
+            if (!user || !xp) return;
+
+            // Add Experience
+            const newXp = user.xp + xp;
+            await user.updateOne({ xp: newXp });
+
+            // Check for level up
+            if (newXp >= user.levelUpXpRequired) {
+                console.log('level up', newXp, user.levelUpXpRequired);
+                await user.updateOne({ level: user.level + 1, xp: 0 });
+            }
+
+            return user;
         }
     }
 };
