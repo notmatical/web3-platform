@@ -1,38 +1,25 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // material-ui
-import { useTheme, styled } from '@mui/material/styles';
-import {
-    Grid,
-    Box,
-    Stack,
-    Chip,
-    Fade,
-    CardMedia,
-    CardContent,
-    CircularProgress,
-    Divider,
-    Tooltip,
-    Avatar,
-    IconButton,
-    Typography
-} from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { Grid, Box, Stack, Fade, CircularProgress, Divider, Tooltip, Avatar, IconButton, Typography } from '@mui/material';
 
 // project imports
 import { HS_API_KEY } from 'config';
 import { useSolPrice } from 'contexts/CoinGecko';
 import { formatPercent, formatNumber, abbreviateValue, ordinal_suffix_of, shortenAddress, formatDate } from 'utils/utils';
-import MainCard from 'components/MainCard';
+
+// graphql
+import { useQuery } from '@apollo/client';
+import { queries } from '../../../graphql/graphql';
 
 // third-party
 import { HyperspaceClient, MarketplaceActionEnums } from 'hyperspace-client-js';
 
 // assets
-import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import { IconRefresh, IconExternalLink, IconDiamond } from '@tabler/icons';
-import { CloseCircleOutlined, StarFilled } from '@ant-design/icons';
+import { IconRefresh, IconExternalLink } from '@tabler/icons';
+import { CloseCircleOutlined } from '@ant-design/icons';
 import PlaceholderImage from 'assets/images/placeholder.png';
 import MagicEden from 'assets/images/icons/me-logo.svg';
 
@@ -41,8 +28,6 @@ const NftView = () => {
     const navigate = useNavigate();
     const solPrice = useSolPrice();
     const { projectSlug, tab, tokenAddress } = useParams();
-
-    console.log(projectSlug, tokenAddress);
 
     const hsClient = new HyperspaceClient(HS_API_KEY);
 
@@ -82,10 +67,25 @@ const NftView = () => {
                 }
             })
             .then((res) => {
-                console.log(res);
+                fetchDashboardUsers(res.getMarketPlaceActionsByToken);
                 setTokenHistory(res.getMarketPlaceActionsByToken);
             });
     };
+
+    const { data, loading, refetch } = useQuery(queries.GET_MULTIPLE_USERS, { variables: { wallets: [] }, fetchPolicy: 'network-only' });
+    const fetchDashboardUsers = async (history: any) => {
+        const usersToFetch: any = [];
+        // Filter Events from Data
+        Object.values(history[0].market_place_actions).map((hist: any) => {
+            console.log(hist);
+            usersToFetch.push(hist.buyer_address);
+        });
+
+        refetch({ wallets: usersToFetch });
+        console.log('FETCH OBJ', usersToFetch);
+    };
+
+    console.log(data);
 
     useEffect(() => {
         fetchMarketSnapshot();
@@ -93,37 +93,11 @@ const NftView = () => {
         fetchTokenHistory();
     }, []);
 
-    console.log(tokenHistory);
-    console.log(marketSnapshot);
     console.log(tokenState);
 
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>
-                {/* <CardMedia
-                    image={tokenState.length === 0 ? PlaceholderImage : tokenState.market_place_states[0].meta_data_img}
-                    sx={{
-                        overflow: 'hidden',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        // filter: 'blur(16px)',
-                        opacity: '0.5',
-                        height: 300,
-                        ml: '-20px',
-                        mr: '-20px',
-                        mt: '-20px'
-                    }}
-                >
-                    <Box
-                        sx={{
-                            zIndex: -1,
-                            width: '100%',
-                            height: '100%',
-                            background: 'linear-gradient(360deg, #0b0f19 10%, rgba(20, 26, 30, 0) 100%)'
-                        }}
-                    />
-                </CardMedia> */}
-
                 {tokenState.market_place_states && tokenState.market_place_states.length > 0 ? (
                     <>
                         <Box display="flex" flexDirection="row" sx={{ gap: 2 }}>
@@ -491,7 +465,11 @@ const NftView = () => {
                                                     >
                                                         <Stack flexDirection="row" sx={{ gap: 1 }}>
                                                             <Avatar
-                                                                src={PlaceholderImage}
+                                                                src={
+                                                                    data.multiUsers.length > 0 && data.multiUsers[index] !== null
+                                                                        ? data.multiUsers[index].avatarURI
+                                                                        : PlaceholderImage
+                                                                }
                                                                 sx={{
                                                                     borderRadius: '9999px',
                                                                     height: '36px',
@@ -513,7 +491,9 @@ const NftView = () => {
                                                                         }
                                                                     }}
                                                                 >
-                                                                    {shortenAddress(history.buyer_address, 4)}
+                                                                    {data.multiUsers.length > 0 && data.multiUsers[index] !== null
+                                                                        ? data.multiUsers[index].vanity
+                                                                        : shortenAddress(history.buyer_address, 4)}
                                                                 </Typography>
                                                                 <Typography variant="h5" color="inherit">
                                                                     Owned for 3 days
