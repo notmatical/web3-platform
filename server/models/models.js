@@ -1,5 +1,4 @@
 import API from './api';
-import Upgrade from './upgrade';
 
 // user
 import User from './user';
@@ -16,4 +15,8 @@ import Proposal from './proposal';
 import Project from './project';
 import Collab from './collab';
 
-export { User, Social, Quest, Project, Collab, Space, Proposal, API, Upgrade };
+// staff management
+import Wallet from './wallet';
+import Claimer from './claimer';
+
+export { User, Social, Quest, Project, Collab, Space, Proposal, API, Wallet, Claimer };

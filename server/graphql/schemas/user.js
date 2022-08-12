@@ -22,6 +22,7 @@ export default gql`
 
     extend type Query {
         users: [User!]!
+        multiUsers(wallets: [String!]): [User]!
         user(wallet: String!): User
     }
 
@@ -32,6 +33,7 @@ export default gql`
         follow(userAddress: String!, userAddressToFollow: String!): User
         unfollow(userAddress: String!, userAddressToUnfollow: String!): User
         changeUsername(wallet: String!, vanity: String!): User
+        addExperience(wallet: String!, xp: Int!): User
         linkDiscord(address: String!, discordId: String!, discordName: String!, discordAvatar: String!): User
     }
 `;

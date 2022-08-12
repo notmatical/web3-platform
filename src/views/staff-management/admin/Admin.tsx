@@ -20,7 +20,7 @@ export default function Admin() {
     const [notifyProjects, setNofifyProjects] = useState({});
     const theme = useTheme();
     return (
-        <Grid container spacing={2} justifyContent="center" sx={{ p: 2 }}>
+        <Grid container spacing={2} sx={{ p: 2 }}>
             <Grid container spacing={4} sx={{ pb: 3 }}>
                 <Grid item xs={12} lg={3} sm={6}>
                     <RevenueCard

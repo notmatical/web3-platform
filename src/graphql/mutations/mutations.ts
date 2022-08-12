@@ -191,7 +191,7 @@ export const LINK_DISCORD = gql`
 `;
 
 // Staff Management
-export const CREAT_PROJECT = gql`
+export const CREATE_PROJECT = gql`
     mutation createWallet($project: String!, $wallet: String!) {
         createWallet(project: $project, wallet: $wallet) {
             project
@@ -244,5 +244,11 @@ export const CLAIM = gql`
             period
             time
         }
+    }
+`;
+
+export const WITHDRAW = gql`
+    mutation clickWithdraw($project: String!, $method: String!, $amount: Int!) {
+        clickWithdraw(project: $project, method: $method, amount: $amount)
     }
 `;

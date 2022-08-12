@@ -2,7 +2,6 @@
 import root from './root';
 import api from './api';
 import drop from './drop';
-import upgrade from './upgrade';
 
 // user
 import user from './user';
@@ -19,4 +18,8 @@ import proposal from './proposal';
 import project from './project';
 import collab from './collab';
 
-export default [user, social, quest, collab, project, space, proposal, api, drop, upgrade, root];
+// staff management
+import wallet from './wallet';
+import claimer from './claimer';
+
+export default [user, social, quest, collab, project, space, proposal, api, drop, wallet, claimer, root];

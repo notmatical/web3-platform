@@ -1,7 +1,13 @@
+import React, { useEffect, useState } from 'react';
+
+import { useTheme, styled } from '@mui/material/styles';
 import {
     Grid,
+    Stack,
     Button,
+    Avatar,
     TextField,
+    Tooltip,
     FormControl,
     Select,
     MenuItem,
@@ -16,10 +22,17 @@ import {
     OutlinedInput,
     InputLabel,
     Box,
-    LinearProgress,
-    Chip
+    CircularProgress,
+    Chip,
+    TableContainer,
+    TablePagination,
+    Table,
+    TableHead,
+    TableRow,
+    TableBody,
+    TableCell
 } from '@mui/material';
-import { useEffect, useState } from 'react';
+
 import moment from 'moment';
 import { useMutation, useQuery } from '@apollo/client';
 import { mutations, queries } from '../../../../graphql/graphql';
@@ -33,6 +46,10 @@ import CopyAddress from 'components/CopyAddress';
 import EmployCard from './EmployCard';
 import { FormattedMessage } from 'react-intl';
 import { useSolPrice } from 'contexts/CoinGecko';
+import { IconArrowsSort, IconPlus, IconRefresh } from '@tabler/icons';
+
+// assets
+import { CloseCircleOutlined } from '@ant-design/icons';
 
 function SelectProject({ projects, setProjects, address }: any) {
     const { data } = useQuery(queries.GET_WALLETS, { variables: { wallet: address } });
@@ -62,6 +79,8 @@ function SelectProject({ projects, setProjects, address }: any) {
 }
 
 export default function ShowEmployee({ selectedProject, setSelectedProject, setMonthlyPayout, setNofifyProjects }: any) {
+    const theme = useTheme();
+
     const [period, setPeriod] = useState('Daily');
     const [method, setMethod] = useState('SOL');
     const [isLoading, setIsLoading] = useState(false);
@@ -85,9 +104,26 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
     const adminWallet = useWallet();
     const solPrice = useSolPrice();
 
+    // table pagination
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    const handleChangePage = (event: unknown, newPage: number) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
+    // Avoid a layout jump when reaching the last page with empty rows.
+    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - data1.length) : 0;
+
     const onPeriod = ({ target: { value } }: SelectChangeEvent) => {
         setPeriod(value);
     };
+
     const onMethod = ({ target: { value } }: SelectChangeEvent) => {
         setMethod(value);
     };
@@ -102,6 +138,7 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
                     }
                 } = await refetch();
                 setData1(projectData.getEmployees);
+                console.log('employees', data1);
             } else {
                 const {
                     data: projectData = {
@@ -109,6 +146,7 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
                     }
                 } = await refetchAllData();
                 setData1(projectData.getClaimers);
+                console.log('claimers', data1);
                 setMonthlyPayout(
                     sum(
                         map(projectData.getClaimers, ({ amount: amt, method: cur, period: per }: any) => {
@@ -205,6 +243,7 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
             showInfoToast('fields must be required.');
             return;
         }
+
         try {
             setIsLoading(true);
             await createClaimer({
@@ -224,75 +263,7 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
             setIsLoading(false);
         }
     };
-    const columns: GridColDef[] = [
-        { field: 'project', headerName: 'Project', flex: 1 },
-        {
-            field: 'name',
-            headerName: 'Name',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => capitalize(params.row.name)
-        },
-        {
-            field: 'wallet',
-            headerName: 'Wallet',
-            flex: 3,
-            renderCell: (params: GridRenderCellParams) => <CopyAddress address={params.row.wallet} />
-        },
-        {
-            field: 'amount',
-            headerName: 'Budget',
-            type: 'number',
-            flex: 3,
-            renderCell: (params: GridRenderCellParams) => (
-                <Box sx={{ display: 'flex', gap: 1 }}>
-                    <Chip
-                        label={`${params.row.amount} ${params.row.method}`}
-                        color={params.row.method === 'SOL' ? 'secondary' : 'info'}
-                        size="small"
-                    />
-                    <Chip label={params.row.period} color="success" size="small" />
-                </Box>
-            )
-        },
-        {
-            field: 'time',
-            headerName: 'Upcoming payment date',
-            flex: 2,
-            renderCell: (params: GridRenderCellParams) => new Date(params.row.time).toLocaleString()
-        },
-        {
-            field: 'claimed',
-            headerName: 'Claimed?',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => {
-                if (!params.row.transactionHash.length) {
-                    return <Chip label="No Claim" color="primary" size="small" />;
-                }
-                return (
-                    <a
-                        href={`https://solscan.io/tx/${get(last(params.row.transactionHash), 'txHash', '')}?cluster=devnet`}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        {new Date(get(last(params.row.transactionHash), 'date', '')).toLocaleString()}
-                    </a>
-                );
-            }
-        },
-        {
-            field: 'delete',
-            headerName: '',
-            flex: 1,
-            renderCell: (params: GridRenderCellParams) => (
-                <IconButton
-                    color="error"
-                    onClick={() => deleteFunc({ project: params.row.project, name: params.row.name, wallet: params.row.wallet })}
-                >
-                    <DeleteOutlined />
-                </IconButton>
-            )
-        }
-    ];
+
     const EmployeeListCard = ({ children, sx }: any) => (
         <MainCard
             title={selectedProject ? `${selectedProject} - Employees` : 'Employees'}
@@ -320,6 +291,7 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
             {children}
         </MainCard>
     );
+
     return (
         <>
             <Box sx={{ display: { md: 'none' }, width: '100%' }}>
@@ -344,12 +316,198 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
                         </>
                     ) : (
                         <Grid item sx={{ p: 2 }}>
-                            <LinearProgress color="secondary" />
+                            <Box display="flex" justifyContent="center" alignItems="center">
+                                <CircularProgress color="secondary" />
+                            </Box>
                         </Grid>
                     )}
                 </EmployeeListCard>
             </Box>
-            <Box sx={{ display: { xs: 'none', md: 'block' }, width: '100%' }}>
+
+            <Grid item xs={12}>
+                <Box display="flex" alignItems="center" justifyContent="space-between">
+                    <Typography variant="h3">Current Employees</Typography>
+                    <Box display="flex" alignItems="center" sx={{ gap: 1 }}>
+                        <Tooltip title="Add Employee" placement="top" arrow>
+                            <IconButton
+                                onClick={() => setShowAddEmployeeModal(true)}
+                                sx={{
+                                    background: '#202a30',
+                                    width: '33px',
+                                    height: '33px'
+                                }}
+                            >
+                                <IconPlus color="#FFF" />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Refresh Employees" placement="top" arrow>
+                            <IconButton
+                                onClick={() => updatePage()}
+                                sx={{
+                                    background: '#202a30',
+                                    width: '33px',
+                                    height: '33px'
+                                }}
+                            >
+                                <IconRefresh color="#FFF" />
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Show All" placement="top" arrow>
+                            <IconButton
+                                onClick={() => setSelectedProject(undefined)}
+                                sx={{
+                                    background: '#202a30',
+                                    width: '33px',
+                                    height: '33px'
+                                }}
+                            >
+                                <IconArrowsSort color="#FFF" />
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
+                </Box>
+            </Grid>
+            {!isLoading ? (
+                <>
+                    {data1 && data1.length > 0 ? (
+                        <>
+                            <MainCard border={false} sx={{ width: '100%', mt: 2 }} contentSX={{ p: '0 !important' }}>
+                                <TableContainer>
+                                    <Table sx={{ minWidth: 650 }} aria-label="employee table">
+                                        <TableHead>
+                                            <TableRow>
+                                                <TableCell>Project</TableCell>
+                                                <TableCell>Employee</TableCell>
+                                                <TableCell>Wallet</TableCell>
+                                                <TableCell>Budget</TableCell>
+                                                <TableCell>Next Payment</TableCell>
+                                                <TableCell>Status</TableCell>
+                                                <TableCell>Actions</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {data1
+                                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                                .map((item: any, index: number) => (
+                                                    <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                                        <TableCell component="th" scope="row">
+                                                            {item.project}
+                                                        </TableCell>
+                                                        <TableCell>{item.name}</TableCell>
+                                                        <TableCell>
+                                                            <CopyAddress address={item.wallet} />
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            <Box sx={{ display: 'flex', gap: 1 }}>
+                                                                <Chip
+                                                                    label={`${item.amount} ${item.method}`}
+                                                                    color={item.method === 'SOL' ? 'secondary' : 'info'}
+                                                                    size="small"
+                                                                    sx={{ borderRadius: '4px' }}
+                                                                />
+                                                                <Chip
+                                                                    label={item.period}
+                                                                    color="success"
+                                                                    size="small"
+                                                                    sx={{ borderRadius: '4px' }}
+                                                                />
+                                                            </Box>
+                                                        </TableCell>
+                                                        <TableCell>{new Date(item.time).toLocaleString()}</TableCell>
+                                                        <TableCell>
+                                                            {!item.transactionHash.length ? (
+                                                                <Chip
+                                                                    label="Hasn't Claimed"
+                                                                    size="small"
+                                                                    color="error"
+                                                                    sx={{ borderRadius: '4px' }}
+                                                                />
+                                                            ) : (
+                                                                <Chip
+                                                                    label="Not Started"
+                                                                    size="small"
+                                                                    color="secondary"
+                                                                    sx={{ borderRadius: '4px' }}
+                                                                />
+                                                            )}
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            <Box display="flex" flexDirection="row" sx={{ gap: 1 }}>
+                                                                <Button
+                                                                    color="error"
+                                                                    size="small"
+                                                                    variant="contained"
+                                                                    onClick={() =>
+                                                                        deleteFunc({
+                                                                            project: item.project,
+                                                                            name: item.name,
+                                                                            wallet: item.wallet
+                                                                        })
+                                                                    }
+                                                                >
+                                                                    Remove
+                                                                </Button>
+                                                            </Box>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                ))}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                                <Divider />
+                                <TablePagination
+                                    rowsPerPageOptions={[5, 10, 25]}
+                                    component="div"
+                                    count={data1.length}
+                                    rowsPerPage={rowsPerPage}
+                                    page={page}
+                                    onPageChange={handleChangePage}
+                                    onRowsPerPageChange={handleChangeRowsPerPage}
+                                />
+                            </MainCard>
+                        </>
+                    ) : (
+                        <Grid item xs={12}>
+                            <Box
+                                display="flex"
+                                justifyContent="center"
+                                alignItems="center"
+                                sx={{ borderRadius: 3, padding: 4, border: '1px solid rgba(213, 217, 233, 0.2)' }}
+                            >
+                                <Stack alignItems="center">
+                                    <Avatar
+                                        variant="rounded"
+                                        sx={{
+                                            borderRadius: '9999px',
+                                            width: '80px !important',
+                                            height: '80px !important',
+                                            backgroundColor: theme.palette.dark.main,
+                                            color: theme.palette.secondary.dark,
+                                            mb: 2
+                                        }}
+                                    >
+                                        <CloseCircleOutlined style={{ fontSize: 32 }} />
+                                    </Avatar>
+                                    <Typography variant="h3" color="inherit">
+                                        No Employees Found
+                                    </Typography>
+                                    <Typography variant="subtitle2" color="inherit">
+                                        There are no employees to display.
+                                    </Typography>
+                                </Stack>
+                            </Box>
+                        </Grid>
+                    )}
+                </>
+            ) : (
+                <Grid item sx={{ p: 2 }}>
+                    <Box display="flex" justifyContent="center" alignItems="center">
+                        <CircularProgress color="secondary" />
+                    </Box>
+                </Grid>
+            )}
+
+            {/* <Box sx={{ display: { xs: 'none', md: 'block' }, width: '100%' }}>
                 <EmployeeListCard sx={{ p: 0 }}>
                     {!isLoading ? (
                         <DataGrid
@@ -373,11 +531,14 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
                         />
                     ) : (
                         <Grid item sx={{ p: 2 }}>
-                            <LinearProgress color="secondary" />
+                            <Box display="flex" justifyContent="center" alignItems="center">
+                                <CircularProgress color="secondary" />
+                            </Box>
                         </Grid>
                     )}
                 </EmployeeListCard>
-            </Box>
+            </Box> */}
+
             <Dialog
                 open={showAddEmployeeModal}
                 onClose={() => {

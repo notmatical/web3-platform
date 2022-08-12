@@ -1,7 +1,6 @@
 // misc
 import api from './api';
 import drop from './drop';
-import upgrade from './upgrade';
 
 // user
 import user from './user';
@@ -18,4 +17,8 @@ import proposal from './proposal';
 import project from './project';
 import collab from './collab';
 
-export default [user, social, quest, api, upgrade, drop, project, collab, space, proposal];
+// staff management
+import wallet from './wallet';
+import claimer from './claimer';
+
+export default [user, social, quest, api, drop, project, collab, space, proposal, wallet, claimer];
