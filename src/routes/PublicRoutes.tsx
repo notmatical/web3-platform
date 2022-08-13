@@ -5,18 +5,16 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'components/Loadable';
 import AuthGuard from 'utils/route-guard/AuthGuard';
 
+// Dashboard
+const Home = Loadable(lazy(() => import('views/dashboard/home')));
+const Feed = Loadable(lazy(() => import('views/dashboard/feed')));
+
 // account routing
 const SocialRanking = Loadable(lazy(() => import('views/account/rankings')));
 const UserAccount = Loadable(lazy(() => import('views/account')));
 
 // gamification
 const Quests = Loadable(lazy(() => import('views/gamification/Quests')));
-
-// activity
-const Activity = Loadable(lazy(() => import('views/activity/index')));
-
-// dashboard routing
-const DashboardDefault = Loadable(lazy(() => import('views/dashboard')));
 
 // spaces
 const Spaces = Loadable(lazy(() => import('views/spaces/index')));
@@ -68,7 +66,7 @@ const PublicRoutes = {
         // Activity / NFT
         {
             path: '/feed',
-            element: <Activity />
+            element: <Feed />
         },
         {
             path: '/nft/:projectSlug/:tab',
@@ -82,7 +80,7 @@ const PublicRoutes = {
         // General
         {
             path: '/home',
-            element: <DashboardDefault />
+            element: <Home />
         },
 
         // Spaces

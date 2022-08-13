@@ -5,14 +5,13 @@ import MainLayout from 'layout/MainLayout';
 import Loadable from 'components/Loadable';
 import AuthGuard from 'utils/route-guard/AuthGuard';
 
+// Explore
+const Monitor = Loadable(lazy(() => import('views/explore/nfts/index')));
+
 // applications
-const RaritySearch = Loadable(lazy(() => import('views/application/rarity-search/Rarity')));
 const MintCalendar = Loadable(lazy(() => import('views/application/mint-calendar/index')));
 const Lending = Loadable(lazy(() => import('views/application/lending/index')));
 const Trading = Loadable(lazy(() => import('views/application/trade/index')));
-
-// monitor
-const Monitor = Loadable(lazy(() => import('views/explore/nfts/index')));
 
 // raffles
 const Raffles = Loadable(lazy(() => import('views/application/raffles/index')));
@@ -33,10 +32,6 @@ const MainRoutes = {
     ),
     children: [
         // Applications
-        {
-            path: '/applications/rarity',
-            element: <RaritySearch />
-        },
         {
             path: '/applications/calendar',
             element: <MintCalendar />

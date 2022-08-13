@@ -15,7 +15,7 @@ import HoverSocialCard from 'components/cards/HoverSocialCard';
 
 // gql
 import { useQuery } from '@apollo/client';
-import { queries } from '../../graphql/graphql';
+import { queries } from '../../../graphql/graphql';
 
 // assets
 import BannerIllustration from 'assets/images/banner-illustration.png';
