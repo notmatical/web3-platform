@@ -17,15 +17,15 @@ const UserAccount = Loadable(lazy(() => import('views/account')));
 const Quests = Loadable(lazy(() => import('views/gamification/Quests')));
 
 // spaces
-const Spaces = Loadable(lazy(() => import('views/spaces/index')));
-const SpacePage = Loadable(lazy(() => import('views/spaces/SpacePage')));
-const ProposalCreate = Loadable(lazy(() => import('views/spaces/proposals/ProposalCreate')));
-const ProposalPage = Loadable(lazy(() => import('views/spaces/proposals/ProposalPage')));
+const Spaces = Loadable(lazy(() => import('views/application/spaces/index')));
+const SpacePage = Loadable(lazy(() => import('views/application/spaces/SpacePage')));
+const ProposalCreate = Loadable(lazy(() => import('views/application/spaces/proposals/ProposalCreate')));
+const ProposalPage = Loadable(lazy(() => import('views/application/spaces/proposals/ProposalPage')));
 
 // collabs
-const Collabs = Loadable(lazy(() => import('views/collabs/index')));
-const CollabsManage = Loadable(lazy(() => import('views/collabs/manager/index')));
-const CollabsProjectView = Loadable(lazy(() => import('views/collabs/manager/ProjectView')));
+const Collabs = Loadable(lazy(() => import('views/application/collabs/index')));
+const CollabsManage = Loadable(lazy(() => import('views/application/collabs/manager/index')));
+const CollabsProjectView = Loadable(lazy(() => import('views/application/collabs/manager/ProjectView')));
 
 // Collection / NFT Aggreation
 const CollectionView = Loadable(lazy(() => import('views/pages/project/index')));

@@ -20,8 +20,8 @@ const RaffleCreate = Loadable(lazy(() => import('views/application/raffles/Raffl
 const RafflePage = Loadable(lazy(() => import('views/application/raffles/RafflePage')));
 
 // staff management
-const Admin = Loadable(lazy(() => import('views/staff-management/admin/Admin')));
-const Employee = Loadable(lazy(() => import('views/staff-management/employee/Employee')));
+const Admin = Loadable(lazy(() => import('views/platforms/staff-management/admin/Admin')));
+const Employee = Loadable(lazy(() => import('views/platforms/staff-management/employee/Employee')));
 
 const MainRoutes = {
     path: '/',
