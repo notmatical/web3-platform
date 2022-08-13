@@ -80,7 +80,7 @@ export const WalletHandlerProvider: FC<{ children: ReactNode }> = ({ children })
             // create a nonce, and sign message
             const nonce = await setNonce();
             try {
-                const messageStr = `Welcome to the Yaku Labs Dashboard!\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nYour authentication status will reset after 24 hours.\n\nWallet address:\n${publicKey}\n\nNonce:\n${nonce}`;
+                const messageStr = `Welcome to the Vaporize Finance Platform\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nYour authentication status will reset after 24 hours.\n\nWallet address:\n${publicKey}\n\nNonce:\n${nonce}`;
                 const message = new TextEncoder().encode(messageStr);
 
                 await signMessage!(message)

@@ -322,7 +322,7 @@ function UserAccount() {
                                         <IconButton
                                             sx={{ mr: 0.5 }}
                                             onClick={() => {
-                                                navigator.clipboard.writeText(`https://hub.yaku.ai/account/${vanity!}/portfolio`);
+                                                navigator.clipboard.writeText(`https://vaporize.fi/account/${vanity!}/portfolio`);
                                                 showInfoToast('Profile link copied to clipboard.');
                                             }}
                                         >
