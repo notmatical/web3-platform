@@ -2,13 +2,13 @@
     "dashboard": "Dashboard",
     "home": "Home",
     "feed": "Feed",
-    "tokens": "Tokens",
 
 
     "explore": "Explore",
     "nfts": "NFTs",
     "defi": "DeFi",
     "dao": "DAOs",
+
 
     "staff-management": "Staff Management",
     "staff-management-caption": "Projects Management Tool",
@@ -61,13 +61,15 @@
     "collabs": "Collabs",
     "spaces": "Spaces",
     "raffles": "Raffles",
-    "monitor": "Monitor",
     "lending": "Lending",
     "trade": "Trading",
-    "rarity-search": "Rarity Search",
     "mint-calendar": "Mint Calendar",
-    "auctions": "Auctions",
-    "lottery": "Lottery",
+
+
+    "platforms": "Platforms",
+    "job-listing": "Job Listings",
+    "job-browse": "Browse",
+    "job-create": "Create",
 
     
     "yakuholder": "Yaku collections",

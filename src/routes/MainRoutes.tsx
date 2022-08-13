@@ -31,6 +31,16 @@ const MainRoutes = {
         </AuthGuard>
     ),
     children: [
+        // Explore
+        {
+            path: '/nft',
+            element: <Monitor />
+        },
+        {
+            path: '/project/:projectName',
+            element: <Monitor />
+        },
+
         // Applications
         {
             path: '/applications/calendar',
@@ -45,7 +55,7 @@ const MainRoutes = {
             element: <Trading />
         },
 
-        // Staff Management
+        // Platforms
         {
             path: '/staff-management/admin',
             element: <Admin />
@@ -53,16 +63,6 @@ const MainRoutes = {
         {
             path: '/staff-management/employee',
             element: <Employee />
-        },
-
-        // Explore
-        {
-            path: '/nft',
-            element: <Monitor />
-        },
-        {
-            path: '/project/:projectName',
-            element: <Monitor />
         },
 
         // Raffles
