@@ -1,4 +1,3 @@
-import { UserInputError, ApolloError } from 'apollo-server-express';
 import { Space } from '../../models/models';
 
 export default {

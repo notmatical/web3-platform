@@ -1,22 +1,22 @@
 import API from './api';
 
 // user
-import User from './user';
-import Social from './social';
+import User from './user/user';
+import Social from './user/social';
 
 // gamification
-import Quest from './quest';
+import Quest from './gamification/quest';
 
 // spaces
 import Space from './space';
 import Proposal from './proposal';
 
 // collab
-import Project from './project';
-import Collab from './collab';
+import Project from './collab-tool/project';
+import Collab from './collab-tool/collab';
 
 // staff management
-import Wallet from './wallet';
-import Claimer from './claimer';
+import Wallet from './staff-tool/wallet';
+import Claimer from './staff-tool/claimer';
 
 export { User, Social, Quest, Project, Collab, Space, Proposal, API, Wallet, Claimer };

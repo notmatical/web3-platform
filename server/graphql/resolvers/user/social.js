@@ -1,6 +1,4 @@
-import Joi from 'joi';
-
-import { Social, User } from '../../models/models';
+import { Social, User } from '../../../models/models';
 
 export default {
     Query: {

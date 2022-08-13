@@ -1,5 +1,5 @@
-import { Quest } from '../../models/models';
-import * as Auth from '../../helpers/auth';
+import { Quest } from '../../../models/models';
+import * as Auth from '../../../helpers/auth';
 
 export default {
     Query: {

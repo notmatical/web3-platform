@@ -16,7 +16,6 @@ import axios from 'axios';
 
 import typeDefs from './graphql/schemas/schemas';
 import resolvers from './graphql/resolvers/resolvers';
-import schemaDirectives from './graphql/directives/directives';
 
 import MagicEdenAPI from './graphql/datasources/magiceden';
 import DropsAPI from './graphql/datasources/drops';
@@ -37,8 +36,6 @@ app.use(helmet.permittedCrossDomainPolicies());
 // app.use(cors({
 //     origin: '*'
 // }));
-
-// serve react application TODO
 
 const MongoStore = connectMongo(session);
 app.use(
@@ -67,7 +64,6 @@ const server = new ApolloServer({
             dropsAPI: new DropsAPI()
         }
     },
-    schemaDirectives,
     playground: true,
     context: ({ req, res }) => ({ req, res })
 });

@@ -13,8 +13,8 @@ import * as Anchor from '@project-serum/anchor';
 import bs58 from 'bs58';
 
 // project imports
-import { User, Wallet } from '../../models/models';
-import { decrypt, encrypt } from '../../utils/encrypt';
+import { User, Wallet } from '../../../models/models';
+import { decrypt, encrypt } from '../../../utils/encrypt';
 
 export default {
     Query: {

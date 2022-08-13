@@ -1,6 +1,6 @@
 import passport from 'passport';
 import DiscordStrategy from 'passport-discord';
-import User from '../models/user';
+import User from '../models/user/user';
 
 import * as Auth from '../helpers/auth';
 

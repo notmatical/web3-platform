@@ -1,5 +1,5 @@
 import { UserInputError, ApolloError } from 'apollo-server-express';
-import { Collab, Project, User } from '../../models/models';
+import { Collab, Project, User } from '../../../models/models';
 
 export default {
     Query: {
