@@ -21,7 +21,7 @@ import { shouldForwardProp } from '@mui/system';
 
 // test
 import { useQuery, useMutation } from '@apollo/client';
-import { mutations, queries } from '../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 // third-party
 import { FormikValues } from 'formik';
@@ -66,9 +66,9 @@ const Collabs = () => {
     const theme = useTheme();
     const navigate = useNavigate();
 
-    const { data, loading, error } = useQuery(queries.GET_PROJECTS, { fetchPolicy: 'network-only' });
+    const { data, loading, error } = useQuery(db.queries.GET_PROJECTS, { fetchPolicy: 'network-only' });
 
-    const [AddProject] = useMutation(mutations.ADD_PROJECT);
+    const [AddProject] = useMutation(db.mutations.ADD_PROJECT);
 
     const [value, setValue] = useState('all');
     const [search, setSearch] = useState<string | undefined>('');

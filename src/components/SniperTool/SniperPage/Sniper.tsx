@@ -49,7 +49,7 @@ import { SNIPER_API_URL, SNIPER_API_ENDPOINT } from 'config/config';
 import { LoadingButton } from '@mui/lab';
 import { FormattedMessage } from 'react-intl';
 import { useQuery } from '@apollo/client';
-import { queries } from '../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(({ theme }) => ({
     width: '100%',
@@ -72,7 +72,7 @@ const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(({ theme 
 
 const Sniper = ({ buyNow }: any) => {
     const [search, setSearch] = useState('');
-    const { data: Collections, refetch } = useQuery(queries.GET_COLLECTIONS);
+    const { data: Collections, refetch } = useQuery(db.queries.GET_COLLECTIONS);
 
     const [showSearch, setShowSearch] = useRecoilState(showSearchAtom);
     const [searchResult, setSearchResult] = useRecoilState(searchResultAtom);

@@ -14,7 +14,7 @@ import MainCard from 'components/MainCard';
 
 // graphql
 import { useQuery, useMutation } from '@apollo/client';
-import { mutations, queries } from '../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 // assets
 import { IconBook } from '@tabler/icons';
@@ -25,7 +25,7 @@ const Quests = () => {
     const navigate = useNavigate();
     const wallet = useWallet();
 
-    const { data, loading, error } = useQuery(queries.GET_QUESTS, { fetchPolicy: 'network-only' });
+    const { data, loading, error } = useQuery(db.queries.GET_QUESTS, { fetchPolicy: 'network-only' });
 
     console.log(data);
 

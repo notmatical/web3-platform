@@ -25,10 +25,10 @@ import AddProposalForm from './AddProposalForm';
 
 // graphql
 import { useQuery, useMutation } from '@apollo/client';
-import { mutations, queries } from '../../graphql/graphql';
-import { useWallet } from '@solana/wallet-adapter-react';
+import * as db from 'database/graphql/graphql';
 
 // third party
+import { useWallet } from '@solana/wallet-adapter-react';
 import { FormikValues } from 'formik';
 import moment from 'moment';
 
@@ -70,14 +70,14 @@ const SpacePage = () => {
 
     // GRAPHQL QUERIES
     // eslint-disable-next-line object-shorthand
-    const { data, loading } = useQuery(queries.GET_SPACE, { variables: { symbol: symbol }, fetchPolicy: 'cache-and-network' });
-    const { data: proposals } = useQuery(queries.GET_PROPOSALS_FOR_SPACE, {
+    const { data, loading } = useQuery(db.queries.GET_SPACE, { variables: { symbol: symbol }, fetchPolicy: 'cache-and-network' });
+    const { data: proposals } = useQuery(db.queries.GET_PROPOSALS_FOR_SPACE, {
         variables: { id: data.space.id },
         fetchPolicy: 'cache-and-network'
     });
 
     // GRAPHQL MUTATIONS
-    const [CreateProposal] = useMutation(mutations.CREATE_PROPOSAL);
+    const [CreateProposal] = useMutation(db.mutations.CREATE_PROPOSAL);
 
     // modal/dialog related shit
     const [isModalOpen, setIsModalOpen] = useState(false);

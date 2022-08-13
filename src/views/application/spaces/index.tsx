@@ -20,7 +20,7 @@ import { FormikValues } from 'formik';
 
 // graphql
 import { useQuery, useMutation } from '@apollo/client';
-import { mutations, queries } from '../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 // styles
 const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(({ theme }) => ({
@@ -58,8 +58,8 @@ const Spaces = () => {
     const theme = useTheme();
     const dispatch = useDispatch();
 
-    const { data, loading, error } = useQuery(queries.GET_SPACES, { fetchPolicy: 'cache-and-network' });
-    const [AddSpace] = useMutation(mutations.ADD_SPACE);
+    const { data, loading, error } = useQuery(db.queries.GET_SPACES, { fetchPolicy: 'cache-and-network' });
+    const [AddSpace] = useMutation(db.mutations.ADD_SPACE);
 
     const [value, setValue] = useState('all');
     const [search, setSearch] = useState('');

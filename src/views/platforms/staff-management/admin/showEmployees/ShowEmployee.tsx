@@ -35,7 +35,7 @@ import {
 
 import moment from 'moment';
 import { useMutation, useQuery } from '@apollo/client';
-import { mutations, queries } from '../../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 import { useToasts } from 'hooks/useToasts';
 import MainCard from 'components/MainCard';
 import { AddOutlined, DeleteOutlined, RefreshOutlined } from '@mui/icons-material';
@@ -52,7 +52,7 @@ import { IconArrowsSort, IconPlus, IconRefresh } from '@tabler/icons';
 import { CloseCircleOutlined } from '@ant-design/icons';
 
 function SelectProject({ projects, setProjects, address }: any) {
-    const { data } = useQuery(queries.GET_WALLETS, { variables: { wallet: address } });
+    const { data } = useQuery(db.queries.GET_WALLETS, { variables: { wallet: address } });
 
     const onProjects = ({ target: { value } }: SelectChangeEvent) => {
         setProjects(value);
@@ -85,11 +85,11 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
     const [method, setMethod] = useState('SOL');
     const [isLoading, setIsLoading] = useState(false);
 
-    const { data: allData, refetch: refetchAllData } = useQuery(queries.GET_CLAIMERS);
-    const { data, refetch } = useQuery(queries.GET_EMPLOYEES, { variables: { project: selectedProject || '' } });
+    const { data: allData, refetch: refetchAllData } = useQuery(db.queries.GET_CLAIMERS);
+    const { data, refetch } = useQuery(db.queries.GET_EMPLOYEES, { variables: { project: selectedProject || '' } });
     const [data1, setData1] = useState<any[]>([]);
 
-    const [deleteClaimer] = useMutation(mutations.DELETE_CLAIMER);
+    const [deleteClaimer] = useMutation(db.mutations.DELETE_CLAIMER);
 
     const [showAddEmployeeModal, setShowAddEmployeeModal] = useState(false);
 
@@ -98,7 +98,7 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
     const [wallet, setWallet] = useState('');
     const [time, setTime] = useState('');
     const [projects, setProjects] = useState('');
-    const [createClaimer] = useMutation(mutations.ADD_CLAIMER);
+    const [createClaimer] = useMutation(db.mutations.ADD_CLAIMER);
 
     const { showInfoToast, showErrorToast } = useToasts();
     const adminWallet = useWallet();

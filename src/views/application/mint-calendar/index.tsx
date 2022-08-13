@@ -1,13 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 // material-ui
-import { useTheme, styled } from '@mui/material/styles';
-import { Theme, useMediaQuery, CircularProgress, Grid, Typography, Box, Dialog, Stack } from '@mui/material';
-
-// assets
-import TwitterIcon from '@mui/icons-material/Twitter';
-import LanguageIcon from '@mui/icons-material/Language';
-import { IconBrandDiscord } from '@tabler/icons';
+import { useTheme } from '@mui/material/styles';
+import { Theme, useMediaQuery, CircularProgress, Grid, Box, Dialog, Stack } from '@mui/material';
 
 // third-party
 import FullCalendar from '@fullcalendar/react';
@@ -17,20 +12,15 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import timelinePlugin from '@fullcalendar/timeline';
 import interactionPlugin from '@fullcalendar/interaction';
 
-// web3
-import { useWallet } from '@solana/wallet-adapter-react';
-
 // project imports
 import { useToasts } from 'hooks/useToasts';
-import MainCard from 'components/cards/MainCard';
-import SubCard from 'components/cards/SubCard';
 import ViewDropModal from './ViewDropModal';
 import CalendarStyled from './CalendarStyled';
 import Toolbar from './Toolbar';
 
 // test
-import { useQuery, useMutation } from '@apollo/client';
-import { mutations, queries } from '../../../graphql/graphql';
+import { useQuery } from '@apollo/client';
+import * as db from 'database/graphql/graphql';
 
 // ==============================|| APPLICATION CALENDAR ||============================== //
 
@@ -41,7 +31,7 @@ const MintCalendar = () => {
     const calendarRef = useRef<FullCalendar>(null);
     const matchSm = useMediaQuery((them: Theme) => them.breakpoints.down('md'));
 
-    const { data, loading, error } = useQuery(queries.GET_DROPS);
+    const { data, loading, error } = useQuery(db.queries.GET_DROPS);
 
     const [events, setEvents] = useState([]);
     const [eventsData, setEventsData] = useState([]);

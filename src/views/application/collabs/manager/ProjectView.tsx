@@ -41,7 +41,7 @@ import { CloseCircleOutlined } from '@ant-design/icons';
 
 // test
 import { useQuery, useMutation } from '@apollo/client';
-import { mutations, queries } from '../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 const ProjectView = () => {
     const theme = useTheme();
@@ -50,15 +50,15 @@ const ProjectView = () => {
     const { showInfoToast, showErrorToast } = useToasts();
     const { guildId } = useParams();
 
-    const { data: project } = useQuery(queries.GET_PROJECT, { variables: { guildId }, fetchPolicy: 'network-only' });
-    const { data, loading, refetch } = useQuery(queries.GET_COLLABS, {
+    const { data: project } = useQuery(db.queries.GET_PROJECT, { variables: { guildId }, fetchPolicy: 'network-only' });
+    const { data, loading, refetch } = useQuery(db.queries.GET_COLLABS, {
         variables: { guildId },
         fetchPolicy: 'network-only',
         pollInterval: 10000
     });
 
-    const [ApproveCollab] = useMutation(mutations.APPROVE_COLLAB);
-    const [RejectCollab] = useMutation(mutations.REJECT_COLLAB);
+    const [ApproveCollab] = useMutation(db.mutations.APPROVE_COLLAB);
+    const [RejectCollab] = useMutation(db.mutations.REJECT_COLLAB);
 
     const approveCollab = async (id: any, spots: any) => {
         console.log('approved');

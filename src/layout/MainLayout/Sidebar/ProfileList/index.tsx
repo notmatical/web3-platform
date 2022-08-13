@@ -29,7 +29,7 @@ import Transitions from 'components/@extended/Transitions';
 
 // graphql
 import { useQuery } from '@apollo/client';
-import { queries } from '../../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 // assets
 import DefaultUser from 'assets/images/users/user-image.jpg';
@@ -50,7 +50,7 @@ const ProfileList = () => {
     const [open, setOpen] = useState(false);
     const anchorRef = useRef<any>(null);
 
-    const { data, loading, error } = useQuery(queries.GET_USER, { variables: { wallet: publicKey }, fetchPolicy: 'network-only' });
+    const { data, loading, error } = useQuery(db.queries.GET_USER, { variables: { wallet: publicKey }, fetchPolicy: 'network-only' });
 
     const base58 = useMemo(() => publicKey?.toBase58(), [publicKey]);
     const content = useMemo(() => {

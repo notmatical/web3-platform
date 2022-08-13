@@ -24,16 +24,16 @@ import { FormikValues } from 'formik';
 
 // test
 import { useQuery, useMutation } from '@apollo/client';
-import { mutations, queries } from '../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 const ProjectManage = () => {
     const theme = useTheme();
     const { publicKey } = useWallet();
     const { showInfoToast } = useToasts();
 
-    const { data: user } = useQuery(queries.GET_USER, { variables: { wallet: publicKey }, fetchPolicy: 'network-only' });
-    const { data, loading, error } = useQuery(queries.GET_PROJECTS, { fetchPolicy: 'network-only' });
-    const [AddProject] = useMutation(mutations.ADD_PROJECT);
+    const { data: user } = useQuery(db.queries.GET_USER, { variables: { wallet: publicKey }, fetchPolicy: 'network-only' });
+    const { data, loading, error } = useQuery(db.queries.GET_PROJECTS, { fetchPolicy: 'network-only' });
+    const [AddProject] = useMutation(db.mutations.ADD_PROJECT);
 
     // modal/dialog related shit
     const [isModalOpen, setIsModalOpen] = useState(false);

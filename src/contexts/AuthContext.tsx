@@ -11,7 +11,7 @@ import accountReducer from 'store/accountReducer';
 import axios from 'utils/axios';
 import { useToasts } from 'hooks/useToasts';
 import { useMutation } from '@apollo/client';
-import { mutations } from '../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 // types
 import { KeyedObject } from 'types';
@@ -57,7 +57,7 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     const tryLogin = async (address: string) => {
         // eslint-disable-next-line react-hooks/rules-of-hooks
-        const [login] = useMutation(mutations.LOG_IN);
+        const [login] = useMutation(db.mutations.LOG_IN);
         login({ variables: { address } }).then(
             (res) => {
                 // dispatch({

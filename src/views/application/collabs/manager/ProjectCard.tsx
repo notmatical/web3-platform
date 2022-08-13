@@ -17,7 +17,7 @@ import { displayGuildIcon } from 'utils/discord';
 
 // test
 import { useQuery, useMutation } from '@apollo/client';
-import { mutations, queries } from '../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 import { useNavigate } from 'react-router-dom';
 
 // types
@@ -31,7 +31,7 @@ const CollabCard = ({ project, loading }: CollabCardProps) => {
     const { showInfoToast } = useToasts();
 
     // mutations gql
-    const [DiasbleCollabs] = useMutation(mutations.DISABLE_COLLABS);
+    const [DiasbleCollabs] = useMutation(db.mutations.DISABLE_COLLABS);
 
     return (
         <>

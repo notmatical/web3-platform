@@ -4,10 +4,21 @@ import { ReactElement, useState, useEffect } from 'react';
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Grid, Button, Tooltip, Tab, Box, IconButton } from '@mui/material';
+import { TabContext, TabList, TabPanel } from '@mui/lab';
 
 // web3 imports
+import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 import { useAnchorWallet, useWallet } from '@solana/wallet-adapter-react';
 import { calculateAllRewards, claimRewardAll } from 'actions/stake';
+
+// third-party
+import { chunk, each, find, findIndex, map, min, sortBy, sumBy } from 'lodash';
+import { FormattedMessage } from 'react-intl';
+import { Promise } from 'bluebird';
+
+// graphql
+import { ApolloQueryResult, useQuery } from '@apollo/client';
+import * as db from 'database/graphql/graphql';
 
 // project imports
 import RevenueCard from 'components/cards/RevenueCard';
@@ -16,63 +27,40 @@ import MainCard from 'components/cards/MainCard';
 import StakeEmpty from './StakeEmpty';
 import StakedNftCard from './StakedNftCard';
 import NftCard from './StakeNftCard';
+import YakuStakeNftCard from './YakuStakedNftCard';
+import { YAKU_NFT } from 'types/staking';
+import { fastConnection, getNftMetaData, solConnection } from 'actions/shared';
 import { useSolPrice } from 'contexts/CoinGecko';
 import { formatNumber, formatUSD } from 'utils/utils';
 import { useMeta } from 'contexts/meta/meta';
 import { useToasts } from 'hooks/useToasts';
 import { gridSpacing } from 'store/constant';
+import { getGlobalData, getUserPoolData, getTokenDistribution, getYakuStakedNfts, getUnstakedNfts, getMagicEdenFloorPrice, calculateAllYakuRewards } from './fetchData';
+import { claimRewardV2Multiple, fetchMetadata, getStakingState, loadYakuProgram, stakeNftV2Multiple, unStakeNftV2Multiple } from 'actions/yakuStake';
 
 // assets
 import MonetizationOnTwoToneIcon from '@mui/icons-material/MonetizationOnTwoTone';
 import AccountBalanceTwoToneIcon from '@mui/icons-material/AccountBalanceTwoTone';
 import FormatListBulletedTwoToneIcon from '@mui/icons-material/FormatListBulletedTwoTone';
 import EqualizerTwoToneIcon from '@mui/icons-material/EqualizerTwoTone';
-
-import {
-    getGlobalData,
-    getUserPoolData,
-    getTokenDistribution,
-    getYakuStakedNfts,
-    getUnstakedNfts,
-    getMagicEdenFloorPrice,
-    calculateAllYakuRewards
-} from './fetchData';
-import YakuStakeNftCard from './YakuStakedNftCard';
-import { TabContext, TabList, TabPanel } from '@mui/lab';
-import {
-    claimRewardV2Multiple,
-    fetchMetadata,
-    getStakingState,
-    loadYakuProgram,
-    stakeNftV2Multiple,
-    unStakeNftV2Multiple
-} from 'actions/yakuStake';
-import { chunk, each, find, findIndex, map, min, sortBy, sumBy } from 'lodash';
-import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
-import { fastConnection, getNftMetaData, solConnection } from 'actions/shared';
 import { RefreshOutlined } from '@mui/icons-material';
-import { FormattedMessage } from 'react-intl';
-import { YAKU_NFT } from 'types/staking';
-import { queries } from '../../../graphql/graphql';
-import { ApolloQueryResult, useQuery } from '@apollo/client';
-import { Promise } from 'bluebird';
 
 function Staking() {
     const theme = useTheme();
 
-    const { data: caStats, refetch: refetchCaStats } = useQuery(queries.GET_COLLECTION_STATS, {
+    const { data: caStats, refetch: refetchCaStats } = useQuery(db.queries.GET_COLLECTION_STATS, {
         variables: { symbol: 'cosmic_astronauts' },
         fetchPolicy: 'network-only'
     });
-    const { data: oniStats, refetch: refetchOniStats } = useQuery(queries.GET_COLLECTION_STATS, {
+    const { data: oniStats, refetch: refetchOniStats } = useQuery(db.queries.GET_COLLECTION_STATS, {
         variables: { symbol: 'yaku_corp' },
         fetchPolicy: 'network-only'
     });
-    const { data: capsuleStats, refetch: refetchCapsuleStats } = useQuery(queries.GET_COLLECTION_STATS, {
+    const { data: capsuleStats, refetch: refetchCapsuleStats } = useQuery(db.queries.GET_COLLECTION_STATS, {
         variables: { symbol: 'yaku_corp_capsulex' },
         fetchPolicy: 'network-only'
     });
-    const { data: yakuXStats, refetch: refetchYakuXStats } = useQuery(queries.GET_COLLECTION_STATS, {
+    const { data: yakuXStats, refetch: refetchYakuXStats } = useQuery(db.queries.GET_COLLECTION_STATS, {
         variables: { symbol: 'yaku_x' },
         fetchPolicy: 'network-only'
     });

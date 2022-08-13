@@ -41,7 +41,7 @@ import ProjectCard from './ProjectCard';
 
 // graphql
 import { useMutation, useQuery } from '@apollo/client';
-import { mutations, queries } from '../../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 export default function ShowProjects({
     notifyProjects,
@@ -51,7 +51,7 @@ export default function ShowProjects({
     setTotalSolBal,
     setTotalUSDCBal
 }: any) {
-    const [clickWithdraw] = useMutation(mutations.WITHDRAW);
+    const [clickWithdraw] = useMutation(db.mutations.WITHDRAW);
     const { connection } = useConnection();
 
     const [project, setProject] = useState('');
@@ -70,10 +70,10 @@ export default function ShowProjects({
     const [maxBalance, setMaxBalance] = useState<any>({});
     const wallet = useWallet();
 
-    const [createWallet] = useMutation(mutations.CREATE_PROJECT);
+    const [createWallet] = useMutation(db.mutations.CREATE_PROJECT);
 
-    const { data, refetch } = useQuery(queries.GET_WALLETS, { variables: { wallet: wallet.publicKey?.toBase58() } });
-    const { data: projectWallet, refetch: refetchProjectWallet } = useQuery(queries.GET_WALLETPUBKEY, {
+    const { data, refetch } = useQuery(db.queries.GET_WALLETS, { variables: { wallet: wallet.publicKey?.toBase58() } });
+    const { data: projectWallet, refetch: refetchProjectWallet } = useQuery(db.queries.GET_WALLETPUBKEY, {
         variables: { project: '', wallet: wallet.publicKey?.toBase58() }
     });
     const [data1, setData1] = useState<any[]>([]);

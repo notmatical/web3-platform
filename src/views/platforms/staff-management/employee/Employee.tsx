@@ -1,21 +1,29 @@
 import { Avatar, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, useTheme } from '@mui/material';
-import { useQuery } from '@apollo/client';
-import { queries } from '../../../graphql/graphql';
-import { useWallet } from '@solana/wallet-adapter-react';
+
+// project imports
 import MainCard from 'components/MainCard';
-import { AccountBalanceWalletOutlined, RefreshOutlined } from '@mui/icons-material';
-import { capitalize, groupBy, keys, map, sum } from 'lodash';
 import ProjectCard from './ProjectCard';
 import CopyAddress from 'components/CopyAddress';
-import { UserOutlined } from '@ant-design/icons';
-import { FormattedMessage } from 'react-intl';
 import RevenueCard from 'components/cards/RevenueCard';
+import { useSolPrice } from 'contexts/CoinGecko';
+
+// third party
+import { useWallet } from '@solana/wallet-adapter-react';
+import { capitalize, groupBy, keys, map, sum } from 'lodash';
+import { FormattedMessage } from 'react-intl';
+import moment from 'moment';
+
+// graphql
+import { useQuery } from '@apollo/client';
+import * as db from 'database/graphql/graphql';
+
+// assets
+import { UserOutlined } from '@ant-design/icons';
+import { AccountBalanceWalletOutlined, RefreshOutlined } from '@mui/icons-material';
 import MonetizationOnTwoToneIcon from '@mui/icons-material/MonetizationOnTwoTone';
 import AccountBalanceTwoToneIcon from '@mui/icons-material/AccountBalanceTwoTone';
 import FormatListBulletedTwoToneIcon from '@mui/icons-material/FormatListBulletedTwoTone';
 import EqualizerTwoToneIcon from '@mui/icons-material/EqualizerTwoTone';
-import { useSolPrice } from 'contexts/CoinGecko';
-import moment from 'moment';
 
 type registeredwallet = {
     walletaddress: any;
@@ -75,7 +83,7 @@ export default function Employee() {
 
     const walletAddr = { wallet: wallet.connected ? wallet.publicKey!.toBase58() : 'Not Connected' };
 
-    const { data, refetch } = useQuery(queries.GET_CLAIMER, { variables: { wallet: walletAddr.wallet } });
+    const { data, refetch } = useQuery(db.queries.GET_CLAIMER, { variables: { wallet: walletAddr.wallet } });
 
     const theme = useTheme();
     const solPrice = useSolPrice();

@@ -39,7 +39,7 @@ import Activity from './components/ActivityTab';
 
 // graphql
 import { useQuery } from '@apollo/client';
-import { queries } from '../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 function TabPanel({ children, value, index, ...other }: TabsProps) {
     return (
@@ -88,7 +88,7 @@ function UserAccount() {
 
     const hsClient = new HyperspaceClient(HS_API_KEY);
 
-    const { data, loading, error, refetch } = useQuery(queries.GET_USER, { variables: { wallet: publicKey }, fetchPolicy: 'network-only' });
+    const { data, loading, error, refetch } = useQuery(db.queries.GET_USER, { variables: { wallet: publicKey }, fetchPolicy: 'network-only' });
 
     let selectedTab = 0;
     switch (tab) {

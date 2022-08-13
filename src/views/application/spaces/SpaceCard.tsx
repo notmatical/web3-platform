@@ -17,7 +17,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 
 // graphql
 import { useQuery, useMutation } from '@apollo/client';
-import { mutations, queries } from '../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 // assets
 import StarIcon from '@mui/icons-material/Star';
@@ -41,8 +41,8 @@ const SpaceCard = ({ space }: SpaceCardProps) => {
 
     const { id, symbol, avatar, name } = space;
 
-    const { data, loading } = useQuery(queries.GET_SPACE, { variables: { symbol }, fetchPolicy: 'cache-and-network' });
-    const [JoinSpace] = useMutation(mutations.JOIN_SPACE);
+    const { data, loading } = useQuery(db.queries.GET_SPACE, { variables: { symbol }, fetchPolicy: 'cache-and-network' });
+    const [JoinSpace] = useMutation(db.mutations.JOIN_SPACE);
 
     // CHECK ACCESS FROM CREATOR WALLET
     const joinSpace = async (event: SyntheticEvent) => {

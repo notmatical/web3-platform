@@ -8,7 +8,7 @@ import { useAccess } from 'hooks/useAccess';
 import { shortenAddress } from 'utils/utils';
 import defaultConfig from 'config';
 import { useMutation } from '@apollo/client';
-import { mutations } from '../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 // reducer - state management
 import { SET_AUTH_USER } from 'store/actions';
@@ -42,7 +42,7 @@ export const WalletHandlerProvider: FC<{ children: ReactNode }> = ({ children })
     const [connected, setConnected] = useState(!!publicKey);
 
     // auth
-    const [login] = useMutation(mutations.LOG_IN);
+    const [login] = useMutation(db.mutations.LOG_IN);
     // const [state, dispatch] = useReducer(accountReducer, testState);
 
     const hasNonce = () => !!Cookies.get('auth-nonce');

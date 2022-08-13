@@ -12,13 +12,13 @@ import { gridSpacing } from 'store/constant';
 
 // graphql
 import { useQuery } from '@apollo/client';
-import { queries } from '../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 const Lending = () => {
     const theme = useTheme();
     const navigate = useNavigate();
 
-    const { data, loading, error, fetchMore } = useQuery(queries.GET_LEADERBOARD, {
+    const { data, loading, error, fetchMore } = useQuery(db.queries.GET_LEADERBOARD, {
         variables: { first: 25 }
     });
 

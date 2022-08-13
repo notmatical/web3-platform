@@ -22,7 +22,7 @@ import ReactMarkdown from 'react-markdown';
 
 // graphql
 import { useQuery, useMutation } from '@apollo/client';
-import { mutations, queries } from '../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 import SelectVoteSystem from './SelectVoteSystem';
 
 // test
@@ -127,7 +127,7 @@ const ProposalCreate = () => {
 
     // GRAPHQL QUERIES
     // eslint-disable-next-line object-shorthand
-    const { data, loading } = useQuery(queries.GET_SPACE, { variables: { symbol }, fetchPolicy: 'cache-and-network' });
+    const { data, loading } = useQuery(db.queries.GET_SPACE, { variables: { symbol }, fetchPolicy: 'cache-and-network' });
 
     return (
         <>

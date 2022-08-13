@@ -27,7 +27,7 @@ import { CloseCircleOutlined, CheckCircleOutlined } from '@ant-design/icons';
 
 // graphql
 import { useMutation } from '@apollo/client';
-import { mutations } from '../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 import MainCard from 'components/MainCard';
 
 // types
@@ -46,7 +46,7 @@ const UpdateAvatarModal = ({ user, nfts, onCancel, onFinish }: UpdateAvatarModal
     const [isSelected, setIsSelected] = useState(false);
     const [avatar, setAvatar] = useState<string>('');
 
-    const [update] = useMutation(mutations.UPDATE_AVATAR);
+    const [update] = useMutation(db.mutations.UPDATE_AVATAR);
 
     const chooseAvatar = (image: string) => {
         setIsSelected(true);

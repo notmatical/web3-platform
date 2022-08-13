@@ -37,7 +37,7 @@ import { NFT_CREATOR } from 'config/config'; // TODO: Replace with database quer
 
 // third party
 import { useMutation } from '@apollo/client';
-import { mutations } from '../../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 import { isMobile } from 'react-device-detect';
 
 // assets
@@ -87,8 +87,8 @@ const WalletLogin = () => {
     const { borderRadius } = useConfig();
 
     // mutations / queries
-    const [login] = useMutation(mutations.LOG_IN);
-    const [signup] = useMutation(mutations.SIGN_UP);
+    const [login] = useMutation(db.mutations.LOG_IN);
+    const [signup] = useMutation(db.mutations.SIGN_UP);
 
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
 

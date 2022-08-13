@@ -12,7 +12,7 @@ import { formatPercent, formatNumber, abbreviateValue, ordinal_suffix_of, shorte
 
 // graphql
 import { useQuery } from '@apollo/client';
-import { queries } from '../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 // third-party
 import { HyperspaceClient, MarketplaceActionEnums } from 'hyperspace-client-js';
@@ -72,7 +72,7 @@ const NftView = () => {
             });
     };
 
-    const { data, loading, refetch } = useQuery(queries.GET_MULTIPLE_USERS, { variables: { wallets: [] }, fetchPolicy: 'network-only' });
+    const { data, loading, refetch } = useQuery(db.queries.GET_MULTIPLE_USERS, { variables: { wallets: [] }, fetchPolicy: 'network-only' });
     const fetchDashboardUsers = async (history: any) => {
         const usersToFetch: any = [];
         // Filter Events from Data

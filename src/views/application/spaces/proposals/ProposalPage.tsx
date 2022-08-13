@@ -19,7 +19,7 @@ import MainCard from 'components/cards/MainCard';
 
 // graphql
 import { useQuery, useMutation } from '@apollo/client';
-import { mutations, queries } from '../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 // third party
 import moment from 'moment';
@@ -62,12 +62,12 @@ const ProposalPage = () => {
 
     // GRAPHQL QUERIES
     // eslint-disable-next-line object-shorthand
-    const { data: space } = useQuery(queries.GET_SPACE, { variables: { symbol }, fetchPolicy: 'cache-and-network' });
-    const { data, loading } = useQuery(queries.GET_PROPOSAL, { variables: { id }, fetchPolicy: 'cache-and-network' });
+    const { data: space } = useQuery(db.queries.GET_SPACE, { variables: { symbol }, fetchPolicy: 'cache-and-network' });
+    const { data, loading } = useQuery(db.queries.GET_PROPOSAL, { variables: { id }, fetchPolicy: 'cache-and-network' });
 
-    const [DeleteProposal] = useMutation(mutations.DELETE_PROPOSAL);
-    const [CloseProposal] = useMutation(mutations.CLOSE_PROPOSAL);
-    const [VoteProposal] = useMutation(mutations.VOTE_PROPOSAL);
+    const [DeleteProposal] = useMutation(db.mutations.DELETE_PROPOSAL);
+    const [CloseProposal] = useMutation(db.mutations.CLOSE_PROPOSAL);
+    const [VoteProposal] = useMutation(db.mutations.VOTE_PROPOSAL);
 
     useEffect(() => {
         if (data && data.proposal) {

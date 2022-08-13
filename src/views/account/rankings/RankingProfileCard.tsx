@@ -15,7 +15,7 @@ import { IconUserPlus, IconCircleCheck } from '@tabler/icons';
 
 // graphql
 import { useMutation } from '@apollo/client';
-import { mutations } from '../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 import { shortenAddress } from 'utils/utils';
 
 interface RankingProfileProps {
@@ -30,8 +30,8 @@ const RankingProfileCard = ({ position, user }: RankingProfileProps) => {
     const { publicKey } = useWallet();
 
     console.log(user.user.followers);
-    const [follow] = useMutation(mutations.FOLLOW_USER);
-    const [unfollow] = useMutation(mutations.UNFOLLOW_USER);
+    const [follow] = useMutation(db.mutations.FOLLOW_USER);
+    const [unfollow] = useMutation(db.mutations.UNFOLLOW_USER);
 
     const handleFollow = async () => {
         follow({

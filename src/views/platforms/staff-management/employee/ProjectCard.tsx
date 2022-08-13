@@ -1,15 +1,23 @@
-import { Grid, Button, Divider, CardContent, useTheme, Box, Typography, Chip } from '@mui/material';
 import { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { mutations } from '../../../graphql/graphql';
-import { useToasts } from 'hooks/useToasts';
 import { useNavigate } from 'react-router-dom';
+
+// material-ui
+import { Grid, Button, Divider, CardContent, useTheme, Box, Typography, Chip } from '@mui/material';
+
+// project imports
+import { useToasts } from 'hooks/useToasts';
 import MainCard from 'components/MainCard';
 import SkeletonProductPlaceholder from 'components/cards/Skeleton/CardPlaceholder';
+
+// third-party
 import { FormattedMessage } from 'react-intl';
 
+// graphql
+import { useMutation } from '@apollo/client';
+import * as db from 'database/graphql/graphql';
+
 const ProjectCard = ({ time: datetime, project, wallet, method, amount, period }: any) => {
-    const [clickClaim] = useMutation(mutations.CLAIM);
+    const [clickClaim] = useMutation(db.mutations.CLAIM);
     const theme = useTheme();
     const now = new Date();
     const time = new Date(datetime);

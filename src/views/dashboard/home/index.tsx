@@ -15,7 +15,7 @@ import HoverSocialCard from 'components/cards/HoverSocialCard';
 
 // gql
 import { useQuery } from '@apollo/client';
-import { queries } from '../../../graphql/graphql';
+import * as db from 'database/graphql/graphql';
 
 // assets
 import BannerIllustration from 'assets/images/banner-illustration.png';
@@ -62,7 +62,7 @@ const Dashboard = () => {
         }, 1000);
     }, []);
 
-    const { data, refetch } = useQuery(queries.GET_COLLECTION_STATS, {
+    const { data, refetch } = useQuery(db.queries.GET_COLLECTION_STATS, {
         variables: { symbol: 'all' },
         fetchPolicy: 'network-only'
     });
