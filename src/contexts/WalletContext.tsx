@@ -59,21 +59,16 @@ export const WalletHandlerProvider: FC<{ children: ReactNode }> = ({ children })
             if (gotNonce) {
                 // user already has a nonce, no need to make them sign.
 
-                const hasAccess = await checkAccess(publicKey, NFT_CREATOR);
-                if (hasAccess) {
-                    const address = publicKey.toBase58();
-                    login({ variables: { address } }).then(
-                        (res) => {
-                            showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
-                            navigate(defaultConfig.defaultPath, { replace: true });
-                        },
-                        (err) => {
-                            showErrorToast('Something unexpected happened, please try again later.');
-                        }
-                    );
-                } else {
-                    navigate('/purchase', { replace: true });
-                }
+                const address = publicKey.toBase58();
+                login({ variables: { address } }).then(
+                    (res) => {
+                        showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
+                        navigate(defaultConfig.defaultPath, { replace: true });
+                    },
+                    (err) => {
+                        showErrorToast('Something unexpected happened, please try again later.');
+                    }
+                );
                 return;
             }
 
@@ -85,22 +80,16 @@ export const WalletHandlerProvider: FC<{ children: ReactNode }> = ({ children })
 
                 await signMessage!(message)
                     .then(async () => {
-                        const hasAccess = await checkAccess(publicKey, NFT_CREATOR);
-                        if (hasAccess) {
-                            const address = publicKey.toBase58();
-                            login({ variables: { address } }).then(
-                                (res) => {
-                                    showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
-                                    navigate(defaultConfig.defaultPath, { replace: true });
-                                },
-                                (err) => {
-                                    console.log(err);
-                                }
-                            );
-                        } else {
-                            showErrorToast(`You don't hold any NFT's that have access to this platform.`);
-                            navigate('/purchase', { replace: true });
-                        }
+                        const address = publicKey.toBase58();
+                        login({ variables: { address } }).then(
+                            (res) => {
+                                showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
+                                navigate(defaultConfig.defaultPath, { replace: true });
+                            },
+                            (err) => {
+                                console.log(err);
+                            }
+                        );
                     })
                     .catch((err) => {
                         if (err.name === 'WalletSignTransactionError') {

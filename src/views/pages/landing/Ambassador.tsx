@@ -55,7 +55,7 @@ const AmbassadorPage = () => {
                             [theme.breakpoints.down('lg')]: { textAlign: 'center' }
                         }}
                     >
-                        <AmbassadorImage src={imgAmbassador} alt="Yaku Labs" />
+                        <AmbassadorImage src={imgAmbassador} alt="Vaporize" />
                     </Grid>
                     <Grid item xs={12} md={7}>
                         <AmbassadorCard>
@@ -71,8 +71,8 @@ const AmbassadorPage = () => {
                                 </Grid>
                                 <Grid item sm={12}>
                                     <Typography variant="body2">
-                                        Want to aide in the growth of the Yaku Labs Brand and earn $SOL each time you successfully refer a
-                                        project?
+                                        Want to aide in the growth of the Vaporize Finance Brand and earn $SOL each time you successfully
+                                        refer a project?
                                         <br />
                                         <br />
                                         Send us a message on Discord to get started.

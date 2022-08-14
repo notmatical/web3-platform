@@ -38,7 +38,7 @@ const HeaderPage = () => {
                                 <Typography
                                     variant="h1"
                                     sx={{
-                                        fontSize: { xs: '3.25rem', sm: '5rem', md: '8rem' },
+                                        fontSize: { xs: '3.25rem', sm: '5rem', md: '7rem' },
                                         fontWeight: 900,
                                         lineHeight: 1.4
                                     }}

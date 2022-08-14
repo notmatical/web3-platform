@@ -14,8 +14,8 @@ import AuthCardWrapper from '../AuthCardWrapper';
 import AuthFooter from 'components/cards/AuthFooter';
 
 // assets
-import logoDark from 'assets/images/logo-light.png';
-import logo from 'assets/images/logo-dark.png';
+import logoDark from 'assets/images/vapor-logo-light.png';
+import logo from 'assets/images/vapor-logo-dark.png';
 import { IconCheck } from '@tabler/icons';
 
 const LinkDiscord = () => {
@@ -72,7 +72,7 @@ const LinkDiscord = () => {
                                     <Grid container spacing={2} alignItems="center" justifyContent="center">
                                         <Grid item>
                                             <Link to="#">
-                                                <img src={theme.palette.mode === 'dark' ? logoDark : logo} alt="Yaku Labs" width="200" />
+                                                <img src={theme.palette.mode === 'dark' ? logoDark : logo} alt="Vaporize" width="200" />
                                             </Link>
                                         </Grid>
                                         <Grid item xs={12}>
