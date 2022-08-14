@@ -42,7 +42,7 @@ const FooterPage = () => {
                 <Container>
                     <Grid container alignItems="center" spacing={gridSpacing}>
                         <Grid item xs={12} sm={4}>
-                            <img src={logoDark} alt="Yaku Labs" width="100" />
+                            <img src={logoDark} alt="Vaporize" width="100" />
                         </Grid>
                         <Grid item xs={12} sm={8}>
                             <Grid

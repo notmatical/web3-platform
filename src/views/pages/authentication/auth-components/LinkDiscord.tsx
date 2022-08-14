@@ -72,7 +72,7 @@ const LinkDiscord = () => {
                                     <Grid container spacing={2} alignItems="center" justifyContent="center">
                                         <Grid item>
                                             <Link to="#">
-                                                <img src={theme.palette.mode === 'dark' ? logoDark : logo} alt="Yaku Labs" width="200" />
+                                                <img src={theme.palette.mode === 'dark' ? logoDark : logo} alt="Vaporize" width="200" />
                                             </Link>
                                         </Grid>
                                         <Grid item xs={12}>

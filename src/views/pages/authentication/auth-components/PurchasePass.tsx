@@ -72,7 +72,7 @@ const PurchasePass = () => {
                                 <Grid container spacing={2} alignItems="center" justifyContent="center">
                                     <Grid item>
                                         <Link to="#">
-                                            <img src={theme.palette.mode === 'dark' ? logoDark : logo} alt="Yaku Labs" width="200" />
+                                            <img src={theme.palette.mode === 'dark' ? logoDark : logo} alt="Vaporize" width="200" />
                                         </Link>
                                     </Grid>
                                     <Grid item xs={12}>
@@ -85,7 +85,7 @@ const PurchasePass = () => {
                                             <Grid item>
                                                 <Stack alignItems="center" justifyContent="center" spacing={1}>
                                                     <Typography variant="caption" fontSize="16px" textAlign="center">
-                                                        It appears your wallet does not have proper access to the Yaku Labs Dashboard
+                                                        It appears your wallet does not have proper access to the Vaporize Dashboard
                                                         <br />
                                                         <br />
                                                         You can purchase one on any of the secondary marketplaces below.

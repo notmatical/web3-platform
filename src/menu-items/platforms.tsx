@@ -7,7 +7,7 @@ import { IconSubtask, IconBuilding } from '@tabler/icons';
 // constant
 const icons = { IconSubtask, IconBuilding };
 
-// ==============================|| YAKU HOLDER MENU ITEMS ||============================== //
+// ==============================|| PLATFORMS MENU ITEMS ||============================== //
 
 const platforms = {
     id: 'platforms',

@@ -9,7 +9,7 @@ import logo from 'assets/images/vapor-logo-dark.png';
 const Logo = () => {
     const theme = useTheme();
 
-    return <img src={theme.palette.mode === 'dark' ? logoDark : logo} alt="Yaku Labs" width="150" />;
+    return <img src={theme.palette.mode === 'dark' ? logoDark : logo} alt="Vaporize" width="150" />;
 };
 
 export default Logo;

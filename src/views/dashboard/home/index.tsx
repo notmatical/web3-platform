@@ -63,7 +63,7 @@ const Dashboard = () => {
             )}
 
             <Grid item xs={12} sx={{ mb: -2.25 }}>
-                <Typography variant="h6">Yaku Labs Dashboard</Typography>
+                <Typography variant="h6">Vaporize Finance</Typography>
             </Grid>
         </Grid>
     );
