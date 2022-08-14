@@ -49,7 +49,7 @@ const PublicRoutes = {
             element: <SocialRanking />
         },
         {
-            path: '/account/:vanity/:tab',
+            path: '/account/:vanity',
             element: <UserAccount />
         },
 
