@@ -32,7 +32,7 @@ export type Direction = 'up' | 'down' | 'right' | 'left';
 export interface TabsProps {
     children?: React.ReactElement | React.ReactNode | string;
     value: string | number;
-    index: number;
+    index?: number;
 }
 
 export interface GenericCardProps {

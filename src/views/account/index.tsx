@@ -1,8 +1,11 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
+
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import TabContext from '@mui/lab/TabContext';
+import TabPanel from '@mui/lab/TabPanel';
 import { Box, CardMedia, Grid, Tab, Tabs, Typography, IconButton, Dialog, Button, Tooltip, Divider, Chip, Badge } from '@mui/material';
 
 // web3 imports
@@ -55,39 +58,40 @@ import Activity from './components/ActivityTab';
 import { useQuery } from '@apollo/client';
 import * as db from 'database/graphql/graphql';
 
-function TabPanel({ children, value, index, ...other }: TabsProps) {
-    return (
-        <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
-            {value === index && <Box sx={{ p: 0 }}>{children}</Box>}
-        </div>
-    );
-}
+// function TabPanel({ children, value, ...other }: TabsProps) {
+//     console.log(value);
+//     return (
+//         <div role="tabpanel" hidden={value !== value} {...other}>
+//             {value === value && <Box sx={{ p: 0 }}>{children}</Box>}
+//         </div>
+//     );
+// }
 
 function a11yProps(index: number) {
     return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`
+        id: `profile-tab-${index}`,
+        'aria-controls': `profile-tabpanel-${index}`
     };
 }
 
 const tabOptions = [
     {
-        to: '/portfolio',
+        value: 'portfolio',
         icon: <IconBook stroke={1.5} size="1.1rem" />,
         label: 'Portfolio'
     },
     {
-        to: '/nfts',
+        value: 'nfts',
         icon: <IconStar stroke={1.5} size="1.1rem" />,
         label: 'NFTs'
     },
     {
-        to: '/activity',
+        value: 'activity',
         icon: <IconActivity stroke={1.5} size="1.1rem" />,
         label: 'Activity'
     },
     {
-        to: '/badges',
+        value: 'badges',
         icon: <IconBolt stroke={1.5} size="1.1rem" />,
         label: 'Badges'
     },
@@ -99,30 +103,16 @@ function UserAccount() {
     const { showInfoToast, showErrorToast, showWarningToast } = useToasts();
     const { connection } = useConnection();
     const { publicKey } = useWallet();
-    const { vanity, tab } = useParams();
+    const { vanity } = useParams();
 
     const hsClient = new HyperspaceClient(HS_API_KEY);
 
     const { data, loading, error, refetch } = useQuery(db.queries.GET_USER, { variables: { wallet: vanity }, fetchPolicy: 'network-only' });
 
-    let selectedTab = 0;
-    switch (tab) {
-        case 'nfts':
-            selectedTab = 1;
-            break;
-        case 'badges':
-            selectedTab = 2;
-            break;
-        default:
-            selectedTab = 0;
-    }
-
-    const [value, setValue] = useState<number>(selectedTab);
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const [value, setValue] = useState<string>('portfolio')
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
-
-    const redirectUrl = `/account/${vanity}`;
 
     // Styles
     const sideAvatarSX = {
@@ -322,7 +312,7 @@ function UserAccount() {
                                         <IconButton
                                             sx={{ mr: 0.5 }}
                                             onClick={() => {
-                                                navigator.clipboard.writeText(`https://vaporize.fi/account/${vanity!}/portfolio`);
+                                                navigator.clipboard.writeText(`https://vaporize.fi/account/${vanity!}`);
                                                 showInfoToast('Profile link copied to clipboard.');
                                             }}
                                         >
@@ -648,66 +638,75 @@ function UserAccount() {
 
                     {/* right-side content */}
                     <Grid item xs={8} sx={{ pt: '20px !important' }}>
-                        <Tabs
-                            value={value}
-                            variant="scrollable"
-                            onChange={handleChange}
-                            sx={{
-                                // marginTop: 2.5,
-                                '& .MuiTabs-flexContainer': {
-                                    border: 'none'
-                                },
-                                '& a': {
-                                    minHeight: 'auto',
-                                    minWidth: 10,
-                                    py: 1.5,
-                                    px: 1,
-                                    mr: 2.25,
-                                    color: 'primary.main',
-                                    display: 'flex',
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    justifyContent: 'center'
-                                },
-                                '& a.Mui-selected': {
-                                    color: 'white'
-                                },
-                                '& .MuiTabs-indicator': {
-                                    backgroundColor: 'secondary.main'
-                                },
-                                '& a > svg': {
-                                    mr: 1.25,
-                                    mb: '0px !important'
-                                }
-                            }}
-                        >
-                            {tabOptions.map((option, index) => (
-                                <Tab
-                                    key={index}
-                                    component={Link}
-                                    to={redirectUrl + option.to}
-                                    icon={option.icon}
-                                    label={option.label}
-                                    sx={{ mb: 0 }}
-                                    {...a11yProps(index)}
-                                />
-                            ))}
-                        </Tabs>
+                        <TabContext value={value}>
+                            <Tabs
+                                value={value}
+                                variant="scrollable"
+                                onChange={handleChange}
+                                sx={{
+                                    // marginTop: 2.5,
+                                    '& .MuiTabs-flexContainer': {
+                                        border: 'none'
+                                    },
+                                    '& button': {
+                                        minHeight: 'auto',
+                                        minWidth: 10,
+                                        py: 1.5,
+                                        px: 1,
+                                        mr: 2.25,
+                                        color: 'primary.main',
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        justifyContent: 'center'
+                                    },
+                                    '& .Mui-selected': {
+                                        color: 'white'
+                                    },
+                                    '& .MuiTabs-indicator': {
+                                        backgroundColor: 'secondary.main'
+                                    },
+                                    '& button > svg': {
+                                        mr: 1.25,
+                                        mb: '0px !important'
+                                    }
+                                }}
+                            >
+                                {tabOptions.map((option, index) => (
+                                    <Tab
+                                        key={index}
+                                        value={option.value}
+                                        icon={option.icon}
+                                        label={option.label}
+                                        sx={{ mb: 0 }}
+                                        {...a11yProps(index)}
+                                    />
+                                ))}
+                            </Tabs>
 
-                        <Divider sx={{ mb: 2 }} />
+                            <Divider sx={{ mb: 2 }} />
 
-                        <TabPanel value={value} index={0}>
-                            <Portfolio user={data.user} tokenList={tokenList} isLoading={isLoading} />
-                        </TabPanel>
-                        <TabPanel value={value} index={1}>
-                            <NFTs />
-                        </TabPanel>
-                        <TabPanel value={value} index={2}>
-                            <Activity user={data.user} />
-                        </TabPanel>
-                        <TabPanel value={value} index={3}>
-                            <Badges />
-                        </TabPanel>
+                            <TabPanel value="portfolio" sx={{ padding: 0 }}>
+                                <Box sx={{ p: '0 !important' }}>
+                                    <Portfolio user={data.user} tokenList={tokenList} isLoading={isLoading} />
+                                </Box>
+                            </TabPanel>
+                            <TabPanel value="nfts" sx={{ padding: 0 }}>
+                                <Box sx={{ p: '0 !important' }}>
+                                    <NFTs />
+                                </Box>
+                            </TabPanel>
+                            <TabPanel value="activity" sx={{ padding: 0 }}>
+                                <Box sx={{ p: '0 !important' }}>
+                                    <Activity user={data.user} />
+                                </Box>
+                            </TabPanel>
+                            <TabPanel value="badges" sx={{ padding: 0 }}>
+                                <Box sx={{ p: '0 !important' }}>
+                                    <Badges />
+                                </Box>
+                            </TabPanel>
+                        </TabContext>
                     </Grid>
 
                     {/* Dialog renders its body even if not open */}
