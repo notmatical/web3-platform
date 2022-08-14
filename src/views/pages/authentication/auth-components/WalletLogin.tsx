@@ -144,45 +144,22 @@ const WalletLogin = () => {
     const attemptLogin = async (address: string) => {
         if (publicKey) {
             if (address) {
-                const userPoolData = await getUserPoolState(wallet);
-                const numStaked = userPoolData?.itemCount.toNumber();
-
-                const hasAccess = await checkAccess(publicKey!, NFT_CREATOR);
-                if (hasAccess) {
-                    login({ variables: { wallet: address } }).then(
-                        (res) => {
-                            if (res.data.login.registered) {
-                                setIsConnecting(false);
-                                showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
-                                navigate(defaultConfig.defaultPath, { replace: true });
-                                return;
-                            }
-                            setStep(STEPS.CHOOSE_USERNAME);
+                login({ variables: { wallet: address } }).then(
+                    (res) => {
+                        if (res.data.login.registered) {
                             setIsConnecting(false);
-                        },
-                        (err) => {
-                            showErrorToast('An error occurred while contacting the database, please try again.');
-                            setIsConnecting(false);
+                            showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
+                            navigate(defaultConfig.defaultPath, { replace: true });
+                            return;
                         }
-                    );
-                } else {
-                    login({ variables: { wallet: address } }).then(
-                        (res) => {
-                            if (numStaked !== 0 && numStaked !== null && numStaked !== undefined) {
-                                setIsConnecting(false);
-                                showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
-                                navigate(defaultConfig.defaultPath, { replace: true });
-                                return;
-                            }
-                            showErrorToast(`You don't hold any NFT's that have access to this platform.`);
-                            navigate('/purchase', { replace: true });
-                        },
-                        (err) => {
-                            showErrorToast('An error occurred while contacting the database, please try again.');
-                            setIsConnecting(false);
-                        }
-                    );
-                }
+                        setStep(STEPS.CHOOSE_USERNAME);
+                        setIsConnecting(false);
+                    },
+                    (err) => {
+                        showErrorToast('An error occurred while contacting the database, please try again.');
+                        setIsConnecting(false);
+                    }
+                );
             } else {
                 setStep(STEPS.SELECT_WALLET);
                 setIsConnecting(false);
