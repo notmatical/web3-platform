@@ -14,8 +14,8 @@ import AuthCardWrapper from '../AuthCardWrapper';
 import AuthFooter from 'components/cards/AuthFooter';
 
 // assets
-import logoDark from 'assets/images/logo-light.png';
-import logo from 'assets/images/logo-dark.png';
+import logoDark from 'assets/images/vapor-logo-light.png';
+import logo from 'assets/images/vapor-logo-dark.png';
 import { IconCheck } from '@tabler/icons';
 
 const LinkDiscord = () => {

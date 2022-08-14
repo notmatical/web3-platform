@@ -41,8 +41,8 @@ import * as db from 'database/graphql/graphql';
 import { isMobile } from 'react-device-detect';
 
 // assets
-import logoDark from 'assets/images/logo-light.png';
-import logo from 'assets/images/logo-dark.png';
+import logoDark from 'assets/images/vapor-logo-light.png';
+import logo from 'assets/images/vapor-logo-dark.png';
 import MetaMaskLogo from 'assets/images/icons/metamask.png';
 import Confetti from 'assets/images/icons/confetti.png';
 import DiscordLogo from 'assets/images/icons/discord.svg';

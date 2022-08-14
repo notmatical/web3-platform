@@ -1,8 +1,8 @@
 // material-ui
 import { useTheme } from '@mui/material/styles';
 
-import logoDark from 'assets/images/logo-light.png';
-import logo from 'assets/images/logo-dark.png';
+import logoDark from 'assets/images/vapor-logo-light.png';
+import logo from 'assets/images/vapor-logo-dark.png';
 
 // ==============================|| LOGO SVG ||============================== //
 
