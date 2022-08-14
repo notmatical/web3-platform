@@ -52,7 +52,7 @@ const FooterPage = () => {
                                 sx={{ justifyContent: 'flex-end', [theme.breakpoints.down('md')]: { justifyContent: 'center' } }}
                             >
                                 <Grid item>
-                                    <FooterLink href="https://twitter.com/minxlabs" target="_blank" underline="hover">
+                                    <FooterLink href="https://twitter.com/vaporize_fi" target="_blank" underline="hover">
                                         <TwitterIcon />
                                         Twitter
                                     </FooterLink>
