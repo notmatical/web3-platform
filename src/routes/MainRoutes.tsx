@@ -9,8 +9,8 @@ import AuthGuard from 'utils/route-guard/AuthGuard';
 const Monitor = Loadable(lazy(() => import('views/explore/nfts/index')));
 
 // applications
+const Swap = Loadable(lazy(() => import('views/application/swap/index')));
 const MintCalendar = Loadable(lazy(() => import('views/application/mint-calendar/index')));
-const Lending = Loadable(lazy(() => import('views/application/lending/index')));
 const Trading = Loadable(lazy(() => import('views/application/trade/index')));
 
 // raffles
@@ -43,12 +43,16 @@ const MainRoutes = {
 
         // Applications
         {
-            path: '/applications/calendar',
-            element: <MintCalendar />
+            path: '/swap',
+            element: <Swap />
         },
         {
-            path: '/applications/lending',
-            element: <Lending />
+            path: '/swap',
+            element: <Swap />
+        },
+        {
+            path: '/applications/calendar',
+            element: <MintCalendar />
         },
         {
             path: '/applications/trade',

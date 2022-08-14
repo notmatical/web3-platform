@@ -71,8 +71,8 @@ const AmbassadorPage = () => {
                                 </Grid>
                                 <Grid item sm={12}>
                                     <Typography variant="body2">
-                                        Want to aide in the growth of the Vaporize Finance Brand and earn $SOL each time you successfully refer a
-                                        project?
+                                        Want to aide in the growth of the Vaporize Finance Brand and earn $SOL each time you successfully
+                                        refer a project?
                                         <br />
                                         <br />
                                         Send us a message on Discord to get started.

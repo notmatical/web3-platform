@@ -3410,7 +3410,7 @@
     "bn.js" "^5.1.2"
     "buffer-layout" "^1.2.0"
 
-"@project-serum/serum@^0.13.61", "@project-serum/serum@>=0.13.60", "@project-serum/serum@0.13.65":
+"@project-serum/serum@^0.13.61", "@project-serum/serum@^0.13.65", "@project-serum/serum@>=0.13.60", "@project-serum/serum@0.13.65":
   "integrity" "sha512-BHRqsTqPSfFB5p+MgI2pjvMBAQtO8ibTK2fYY96boIFkCI3TTwXDt2gUmspeChKO2pqHr5aKevmexzAcXxrSRA=="
   "resolved" "https://registry.npmjs.org/@project-serum/serum/-/serum-0.13.65.tgz"
   "version" "0.13.65"
