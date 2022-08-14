@@ -30,12 +30,12 @@ const ProjectsPage = () => (
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="h2" component="div">
-                            Yaku Labs Projects &#38; Acquisitions
+                            Vaporize Projects &#38; Acquisitions
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Typography variant="body2">
-                            Yaku Labs looks to push the space forward by acquiring and giving commerical rights back to the end-user.
+                            Vaporize looks to push the space forward by acquiring and giving commerical rights back to the end-user.
                         </Typography>
                     </Grid>
                 </Grid>

@@ -36,7 +36,7 @@ const ServicesPage = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="body2">
-                                Yaku Labs offers a variety of innovating services to add value to any project looking to expand in the
+                                Vaporize offers a variety of innovating services to add value to any project looking to expand in the
                                 ecosystem.
                             </Typography>
                         </Grid>

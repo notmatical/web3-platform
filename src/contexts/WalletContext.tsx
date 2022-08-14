@@ -59,48 +59,37 @@ export const WalletHandlerProvider: FC<{ children: ReactNode }> = ({ children })
             if (gotNonce) {
                 // user already has a nonce, no need to make them sign.
 
-                const hasAccess = await checkAccess(publicKey, NFT_CREATOR);
-                if (hasAccess) {
-                    const address = publicKey.toBase58();
-                    login({ variables: { address } }).then(
-                        (res) => {
-                            showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
-                            navigate(defaultConfig.defaultPath, { replace: true });
-                        },
-                        (err) => {
-                            showErrorToast('Something unexpected happened, please try again later.');
-                        }
-                    );
-                } else {
-                    navigate('/purchase', { replace: true });
-                }
+                const address = publicKey.toBase58();
+                login({ variables: { address } }).then(
+                    (res) => {
+                        showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
+                        navigate(defaultConfig.defaultPath, { replace: true });
+                    },
+                    (err) => {
+                        showErrorToast('Something unexpected happened, please try again later.');
+                    }
+                );
                 return;
             }
 
             // create a nonce, and sign message
             const nonce = await setNonce();
             try {
-                const messageStr = `Welcome to the Yaku Labs Dashboard!\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nYour authentication status will reset after 24 hours.\n\nWallet address:\n${publicKey}\n\nNonce:\n${nonce}`;
+                const messageStr = `Welcome to the Vaporize Finance Platform\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nYour authentication status will reset after 24 hours.\n\nWallet address:\n${publicKey}\n\nNonce:\n${nonce}`;
                 const message = new TextEncoder().encode(messageStr);
 
                 await signMessage!(message)
                     .then(async () => {
-                        const hasAccess = await checkAccess(publicKey, NFT_CREATOR);
-                        if (hasAccess) {
-                            const address = publicKey.toBase58();
-                            login({ variables: { address } }).then(
-                                (res) => {
-                                    showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
-                                    navigate(defaultConfig.defaultPath, { replace: true });
-                                },
-                                (err) => {
-                                    console.log(err);
-                                }
-                            );
-                        } else {
-                            showErrorToast(`You don't hold any NFT's that have access to this platform.`);
-                            navigate('/purchase', { replace: true });
-                        }
+                        const address = publicKey.toBase58();
+                        login({ variables: { address } }).then(
+                            (res) => {
+                                showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
+                                navigate(defaultConfig.defaultPath, { replace: true });
+                            },
+                            (err) => {
+                                console.log(err);
+                            }
+                        );
                     })
                     .catch((err) => {
                         if (err.name === 'WalletSignTransactionError') {

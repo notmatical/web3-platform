@@ -62,7 +62,7 @@ export default class Wallet {
     }
 
     async signMessage(nonce: string = '') {
-        const message = `Welcome to the Yaku Labs Dashboard!\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nYour authentication status will reset after 24 hours.\n\nWallet address:\n${this.id}`;
+        const message = `Welcome to the Vaporize Finance Platform!\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nYour authentication status will reset after 24 hours.\n\nWallet address:\n${this.id}`;
         const encodedMessage = new TextEncoder().encode(message);
         let signature = await this.wallet.signMessage!(encodedMessage);
         if (!signature) throw new Error('Signature Failed');

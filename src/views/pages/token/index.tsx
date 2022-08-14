@@ -104,7 +104,7 @@ const TokenDirectory = () => {
                             Solana Token Directory
                         </Typography>
                         <Typography variant="h4" color="primary" sx={{ mt: 1, fontWeight: 500 }}>
-                            Browse the list of Yaku Labs supported tokens. By default sorted by the amount of Holders.
+                            Browse the list of Vaporize supported tokens. By default sorted by the amount of Holders.
                         </Typography>
                     </Stack>
                 </Box>

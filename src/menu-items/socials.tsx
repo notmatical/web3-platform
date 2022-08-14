@@ -21,7 +21,7 @@ const other = {
             id: 'social-twitter',
             title: <FormattedMessage id="social-twitter" />,
             type: 'item',
-            url: 'https://twitter.com/minxlabs',
+            url: 'https://twitter.com/vaporize_fi',
             icon: icons.IconBrandTwitter,
             external: true,
             target: true
@@ -30,7 +30,7 @@ const other = {
             id: 'social-discord',
             title: <FormattedMessage id="social-discord" />,
             type: 'item',
-            url: 'https://discord.gg/a2KD752SA8',
+            url: 'https://discord.gg/bWSUSsETH6',
             icon: icons.IconBrandDiscord,
             external: true,
             target: true
@@ -39,7 +39,7 @@ const other = {
             id: 'feature-request',
             title: <FormattedMessage id="feature-request" />,
             type: 'item',
-            url: 'https://minxlabs.canny.io',
+            url: 'https://vaporize.canny.io',
             icon: icons.IconSitemap,
             external: true,
             target: true

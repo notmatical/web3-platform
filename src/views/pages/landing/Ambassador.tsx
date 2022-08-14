@@ -55,7 +55,7 @@ const AmbassadorPage = () => {
                             [theme.breakpoints.down('lg')]: { textAlign: 'center' }
                         }}
                     >
-                        <AmbassadorImage src={imgAmbassador} alt="Yaku Labs" />
+                        <AmbassadorImage src={imgAmbassador} alt="Vaporize" />
                     </Grid>
                     <Grid item xs={12} md={7}>
                         <AmbassadorCard>

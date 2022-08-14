@@ -38,13 +38,13 @@ const HeaderPage = () => {
                                 <Typography
                                     variant="h1"
                                     sx={{
-                                        fontSize: { xs: '3.25rem', sm: '5rem', md: '8rem' },
+                                        fontSize: { xs: '3.25rem', sm: '5rem', md: '7rem' },
                                         fontWeight: 900,
                                         lineHeight: 1.4
                                     }}
                                 >
                                     <Box component="span" sx={{ fontWeight: 700, color: theme.palette.secondary.main, textShadow: '5px 5px 10px rgb(18 23 47 / 65%)' }}>
-                                        YAKU LABS
+                                        VAPORIZE FINANCE
                                     </Box>
                                 </Typography>
                             </motion.div>
@@ -71,7 +71,7 @@ const HeaderPage = () => {
                                             theme.palette.mode === 'dark' ? theme.palette.text.secondary : theme.palette.primary[200]
                                     }}
                                 >
-                                    Yaku Labs is a Web3 startup innovating and pushing the ecosystem forward while providing value to other startups.
+                                    Vaporize is a Web3 startup innovating and pushing the ecosystem forward while providing value to other startups.
                                 </Typography>
                             </motion.div>
                         </Grid>
