@@ -119,7 +119,7 @@ const ProfileList = () => {
                     ) : (
                         <Avatar
                             src={data.user.avatarURI ? data.user.avatarURI : DefaultUser}
-                            onClick={() => navigate(`/account/${publicKey}/portfolio`)}
+                            onClick={() => navigate(`/account/${publicKey}`)}
                             sx={{
                                 ...theme.typography.largeAvatar,
                                 mr: 1,
@@ -260,7 +260,7 @@ const ProfileList = () => {
                                                                 </Typography>
                                                                 <Link
                                                                     to={{
-                                                                        pathname: `/account/${publicKey}/portfolio`
+                                                                        pathname: `/account/${publicKey}`
                                                                     }}
                                                                     style={{ textDecoration: 'none' }}
                                                                 >
