@@ -1,0 +1,131 @@
+import { AccountInfo, PublicKey } from '@solana/web3.js';
+import { Market, OpenOrders } from '@project-serum/serum'
+
+export interface Token {
+    chainId: number // 101,
+    address: string // 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v',
+    symbol: string // 'USDC',
+    name: string // 'Wrapped USDC',
+    decimals: number // 6,
+    logoURI: string // 'https://raw.githubusercontent.com/solana-labs/token-list/main/assets/mainnet/BXXkv6z8ykpG1yuvUDPgh732wzVHB69RnB9YgSYh3itW/logo.png',
+    tags: string[] // [ 'stablecoin' ]
+}
+
+export interface MarketInfo {
+    address: PublicKey
+    name: string
+    programId: PublicKey
+    deprecated: boolean
+    quoteLabel?: string
+    baseLabel?: string
+}
+
+export interface TokenAccount {
+    pubkey: PublicKey
+    account: AccountInfo<Buffer> | null
+    effectiveMint: PublicKey
+}
+
+export interface Trade extends Event {
+    side: string
+    price: number
+    feeCost: number
+    size: number
+}
+
+interface BalancesBase {
+    key: string
+    symbol: string
+    wallet?: number | null | undefined
+    orders?: number | null | undefined
+    openOrders?: OpenOrders | null | undefined
+    unsettled?: number | null | undefined
+}
+
+// balances interface
+
+export interface OpenOrdersBalances extends BalancesBase {
+    market?: string | null | undefined
+    baseCurrencyAccount:
+      | { pubkey: PublicKey; account: AccountInfo<Buffer> }
+      | null
+      | undefined
+    quoteCurrencyAccount:
+      | { pubkey: PublicKey; account: AccountInfo<Buffer> }
+      | null
+      | undefined
+}
+
+export interface EndpointInfo {
+    name: string
+    url: string
+    websocket: string
+    custom: boolean
+}
+
+/**
+ * {tokenMint: preferred token account's base58 encoded public key}
+ */
+export interface SelectedTokenAccounts {
+    [tokenMint: string]: string
+}
+  
+export interface ChartTradeType {
+    market: string
+    size: number
+    price: number
+    orderId: string
+    time: number
+    side: string
+    feeCost: number
+    marketAddress: string
+}
+  
+export interface FeeRates {
+    taker: number
+    maker: number
+}
+  
+// Type declaration for the margin accounts for the mango group
+export type mangoTokenAccounts = {
+    mango_group: string
+    accounts: TokenAccount[]
+}
+  
+// Token infos
+export interface KnownToken {
+    tokenSymbol: string
+    tokenName: string
+    icon?: string
+    mintAddress: string
+}
+  
+export const DEFAULT_PUBLIC_KEY = new PublicKey('11111111111111111111111111111111');
+  
+export interface PerpTriggerOrder {
+    orderId: number
+    marketIndex: number
+    orderType: 'limit' | 'ioc' | 'postOnly' | 'market'
+    side: 'buy' | 'sell'
+    price: number
+    size: number
+    triggerCondition: 'above' | 'below'
+    triggerPrice: number
+}
+  
+export type StringPublicKey = string
+  
+export interface PromiseFulfilledResult<T> {
+    status: 'fulfilled'
+    value: T
+}
+  
+export interface PromiseRejectedResult {
+    status: 'rejected'
+    reason: any
+}
+  
+  export type PromiseSettledResult<T> =
+    | PromiseFulfilledResult<T>
+    | PromiseRejectedResult
+  

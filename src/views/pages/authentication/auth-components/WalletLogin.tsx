@@ -41,8 +41,8 @@ import * as db from 'database/graphql/graphql';
 import { isMobile } from 'react-device-detect';
 
 // assets
-import logoDark from 'assets/images/logo-light.png';
-import logo from 'assets/images/logo-dark.png';
+import logoDark from 'assets/images/vapor-logo-light.png';
+import logo from 'assets/images/vapor-logo-dark.png';
 import MetaMaskLogo from 'assets/images/icons/metamask.png';
 import Confetti from 'assets/images/icons/confetti.png';
 import DiscordLogo from 'assets/images/icons/discord.svg';
@@ -144,45 +144,22 @@ const WalletLogin = () => {
     const attemptLogin = async (address: string) => {
         if (publicKey) {
             if (address) {
-                const userPoolData = await getUserPoolState(wallet);
-                const numStaked = userPoolData?.itemCount.toNumber();
-
-                const hasAccess = await checkAccess(publicKey!, NFT_CREATOR);
-                if (hasAccess) {
-                    login({ variables: { wallet: address } }).then(
-                        (res) => {
-                            if (res.data.login.registered) {
-                                setIsConnecting(false);
-                                showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
-                                navigate(defaultConfig.defaultPath, { replace: true });
-                                return;
-                            }
-                            setStep(STEPS.CHOOSE_USERNAME);
+                login({ variables: { wallet: address } }).then(
+                    (res) => {
+                        if (res.data.login.registered) {
                             setIsConnecting(false);
-                        },
-                        (err) => {
-                            showErrorToast('An error occurred while contacting the database, please try again.');
-                            setIsConnecting(false);
+                            showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
+                            navigate(defaultConfig.defaultPath, { replace: true });
+                            return;
                         }
-                    );
-                } else {
-                    login({ variables: { wallet: address } }).then(
-                        (res) => {
-                            if (numStaked !== 0 && numStaked !== null && numStaked !== undefined) {
-                                setIsConnecting(false);
-                                showInfoToast(`Connected to wallet ${shortenAddress(address)}`);
-                                navigate(defaultConfig.defaultPath, { replace: true });
-                                return;
-                            }
-                            showErrorToast(`You don't hold any NFT's that have access to this platform.`);
-                            navigate('/purchase', { replace: true });
-                        },
-                        (err) => {
-                            showErrorToast('An error occurred while contacting the database, please try again.');
-                            setIsConnecting(false);
-                        }
-                    );
-                }
+                        setStep(STEPS.CHOOSE_USERNAME);
+                        setIsConnecting(false);
+                    },
+                    (err) => {
+                        showErrorToast('An error occurred while contacting the database, please try again.');
+                        setIsConnecting(false);
+                    }
+                );
             } else {
                 setStep(STEPS.SELECT_WALLET);
                 setIsConnecting(false);
@@ -228,7 +205,7 @@ const WalletLogin = () => {
         if (publicKey) {
             setIsConnecting(true);
             try {
-                const message = `Welcome to the Yaku Labs Dashboard!\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nYour authentication status will reset after 24 hours.\n\nWallet address:\n${publicKey}`;
+                const message = `Welcome to Vaporize Finance!\n\nThis request will not trigger a blockchain transaction or cost any gas fees.\n\nYour authentication status will reset after 24 hours.\n\nWallet address:\n${publicKey}`;
                 const encodedMessage = new TextEncoder().encode(message);
                 const signature = await signMessage!(encodedMessage);
                 if (!signature) showErrorToast(`An error occurred while confirming the signature, please try again.`);
@@ -264,7 +241,7 @@ const WalletLogin = () => {
                 (res) => {
                     console.log(res);
                     setStep(STEPS.LINK_DISCORD);
-                    showInfoToast('Congratulations! You are all set and ready to dive into the Yaku Labs Ecosystem!');
+                    showInfoToast('Congratulations! You are all set and ready to dive into the Vaporverse');
                 },
                 (err) => {
                     console.log(err);
@@ -321,7 +298,7 @@ const WalletLogin = () => {
                                     ) : (
                                         <Grid item>
                                             <Link to="#">
-                                                <img src={theme.palette.mode === 'dark' ? logoDark : logo} alt="Yaku Labs" width="200" />
+                                                <img src={theme.palette.mode === 'dark' ? logoDark : logo} alt="Vaporize" width="200" />
                                             </Link>
                                         </Grid>
                                     )}
@@ -355,7 +332,7 @@ const WalletLogin = () => {
                                                             <Grid item>
                                                                 <Stack alignItems="center" justifyContent="center" spacing={1}>
                                                                     <Typography variant="caption" fontSize="16px" textAlign="center">
-                                                                        Please connect your wallet which has access to the Yaku Labs
+                                                                        Please connect your wallet which has access to the Vaporize
                                                                         Dashboard
                                                                     </Typography>
                                                                 </Stack>
@@ -523,7 +500,7 @@ const WalletLogin = () => {
                                                             <Grid item>
                                                                 <Stack alignItems="center" justifyContent="center" spacing={1}>
                                                                     <Typography variant="caption" fontSize="16px" textAlign="center">
-                                                                        It appears to be your first time accessing the Yaku Labs Dashboard.
+                                                                        It appears to be your first time accessing the Vaporize Dashboard.
                                                                         <br />
                                                                         <br />
                                                                         You are eligible to choose a username, this will be displayed around

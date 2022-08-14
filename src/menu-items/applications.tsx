@@ -2,10 +2,10 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { IconAtom, IconAffiliate, IconBox, IconRepeat, IconCalendar } from '@tabler/icons';
+import { IconAccessible, IconAtom, IconAffiliate, IconBox, IconRepeat, IconCalendar } from '@tabler/icons';
 
 // constant
-const icons = { IconAtom, IconAffiliate, IconBox, IconRepeat, IconCalendar };
+const icons = { IconAccessible, IconAtom, IconAffiliate, IconBox, IconRepeat, IconCalendar };
 
 // ==============================|| APPLICATION MENU ITEMS ||============================== //
 
@@ -14,6 +14,14 @@ const applications = {
     title: <FormattedMessage id="application" />,
     type: 'group',
     children: [
+        {
+            id: 'swap',
+            title: <FormattedMessage id="swap" />,
+            type: 'item',
+            url: '/swap',
+            icon: icons.IconAccessible,
+            breadcrumbs: false
+        },
         {
             id: 'collabs',
             title: <FormattedMessage id="collabs" />,
