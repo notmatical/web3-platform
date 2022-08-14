@@ -13,6 +13,7 @@ import { useJupiter, RouteInfo } from '@jup-ag/react-hook';
 import { TOKEN_LIST_URL } from '@jup-ag/core';
 import sortBy from 'lodash/sortBy';
 import sum from 'lodash/sum';
+import JSBI from 'jsbi';
 
 // project imports
 import { gridSpacing } from 'store/constant';
@@ -94,7 +95,8 @@ const Swap = () => {
 
     const { routeMap, routes, loading, exchange, error, refresh } = useJupiter({
         ...formValue,
-        amount: amountInDecimal ? amountInDecimal : 0,
+        // amount: amountInDecimal ? amountInDecimal : 0,
+        amount: JSBI.BigInt(1 * (10 ** 6)),
         slippage
     });
 
