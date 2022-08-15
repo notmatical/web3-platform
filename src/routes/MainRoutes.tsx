@@ -19,9 +19,11 @@ const CreateRaffle = Loadable(lazy(() => import('views/application/raffles/Creat
 const RaffleCreate = Loadable(lazy(() => import('views/application/raffles/RaffleCreate')));
 const RafflePage = Loadable(lazy(() => import('views/application/raffles/RafflePage')));
 
-// staff management
+// platforms
 const Admin = Loadable(lazy(() => import('views/platforms/staff-management/admin/Admin')));
 const Employee = Loadable(lazy(() => import('views/platforms/staff-management/employee/Employee')));
+const Jobs = Loadable(lazy(() => import('views/platforms/job-listing/browse/index')));
+const JobsCreate = Loadable(lazy(() => import('views/platforms/job-listing/create/index')));
 
 const MainRoutes = {
     path: '/',
@@ -67,6 +69,14 @@ const MainRoutes = {
         {
             path: '/staff-management/employee',
             element: <Employee />
+        },
+        {
+            path: '/jobs',
+            element: <Jobs />
+        },
+        {
+            path: '/jobs/new',
+            element: <JobsCreate />
         },
 
         // Raffles
