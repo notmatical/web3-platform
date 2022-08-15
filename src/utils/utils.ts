@@ -76,6 +76,13 @@ export function relativeTimeFromDates(relative: Date | null, pivot: Date = new D
     return relativeTimeFromElapsed(elapsed);
 }
 
+export const getRelativeTimeFromEpoch = (epoch: number | string) => {
+    epoch = Number(epoch);
+    const now = new Date().getTime();
+    const elapsed = now - epoch;
+    return relativeTimeFromElapsed(elapsed);
+};
+
 export function relativeTimeFromElapsed(elapsed: number): string {
     for (const {unit, ms} of units) {
         if (Math.abs(elapsed) >= ms || unit === "second") {
