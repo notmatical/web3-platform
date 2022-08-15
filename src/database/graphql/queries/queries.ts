@@ -5,6 +5,9 @@ export * from './collab-tool/projects';
 
 export * from './gamification/index';
 
+export * from './job-listing/company';
+export * from './job-listing/job';
+
 export * from './spaces/proposal';
 export * from './spaces/spaces';
 
