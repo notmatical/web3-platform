@@ -20,10 +20,12 @@ import {
 
 // web3 imports
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { LAMPORTS_PER_SOL } from '@solana/web3.js';
+import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 
 // project imports
-import { shortenAddress } from 'utils/utils';
+import { getTokenBalance } from 'views/cosmic-astro/staking/fetchData';
+import { getATokenAddrFungible, solConnection } from 'actions/shared';
+import { VAPOR_TOKEN_MINT } from 'config/config';
 import MainCard from 'components/cards/MainCard';
 import Transitions from 'components/@extended/Transitions';
 
@@ -35,6 +37,7 @@ import * as db from 'database/graphql/graphql';
 import DefaultUser from 'assets/images/users/user-image.jpg';
 import { IconBook, IconGift, IconCrown, IconPower, IconRefresh, IconChevronDown } from '@tabler/icons';
 import SolanaLogo from 'assets/images/icons/solana-logo.png';
+import VaporToken from 'assets/images/icons/vapor-token.png';
 
 // ==============================|| SIDEBAR PROFILE ||============================== //
 
@@ -43,10 +46,11 @@ const ProfileList = () => {
     const navigate = useNavigate();
 
     const { connection } = useConnection();
-    const { publicKey, wallet, disconnect } = useWallet();
+    const mainWallet = useWallet();
+    const { publicKey, wallet, disconnect } = mainWallet;
     const [balance, setBalance] = useState(0);
+    const [vaporBalance, setVaporBalance] = useState(0);
 
-    const [selectedIndex, setSelectedIndex] = useState(-1);
     const [open, setOpen] = useState(false);
     const anchorRef = useRef<any>(null);
 
@@ -71,13 +75,6 @@ const ProfileList = () => {
         }
     };
 
-    const fetchBalance = async () => {
-        if (publicKey) {
-            const solBalance = await connection.getBalance(publicKey, 'confirmed');
-            setBalance(solBalance / LAMPORTS_PER_SOL);
-        }
-    };
-
     const handleToggle = () => {
         setOpen((prevOpen) => !prevOpen);
     };
@@ -90,9 +87,27 @@ const ProfileList = () => {
         setOpen(false);
     };
 
+    const fetchBalance = async () => {
+        if (publicKey) {
+            const solBalance = await connection.getBalance(publicKey, 'confirmed');
+            setBalance(solBalance / LAMPORTS_PER_SOL);
+        }
+    };
+
+    const fetchVaporBalance = async () => {
+        if (publicKey) {
+            const tokenAccountAddress = await getATokenAddrFungible(connection, publicKey, new PublicKey(VAPOR_TOKEN_MINT!));
+            if (tokenAccountAddress) {
+                const value = (await getTokenBalance(tokenAccountAddress, mainWallet, false)) || 0;
+                setVaporBalance(value);
+            }
+        }
+    };
+
     const prevOpen = useRef(open);
     useEffect(() => {
         fetchBalance();
+        fetchVaporBalance();
 
         if (prevOpen.current === true && open === false) {
             anchorRef.current.focus();
@@ -218,7 +233,7 @@ const ProfileList = () => {
                         {
                             name: 'offset',
                             options: {
-                                offset: [0, 14]
+                                offset: [35, 0]
                             }
                         }
                     ]
@@ -229,7 +244,7 @@ const ProfileList = () => {
                         <Transitions in={open} {...TransitionProps}>
                             <Paper>
                                 {open && (
-                                    <MainCard border={false} elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
+                                    <MainCard border elevation={16} content={false} boxShadow shadow={theme.shadows[16]}>
                                         <Box sx={{ m: 1 }}>
                                             <Stack>
                                                 <Stack direction="row" spacing={0.5} alignItems="center" justifyContent="flex-start">
@@ -320,6 +335,35 @@ const ProfileList = () => {
                                                     {wallet && (
                                                         <Typography variant="body1" fontWeight="800" sx={{ ml: 1 }}>
                                                             {(balance || 0).toLocaleString()} ◎
+                                                        </Typography>
+                                                    )}
+                                                </Stack>
+                                            </Stack>
+
+                                            <Stack
+                                                direction="row"
+                                                spacing={0.5}
+                                                alignItems="center"
+                                                justifyContent="flex-start"
+                                                sx={{ p: 0.5 }}
+                                            >
+                                                <Avatar
+                                                    src={VaporToken}
+                                                    sx={{
+                                                        ...theme.typography.mediumAvatar,
+                                                        cursor: 'pointer'
+                                                    }}
+                                                    aria-controls={open ? 'menu-list-grow' : undefined}
+                                                    aria-haspopup="true"
+                                                    color="inherit"
+                                                />
+                                                <Stack direction="column" alignItems="flex-start" justifyContent="flex-start">
+                                                    <Typography variant="body1" fontWeight="400" sx={{ ml: 1 }}>
+                                                        Vapor Balance
+                                                    </Typography>
+                                                    {wallet && (
+                                                        <Typography variant="body1" fontWeight="800" sx={{ ml: 1 }}>
+                                                            {(vaporBalance || 0).toLocaleString()} Ⓥ
                                                         </Typography>
                                                     )}
                                                 </Stack>
