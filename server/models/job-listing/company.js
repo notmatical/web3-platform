@@ -10,8 +10,9 @@ const companySchema = new Schema(
             unique: true
         },
         bio: String,
-        icon: String,
+        logoURI: String,
         website: String,
+        twitter: String,
         size: {
             type: String,
             enum: ['SMALL', 'MEDIUM', 'LARGE'],
@@ -26,7 +27,7 @@ const companySchema = new Schema(
         }],
         jobs: [{
             type: ObjectId,
-            ref: 'Jobs'
+            ref: 'Job'
         }],
         verified: {
             type: Boolean,
