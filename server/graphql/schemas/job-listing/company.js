@@ -11,8 +11,9 @@ export default gql`
 		id: ID!
 		name: String!
         bio: String!
-        icon: String!
+        logoURI: String!
 		website: String
+		twitter: String
 		size: CompanySize
 		locations: [String]
 		team: [User]!
@@ -28,6 +29,6 @@ export default gql`
 	}
 
 	extend type Mutation {
-        createCompany(name: String!, bio: String!, icon: String!, website: String!, size: CompanySize!, locations: [String]): Company
+        createCompany(name: String!, bio: String!, icon: String!, website: String, twitter: String, size: CompanySize!, locations: [String]): Company
     }
 `;
