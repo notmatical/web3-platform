@@ -109,7 +109,7 @@ function UserAccount() {
 
     const { data, loading, error, refetch } = useQuery(db.queries.GET_USER, { variables: { wallet: vanity }, fetchPolicy: 'network-only' });
 
-    const [value, setValue] = useState<string>('portfolio')
+    const [value, setValue] = useState<string>('portfolio');
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };

@@ -69,11 +69,11 @@ const PublicRoutes = {
             element: <Feed />
         },
         {
-            path: '/nft/:projectSlug/:tab',
+            path: '/nft/:projectSlug',
             element: <CollectionView />
         },
         {
-            path: '/nft/:projectSlug/:tab/:tokenAddress',
+            path: '/nft/:projectSlug/:tokenAddress',
             element: <NftView />
         },
 

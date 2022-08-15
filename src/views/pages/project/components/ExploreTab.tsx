@@ -238,7 +238,7 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
                             <Grid key={index} item xs={6} sm={4} md={3} lg={3}>
                                 <MainCard
                                     content={false}
-                                    onClick={() => navigate(`/nft/${projectSlug}/explore/${nft.token_address}`)}
+                                    onClick={() => navigate(`/nft/${projectSlug}/${nft.token_address}`)}
                                     sx={{
                                         borderRadius: 4,
                                         '&:hover': {

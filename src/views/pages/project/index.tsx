@@ -3,6 +3,8 @@ import { Link, useNavigate, useLocation, useParams } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
+import TabContext from '@mui/lab/TabContext';
+import TabPanel from '@mui/lab/TabPanel';
 import { Grid, Box, Fade, Stack, Tooltip, Tab, Tabs, Divider, Avatar, IconButton, Typography, CardMedia } from '@mui/material';
 
 // project imports
@@ -19,40 +21,31 @@ import { IconBook, IconUsers, IconActivity, IconChartBar, IconDots } from '@tabl
 import NavigateBeforeRoundedIcon from '@mui/icons-material/NavigateBeforeRounded';
 import PlaceholderImage from 'assets/images/placeholder.png';
 
-// data
-function TabPanel({ children, value, index, ...other }: TabsProps) {
-    return (
-        <div role="tabpanel" hidden={value !== index} id={`simple-tabpanel-${index}`} aria-labelledby={`simple-tab-${index}`} {...other}>
-            {value === index && <Box sx={{ p: 0 }}>{children}</Box>}
-        </div>
-    );
-}
-
 function a11yProps(index: number) {
     return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`
+        id: `nft-tab-${index}`,
+        'aria-controls': `nft-tabpanel-${index}`
     };
 }
 
 const tabOptions = [
     {
-        to: '/explore',
+        value: 'explore',
         icon: <IconBook stroke={1.5} size="1.1rem" />,
         label: 'Explore'
     },
     {
-        to: '/owners',
+        value: 'owners',
         icon: <IconUsers stroke={1.5} size="1.1rem" />,
         label: 'Owners'
     },
     {
-        to: '/activity',
+        value: 'activity',
         icon: <IconActivity stroke={1.5} size="1.1rem" />,
         label: 'Activity'
     },
     {
-        to: '/analytics',
+        value: 'analytics',
         icon: <IconChartBar stroke={1.5} size="1.1rem" />,
         label: 'Analytics'
     }
@@ -62,32 +55,14 @@ const CollectionView = () => {
     const theme = useTheme();
     const navigate = useNavigate();
     const location = useLocation();
-    const { projectSlug, tab } = useParams();
+    const { projectSlug } = useParams();
 
     const solPrice = useSolPrice();
 
     const [project, setProject] = useState<any>(location.state);
 
-    // Tabs
-    let selectedTab = 0;
-    switch (tab) {
-        case 'owners':
-            selectedTab = 1;
-            break;
-        case 'activity':
-            selectedTab = 2;
-            break;
-        case 'analytics':
-            selectedTab = 3;
-            break;
-        default:
-            selectedTab = 0;
-    }
-
-    const redirectUrl = `/nft/${projectSlug}`;
-
-    const [value, setValue] = useState<number>(selectedTab);
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    const [value, setValue] = useState<string>('explore');
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
     };
 
@@ -199,67 +174,67 @@ const CollectionView = () => {
                     </Box>
                 </Box>
 
-                <Tabs
-                    value={value}
-                    variant="scrollable"
-                    onChange={handleChange}
-                    sx={{
-                        marginTop: 2,
-                        px: 2,
-                        '& .MuiTabs-flexContainer': {
-                            border: 'none'
-                        },
-                        '& a': {
-                            minHeight: 'auto',
-                            minWidth: 10,
-                            py: 1.5,
-                            px: 1,
-                            mr: 2.25,
-                            color: 'primary.main',
-                            display: 'flex',
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        },
-                        '& a.Mui-selected': {
-                            color: 'white'
-                        },
-                        '& .MuiTabs-indicator': {
-                            backgroundColor: 'secondary.main'
-                        },
-                        '& a > svg': {
-                            mr: 1.25,
-                            mb: '0px !important'
-                        }
-                    }}
-                >
-                    {tabOptions.map((option, index) => (
-                        <Tab
-                            key={index}
-                            component={Link}
-                            to={redirectUrl + option.to}
-                            icon={option.icon}
-                            label={option.label}
-                            sx={{ mb: 0 }}
-                            {...a11yProps(index)}
-                        />
-                    ))}
-                </Tabs>
+                <TabContext value={value}>
+                    <Tabs
+                        value={value}
+                        variant="scrollable"
+                        onChange={handleChange}
+                        sx={{
+                            marginTop: 2.5,
+                            '& .MuiTabs-flexContainer': {
+                                border: 'none'
+                            },
+                            '& button': {
+                                minHeight: 'auto',
+                                minWidth: 10,
+                                py: 1.5,
+                                px: 1,
+                                mr: 2.25,
+                                color: 'primary.main',
+                                display: 'flex',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            },
+                            '& .Mui-selected': {
+                                color: 'white'
+                            },
+                            '& .MuiTabs-indicator': {
+                                backgroundColor: 'secondary.main'
+                            },
+                            '& button > svg': {
+                                mr: 1.25,
+                                mb: '0px !important'
+                            }
+                        }}
+                    >
+                        {tabOptions.map((option, index) => (
+                            <Tab
+                                key={index}
+                                value={option.value}
+                                icon={option.icon}
+                                label={option.label}
+                                sx={{ mb: 0 }}
+                                {...a11yProps(index)}
+                            />
+                        ))}
+                    </Tabs>
 
-                <Divider sx={{ mx: 2, mb: 2 }} />
+                    <Divider sx={{ mx: 2, mb: 2 }} />
 
-                <TabPanel value={value} index={0}>
-                    <ExploreTab project={project} projectSlug={projectSlug} />
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                    <OwnersTab project={project} projectSlug={projectSlug} />
-                </TabPanel>
-                <TabPanel value={value} index={2}>
-                    <ActivityTab project={project} projectSlug={projectSlug} />
-                </TabPanel>
-                <TabPanel value={value} index={3}>
-                    <AnalyticsTab project={project} projectSlug={projectSlug} />
-                </TabPanel>
+                    <TabPanel value="explore" sx={{ padding: 0 }}>
+                        <ExploreTab project={project} projectSlug={projectSlug} />
+                    </TabPanel>
+                    <TabPanel value="owners" sx={{ padding: 0 }}>
+                        <OwnersTab project={project} projectSlug={projectSlug} />
+                    </TabPanel>
+                    <TabPanel value="activity" sx={{ padding: 0 }}>
+                        <ActivityTab project={project} projectSlug={projectSlug} />
+                    </TabPanel>
+                    <TabPanel value="analytics" sx={{ padding: 0 }}>
+                        <AnalyticsTab project={project} projectSlug={projectSlug} />
+                    </TabPanel>
+                </TabContext>
             </Grid>
         </Grid>
     );
