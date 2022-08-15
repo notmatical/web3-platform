@@ -19,4 +19,8 @@ import Collab from './collab-tool/collab';
 import Wallet from './staff-tool/wallet';
 import Claimer from './staff-tool/claimer';
 
-export { User, Social, Quest, Project, Collab, Space, Proposal, API, Wallet, Claimer };
+// job listing
+import Company from './job-listing/company';
+import Job from './job-listing/job';
+
+export { User, Social, Quest, Project, Collab, Space, Proposal, API, Wallet, Claimer, Company, Job };

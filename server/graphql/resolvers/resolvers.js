@@ -21,4 +21,8 @@ import collab from './collab-tool/collab';
 import wallet from './staff-tool/wallet';
 import claimer from './staff-tool/claimer';
 
-export default [user, social, quest, api, drop, project, collab, space, proposal, wallet, claimer];
+// job listing
+import company from './job-listing/company';
+import job from './job-listing/job';
+
+export default [user, social, quest, api, drop, project, collab, space, proposal, wallet, claimer, company, job];
