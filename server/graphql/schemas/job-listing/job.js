@@ -20,6 +20,7 @@ export default gql`
 		getJobs: [Job]
 		getJob(id: ID!): Job
         getJobsByCompany(company: ID!): [Job]
+		getRecentJobListings(limit: Int!): [Job]
 	}
 
 	extend type Mutation {
