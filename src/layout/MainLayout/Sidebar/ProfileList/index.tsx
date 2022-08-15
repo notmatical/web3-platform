@@ -10,6 +10,7 @@ import {
     Skeleton,
     Badge,
     Popper,
+    Dialog,
     Button,
     Typography,
     Avatar,
@@ -27,6 +28,7 @@ import { getTokenBalance } from 'views/cosmic-astro/staking/fetchData';
 import { getATokenAddrFungible, solConnection } from 'actions/shared';
 import { VAPOR_TOKEN_MINT } from 'config/config';
 import MainCard from 'components/cards/MainCard';
+import ConfirmLogoutModal from './ConfirmLogoutModal';
 import Transitions from 'components/@extended/Transitions';
 
 // graphql
@@ -53,6 +55,11 @@ const ProfileList = () => {
 
     const [open, setOpen] = useState(false);
     const anchorRef = useRef<any>(null);
+
+    // Modal
+    const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
+    const handleLogoutOpen = () => setLogoutDialogOpen(true);
+    const handleLogoutClose = () => setLogoutDialogOpen(false);
 
     const { data, loading, error } = useQuery(db.queries.GET_USER, { variables: { wallet: publicKey }, fetchPolicy: 'network-only' });
 
@@ -480,7 +487,7 @@ const ProfileList = () => {
                                                 spacing={0.5}
                                                 alignItems="center"
                                                 justifyContent="flex-start"
-                                                onClick={handleLogout}
+                                                onClick={handleLogoutOpen}
                                                 sx={{
                                                     p: 0.5,
                                                     mb: 1,
@@ -517,6 +524,18 @@ const ProfileList = () => {
                     </ClickAwayListener>
                 )}
             </Popper>
+
+            {/* Dialog renders its body even if not open */}
+            <Dialog
+                maxWidth="sm"
+                fullWidth
+                onClose={handleLogoutClose}
+                open={logoutDialogOpen}
+                scroll="paper"
+                sx={{ '& .MuiDialog-paper': { p: 0 } }}
+            >
+                {logoutDialogOpen && <ConfirmLogoutModal onLogout={handleLogout} onCancel={handleLogoutClose} />}
+            </Dialog>
         </>
     );
 };
