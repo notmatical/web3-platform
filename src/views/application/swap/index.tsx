@@ -87,6 +87,7 @@ const Swap = () => {
     }, [formValue.inputMint?.toBase58(), formValue.outputMint?.toBase58(), tokens]);
 
     // methods
+    // eslint-disable-next-line consistent-return
     const amountInDecimal = useMemo(() => {
         if (typeof formValue?.amount === 'number') {
             return formValue.amount * 10 ** (inputTokenInfo?.decimals || 1);
@@ -96,7 +97,7 @@ const Swap = () => {
     const { routeMap, routes, loading, exchange, error, refresh } = useJupiter({
         ...formValue,
         // amount: amountInDecimal ? amountInDecimal : 0,
-        amount: JSBI.BigInt(1 * (10 ** 6)),
+        amount: JSBI.BigInt(1 * 10 ** 6),
         slippage
     });
 

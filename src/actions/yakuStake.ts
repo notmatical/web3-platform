@@ -11,7 +11,7 @@ import {
     STAKING_PROGRAM_ID,
     STAKING_REWARD_MINT,
     TOKEN_ADDR,
-    YAKU_SPL_TOKEN_PROGRAM_ID
+    SPL_TOKEN_PROGRAM_ID
 } from 'config/config';
 import { getNftMetaData, solConnection } from 'actions/shared';
 import { AnchorWallet, WalletContextState } from '@solana/wallet-adapter-react';
@@ -45,7 +45,7 @@ export const getStakingState = async (program: anchor.Program<Staking>) => {
     };
 };
 
-export const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new anchor.web3.PublicKey(YAKU_SPL_TOKEN_PROGRAM_ID);
+export const SPL_ASSOCIATED_TOKEN_ACCOUNT_PROGRAM_ID = new anchor.web3.PublicKey(SPL_TOKEN_PROGRAM_ID);
 
 export const getTokenWallet = async function (wallet: anchor.web3.PublicKey, mint: anchor.web3.PublicKey) {
     return (

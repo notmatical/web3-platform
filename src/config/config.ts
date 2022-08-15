@@ -13,7 +13,9 @@ export const STAKING_CONFIG_ID = 'AyGU2zPhENQdLEkJQNTNaZbqAS5Hmh5ifAGZZXEGigcy';
 export const STAKING_REWARD_MINT = 'NGK3iHqqQkyRZUj4uhJDQqEyKKcZ7mdawWpqwMffM3s';
 
 export const TOKEN_ADDR = 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA';
-export const YAKU_SPL_TOKEN_PROGRAM_ID = 'ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL';
+export const SPL_TOKEN_PROGRAM_ID = 'ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL';
+
+export const VAPOR_TOKEN_MINT = 'BdwbTU3G23sub6wcGX1WJCM2dG8GJu8faip5QQ8BmvNc';
 
 export const NFT_CREATOR = '5SjFvSud46uBFRNXQnAuzFspps5fRnhZjm83TXnY7BPu'; // astro only
 export const YAKU_ONI_NFT_CREATOR = [
@@ -50,7 +52,7 @@ export const TOKEN_PAY_TYPE = 'YAKU';
 
 export const WHITELIST_MAX = 50;
 export const TICKETS_MAX = 5000;
-export const MAX_BUYING_TICKET = 0.1;
+export const MAX_BUYING_TICKET = 0.02;
 export const RAFFLE_REWARD_TYPES: Record<string, number> = {
     nft: 1,
     whitelist: 0,

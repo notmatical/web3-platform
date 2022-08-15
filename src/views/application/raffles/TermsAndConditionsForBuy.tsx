@@ -40,7 +40,9 @@ export const TermsAndConditionsForBuy = () => {
                     <ListItemIcon sx={{ minWidth: '15px' }}>
                         <FiberManualRecordIcon sx={{ fontSize: '0.5rem' }} />
                     </ListItemIcon>
-                    <ListItemText primary={`You can only buy ${(MAX_BUYING_TICKET * 100).toFixed(0)}% of total tickets.`} />
+                    <ListItemText
+                        primary={`You can only buy ${(MAX_BUYING_TICKET * 100).toFixed(0)}% of total tickets in one transaction.`}
+                    />
                 </Box>
             </List>
         </MainCard>
