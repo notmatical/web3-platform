@@ -16,6 +16,7 @@ import useConfig from 'hooks/useConfig';
 // assets
 import { IconSettings } from '@tabler/icons';
 import { HighlightOutlined, BorderInnerOutlined, BgColorsOutlined, CloseCircleOutlined, FontColorsOutlined } from '@ant-design/icons';
+import LightTheme from 'assets/images/customization/light-theme.svg';
 
 const Customization = () => {
     const theme = useTheme();
@@ -77,17 +78,20 @@ const Customization = () => {
                 open={open}
                 PaperProps={{
                     sx: {
-                        width: 340
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flex: '1 0 auto',
+                        overflowY: 'auto',
+                        width: 320
                     }
                 }}
             >
                 {open && (
                     <MainCard
-                        title="Theme Customization"
+                        title="Theme Settings"
                         sx={{
                             border: 'none',
                             borderRadius: 0,
-                            height: '100vh',
                             '& .MuiCardHeader-root': {
                                 color: theme.palette.secondary.dark,
                                 bgcolor: theme.palette.secondary.dark,
@@ -120,6 +124,56 @@ const Customization = () => {
                                 }
                             }}
                         >
+                            {/* sx={{ padding: '32px 24px' }} */}
+                            {/* <Typography
+                                variant="overline"
+                                color="textPrimary"
+                                fontWeight="600"
+                                sx={{
+                                    textTransform: 'uppercase',
+                                    letterSpacing: '0.5px'
+                                }}
+                            >
+                                Color Scheme
+                            </Typography> */}
+                            {/* <Box display="flex" flexDirection="row" alignItems="center" sx={{ margin: '-8px', mt: 1 }}>
+                                <Box display="flex" flexDirection="column" alignItems="center" sx={{ margin: '-8px' }}>
+                                    <Box
+                                        sx={{
+                                            borderColor: 'rgb(45, 55, 72)',
+                                            borderRadius: 1,
+                                            borderStyle: 'solid',
+                                            borderWidth: '2px',
+                                            flexGrow: 1,
+                                            m: 1,
+                                            p: 1
+                                        }}
+                                    >
+                                        <img src={LightTheme} alt="light theme" style={{ height: 'auto', width: '100%' }} />
+                                    </Box>
+                                    <Typography variant="h6" color="textPrimary">
+                                        Light
+                                    </Typography>
+                                </Box>
+                                <Box display="flex" flexDirection="column" alignItems="center" sx={{ margin: '-8px' }}>
+                                    <Box
+                                        sx={{
+                                            borderColor: 'rgb(45, 55, 72)',
+                                            borderRadius: 1,
+                                            borderStyle: 'solid',
+                                            borderWidth: '2px',
+                                            flexGrow: 1,
+                                            m: 1,
+                                            p: 1
+                                        }}
+                                    >
+                                        <img src={LightTheme} alt="light theme" style={{ height: 'auto', width: '100%' }} />
+                                    </Box>
+                                    <Typography variant="h6" color="textPrimary">
+                                        Dark
+                                    </Typography>
+                                </Box>
+                            </Box> */}
                             <Accordion defaultExpanded sx={{ borderTop: 'none' }}>
                                 <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                                     <Stack direction="row" spacing={1.25} alignItems="center">
@@ -167,54 +221,6 @@ const Customization = () => {
                                     </Stack>
                                 </AccordionSummary>
                                 <AccordionDetails>{themeWidth}</AccordionDetails>
-                            </Accordion>
-                            <Accordion defaultExpanded sx={{ borderTop: 'none' }}>
-                                <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-                                    <Stack direction="row" spacing={1.5} alignItems="center">
-                                        <IconButton
-                                            disableRipple
-                                            color="secondary"
-                                            sx={{ bgcolor: theme.palette.background.default, borderRadius: 1 }}
-                                            onClick={handleToggle}
-                                            aria-label="settings toggler"
-                                        >
-                                            <BgColorsOutlined />
-                                        </IconButton>
-                                        <Stack>
-                                            <Typography variant="subtitle1" color="textPrimary">
-                                                Color Scheme
-                                            </Typography>
-                                            <Typography variant="caption" color="textSecondary">
-                                                Choose your preferred color scheme.
-                                            </Typography>
-                                        </Stack>
-                                    </Stack>
-                                </AccordionSummary>
-                                <AccordionDetails>{themeColor}</AccordionDetails>
-                            </Accordion>
-                            <Accordion defaultExpanded sx={{ borderTop: 'none' }}>
-                                <AccordionSummary aria-controls="panel3d-content" id="panel3d-header">
-                                    <Stack direction="row" spacing={1.5} alignItems="center">
-                                        <IconButton
-                                            disableRipple
-                                            color="secondary"
-                                            sx={{ bgcolor: theme.palette.background.default, borderRadius: 1 }}
-                                            onClick={handleToggle}
-                                            aria-label="settings toggler"
-                                        >
-                                            <FontColorsOutlined />
-                                        </IconButton>
-                                        <Stack>
-                                            <Typography variant="subtitle1" color="textPrimary">
-                                                Font Family
-                                            </Typography>
-                                            <Typography variant="caption" color="textSecondary">
-                                                Choose your preferred font family.
-                                            </Typography>
-                                        </Stack>
-                                    </Stack>
-                                </AccordionSummary>
-                                <AccordionDetails>{themeFont}</AccordionDetails>
                             </Accordion>
                         </Box>
                     </MainCard>
