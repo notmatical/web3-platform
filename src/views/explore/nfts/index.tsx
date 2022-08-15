@@ -7,6 +7,7 @@ import {
     Grid,
     Box,
     Stack,
+    ButtonGroup,
     Button,
     TextField,
     MenuItem,
@@ -15,7 +16,8 @@ import {
     Chip,
     Typography,
     TableContainer,
-    Paper,
+    TablePagination,
+    Divider,
     Table,
     TableHead,
     TableRow,
@@ -46,20 +48,16 @@ import { CloseCircleOutlined, StarFilled } from '@ant-design/icons';
 // data
 const filter = [
     {
-        value: 'default',
-        label: 'Filter By'
+        value: 'last_hour',
+        label: 'Last Hour'
     },
     {
-        value: 'recommended',
-        label: 'Recommended'
+        value: 'last_day',
+        label: 'Last Day'
     },
     {
-        value: 'doxxed',
-        label: 'Doxxed'
-    },
-    {
-        value: 'verified',
-        label: 'Verified'
+        value: 'last_week',
+        label: 'Last Week'
     }
 ];
 
@@ -94,9 +92,23 @@ const Monitor = () => {
         fetchProjects();
     }, []);
 
-    // new
-    const [tag, setTag] = useState('all');
-    const [filterValue, setFilterValue] = useState('default');
+    // table pagination
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(50);
+
+    const handleChangePage = (event: unknown, newPage: number) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
+    // Avoid a layout jump when reaching the last page with empty rows.
+    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - projects.project_stats.length) : 0;
+
+    const [filterValue, setFilterValue] = useState('last_day');
 
     return (
         <Grid container rowSpacing={4.5} columnSpacing={2.75}>
@@ -266,98 +278,35 @@ const Monitor = () => {
 
             {/* toolbar */}
             <Grid item xs={12}>
-                <Box display="flex" justifyContent="space-between" alignItems="center">
-                    <Box sx={{ pr: 2, mr: 2, borderRightWidth: '1px' }}>
-                        <Button color="primary" size="small" variant="contained" startIcon={<StarFilled />}>
-                            Watchlist
-                        </Button>
-                        {/* <Button sx={{ ml: 1 }} color="primary" size="small" variant="contained" startIcon={<StarFilled />}>
-                            Portfolio
-                        </Button> */}
-                    </Box>
+                <Box display="flex" alignItems="center" sx={{ flexGrow: 1, gap: 1 }}>
+                    <ButtonGroup variant="outlined" color="primary" aria-label="outlined primary button group">
+                        <Button variant="contained">All</Button>
+                        <Button variant="outlined">Portfolio</Button>
+                    </ButtonGroup>
 
-                    {/* tags */}
-                    <Box sx={{ gap: 2 }}>
-                        <Button
-                            variant={tag === 'all' ? 'contained' : 'text'}
-                            color={tag === 'all' ? 'secondary' : 'primary'}
-                            size="small"
-                            sx={{ fontWeight: 800 }}
-                            onClick={() => setTag('all')}
-                        >
-                            All
-                        </Button>
-                        <Button
-                            variant={tag === 'PFP' ? 'contained' : 'text'}
-                            color={tag === 'PFP' ? 'secondary' : 'primary'}
-                            size="small"
-                            sx={{ fontWeight: 800 }}
-                            onClick={() => setTag('PFP')}
-                        >
-                            PFP
-                        </Button>
-                        <Button
-                            variant={tag === 'Gaming' ? 'contained' : 'text'}
-                            color={tag === 'Gaming' ? 'secondary' : 'primary'}
-                            size="small"
-                            sx={{ fontWeight: 800 }}
-                            onClick={() => setTag('Gaming')}
-                        >
-                            Gaming
-                        </Button>
-                        <Button
-                            variant={tag === 'Utility' ? 'contained' : 'text'}
-                            color={tag === 'Utility' ? 'secondary' : 'primary'}
-                            size="small"
-                            sx={{ fontWeight: 800 }}
-                            onClick={() => setTag('Utility')}
-                        >
-                            Utility
-                        </Button>
-                        <Button
-                            variant={tag === 'Collectibles' ? 'contained' : 'text'}
-                            color={tag === 'Collectibles' ? 'secondary' : 'primary'}
-                            size="small"
-                            sx={{ fontWeight: 800 }}
-                            onClick={() => setTag('Collectibles')}
-                        >
-                            Collectibles
-                        </Button>
-                        <Button
-                            variant={tag === 'Generative Art' ? 'contained' : 'text'}
-                            color={tag === 'Generative Art' ? 'secondary' : 'primary'}
-                            size="small"
-                            sx={{ fontWeight: 800 }}
-                            onClick={() => setTag('Generative Art')}
-                        >
-                            Generative Art
-                        </Button>
-                        <Button
-                            variant={tag === 'Virtual World' ? 'contained' : 'text'}
-                            color={tag === 'Virtual World' ? 'secondary' : 'primary'}
-                            size="small"
-                            sx={{ fontWeight: 800 }}
-                            onClick={() => setTag('Virtual World')}
-                        >
-                            Virtual World
-                        </Button>
-                        <Button
-                            variant={tag === 'NEW' ? 'contained' : 'text'}
-                            color={tag === 'NEW' ? 'secondary' : 'primary'}
-                            size="small"
-                            sx={{ fontWeight: 800 }}
-                            onClick={() => setTag('NEW')}
-                        >
-                            New Listings
-                        </Button>
-                    </Box>
+                    <Box sx={{ flexGrow: 1 }} />
+
+                    {/* date queries */}
+                    <TextField
+                        select
+                        value={filterValue}
+                        size="small"
+                        sx={{ width: 'fit-content', textAlign: 'left' }}
+                        onChange={(e) => setFilterValue(e.target.value)}
+                    >
+                        {filter.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
 
                     {/* filter */}
                     <TextField
                         select
                         value={filterValue}
                         size="small"
-                        sx={{ width: 150, textAlign: 'left', ml: 2 }}
+                        sx={{ width: 150, textAlign: 'left' }}
                         onChange={(e) => setFilterValue(e.target.value)}
                     >
                         {filter.map((option) => (
@@ -372,88 +321,101 @@ const Monitor = () => {
             {/* project info */}
             {projects.project_stats && projects.project_stats.length > 0 ? (
                 <Grid item xs={12} sx={{ pt: '3 !important' }}>
-                    <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 650 }} aria-label="project monitor table">
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>#</TableCell>
-                                    <TableCell>Collection</TableCell>
-                                    <TableCell>Volume (1D)</TableCell>
-                                    <TableCell>1d %</TableCell>
-                                    <TableCell>Floor Price</TableCell>
-                                    <TableCell>Market Cap</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {projects.project_stats.map((project: any, index: number) => (
-                                    <TableRow
-                                        key={index}
-                                        onClick={() => navigate(`/nft/${project.project_id}/explore`, { state: { projectData: project } })}
-                                        sx={{
-                                            '&:last-child td, &:last-child th': {
-                                                border: 0
-                                            },
-                                            '&:hover': {
-                                                cursor: 'pointer',
-                                                transition: 'all .1s ease-in-out',
-                                                background: '#202a30'
-                                            }
-                                        }}
-                                    >
-                                        <TableCell>{index + 1}</TableCell>
-                                        <TableCell component="th" scope="row">
-                                            <Box display="flex" flexDirection="row" alignItems="center">
-                                                <Avatar
-                                                    src={project.project.img_url}
-                                                    sx={{
-                                                        ...theme.typography.mediumAvatar,
-                                                        backgroundColor: 'transparent'
-                                                    }}
-                                                    color="inherit"
-                                                />
-                                                <Stack>
-                                                    <Typography variant="h5" fontWeight="700" sx={{ ml: 1 }}>
-                                                        {project.project.display_name}
-                                                    </Typography>
-                                                    <Typography variant="body1" color="primary" fontWeight="600" sx={{ ml: 1 }}>
-                                                        {formatNumber.format(project.project.supply)}
-                                                    </Typography>
-                                                </Stack>
-                                            </Box>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Typography variant="h4">{formatPrice.format(project.volume_1day)}</Typography>
-                                        </TableCell>
-                                        <TableCell>
-                                            {Math.sign(project.floor_price_1day_change) === 1 ? (
-                                                <Chip
-                                                    label={formatPercent.format(project.floor_price_1day_change)}
-                                                    size="small"
-                                                    color="success"
-                                                    icon={<IconChevronUp size="1.1rem" stroke={1.5} />}
-                                                    sx={{ borderRadius: '24px' }}
-                                                />
-                                            ) : (
-                                                <Chip
-                                                    label={formatPercent.format(project.floor_price_1day_change)}
-                                                    size="small"
-                                                    color="error"
-                                                    icon={<IconChevronDown size="1.1rem" stroke={1.5} />}
-                                                    sx={{ borderRadius: '24px' }}
-                                                />
-                                            )}
-                                        </TableCell>
-                                        <TableCell>
-                                            <Typography variant="h4">{formatPriceNumber.format(project.floor_price)} ◎</Typography>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Typography variant="h4">{formatPrice.format(project.market_cap)}</Typography>
-                                        </TableCell>
+                    <MainCard border={false} sx={{ width: '100%' }} contentSX={{ p: '0 !important' }}>
+                        <TableContainer>
+                            <Table sx={{ minWidth: 650 }} aria-label="explore nfts table">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Collections</TableCell>
+                                        <TableCell>Volume (1D)</TableCell>
+                                        <TableCell>1d %</TableCell>
+                                        <TableCell>Floor Price</TableCell>
+                                        <TableCell>Market Cap</TableCell>
                                     </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
+                                </TableHead>
+                                <TableBody>
+                                    {projects.project_stats.map((project: any, index: number) => (
+                                        <TableRow
+                                            key={index}
+                                            onClick={() => navigate(`/nft/${project.project_id}`, { state: { projectData: project } })}
+                                            sx={{
+                                                '&:last-child td, &:last-child th': {
+                                                    border: 0
+                                                },
+                                                '&:hover': {
+                                                    cursor: 'pointer',
+                                                    transition: 'all .1s ease-in-out',
+                                                    background: 'rgba(255, 255, 255, 0.04)'
+                                                }
+                                            }}
+                                        >
+                                            <TableCell component="th" scope="row">
+                                                <Box display="flex" flexDirection="row" alignItems="center" sx={{ gap: 1 }}>
+                                                    <Typography variant="h5" fontWeight="700" sx={{ minWidth: '32px' }}>
+                                                        {index + 1}
+                                                    </Typography>
+                                                    <Avatar
+                                                        src={project.project.img_url}
+                                                        sx={{
+                                                            ...theme.typography.mediumAvatar,
+                                                            backgroundColor: 'transparent'
+                                                        }}
+                                                        color="inherit"
+                                                    />
+                                                    <Stack>
+                                                        <Typography variant="h5" fontWeight="700" sx={{ ml: 1 }}>
+                                                            {project.project.display_name}
+                                                        </Typography>
+                                                        <Typography variant="body1" color="primary" fontWeight="600" sx={{ ml: 1 }}>
+                                                            {formatNumber.format(project.project.supply)}
+                                                        </Typography>
+                                                    </Stack>
+                                                </Box>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Typography variant="h4">{formatPrice.format(project.volume_1day)}</Typography>
+                                            </TableCell>
+                                            <TableCell>
+                                                {Math.sign(project.floor_price_1day_change) === 1 ? (
+                                                    <Chip
+                                                        label={formatPercent.format(project.floor_price_1day_change)}
+                                                        size="small"
+                                                        color="success"
+                                                        icon={<IconChevronUp size="1.1rem" stroke={1.5} />}
+                                                        sx={{ borderRadius: '24px' }}
+                                                    />
+                                                ) : (
+                                                    <Chip
+                                                        label={formatPercent.format(project.floor_price_1day_change)}
+                                                        size="small"
+                                                        color="error"
+                                                        icon={<IconChevronDown size="1.1rem" stroke={1.5} />}
+                                                        sx={{ borderRadius: '24px' }}
+                                                    />
+                                                )}
+                                            </TableCell>
+                                            <TableCell>
+                                                <Typography variant="h4">{formatPriceNumber.format(project.floor_price)} ◎</Typography>
+                                            </TableCell>
+                                            <TableCell>
+                                                <Typography variant="h4">{formatPrice.format(project.market_cap)}</Typography>
+                                            </TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                        <Divider />
+                        <TablePagination
+                            rowsPerPageOptions={[5, 10, 25]}
+                            component="div"
+                            count={projects.project_stats.length}
+                            rowsPerPage={rowsPerPage}
+                            page={page}
+                            onPageChange={handleChangePage}
+                            onRowsPerPageChange={handleChangeRowsPerPage}
+                        />
+                    </MainCard>
                 </Grid>
             ) : (
                 <Grid item xs={12}>
