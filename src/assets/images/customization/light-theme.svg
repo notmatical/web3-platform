@@ -1,0 +1,51 @@
+<svg width="152" height="130" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#light-theme_svg__a)">
+        <g filter="url(#light-theme_svg__b)">
+            <path fill="#111827" d="M0 0h52v130H0z"></path>
+            <path d="m16.638 9.715 3.516 1.967a.524.524 0 0 1 .195.719.523.523 0 0 1-.195.191l-3.516 1.967a1.506 1.506 0 0 1-1.47 0l-3.516-1.967a.524.524 0 0 1-.196-.719.525.525 0 0 1 .196-.191l3.516-1.967a1.505 1.505 0 0 1 1.47 0Z" fill="#fff"></path>
+            <path opacity="0.7" d="m16.619 11.561 5.035 2.817a.523.523 0 0 1 0 .91l-5.035 2.817a1.505 1.505 0 0 1-1.47 0l-5.035-2.817a.524.524 0 0 1-.196-.719.524.524 0 0 1 .196-.191l5.035-2.817a1.505 1.505 0 0 1 1.47 0Z" fill="#fff"></path>
+            <path opacity="0.4" d="m16.734 13.407 6.999 3.915a.522.522 0 0 1 .195.718.523.523 0 0 1-.195.191l-7 3.915a1.503 1.503 0 0 1-1.467 0L8.267 18.23a.523.523 0 0 1-.195-.718.522.522 0 0 1 .195-.191l7-3.915a1.503 1.503 0 0 1 1.467 0Z" fill="#fff"></path>
+            <rect x="8" y="36" width="36" height="6" rx="3" fill="#10B981"></rect>
+            <rect x="8" y="54" width="36" height="6" rx="3" fill="#4B5563"></rect>
+            <rect x="8" y="72" width="36" height="6" rx="3" fill="#4B5563"></rect>
+            <rect x="8" y="90" width="36" height="6" rx="3" fill="#4B5563"></rect>
+            <rect x="8" y="108" width="36" height="6" rx="3" fill="#4B5563"></rect>
+        </g>
+        <path fill="#F9FAFC" d="M52 0h100v130H52z"></path>
+        <g filter="url(#light-theme_svg__c)">
+            <path fill="#fff" d="M52 0h100v22H52z"></path>
+            <rect x="58" y="8" width="33" height="6" rx="3" fill="#CFD8DC"></rect>
+            <rect x="122" y="7" width="8" height="8" rx="4" fill="#CFD8DC"></rect>
+            <rect x="138" y="7" width="8" height="8" rx="4" fill="#CFD8DC"></rect>
+        </g>
+    </g>
+    <defs>
+        <filter id="light-theme_svg__b" x="-2" y="-1" width="56" height="134" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+            <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
+            <feOffset dy="1"></feOffset>
+            <feGaussianBlur stdDeviation="1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"></feColorMatrix>
+            <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_7075:30048"></feBlend>
+            <feBlend in="SourceGraphic" in2="effect1_dropShadow_7075:30048" result="shape"></feBlend>
+        </filter>
+        <filter id="light-theme_svg__c" x="50" y="-1" width="104" height="26" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+            <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
+            <feOffset dy="1"></feOffset>
+            <feGaussianBlur stdDeviation="1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.392157 0 0 0 0 0.454902 0 0 0 0 0.545098 0 0 0 0.1 0"></feColorMatrix>
+            <feBlend in2="BackgroundImageFix" result="effect1_dropShadow_7075:30048"></feBlend>
+            <feColorMatrix in="SourceAlpha" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
+            <feOffset dy="1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5"></feGaussianBlur>
+            <feComposite in2="hardAlpha" operator="out"></feComposite>
+            <feColorMatrix values="0 0 0 0 0.392157 0 0 0 0 0.454902 0 0 0 0 0.545098 0 0 0 0.06 0"></feColorMatrix>
+            <feBlend in2="effect1_dropShadow_7075:30048" result="effect2_dropShadow_7075:30048"></feBlend>
+            <feBlend in="SourceGraphic" in2="effect2_dropShadow_7075:30048" result="shape"></feBlend>
+        </filter>
+        <clipPath id="light-theme_svg__a">
+            <path d="M0 4a4 4 0 0 1 4-4h148v130H0V4Z" fill="#fff"></path>
+        </clipPath>
+    </defs>
+</svg>
