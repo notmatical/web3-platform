@@ -28,7 +28,7 @@ export default {
             return User.find({ wallet: args.wallet });
         },
         jobs: (args) => {
-            return Job.find({ company: args.name });
+            return Job.find({});
         }
     }
 };
