@@ -7,8 +7,7 @@ import { ThemeConfigProps, ConfigOptions } from 'types/config';
 
 // basename: only at build time to set, and Don't add '/' at end off BASENAME for breadcrumbs, also Don't put only '/' use blank('') instead,
 export const BASE_PATH = '';
-export const HS_API_KEY =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJDb3NtaWMgQXN0cm9uYXV0cyIsIm5hbWUiOiJIeXBlcnNwYWNlIiwiaWF0IjoxNTE2MjM5MDIyfQ.TTK9PG6XPznw-jgbdGUMGuWs9i9arpLYRIUlvCXPdrc';
+export const HS_API_KEY = process.env.HYPERSPACE_KEY;
 
 // staking/raffles
 export const GLOBAL_AUTHORITY_SEED = 'global-authority';
