@@ -18,17 +18,19 @@ const applications = {
             id: 'swap',
             title: <FormattedMessage id="swap" />,
             type: 'item',
-            url: '/swap',
+            url: '#',
             icon: icons.IconAccessible,
-            breadcrumbs: false
+            breadcrumbs: false,
+            soon: true
         },
         {
             id: 'collabs',
             title: <FormattedMessage id="collabs" />,
             type: 'item',
-            url: '/collabs',
+            url: '#',
             icon: icons.IconAtom,
-            breadcrumbs: false
+            breadcrumbs: false,
+            soon: true
         },
         {
             id: 'spaces',
@@ -58,7 +60,7 @@ const applications = {
             id: 'trade',
             title: <FormattedMessage id="trade" />,
             type: 'item',
-            url: '/applications/trade',
+            url: '#',
             icon: icons.IconRepeat,
             hidden: true
         }

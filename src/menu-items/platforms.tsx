@@ -35,29 +35,29 @@ const platforms = {
                     breadcrumbs: false
                 }
             ]
-        },
-        {
-            id: 'job-listings',
-            title: <FormattedMessage id="job-listing" />,
-            type: 'collapse',
-            icon: icons.IconBuilding,
-            children: [
-                {
-                    id: 'browse',
-                    title: <FormattedMessage id="job-browse" />,
-                    type: 'item',
-                    url: '/jobs',
-                    breadcrumbs: false
-                },
-                {
-                    id: 'employee',
-                    title: <FormattedMessage id="job-create" />,
-                    type: 'item',
-                    url: '/jobs/new',
-                    breadcrumbs: false
-                }
-            ]
         }
+        // {
+        //     id: 'job-listings',
+        //     title: <FormattedMessage id="job-listing" />,
+        //     type: 'collapse',
+        //     icon: icons.IconBuilding,
+        //     children: [
+        //         {
+        //             id: 'browse',
+        //             title: <FormattedMessage id="job-browse" />,
+        //             type: 'item',
+        //             url: '/jobs',
+        //             breadcrumbs: false
+        //         },
+        //         {
+        //             id: 'employee',
+        //             title: <FormattedMessage id="job-create" />,
+        //             type: 'item',
+        //             url: '/jobs/new',
+        //             breadcrumbs: false
+        //         }
+        //     ]
+        // }
     ]
 };
 

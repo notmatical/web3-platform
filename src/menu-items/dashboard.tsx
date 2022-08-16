@@ -49,9 +49,10 @@ const dashboard = {
             id: 'feed',
             title: <FormattedMessage id="feed" />,
             type: 'item',
-            url: '/feed',
+            url: '#',
             icon: icons.IconActivity,
-            breadcrumbs: false
+            breadcrumbs: false,
+            soon: true
         }
     ]
 };
