@@ -1,3 +1,3 @@
-const Badges = () => <h1>badge</h1>;
+const Badges = () => <h1>badges coming soon</h1>;
 
 export default Badges;

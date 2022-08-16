@@ -50,7 +50,7 @@ import MainCard from 'components/MainCard';
 import Avatar from 'components/@extended/Avatar';
 import UpdateAvatarModal from './modals/UpdateAvatarModal';
 import Portfolio from './Portfolio';
-import NFTs from './NFTs';
+import Nfts from './components/NftsTab';
 import Badges from './components/BadgesTab';
 import Activity from './components/ActivityTab';
 
@@ -170,6 +170,16 @@ function UserAccount() {
             await axios.get(`https://public-api.solscan.io/account/tokens?account=${vanity}`).then((res) => {
                 res.data.forEach((token: any) => {
                     if (!verifiedTokens.includes(token.tokenAddress)) return;
+                    if (token.tokenAddress === 'BdwbTU3G23sub6wcGX1WJCM2dG8GJu8faip5QQ8BmvNc') {
+                        tokens.push({
+                            tokenAddress: token.tokenAddress,
+                            tokenIcon: 'https://www.arweave.net/4Mp3YmQZ5mhC2d3Y1b6BZHi6FYLxWYy6SjhX5JNVob8?ext=png',
+                            tokenName: 'Vaporize Finance',
+                            tokenSynbol: 'VAPOR',
+                            tokenAmount: token.tokenAmount
+                        });
+                    }
+
                     tokens.push({
                         tokenAddress: token.tokenAddress,
                         tokenIcon: token.tokenIcon,
@@ -261,24 +271,24 @@ function UserAccount() {
                             <Box display="flex" flexDirection="row" sx={{ mb: 2 }}>
                                 {/* <EditIcon style={{ position: 'absolute', top: '-10px', left: '30px', fontSize: '46px', zIndex: 9999 }} /> */}
                                 {data.user.level >= 5 ? (
-                                    <Badge color="info" badgeContent={data.user.level}> {/* anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} */}
-                                        <Avatar
-                                            alt="User Image"
-                                            src={data.user.avatarURI ? data.user.avatarURI : DefaultUser}
-                                            onClick={handleOpen}
-                                            sx={{
-                                                // margin: '-70px 0 0 auto',
-                                                mt: '-40px',
-                                                '&:hover': {
-                                                    cursor: 'pointer',
-                                                    transition: 'all .15s ease-in-out',
-                                                    filter: 'brightness(0.4)'
-                                                },
-                                                width: { xs: 72, sm: 72, md: 80 },
-                                                height: { xs: 72, sm: 72, md: 80 }
-                                            }}
-                                        />
-                                    </Badge>
+                                    // <Badge color="info" badgeContent={data.user.level}> {/* anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} */}
+                                    <Avatar
+                                        alt="User Image"
+                                        src={data.user.avatarURI ? data.user.avatarURI : DefaultUser}
+                                        onClick={handleOpen}
+                                        sx={{
+                                            // margin: '-70px 0 0 auto',
+                                            mt: '-40px',
+                                            '&:hover': {
+                                                cursor: 'pointer',
+                                                transition: 'all .15s ease-in-out',
+                                                filter: 'brightness(0.4)'
+                                            },
+                                            width: { xs: 72, sm: 72, md: 80 },
+                                            height: { xs: 72, sm: 72, md: 80 }
+                                        }}
+                                    />
+                                    // </Badge>
                                 ) : (
                                     <Avatar
                                         alt="User Image"
@@ -418,9 +428,9 @@ function UserAccount() {
                             {/* badges */}
                             <Box display="flex" flexDirection="column">
                                 <Typography variant="h4" color="primary" sx={{ mb: 1 }}>
-                                    Badges (3 Total)
+                                    Badges (0 Total)
                                 </Typography>
-                                <Box display="flex" flexDirection="row">
+                                {/* <Box display="flex" flexDirection="row">
                                     <Tooltip title="Staff" placement="bottom" arrow>
                                         <IconButton sx={{ mr: 0.5 }}>
                                             <CrownFilled style={{ fontSize: '24px', color: theme.palette.secondary.dark }} />
@@ -436,12 +446,12 @@ function UserAccount() {
                                             <HeartFilled style={{ fontSize: '24px', color: theme.palette.info.dark }} />
                                         </IconButton>
                                     </Tooltip>
-                                </Box>
-                                <Divider sx={{ mt: 1, mb: 1 }} />
+                                </Box> */}
+                                {/* <Divider sx={{ mt: 1, mb: 1 }} /> */}
                             </Box>
 
                             {/* connected wallets / bundles */}
-                            <Box display="flex" flexDirection="column" sx={{ mb: 1 }}>
+                            {/* <Box display="flex" flexDirection="column" sx={{ mb: 1 }}>
                                 <Box display="flex" flexDirection="row" alignItems="center" sx={{ pb: 2 }}>
                                     <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M11.6668 2.66667H11.0002V2C11.0002 1.46957 10.7894 0.960859 10.4144 0.585787C10.0393 0.210714 9.5306 0 9.00016 0H2.3335C1.80306 0 1.29436 0.210714 0.919283 0.585787C0.54421 0.960859 0.333496 1.46957 0.333496 2V10C0.333496 10.5304 0.54421 11.0391 0.919283 11.4142C1.29436 11.7893 1.80306 12 2.3335 12H11.6668C12.1973 12 12.706 11.7893 13.081 11.4142C13.4561 11.0391 13.6668 10.5304 13.6668 10V4.66667C13.6668 4.13623 13.4561 3.62753 13.081 3.25245C12.706 2.87738 12.1973 2.66667 11.6668 2.66667ZM2.3335 1.33333H9.00016C9.17697 1.33333 9.34654 1.40357 9.47157 1.5286C9.59659 1.65362 9.66683 1.82319 9.66683 2V2.66667H2.3335C2.15669 2.66667 1.98712 2.59643 1.86209 2.4714C1.73707 2.34638 1.66683 2.17681 1.66683 2C1.66683 1.82319 1.73707 1.65362 1.86209 1.5286C1.98712 1.40357 2.15669 1.33333 2.3335 1.33333ZM12.3335 8H11.6668C11.49 8 11.3204 7.92976 11.1954 7.80474C11.0704 7.67971 11.0002 7.51014 11.0002 7.33333C11.0002 7.15652 11.0704 6.98695 11.1954 6.86193C11.3204 6.73691 11.49 6.66667 11.6668 6.66667H12.3335V8ZM12.3335 5.33333H11.6668C11.1364 5.33333 10.6277 5.54405 10.2526 5.91912C9.87754 6.29419 9.66683 6.8029 9.66683 7.33333C9.66683 7.86377 9.87754 8.37247 10.2526 8.74755C10.6277 9.12262 11.1364 9.33333 11.6668 9.33333H12.3335V10C12.3335 10.1768 12.2633 10.3464 12.1382 10.4714C12.0132 10.5964 11.8436 10.6667 11.6668 10.6667H2.3335C2.15669 10.6667 1.98712 10.5964 1.86209 10.4714C1.73707 10.3464 1.66683 10.1768 1.66683 10V3.88667C1.88101 3.96201 2.10645 4.00034 2.3335 4H11.6668C11.8436 4 12.0132 4.07024 12.1382 4.19526C12.2633 4.32029 12.3335 4.48986 12.3335 4.66667V5.33333Z" fill="#465ED2"></path></svg>
                                     <Typography variant="h4" color="primary" sx={{ ml: 1 }}>
@@ -495,7 +505,7 @@ function UserAccount() {
                                         M1NX...8dwM
                                     </Typography>
                                 </Box>
-                            </Box>
+                            </Box> */}
                         </MainCard>
 
                         {/* user stats */}
@@ -693,7 +703,7 @@ function UserAccount() {
                             </TabPanel>
                             <TabPanel value="nfts" sx={{ padding: 0 }}>
                                 <Box sx={{ p: '0 !important' }}>
-                                    <NFTs />
+                                    <Nfts />
                                 </Box>
                             </TabPanel>
                             <TabPanel value="activity" sx={{ padding: 0 }}>
