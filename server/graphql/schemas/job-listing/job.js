@@ -12,6 +12,7 @@ export default gql`
 		rate: String!
 		offers: [String]!
         description: String!
+		status: String!
 		createdAt: String!
 		updatedAt: String!
 	}

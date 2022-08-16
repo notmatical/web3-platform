@@ -22,7 +22,8 @@ const jobSchema = new Schema(
         offers: [{
             type: String
         }],
-        description: String
+        description: String,
+        status: String
     },
     {
         timestamps: true

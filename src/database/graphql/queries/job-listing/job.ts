@@ -20,9 +20,10 @@ export const GET_JOBS_BY_COMPANY = gql`
     query GetJobsByCompany($company: ID!) {
         getJobsByCompany(company: $companyId) {
             company {
-                icon
+                logoURI
                 name
                 bio
+                locations
                 verified
             }
             title
@@ -41,10 +42,11 @@ export const GET_RECENT_JOB_LISTINGS = gql`
     query GetRecentJobListings($limit: Int!) {
         getRecentJobListings(limit: $limit) {
             company {
-                icon
+                logoURI
                 name
                 bio
                 size
+                locations
                 verified
             }
             title

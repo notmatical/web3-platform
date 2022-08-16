@@ -7,7 +7,7 @@ export const GET_COMPANIES = gql`
             name
             bio
             website
-            icon
+            logoURI
             locations
             size
             verified
@@ -22,7 +22,7 @@ export const GET_COMPANY = gql`
             name
             bio
             website
-            icon
+            logoURI
             locations
             size
             verified
