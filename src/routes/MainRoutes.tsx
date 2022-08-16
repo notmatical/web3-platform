@@ -42,14 +42,10 @@ const MainRoutes = {
         },
 
         // Applications
-        {
-            path: '/swap',
-            element: <Swap />
-        },
-        {
-            path: '/swap',
-            element: <Swap />
-        },
+        // {
+        //     path: '/swap',
+        //     element: <Swap />
+        // },
         {
             path: '/applications/calendar',
             element: <MintCalendar />

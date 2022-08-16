@@ -87,11 +87,11 @@ const Swap = () => {
     }, [formValue.inputMint?.toBase58(), formValue.outputMint?.toBase58(), tokens]);
 
     // methods
-    const amountInDecimal = useMemo(() => {
-        if (typeof formValue?.amount === 'number') {
-            return formValue.amount * 10 ** (inputTokenInfo?.decimals || 1);
-        }
-    }, [inputTokenInfo, formValue.amount]);
+    // const amountInDecimal = useMemo(() => {
+    //     if (typeof formValue?.amount === 'number') {
+    //         return formValue.amount * 10 ** (inputTokenInfo?.decimals || 1);
+    //     }
+    // }, [inputTokenInfo, formValue.amount]);
 
     const { routeMap, routes, loading, exchange, error, refresh } = useJupiter({
         ...formValue,
