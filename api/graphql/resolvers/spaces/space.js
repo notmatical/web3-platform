@@ -1,4 +1,4 @@
-import { Space } from '../../models/models';
+import { Space } from '../../../models/models';
 
 export default {
     Query: {

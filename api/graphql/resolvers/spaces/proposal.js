@@ -1,5 +1,5 @@
 import { ApolloError } from 'apollo-server-express';
-import { Proposal, Space } from '../../models/models';
+import { Proposal, Space } from '../../../models/models';
 
 export default {
     Query: {

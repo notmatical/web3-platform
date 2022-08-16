@@ -1,4 +1,4 @@
-import { Quest } from '../../models/models';
+import { Quest } from '../../../models/models';
 
 export default {
     Query: {
