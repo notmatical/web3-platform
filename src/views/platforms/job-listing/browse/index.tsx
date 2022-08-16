@@ -18,6 +18,7 @@ import { useQuery } from '@apollo/client';
 import * as db from 'database/graphql/graphql';
 
 // assets
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ScheduleOutlinedIcon from '@mui/icons-material/ScheduleOutlined';
 import AccountBalanceOutlinedIcon from '@mui/icons-material/AccountBalanceOutlined';
 import DoneIcon from '@mui/icons-material/Done';
@@ -103,6 +104,15 @@ const JobBrowse = () => {
                                             <StarIcon fontSize="small" style={{ marginRight: 6, color: theme.palette.primary.dark }} />
                                             <Typography variant="overline" color="primary" fontWeight="600">
                                                 4.5/5
+                                            </Typography>
+                                        </Box>
+                                        <Box display="flex" flexDirection="row" alignItems="center">
+                                            <LocationOnIcon
+                                                fontSize="small"
+                                                style={{ marginRight: 6, color: theme.palette.primary.dark }}
+                                            />
+                                            <Typography variant="overline" color="primary" fontWeight="600">
+                                                {job.company.locations.join(', ')}
                                             </Typography>
                                         </Box>
                                         {job.company.verified && (
