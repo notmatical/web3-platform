@@ -148,16 +148,15 @@ const Raffles = () => {
         <TabContext value={tabIdx}>
             <Grid container spacing={2.5}>
                 {/* featured section / carousel */}
-                {filter(masterRaffles, (item: any) => item.featured && item.endTimestamp > new Date().getTime()).length > 0 && (
-                    <>
-                        <Grid item xs={12}>
+                {/* {filter(masterRaffles, (item: any) => item.featured && item.endTimestamp > new Date().getTime()).length > 0 && (
+                    <> */}
+                        {/* <Grid item xs={12}>
                             <Typography fontWeight="700" color="secondary.dark" sx={{ fontSize: '1.5rem', py: 2 }}>
                                 <FormattedMessage id="featured-raffles" />
                             </Typography>
                         </Grid>
 
                         <Grid item xs={12} sx={{ pt: '0 !important' }}>
-                            {/* eslint-disable */}
                             <AliceCarousel
                                 autoPlay={true}
                                 infinite={true}
@@ -184,9 +183,9 @@ const Raffles = () => {
                                     )
                                 )}
                             </AliceCarousel>
-                        </Grid>
-                    </>
-                )}
+                        </Grid> */}
+                    {/* </>
+                )} */}
                 {/* buttons / search / filter */}
                 <Grid item xs={12}>
                     <Stack
@@ -195,7 +194,7 @@ const Raffles = () => {
                         sx={{ flexDirection: { xs: 'column', md: 'row', lg: 'row' } }}
                     >
                         <Box>
-                            {filter(masterRaffles, (item: any) => item.featured && item.endTimestamp > new Date().getTime()).length > 0 && (
+                            {/* {filter(masterRaffles, (item: any) => item.featured && item.endTimestamp > new Date().getTime()).length > 0 && (
                                 <Button
                                     variant={tabIdx === 'featured' ? 'contained' : 'text'}
                                     color={tabIdx === 'featured' ? 'secondary' : 'primary'}
@@ -204,7 +203,7 @@ const Raffles = () => {
                                 >
                                     <FormattedMessage id="featured" />
                                 </Button>
-                            )}
+                            )} */}
                             <Button
                                 variant={tabIdx === 'all' ? 'contained' : 'text'}
                                 color={tabIdx === 'all' ? 'secondary' : 'primary'}
