@@ -163,7 +163,7 @@ export const getATokenAddrFungible = async (connection: Connection, walletKey: P
     let tokenAccount = null;
     for (var i = 0; i < tokenAccounts.value.length; i++) {
         const clientTokenAccountTokenAmount = tokenAccounts.value[i].account.data.parsed.info.tokenAmount.uiAmount;
-        console.log('account/tokenAmount:', i, clientTokenAccountTokenAmount);
+        // console.log('account/tokenAmount:', i, clientTokenAccountTokenAmount);
         if (clientTokenAccountTokenAmount < 0.01) {
             continue;
         }

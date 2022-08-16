@@ -76,7 +76,6 @@ const Activity = ({ user }: { user: any }) => {
                 }
             })
             .then((res) => {
-                console.log(res.getUserHistory);
                 setActivities(res.getUserHistory);
             });
     };

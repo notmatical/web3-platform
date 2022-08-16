@@ -91,7 +91,6 @@ const Collabs = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleProposalCreate = async (collabData: FormikValues) => {
-        console.log(collabData);
         handleModalClose();
     };
 

@@ -150,7 +150,6 @@ export const abbreviateValue = (value: number) => {
 };
 
 export const ordinal_suffix_of = (value: number | null) => {
-    console.log(value);
     if (value === null || undefined) return 'Unranked';
     const j = value % 10, k = value % 100;
 

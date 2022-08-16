@@ -119,7 +119,7 @@ const WalletLogin = () => {
             setStep(STEPS.SIGN_MESSAGE);
         }
 
-        console.log(`connecting: ${connecting} | connected: ${connected}`);
+        // console.log(`connecting: ${connecting} | connected: ${connected}`);
         if (!connecting && !connected) {
             connect().catch(() => {});
         }
@@ -132,9 +132,7 @@ const WalletLogin = () => {
     // new functions
     const handleClick = useCallback(
         (adapter: WalletAdapter) => {
-            console.log(adapter);
             if (adapter.name !== wallet.wallet?.adapter.name) {
-                console.log('selecting', adapter.name);
                 select(adapter.name);
             }
         },

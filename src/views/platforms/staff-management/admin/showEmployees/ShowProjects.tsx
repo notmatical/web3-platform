@@ -162,8 +162,8 @@ export default function ShowProjects({
         const amount = depositAmt;
         const toPubkey = depositWallet;
 
-        console.log('deposit solana function called');
-        console.log(wallet, wallet.publicKey, amount, toPubkey);
+        // console.log('deposit solana function called');
+        // console.log(wallet, wallet.publicKey, amount, toPubkey);
 
         if (!wallet || !wallet.publicKey || !amount || !toPubkey) {
             return;
@@ -184,7 +184,7 @@ export default function ShowProjects({
             const signature = await wallet.sendTransaction(transaction, connection);
 
             await connection.confirmTransaction(signature, 'processed');
-            console.log('SIGNATURE', signature);
+            // console.log('SIGNATURE', signature);
             showInfoToast(`You have successfully deposit ${amount.toFixed(2)} SOL.`);
         } catch (error) {
             showErrorToast('There are some issues with the transaction. It may due to Solana congestion.');
@@ -236,7 +236,7 @@ export default function ShowProjects({
             const signature = await wallet.sendTransaction(transaction, connection);
 
             const response = await connection.confirmTransaction(signature, 'processed');
-            console.log('response', response);
+            // console.log('response', response);
             showInfoToast(`You have successfully deposit ${amount.toFixed(2)} USDC.`);
         } catch (error) {
             showErrorToast('There are some issues with the transaction. It may due to Solana congestion.');
@@ -277,7 +277,7 @@ export default function ShowProjects({
     };
 
     const handleDeposit = (address: string) => {
-        console.log('handleDeposit', address);
+        // console.log('handleDeposit', address);
         setDepositAmt(0);
         setDepositWallet(address);
         setShowDepositDialog(true);
@@ -295,7 +295,7 @@ export default function ShowProjects({
         try {
             setIsLoading(true);
             const records = await getProjects();
-            console.log(records);
+            // console.log(records);
             setData1(sortBy(records, 'project'));
         } catch (error) {
             console.error(error);

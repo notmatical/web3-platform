@@ -66,7 +66,6 @@ const ProjectManage = () => {
     let proposalResult: ReactElement | ReactElement[] = <></>;
     if (data && data.projects && data.projects.length > 0) {
         proposalResult = data.projects.map((project: any, index: any) => {
-            console.log(project.managers);
             if (project.managers.indexOf(user.id)) {
                 return project &&
                     <Grid key={index} item xs={12} md={3} lg={3}>

@@ -133,8 +133,6 @@ const Swap = () => {
     //     }
     // }, [connected, fetchWalletTokens]);
 
-    console.log(tokens);
-
     return (
         <Grid container spacing={gridSpacing}>
             <Grid item xs={12} sx={{ mb: -2.25 }}>

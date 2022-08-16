@@ -138,7 +138,6 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
                     }
                 } = await refetch();
                 setData1(projectData.getEmployees);
-                console.log('employees', data1);
             } else {
                 const {
                     data: projectData = {
@@ -146,7 +145,6 @@ export default function ShowEmployee({ selectedProject, setSelectedProject, setM
                     }
                 } = await refetchAllData();
                 setData1(projectData.getClaimers);
-                console.log('claimers', data1);
                 setMonthlyPayout(
                     sum(
                         map(projectData.getClaimers, ({ amount: amt, method: cur, period: per }: any) => {

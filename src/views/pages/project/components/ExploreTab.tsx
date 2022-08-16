@@ -177,8 +177,6 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
         };
     }, [autoRefresh, filterValue]);
 
-    console.log(marketSnapshot);
-
     return (
         <Grid container spacing={2}>
             <Grid item xs={12}>

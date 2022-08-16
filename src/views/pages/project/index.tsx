@@ -91,8 +91,6 @@ const CollectionView = () => {
         setValue(newValue);
     };
 
-    console.log(project);
-
     // https://storage.googleapis.com/zapper-fi-assets/nft/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/1500x500.jpeg
     return (
         <Grid container rowSpacing={4.5} columnSpacing={2.75}>

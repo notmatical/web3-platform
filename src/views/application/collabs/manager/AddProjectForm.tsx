@@ -81,8 +81,6 @@ const AddProjectForm = ({ handleCreate, onCancel }: AddProjectFormProps) => {
                     twitter: values.twitter
                 };
 
-                console.log(data);
-
                 handleCreate(data);
 
                 resetForm();

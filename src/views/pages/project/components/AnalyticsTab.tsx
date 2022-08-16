@@ -77,7 +77,6 @@ const AnalyticsTab = ({ project, projectSlug }: { project: any; projectSlug: any
                 }
             })
             .then((res) => {
-                console.log(res.getProjectHistory);
                 setActivities(res.getProjectHistory);
             });
     };
@@ -103,8 +102,6 @@ const AnalyticsTab = ({ project, projectSlug }: { project: any; projectSlug: any
     useEffect(() => {
         fetchUserHistory();
     }, []);
-
-    console.log(activities);
 
     return (
         <Grid container spacing={2}>

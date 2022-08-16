@@ -22,8 +22,6 @@ const Lending = () => {
         variables: { first: 25 }
     });
 
-    console.log(data, loading, error);
-
     return (
         <Grid container spacing={gridSpacing}>
             <Grid item xs={12}>

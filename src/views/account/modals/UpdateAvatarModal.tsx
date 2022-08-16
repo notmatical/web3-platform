@@ -71,8 +71,6 @@ const UpdateAvatarModal = ({ user, nfts, onCancel, onFinish }: UpdateAvatarModal
         );
     };
 
-    console.log(nfts);
-
     let nftResult: ReactElement | ReactElement[] = <></>;
     if (nfts && nfts.length !== 0) {
         nftResult = nfts.map((nft: any, index: number) => (

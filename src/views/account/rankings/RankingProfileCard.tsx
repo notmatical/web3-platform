@@ -29,7 +29,6 @@ const RankingProfileCard = ({ position, user }: RankingProfileProps) => {
     const { showInfoToast } = useToasts();
     const { publicKey } = useWallet();
 
-    console.log(user.user.followers);
     const [follow] = useMutation(db.mutations.FOLLOW_USER);
     const [unfollow] = useMutation(db.mutations.UNFOLLOW_USER);
 

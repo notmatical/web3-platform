@@ -77,23 +77,17 @@ const NftView = () => {
         const usersToFetch: any = [];
         // Filter Events from Data
         Object.values(history[0].market_place_actions).map((hist: any) => {
-            console.log(hist);
             usersToFetch.push(hist.buyer_address);
         });
 
         refetch({ wallets: usersToFetch });
-        console.log('FETCH OBJ', usersToFetch);
     };
-
-    console.log(data);
 
     useEffect(() => {
         fetchMarketSnapshot();
         fetchTokenState();
         fetchTokenHistory();
     }, []);
-
-    console.log(tokenState);
 
     return (
         <Grid container spacing={2}>
