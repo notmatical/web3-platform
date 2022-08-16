@@ -16,6 +16,7 @@ import resolvers from './graphql/resolvers/resolvers';
 import MagicEdenAPI from './graphql/datasources/magiceden';
 import DropsAPI from './graphql/datasources/drops';
 
+const { MONGO_DB_URI } = process.env;
 const port = process.env.PORT || 8080;
 
 const app = express();
@@ -70,14 +71,14 @@ const apolloServer = new ApolloServer({
 export default apolloServer.start().then(() => {
     const handler = cors(apolloServer.createHandler({ path: '/api/graphql' }));
 
-    mongoose.connect('mongodb+srv://vaporize:yzVaFifJjiofVmiy@cluster0.nbj3ep4.mongodb.net/vaporize_fi', {
+    mongoose.connect(MONGO_DB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
     
     mongoose.connection.once('open', () => {
         app.listen({ port }, () => {
-            console.log(`Server running on port ${port}`);
+            console.log(`GraphQL server running on port ${port}`);
         });
     });
 
