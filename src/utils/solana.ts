@@ -11,6 +11,7 @@ enum VerifiedTokens {
     MNGO = 'MangoCzJ36AjZyKwVj3VnYU4GTonjfVEnJmvvWaxLac',
     ORCA = 'orcaEKTdK7LKz57vaAYr9QeNsVEPfiu6QeMU1kektZE',
     COSMIC = '326vsKSXsf1EsPU1eKstzHwHmHyxsbavY4nTJGEm3ugV',
+    VAPOR = 'BdwbTU3G23sub6wcGX1WJCM2dG8GJu8faip5QQ8BmvNc',
     AURY = 'AURYydfxJib1ZkTir1Jn1J9ECYUtjb6rKQVmtYaixWPP',
     FOXY = 'FoXyMu5xwXre7zEoSvzViRk3nGawHUp9kUh97y2NDhcq',
     PUFF = 'G9tt98aYSznRk7jWsfuz9FnTdokxS6Brohdo9hSmjTRB',
