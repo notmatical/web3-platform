@@ -65,7 +65,7 @@ const MainCard = forwardRef(
                 {...others}
                 sx={{
                     position: 'relative',
-                    border: border ? '1px solid rgba(51, 39, 63, 1)' : 'none',
+                    border: border ? '1px solid rgb(45, 55, 72)' : 'none',
                     borderRadius: 1,
                     borderColor: theme.palette.mode === 'dark' ? 'none' : theme.palette.grey.A700,
                     boxShadow:
