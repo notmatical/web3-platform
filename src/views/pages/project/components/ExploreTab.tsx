@@ -451,13 +451,17 @@ const ExploreTab = ({ project, projectSlug }: { project: any; projectSlug: any }
 
                                             <Box display="flex" flexDirection="row" justifyContent="space-between" sx={{ gap: 2 }}>
                                                 {nft.lowest_listing_mpa !== null ? (
-                                                    <Button variant="contained" color="secondary" fullWidth>
-                                                        Buy
-                                                    </Button>
+                                                    <Tooltip title="Coming Soon" placement="top" arrow>
+                                                        <Button variant="contained" color="secondary" disabled fullWidth>
+                                                            Buy
+                                                        </Button>
+                                                    </Tooltip>
                                                 ) : (
-                                                    <Button variant="contained" color="secondary" fullWidth>
-                                                        Make Offer
-                                                    </Button>
+                                                    <Tooltip title="Coming Soon" placement="top" arrow>
+                                                        <Button variant="contained" color="secondary" disabled fullWidth>
+                                                            Make Offer
+                                                        </Button>
+                                                    </Tooltip>
                                                 )}
                                             </Box>
                                         </Box>
