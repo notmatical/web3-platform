@@ -211,7 +211,7 @@ function UserAccount() {
                     searchAddress: vanity!
                 }
             })
-            .then((res) => {
+            .then((res: any) => {
                 if (res.getWalletStatsHist != null || res.getWalletStatsHist != undefined) {
                     res.getWalletStatsHist?.wallet_stats_history?.map((hist: any) => {
                         value.push({ price: Math.floor(hist.portfolio_value).toFixed(0) });
@@ -270,8 +270,7 @@ function UserAccount() {
                         >
                             <Box display="flex" flexDirection="row" sx={{ mb: 2 }}>
                                 {/* <EditIcon style={{ position: 'absolute', top: '-10px', left: '30px', fontSize: '46px', zIndex: 9999 }} /> */}
-                                {data.user.level >= 5 ? (
-                                    // <Badge color="info" badgeContent={data.user.level}> {/* anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} */}
+                                {data.user.wallet === publicKey!.toBase58() ? (
                                     <Avatar
                                         alt="User Image"
                                         src={data.user.avatarURI ? data.user.avatarURI : DefaultUser}
@@ -288,20 +287,12 @@ function UserAccount() {
                                             height: { xs: 72, sm: 72, md: 80 }
                                         }}
                                     />
-                                    // </Badge>
                                 ) : (
                                     <Avatar
                                         alt="User Image"
                                         src={data.user.avatarURI ? data.user.avatarURI : DefaultUser}
-                                        onClick={handleOpen}
                                         sx={{
-                                            // margin: '-70px 0 0 auto',
                                             mt: '-40px',
-                                            '&:hover': {
-                                                cursor: 'pointer',
-                                                transition: 'all .15s ease-in-out',
-                                                filter: 'brightness(0.4)'
-                                            },
                                             width: { xs: 72, sm: 72, md: 80 },
                                             height: { xs: 72, sm: 72, md: 80 }
                                         }}
