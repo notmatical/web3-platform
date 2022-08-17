@@ -276,8 +276,8 @@ function UserAccount() {
                                         src={data.user.avatarURI ? data.user.avatarURI : DefaultUser}
                                         onClick={handleOpen}
                                         sx={{
-                                            // margin: '-70px 0 0 auto',
                                             mt: '-40px',
+                                            boxShadow: '0px 4px 20px 5px rgba(0, 0, 0, 0.7)',
                                             '&:hover': {
                                                 cursor: 'pointer',
                                                 transition: 'all .15s ease-in-out',
@@ -293,6 +293,7 @@ function UserAccount() {
                                         src={data.user.avatarURI ? data.user.avatarURI : DefaultUser}
                                         sx={{
                                             mt: '-40px',
+                                            boxShadow: '0px 4px 20px 5px rgba(0, 0, 0, 0.7)',
                                             width: { xs: 72, sm: 72, md: 80 },
                                             height: { xs: 72, sm: 72, md: 80 }
                                         }}
