@@ -7,7 +7,7 @@ import { ThemeConfigProps, ConfigOptions } from 'types/config';
 
 // basename: only at build time to set, and Don't add '/' at end off BASENAME for breadcrumbs, also Don't put only '/' use blank('') instead,
 export const BASE_PATH = '';
-export const HS_API_KEY = process.env.HYPERSPACE_KEY as string;
+export const HS_API_KEY = process.env.REACT_APP_HS_KEY as string;
 
 // staking/raffles
 export const GLOBAL_AUTHORITY_SEED = 'global-authority';
