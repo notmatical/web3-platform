@@ -22,11 +22,13 @@ class MagicEdenAPI extends RESTDataSource {
                 timeout: 60 * 60 * 1000,
                 compress: true,
             }
+
             const {collections = {}} = await this.get('all_collections', process.env.ME_AUTHORIZATION_TOKEN ? {
                 headers: {
                     Authorization: process.env.ME_AUTHORIZATION_TOKEN,
                 },
             } : {}, requestInit);
+
             return collections;
         } catch (error) {
             console.error(error);
