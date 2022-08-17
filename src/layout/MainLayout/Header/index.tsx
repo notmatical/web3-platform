@@ -65,9 +65,6 @@ const Header = () => {
                 </Avatar>
             </Box>
 
-            {/* blockchain selection */}
-            {/* <BlockchainSection /> */}
-
             {/* header search */}
             <SearchSection />
             <Box sx={{ flexGrow: 1 }} />
@@ -78,7 +75,7 @@ const Header = () => {
                 <LocalizationSection />
             </Box>
 
-            <BlockchainSection />
+            {/* <BlockchainSection /> */}
 
             {/* notification & profile */}
             {connected && <NotificationSection />}
