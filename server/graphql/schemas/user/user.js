@@ -2,6 +2,7 @@ import { gql } from 'apollo-server-express';
 
 export default gql`
     enum BadgeTypes {
+        CORE_TEAM
         STAFF
         SITE_DEVELOPER
         RETIRED_STAFF
@@ -9,8 +10,14 @@ export default gql`
         SUPPORTER
         RATED_AWESOME
         DISCORD_ELITE
+        SUMMER_2022
         IDEA_GUY
         WIZARD
+        NINJA
+        QUEST_KING
+        QUEST_MASTER
+        QUEST_ELITE
+        V1_LAUNCH
     }
 
     type User {
