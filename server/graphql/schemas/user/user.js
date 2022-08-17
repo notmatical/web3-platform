@@ -1,6 +1,18 @@
 import { gql } from 'apollo-server-express';
 
 export default gql`
+    enum BadgeTypes {
+        STAFF
+        SITE_DEVELOPER
+        RETIRED_STAFF
+        BETA_TESTER
+        SUPPORTER
+        RATED_AWESOME
+        DISCORD_ELITE
+        IDEA_GUY
+        WIZARD
+    }
+
     type User {
         id: ID!
         wallet: String!
@@ -10,7 +22,7 @@ export default gql`
         level: Int!
         levelUpXpRequired: Int!
         xp: Int!
-        badges: [String]
+        badges: [BadgeTypes]
         followed: [User]
         followers: [User]
         socialStats: Social
@@ -34,6 +46,7 @@ export default gql`
         unfollow(userAddress: String!, userAddressToUnfollow: String!): User
         changeUsername(wallet: String!, vanity: String!): User
         addExperience(wallet: String!, xp: Int!): User
+        addBadge(wallet: String!, badge: String!): User
         linkDiscord(address: String!, discordId: String!, discordName: String!, discordAvatar: String!): User
     }
 `;
