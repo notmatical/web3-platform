@@ -48,7 +48,7 @@ const UserLink = ({ user }: { user: any }) => {
         <>
             <strong>
                 <Link
-                    to={`/account/${user.wallet}`}
+                    to={`/profile/${user.wallet}`}
                     ref={anchorRef}
                     onMouseEnter={handleToggle}
                     // onMouseLeave={handleToggle}
@@ -139,7 +139,7 @@ const UserLink = ({ user }: { user: any }) => {
                                                             color="secondary"
                                                             size="small"
                                                             variant="contained"
-                                                            onClick={() => navigate(`/account/${user.wallet}`)}
+                                                            onClick={() => navigate(`/profile/${user.wallet}`)}
                                                             fullWidth
                                                         >
                                                             View Profile

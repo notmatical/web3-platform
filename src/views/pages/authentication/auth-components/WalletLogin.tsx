@@ -259,7 +259,7 @@ const WalletLogin = () => {
             showErrorToast('There seems to be an issue with your connection, please try again.');
             return;
         }
-        // navigate(`/account/${publicKey?.toBase58()}/portfolio`, { replace: true });
+        // navigate(`/profile/${publicKey?.toBase58()}/portfolio`, { replace: true });
         navigate(defaultConfig.defaultPath, { replace: true });
     };
 

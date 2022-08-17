@@ -313,7 +313,7 @@ function UserAccount() {
                                         <IconButton
                                             sx={{ mr: 0.5 }}
                                             onClick={() => {
-                                                navigator.clipboard.writeText(`https://vaporize.fi/account/${vanity!}`);
+                                                navigator.clipboard.writeText(`https://vaporize.fi/profile/${vanity!}`);
                                                 showInfoToast('Profile link copied to clipboard.');
                                             }}
                                         >

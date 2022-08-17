@@ -71,7 +71,7 @@ const RankingProfileCard = ({ position, user }: RankingProfileProps) => {
                 <Avatar
                     src={user.user.avatarURI ? user.user.avatarURI : DefaultUser}
                     color="inherit"
-                    onClick={() => navigate(`/account/${user.user.wallet}`, { replace: true })}
+                    onClick={() => navigate(`/profile/${user.user.wallet}`, { replace: true })}
                     sx={{
                         ...theme.typography.mediumAvatar,
                         '&:hover': {
@@ -83,7 +83,7 @@ const RankingProfileCard = ({ position, user }: RankingProfileProps) => {
                     <Typography
                         variant="h6"
                         fontWeight="800"
-                        onClick={() => navigate(`/account/${user.user.wallet}`, { replace: true })}
+                        onClick={() => navigate(`/profile/${user.user.wallet}`, { replace: true })}
                         sx={{
                             ml: 1,
                             '&:hover': {
