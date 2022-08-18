@@ -166,36 +166,36 @@ function UserAccount() {
     const getUserTokens = async () => {
         const verifiedTokens = Object.values(VerifiedTokens);
         const tokens: any = [];
-        try {
-            await axios.get(`https://public-api.solscan.io/account/tokens?account=${vanity}`).then((res) => {
-                res.data.forEach((token: any) => {
-                    if (!verifiedTokens.includes(token.tokenAddress)) return;
-                    if (token.tokenAddress === 'BdwbTU3G23sub6wcGX1WJCM2dG8GJu8faip5QQ8BmvNc') {
-                        tokens.push({
-                            tokenAddress: token.tokenAddress,
-                            tokenIcon: 'https://www.arweave.net/4Mp3YmQZ5mhC2d3Y1b6BZHi6FYLxWYy6SjhX5JNVob8?ext=png',
-                            tokenName: 'Vaporize Finance',
-                            tokenSynbol: 'VAPOR',
-                            tokenAmount: token.tokenAmount
-                        });
-                    }
+        // try {
+        //     await axios.get(`https://public-api.solscan.io/account/tokens?account=${vanity}`).then((res) => {
+        //         res.data.forEach((token: any) => {
+        //             if (!verifiedTokens.includes(token.tokenAddress)) return;
+        //             if (token.tokenAddress === 'BdwbTU3G23sub6wcGX1WJCM2dG8GJu8faip5QQ8BmvNc') {
+        //                 tokens.push({
+        //                     tokenAddress: token.tokenAddress,
+        //                     tokenIcon: 'https://www.arweave.net/4Mp3YmQZ5mhC2d3Y1b6BZHi6FYLxWYy6SjhX5JNVob8?ext=png',
+        //                     tokenName: 'Vaporize Finance',
+        //                     tokenSynbol: 'VAPOR',
+        //                     tokenAmount: token.tokenAmount
+        //                 });
+        //             }
 
-                    tokens.push({
-                        tokenAddress: token.tokenAddress,
-                        tokenIcon: token.tokenIcon,
-                        tokenName: token.tokenName,
-                        tokenSymbol: token.tokenSymbol,
-                        tokenAmount: token.tokenAmount
-                    });
-                });
-                setIsLoading(false);
-                setTokenList(tokens);
-            }).catch((err) => {
-                console.log(err);
-            })
-        } catch (error) {
-            console.log(error);
-        }
+        //             tokens.push({
+        //                 tokenAddress: token.tokenAddress,
+        //                 tokenIcon: token.tokenIcon,
+        //                 tokenName: token.tokenName,
+        //                 tokenSymbol: token.tokenSymbol,
+        //                 tokenAmount: token.tokenAmount
+        //             });
+        //         });
+        //         setIsLoading(false);
+        //         setTokenList(tokens);
+        //     }).catch((err) => {
+        //         console.log(err);
+        //     })
+        // } catch (error) {
+        //     console.log(error);
+        // }
     }
 
     // wallet stats hist
@@ -368,7 +368,7 @@ function UserAccount() {
                                     </Typography>
                                     {rawValue && rawValue.length !== 0 ? (
                                         <Box>
-                                            {Math.sign((rawValue[6].price - rawValue[0].price) / rawValue[0].price) === 1 ? (
+                                            {Math.sign((rawValue[rawValue.length - 1].price - rawValue[0].price) / rawValue[0].price) === 1 ? (
                                                 <Chip
                                                     label={formatPercent.format(
                                                         (rawValue[6].price - rawValue[0].price) / rawValue[0].price
@@ -381,7 +381,7 @@ function UserAccount() {
                                             ) : (
                                                 <Chip
                                                     label={formatPercent.format(
-                                                        (rawValue[6].price - rawValue[0].price) / rawValue[0].price
+                                                        (rawValue[rawValue.length - 1].price - rawValue[0].price) / rawValue[0].price
                                                     )}
                                                     size="small"
                                                     color="error"

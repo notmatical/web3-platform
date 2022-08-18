@@ -268,7 +268,6 @@ const BadgesTab = ({ user }: { user: any }) => {
                                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                         .map((badge: any, index: number) => {
                                             const foundBadge = AvailableBadges.find((b) => b.key === badge);
-                                            console.log(foundBadge);
                                             return (
                                                 <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                                     <TableCell component="th" scope="row">

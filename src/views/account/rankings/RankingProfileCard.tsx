@@ -98,24 +98,27 @@ const RankingProfileCard = ({ position, user }: RankingProfileProps) => {
                     </Typography>
                 </Stack>
             </Box>
-            <Button
-                variant="outlined"
-                size="small"
-                color="inherit"
-                endIcon={<IconCircleCheck size="0.975rem" />}
-                sx={{ fontWeight: 800, borderRadius: 8, borderColor: theme.palette.primary.main }}
-            >
-                Following
-            </Button>
-            <Button
-                variant="outlined"
-                size="small"
-                color="inherit"
-                endIcon={<IconUserPlus size="0.975rem" />}
-                sx={{ fontWeight: 800, borderRadius: 8, borderColor: theme.palette.primary.main }}
-            >
-                Follow
-            </Button>
+
+            <Box display="flex" flexDirection="row" sx={{ gap: 1 }}>
+                <Button
+                    variant="outlined"
+                    size="small"
+                    color="inherit"
+                    endIcon={<IconCircleCheck size="0.975rem" />}
+                    sx={{ fontWeight: 800, borderRadius: 8, borderColor: theme.palette.primary.main }}
+                >
+                    Following
+                </Button>
+                <Button
+                    variant="outlined"
+                    size="small"
+                    color="inherit"
+                    endIcon={<IconUserPlus size="0.975rem" />}
+                    sx={{ fontWeight: 800, borderRadius: 8, borderColor: theme.palette.primary.main }}
+                >
+                    Follow
+                </Button>
+            </Box>
         </Box>
     );
 };

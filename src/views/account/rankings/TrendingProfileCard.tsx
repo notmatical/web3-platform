@@ -33,7 +33,7 @@ const TrendingProfileCard = () => {
                     boxShadow: '0 0 0 2px rgb(213, 217, 233)'
                 }
             }}
-            onClick={() => navigate('/profile/45rzLU1gPiEsaDtmkjvawgKDYYpSTHdVXKJjZ74dBDFg/portfolio')}
+            onClick={() => navigate('/profile/45rzLU1gPiEsaDtmkjvawgKDYYpSTHdVXKJjZ74dBDFg')}
         >
             <Box display="flex" flexDirection="column" alignItems="center" sx={{ mt: 1, mb: 1, gap: '8px' }}>
                 <Avatar src={DefaultUser} sx={{ ...theme.typography.largeAvatar }} color="inherit" />

@@ -259,8 +259,8 @@ const WalletLogin = () => {
             showErrorToast('There seems to be an issue with your connection, please try again.');
             return;
         }
-        // navigate(`/profile/${publicKey?.toBase58()}/portfolio`, { replace: true });
-        navigate(defaultConfig.defaultPath, { replace: true });
+        navigate(`/profile/${publicKey?.toBase58()}`, { replace: true });
+        // navigate(defaultConfig.defaultPath, { replace: true });
     };
 
     // TODO: PublicKey and wallet is not being reset, so clicking another button doesnt work.
@@ -603,7 +603,7 @@ const WalletLogin = () => {
                                                                 onClick={() => handleProfileVisit()}
                                                                 sx={{ mt: 2 }}
                                                             >
-                                                                Visit Dashboard
+                                                                Visit Profile
                                                             </WalletButton>
                                                         </Stack>
                                                     </Grid>
