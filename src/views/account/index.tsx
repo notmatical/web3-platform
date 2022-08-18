@@ -414,15 +414,15 @@ function UserAccount() {
                                         <Area type="monotone" dataKey="price" stroke="#d329ff" fillOpacity={1} fill="url(#colorGradient)" />
                                     </AreaChart>
                                 </ResponsiveContainer>
-                                <Divider sx={{ mt: 1, mb: 1 }} />
+                                {/* <Divider sx={{ mt: 1, mb: 1 }} /> */}
                             </Box>
 
                             {/* badges */}
-                            <Box display="flex" flexDirection="column">
+                            {/* <Box display="flex" flexDirection="column">
                                 <Typography variant="h4" color="primary" sx={{ mb: 1 }}>
-                                    Badges (0 Total)
+                                    Badges ({data.user.badges.length} Total)
                                 </Typography>
-                                {/* <Box display="flex" flexDirection="row">
+                                <Box display="flex" flexDirection="row">
                                     <Tooltip title="Staff" placement="bottom" arrow>
                                         <IconButton sx={{ mr: 0.5 }}>
                                             <CrownFilled style={{ fontSize: '24px', color: theme.palette.secondary.dark }} />
@@ -438,9 +438,9 @@ function UserAccount() {
                                             <HeartFilled style={{ fontSize: '24px', color: theme.palette.info.dark }} />
                                         </IconButton>
                                     </Tooltip>
-                                </Box> */}
-                                {/* <Divider sx={{ mt: 1, mb: 1 }} /> */}
-                            </Box>
+                                </Box>
+                                <Divider sx={{ mt: 1, mb: 1 }} />
+                            </Box> */}
 
                             {/* connected wallets / bundles */}
                             {/* <Box display="flex" flexDirection="column" sx={{ mb: 1 }}>
@@ -705,7 +705,7 @@ function UserAccount() {
                             </TabPanel>
                             <TabPanel value="badges" sx={{ padding: 0 }}>
                                 <Box sx={{ p: '0 !important' }}>
-                                    <Badges />
+                                    <Badges user={data.user} />
                                 </Box>
                             </TabPanel>
                         </TabContext>
