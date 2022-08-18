@@ -13,6 +13,9 @@ export default {
         },
         user: async (root, { wallet }) => {
             return User.findOne({ wallet });
+        },
+        userBadges: async (root, { wallet }) => {
+            return User.findOne({ wallet });
         }
     },
     User: {

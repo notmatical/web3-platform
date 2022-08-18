@@ -11,6 +11,7 @@ export default gql`
         RATED_AWESOME
         DISCORD_ELITE
         SUMMER_2022
+        SOLANA_MIAMI_2022
         IDEA_GUY
         WIZARD
         NINJA
@@ -43,6 +44,7 @@ export default gql`
         users: [User!]!
         multiUsers(wallets: [String!]): [User]!
         user(wallet: String!): User
+        userBadges(wallet: String!): [BadgeTypes]
     }
 
     extend type Mutation {
