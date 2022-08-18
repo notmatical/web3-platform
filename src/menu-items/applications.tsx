@@ -61,7 +61,7 @@ const applications = {
             id: 'mint-calendar',
             title: <FormattedMessage id="mint-calendar" />,
             type: 'item',
-            url: '/applications/calendar',
+            url: '/calendar',
             icon: icons.IconCalendar
         },
         {
