@@ -169,7 +169,7 @@ const AvailableBadges = [
         icon: <HailIcon style={{ fontSize: 14 }} />,
         borderColor: '#000',
         backgroundColor: '#000',
-        tooltipTitle: 'Must be a Ninja, prove you are a ninja by showing your true wizard skills.'
+        tooltipTitle: 'Must be a Ninja, prove you are a ninja by showing your true ninja skills.'
     },
     {
         title: 'Quest King',
@@ -206,7 +206,6 @@ const AvailableBadges = [
         tooltipTitle: 'Thank you for being apart of the launch of Version 1!'
     }
 ];
-// TODO: add nullable field for numbered requirements
 
 const Badges = () => {
     const theme = useTheme();
