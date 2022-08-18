@@ -7,15 +7,15 @@ export default {
             return await Social.findOne({ wallet: args.wallet });
         },
         leaderboard: async (root, args, context, info) => {
-            return await Social.find().sort({ followersCount: 'desc' }).limit(args.first);
+            return await Social.find({}).sort({ followersCount: 'desc' }).limit(args.first);
         },
         trending: (root, args, context, info) => {
-            return Social.find({})
+            return Social.find({});
         }
     },
     Social: {
-        user: (args) => {
-            return User.findOne({ wallet: args.wallet });
+        user: async (args) => {
+            return await User.findOne({ wallet: args.wallet });
         }
     }
 };
