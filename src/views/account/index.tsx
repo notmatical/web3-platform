@@ -226,7 +226,7 @@ function UserAccount() {
 
                     setChartData(value.reverse());
                     setRawValue(rValue.reverse());
-                    setLiquidValue(rValue.length === 0 ? 0 : rValue[6].price);
+                    setLiquidValue(rValue.length === 0 ? 0 : rValue[rValue.length - 1].price);
                 }
             });
     };
@@ -337,7 +337,7 @@ function UserAccount() {
                                 <Typography variant="h2" sx={{ mb: 2 }}>
                                     {!loading && data.user && data.user.vanity
                                         ? data.user.vanity
-                                        : shortenAddress(vanity ?? '', 10)}
+                                        : shortenAddress(vanity ?? '', 7)}
                                 </Typography>
                                 {!loading && data.user && data.user.bio &&
                                     <Typography variant="body1" sx={{ mb: 2 }}>
