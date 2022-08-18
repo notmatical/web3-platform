@@ -368,7 +368,7 @@ function UserAccount() {
                                     </Typography>
                                     {rawValue && rawValue.length !== 0 ? (
                                         <Box>
-                                            {Math.sign((rawValue[6].price - rawValue[0].price) / rawValue[0].price) === 1 ? (
+                                            {Math.sign((rawValue[rawValue.length - 1].price - rawValue[0].price) / rawValue[0].price) === 1 ? (
                                                 <Chip
                                                     label={formatPercent.format(
                                                         (rawValue[6].price - rawValue[0].price) / rawValue[0].price
@@ -381,7 +381,7 @@ function UserAccount() {
                                             ) : (
                                                 <Chip
                                                     label={formatPercent.format(
-                                                        (rawValue[6].price - rawValue[0].price) / rawValue[0].price
+                                                        (rawValue[rawValue.length - 1].price - rawValue[0].price) / rawValue[0].price
                                                     )}
                                                     size="small"
                                                     color="error"
