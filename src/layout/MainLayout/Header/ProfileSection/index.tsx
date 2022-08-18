@@ -191,7 +191,7 @@ const ProfileSection = () => {
                                                         <Link
                                                             to={{
                                                                 // pathname: '/under-construction'
-                                                                pathname: `/account/${publicKey}`
+                                                                pathname: `/profile/${publicKey}`
                                                             }}
                                                             style={{ textDecoration: 'none' }}
                                                         >

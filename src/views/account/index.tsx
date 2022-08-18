@@ -226,7 +226,7 @@ function UserAccount() {
 
                     setChartData(value.reverse());
                     setRawValue(rValue.reverse());
-                    setLiquidValue(rValue.length === 0 ? 0 : rValue[6].price);
+                    setLiquidValue(rValue.length === 0 ? 0 : rValue[rValue.length - 1].price);
                 }
             });
     };
@@ -276,8 +276,8 @@ function UserAccount() {
                                         src={data.user.avatarURI ? data.user.avatarURI : DefaultUser}
                                         onClick={handleOpen}
                                         sx={{
-                                            // margin: '-70px 0 0 auto',
                                             mt: '-40px',
+                                            boxShadow: '0px 4px 20px 5px rgba(0, 0, 0, 0.7)',
                                             '&:hover': {
                                                 cursor: 'pointer',
                                                 transition: 'all .15s ease-in-out',
@@ -293,6 +293,7 @@ function UserAccount() {
                                         src={data.user.avatarURI ? data.user.avatarURI : DefaultUser}
                                         sx={{
                                             mt: '-40px',
+                                            boxShadow: '0px 4px 20px 5px rgba(0, 0, 0, 0.7)',
                                             width: { xs: 72, sm: 72, md: 80 },
                                             height: { xs: 72, sm: 72, md: 80 }
                                         }}
@@ -313,7 +314,7 @@ function UserAccount() {
                                         <IconButton
                                             sx={{ mr: 0.5 }}
                                             onClick={() => {
-                                                navigator.clipboard.writeText(`https://vaporize.fi/account/${vanity!}`);
+                                                navigator.clipboard.writeText(`https://vaporize.fi/profile/${vanity!}`);
                                                 showInfoToast('Profile link copied to clipboard.');
                                             }}
                                         >
@@ -336,7 +337,7 @@ function UserAccount() {
                                 <Typography variant="h2" sx={{ mb: 2 }}>
                                     {!loading && data.user && data.user.vanity
                                         ? data.user.vanity
-                                        : shortenAddress(vanity ?? '', 10)}
+                                        : shortenAddress(vanity ?? '', 7)}
                                 </Typography>
                                 {!loading && data.user && data.user.bio &&
                                     <Typography variant="body1" sx={{ mb: 2 }}>
@@ -413,15 +414,15 @@ function UserAccount() {
                                         <Area type="monotone" dataKey="price" stroke="#d329ff" fillOpacity={1} fill="url(#colorGradient)" />
                                     </AreaChart>
                                 </ResponsiveContainer>
-                                <Divider sx={{ mt: 1, mb: 1 }} />
+                                {/* <Divider sx={{ mt: 1, mb: 1 }} /> */}
                             </Box>
 
                             {/* badges */}
-                            <Box display="flex" flexDirection="column">
+                            {/* <Box display="flex" flexDirection="column">
                                 <Typography variant="h4" color="primary" sx={{ mb: 1 }}>
-                                    Badges (0 Total)
+                                    Badges ({data.user.badges.length} Total)
                                 </Typography>
-                                {/* <Box display="flex" flexDirection="row">
+                                <Box display="flex" flexDirection="row">
                                     <Tooltip title="Staff" placement="bottom" arrow>
                                         <IconButton sx={{ mr: 0.5 }}>
                                             <CrownFilled style={{ fontSize: '24px', color: theme.palette.secondary.dark }} />
@@ -437,9 +438,9 @@ function UserAccount() {
                                             <HeartFilled style={{ fontSize: '24px', color: theme.palette.info.dark }} />
                                         </IconButton>
                                     </Tooltip>
-                                </Box> */}
-                                {/* <Divider sx={{ mt: 1, mb: 1 }} /> */}
-                            </Box>
+                                </Box>
+                                <Divider sx={{ mt: 1, mb: 1 }} />
+                            </Box> */}
 
                             {/* connected wallets / bundles */}
                             {/* <Box display="flex" flexDirection="column" sx={{ mb: 1 }}>
@@ -704,7 +705,7 @@ function UserAccount() {
                             </TabPanel>
                             <TabPanel value="badges" sx={{ padding: 0 }}>
                                 <Box sx={{ p: '0 !important' }}>
-                                    <Badges />
+                                    <Badges user={data.user} />
                                 </Box>
                             </TabPanel>
                         </TabContext>

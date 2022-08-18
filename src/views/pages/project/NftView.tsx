@@ -256,7 +256,7 @@ const NftView = () => {
                                         <Typography
                                             variant="h5"
                                             color="secondary"
-                                            onClick={() => navigate(`/account/45rzLU1gPiEsaDtmkjvawgKDYYpSTHdVXKJjZ74dBDFg/portfolio`)}
+                                            onClick={() => navigate(`/profile/45rzLU1gPiEsaDtmkjvawgKDYYpSTHdVXKJjZ74dBDFg/portfolio`)}
                                             sx={{
                                                 ml: 0.5,
                                                 textDecoration: 'underline',

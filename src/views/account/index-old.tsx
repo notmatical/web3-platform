@@ -118,7 +118,7 @@ function UserAccount() {
 
     const [showTooltip, setShowTooltip] = useState(false);
 
-    const redirectUrl = `/account/${publicKey}`;
+    const redirectUrl = `/profile/${publicKey}`;
 
     const [nfts, setNfts] = useState<any>(null);
     const getUserNFTs = async () => {

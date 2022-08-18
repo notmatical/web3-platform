@@ -2,10 +2,10 @@
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { IconAccessible, IconAtom, IconAffiliate, IconBox, IconRepeat, IconCalendar } from '@tabler/icons';
+import { IconMicroscope, IconAccessible, IconAtom, IconAffiliate, IconBox, IconRepeat, IconCalendar } from '@tabler/icons';
 
 // constant
-const icons = { IconAccessible, IconAtom, IconAffiliate, IconBox, IconRepeat, IconCalendar };
+const icons = { IconMicroscope, IconAccessible, IconAtom, IconAffiliate, IconBox, IconRepeat, IconCalendar };
 
 // ==============================|| APPLICATION MENU ITEMS ||============================== //
 
@@ -14,6 +14,14 @@ const applications = {
     title: <FormattedMessage id="application" />,
     type: 'group',
     children: [
+        {
+            id: 'sniper',
+            title: <FormattedMessage id="sniper" />,
+            type: 'item',
+            url: '/sniper',
+            icon: icons.IconMicroscope,
+            breadcrumbs: true
+        },
         {
             id: 'swap',
             title: <FormattedMessage id="swap" />,
@@ -53,7 +61,7 @@ const applications = {
             id: 'mint-calendar',
             title: <FormattedMessage id="mint-calendar" />,
             type: 'item',
-            url: '/applications/calendar',
+            url: '/calendar',
             icon: icons.IconCalendar
         },
         {

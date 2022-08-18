@@ -35,6 +35,9 @@ const NftView = Loadable(lazy(() => import('views/pages/project/NftView')));
 const TokenDirectory = Loadable(lazy(() => import('views/pages/token/index')));
 const TokenView = Loadable(lazy(() => import('views/pages/token/TokenView')));
 
+// Miscellanous
+const Badges = Loadable(lazy(() => import('views/pages/miscellanous/Badges')));
+
 const PublicRoutes = {
     path: '/',
     element: (
@@ -49,7 +52,7 @@ const PublicRoutes = {
             element: <SocialRanking />
         },
         {
-            path: '/account/:vanity',
+            path: '/profile/:vanity',
             element: <UserAccount />
         },
 
@@ -123,6 +126,12 @@ const PublicRoutes = {
         {
             path: '/token/:network/:tokenAddress/:tokenIdentifier',
             element: <TokenView />
+        },
+
+        // Miscellanous
+        {
+            path: '/badges',
+            element: <Badges />
         }
     ]
 };
