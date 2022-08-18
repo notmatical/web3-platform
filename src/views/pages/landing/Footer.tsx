@@ -7,7 +7,7 @@ import { gridSpacing } from 'store/constant';
 
 // assets
 import TwitterIcon from '@mui/icons-material/Twitter';
-import logoDark from 'assets/images/logo-dark.png';
+import logoDark from 'assets/images/vapor-logo-dark.png';
 
 // styles
 const FooterWrapper = styled('div')(({ theme }) => ({

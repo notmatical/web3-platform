@@ -1,4 +1,4 @@
-import MINX_LABS_LOGO from 'assets/images/minx-circle.png';
+import VAPORIZE_LOGO from 'assets/images/logo.png';
 
 const webhook = require('webhook-discord');
 // import { Webhook, MessageBuilder } from 'discord-webhook-node';
@@ -33,7 +33,7 @@ export const useWebhook = () => {
             .setURL('https://minxlabs.io')
             .setColor('#198754')
             .setDescription(description)
-            .setThumbnail(MINX_LABS_LOGO);
+            .setThumbnail(VAPORIZE_LOGO);
 
         await PublicWebhook.send(embed);
     };
@@ -46,7 +46,7 @@ export const useWebhook = () => {
     //         .setAuthor(author)
     //         .setColor('#d4425b')
     //         .setDescription(description)
-    //         .setThumbnail(MINX_LABS_LOGO);
+    //         .setThumbnail(VAPORIZE_LOGO);
 
     //     Hook.send(embed);
     // };
@@ -59,7 +59,7 @@ export const useWebhook = () => {
     //         .setAuthor(author)
     //         .setColor('#ec9c3d')
     //         .setDescription(description)
-    //         .setThumbnail(MINX_LABS_LOGO);
+    //         .setThumbnail(VAPORIZE_LOGO);
 
     //     Hook.send(embed);
     // };
@@ -71,7 +71,7 @@ export const useWebhook = () => {
     //     //     .setURL('https://minxlabs.io')
     //     //     .setColor('#0288d1')
     //     //     .setDescription(description)
-    //     //     .setThumbnail(MINX_LABS_LOGO);
+    //     //     .setThumbnail(VAPORIZE_LOGO);
 
     //     Hook.info('Minx Labs', 'Hooking Test');
     // };
