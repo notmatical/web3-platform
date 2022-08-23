@@ -52,8 +52,8 @@ export const LoaderProvider: FC = ({ children }) => {
 
 const BoxLoader = () => (
     <LoaderWrapper>
-        {/* <HashLoader size={32} color="#c691c1" /> */}
-        <img src={YakuLoader} alt="loader" />
+        <HashLoader size={32} color="#c691c1" />
+        {/* <img src={YakuLoader} alt="loader" /> */}
     </LoaderWrapper>
 );
 
