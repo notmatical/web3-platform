@@ -14,3 +14,6 @@ You will notice two folders: `api` & `server`
     - to start dev server run 'npm run start / yarn start' in the root directory
     - to start backend server run 'npm run dev / yarn dev' in the server directory
     - obtain a Hyperspace API key by requesting one from their team and putting it in config.ts
+
+# Leave a Star :star:
+Don't forget to leave a star and a follow if you find this useful in any way, it comes with a lot of features. Some finished others are works in progress that won't be getting updated/finished again.
